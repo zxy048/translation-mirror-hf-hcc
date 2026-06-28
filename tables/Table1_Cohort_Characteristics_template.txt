@@ -1,0 +1,12 @@
+Table 1. Cohort characteristics across three datasets.
+
+Characteristic        GSE57338 (HF)      TCGA-LIHC (HCC)     GSE141198 (HCC)
+----------------------------------------------------------------------------
+Sample size           313                 424                  148
+Platform              Affymetrix          Illumina RNA-seq     Illumina RNA-seq
+Tissue                LV myocardium       Liver                Liver
+Disease subtypes      DCM/ICM/NF          HCC (371T + 50N)     HCC (all tumor)
+Age (mean±SD)         [待提取]            [待提取]             [待提取]
+Sex (M/F)             [待提取]            [待提取]             [待提取]
+OS events             N/A                 [待提取]             94
+Etiology              N/A                 HBV/HCV/Alcohol/etc  HBV/HCV/NBNC

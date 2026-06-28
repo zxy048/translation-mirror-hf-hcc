@@ -1,0 +1,14 @@
+# Large data files (too big for GitHub; available upon request)
+*.rds
+*.RData
+*.gz
+
+# R files
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# OS files
+.DS_Store
+Thumbs.db

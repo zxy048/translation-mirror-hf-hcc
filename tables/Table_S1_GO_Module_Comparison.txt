@@ -1,0 +1,20 @@
+Table S1. GO enrichment comparison between translation-associated modules.
+GSE57338 Black Module (n=170 genes) vs GSE141198 Blue Module (n=1315 genes)
+
+─── Panel A. GSE57338 Black Module: Translation-Related GO Terms ───
+
+Total significant GO-BP terms: 0
+Translation/ribosome-related terms: 0
+
+
+─── Panel B. GSE141198 Blue Module: Translation-Related GO Terms ───
+
+Total significant GO-BP terms (p<0.01): 113
+Translation/ribosome-related terms: 6
+
+ 1. cytoplasmic translation (p=6.33e-12, 46 genes)
+ 2. ribosomal small subunit biogenesis (p=2.00e-05, 22 genes)
+ 3. ribosome biogenesis (p=7.04e-04, 39 genes)
+ 4. rRNA metabolic process (p=5.26e-03, 33 genes)
+ 5. ribosomal small subunit assembly (p=7.88e-03, 7 genes)
+ 6. rRNA processing (p=9.36e-03, 28 genes)

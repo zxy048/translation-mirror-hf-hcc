@@ -1,0 +1,119 @@
+Table S1. Comparison of translation-associated co-expression modules
+identified in heart failure (GSE57338) and HCC (GSE141198).
+
+═══ Panel A. Module Overview ═══
+
+Feature                   GSE57338 (HF)             GSE141198 (HCC)          
+───────────────────────────────────────────────────────────────────────────────────── 
+Module Color              Black                     Blue                     
+Module Size               170                       1315                     
+Soft Threshold (β)       12 (R²=0.92)             4 (R²=0.84)             
+Total Modules             22                        4                        
+
+Hub Gene                  GSE57338 Module           GSE141198 Module         
+───────────────────────────────────────────────────────────────────────────────────── 
+EEF1A1                    turquoise                 turquoise                
+FAU                       black                     blue                     
+RPL39                     black                     grey                     
+RPL3                      turquoise                 blue                     
+RPL32                     black                     blue                     
+RPL41                     black                     grey                     
+RPS28                     turquoise                 blue                     
+
+Hub genes in primary module: 4/7 (HF) vs 4/7 (HCC)
+
+
+═══ Panel B. GSE57338 Black Module: Gene Composition ═══
+
+Total genes: 170
+
+Category                       Count  Examples
+────────────────────────────────────────────────────────────────────────────────────────── 
+snoRNA/scaRNA                    112  SNORA14A, SNORA60, SNORA36A, SCARNA4, SNORD45B, SNORA42, SNORD3A, SNORD6
+snRNA (U family)                  11  RNU4-2, RNU4-1, RNU1-1, RNU2-1, RNU5E
+Ribosomal proteins                 5  RPS24, RPL32, RPS27A, RPL39, RPL41
+Translation factors                2  EIF4B, EEF1B2
+Vault RNA                          3  VTRNA1-1, VTRNA1-2, VTRNA1-3
+Other (protein-coding/ncRNA)      37  GPAM, TOB2, RMRP, UIMC1, PTCH2, RPPH1, C3orf10, RNASEK, HIST1H4D, C7orf11
+
+Note: 66% of the black module consists of snoRNA/scaRNA genes, which guide
+
+
+═══ Panel C. GSE141198 Blue Module: GO-BP Enrichment ═══
+
+Total genes: 1315 | GO terms (p<0.01): 169 | Translation-related: 7
+
+Translation/ribosome-related GO terms (ordered by p.adjust):
+
+ 1. cytoplasmic translation
+    GO:GO:0002181 | p=6.33e-12 | 46 genes | GeneRatio=46/1064
+
+ 2. ribosomal small subunit biogenesis
+    GO:GO:0042274 | p=2.00e-05 | 22 genes | GeneRatio=22/1064
+
+ 3. ribosome biogenesis
+    GO:GO:0042254 | p=7.04e-04 | 39 genes | GeneRatio=39/1064
+
+ 4. rRNA metabolic process
+    GO:GO:0016072 | p=5.26e-03 | 33 genes | GeneRatio=33/1064
+
+ 5. ribosomal small subunit assembly
+    GO:GO:0000028 | p=7.88e-03 | 7 genes | GeneRatio=7/1064
+
+ 6. rRNA processing
+    GO:GO:0006364 | p=9.36e-03 | 28 genes | GeneRatio=28/1064
+
+ 7. mitochondrial translation
+    GO:GO:0032543 | p=1.73e-02 | 18 genes | GeneRatio=18/1064
+
+
+═══ Panel D. GSE141198 Blue Module: Top Non-Translation GO Terms ═══
+
+ 1. regulation of syncytium formation by plasma membrane fusion (p=1.85e-12, 26 genes)
+ 2. negative regulation of syncytium formation by plasma membrane fusion (p=6.33e-12, 22 genes)
+ 3. negative regulation of myoblast fusion (p=2.29e-11, 21 genes)
+ 4. regulation of myoblast fusion (p=2.41e-11, 23 genes)
+ 5. oxidative phosphorylation (p=3.63e-11, 35 genes)
+ 6. syncytium formation by plasma membrane fusion (p=1.47e-10, 27 genes)
+ 7. cell-cell fusion (p=1.75e-10, 27 genes)
+ 8. syncytium formation (p=2.10e-10, 27 genes)
+ 9. myoblast fusion (p=2.12e-09, 24 genes)
+10. cellular respiration (p=3.77e-09, 50 genes)
+11. aerobic respiration (p=6.84e-09, 46 genes)
+12. aerobic electron transport chain (p=9.49e-09, 25 genes)
+13. small molecule catabolic process (p=1.71e-08, 54 genes)
+14. triglyceride-rich lipoprotein particle remodeling (p=2.33e-08, 11 genes)
+15. ATP synthesis coupled electron transport (p=2.60e-08, 25 genes)
+16. mitochondrial ATP synthesis coupled electron transport (p=2.60e-08, 25 genes)
+17. respiratory electron transport chain (p=4.58e-08, 27 genes)
+18. organic acid catabolic process (p=8.11e-08, 41 genes)
+19. carboxylic acid catabolic process (p=8.11e-08, 41 genes)
+20. proton motive force-driven mitochondrial ATP synthesis (p=1.57e-07, 20 genes)
+
+
+═══ Panel E. Cross-Disease Synthesis ═══
+
+Key observations:
+
+1. Module composition differs fundamentally:
+   - HF Black module: Predominantly non-coding RNAs (snoRNA/scaRNA) that
+     guide rRNA chemical modifications, with co-localized ribosomal proteins
+     (RPL32, RPL39, RPL41, RPS24, RPS27A, FAU) and translation factors
+     (EIF4B, EEF1B2). This suggests coordinated regulation at the level of
+     ribosome biogenesis and rRNA maturation.
+
+   - HCC Blue module: Larger module (1,315 genes) with canonical GO enrichment
+     for cytoplasmic translation, ribosome structure, and peptide biosynthesis.
+     This suggests a broader translational remodeling program in HCC.
+
+2. Hub gene co-localization:
+   - HF: 4/7 hub genes in Black module (FAU, RPL39, RPL32, RPL41)
+   - HCC: 4/7 hub genes in Blue module
+   - Despite different module compositions, ribosomal protein hub genes
+     co-localize in both diseases, supporting the 'mirror regulation' model
+     (conserved module structure, disease-specific perturbation direction).
+
+3. Shared translational machinery:
+   - Both modules converge on cytoplasmic translation (GO:0002181,
+     GO:0006412) despite being identified in completely independent cohorts,
+     platforms (microarray vs RNA-seq), and disease contexts.

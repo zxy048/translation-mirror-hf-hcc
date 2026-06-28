@@ -1,0 +1,37 @@
+Table 1. Cohort characteristics across three datasets.
+
+Characteristic               GSE57338 (HF)          TCGA-LIHC (HCC)         GSE141198 (HCC)
+─────────────────────────────────────────────────────────────────────────────────────────────────────
+Sample size                  313                    377a                    148
+Platform                     Affymetrix HuGene       Illumina RNA-seq        Illumina RNA-seq
+                             1.1 ST Array
+Tissue                       LV myocardium          Liver                   Liver
+Disease subtypes             DCM / ICM / NFb         HCC (tumor only)        HCC (all tumor)
+  Dilated cardiomyopathy     82 (26.2%)              —                       —
+  Ischemic cardiomyopathy    95 (30.4%)              —                       —
+  Non-failing                136 (43.5%)             —                       —
+AJCC Stage I/II/III/IV       —                      175/87/86/5c            —
+Age (mean ± SD)              52.8 ± 13.5            59.5 ± 13.5             NRd
+Sex (M / F)                  217 / 96 (69.3% M)     255 / 122 (67.6% M)    NRd
+OS events (%)                N/Ae                    132 (35.0%)             94 (63.5%)
+OS follow-up (month)         N/Ae                    median 19.7             median ~69f
+                                                      [0–121]
+Etiology                     N/Ae                    HBV/HCV/Alcohol/       HBV / HCV / NBNC
+                                                     NASH/Otherg             30 / 99 / 19
+Race                         —                       White 187 / Asian 161  —
+                                                       / Black 17 / Other 2
+
+─────────────────────────────────────────────────────────────────────────────────────────────────────
+Abbreviations: DCM, dilated cardiomyopathy; ICM, ischemic cardiomyopathy; NF, non-failing;
+NR, not reported; N/A, not applicable; OS, overall survival; NBNC, non-HBV non-HCV.
+
+a TCGA-LIHC clinical data (data_clinical_patient.txt, n=377) includes patients with complete clinical annotations.
+  Expression-level analyses (WGCNA, TGS) used n=424 samples (371 tumor + 50 normal liver + 3 adjacent normal).
+b GSE57338 disease subtypes from "disease status:ch1".
+c TCGA-LIHC AJCC pathologic stage (7th ed.): Stage I (n=175), Stage II (n=87), Stage III/IIIA/IIIB/IIIC
+  (n=86), Stage IV/IVA/IVB (n=5); 22 not available, 2 discrepant.
+d GSE141198 (GEO) does not include age or sex in its public phenotype data. See original publication
+  (Chen et al., 2019, J Pathol) for demographic details.
+e GSE57338 is a cross-sectional myocardial biopsy study without longitudinal follow-up.
+f GSE141198 OS time calculated from "os days:ch1": median 2,099 days (~69 months), range 42–4,644 days.
+g TCGA-LIHC etiology not discretely coded in clinical file; see individual patient records for details.
