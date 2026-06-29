@@ -242,13 +242,13 @@ All datasets used in this study are publicly available: GSE57338, GSE141198, GSE
 
 [2] Sciarretta S, Forte M, Frati G, et al. New insights into the role of mTOR signaling in the cardiovascular system. Circ Res. 2018;122(3):489-505.
 
-[3] Gao X, Belmadani S, Picchi A, et al. Tumor necrosis factor-alpha induces endothelial dysfunction in prediabetic metabolic syndrome via translational regulation of endothelial nitric oxide synthase. J Mol Cell Cardiol. 2015;79:66-75.
+[3] Liu Y, Morley M, Brandimarto J, et al. RNA-Seq identifies novel myocardial gene expression signatures of heart failure. Genomics. 2015;105(2):83-9.
 
 [4] Zhang D, Contu R, Latronico MVG, et al. MTORC1 signaling in cardiac metabolism and disease. Nat Rev Cardiol. 2019;16(3):137-154.
 
 [5] van Riggelen J, Yetil A, Felsher DW. MYC as a regulator of ribosome biogenesis and protein synthesis. Nat Rev Cancer. 2010;10(4):301-309.
 
-[6] Xu Y, Poggio M, Jin HY, et al. Translation control of the immune checkpoint in cancer and its therapeutic targeting. Nat Med. 2019;25(2):301-311.
+[6] Liu P, Ge M, Hu J, et al. A functional mammalian target of rapamycin complex 1 signaling is indispensable for c-Myc-driven hepatocarcinogenesis. Hepatology. 2017;66(1):167-181.
 
 [7] Pakos-Zebrucka K, Koryga I, Mnich K, et al. The integrated stress response. EMBO Rep. 2016;17(10):1374-1395.
 
