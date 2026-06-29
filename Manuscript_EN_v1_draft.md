@@ -36,7 +36,7 @@ We hypothesize that the translational transcriptional alterations in HF and HCC 
 
 This study employs a five-layer analytical strategy: (1) identification of translation co-expression modules and hub genes in HF via WGCNA; (2) independent WGCNA replication in an HCC cohort; (3) parallel ssGSEA pathway activity scoring in both diseases with quantitative comparison of cross-disease effect sizes; (4) validation of TGS prognostic value in multiple external cohorts; (5) screening for upstream transcriptional regulators of the translation co-expression program.
 
-![Figure 1: Study Design Overview](figures/Figure1_Study_Design.png)
+[Figure 1 goes here — Figure1_Study_Design.png]
 
 **Figure 1. Study design overview.** The analytical framework comprises five layers: (A) WGCNA-based identification of translation co-expression modules in HF (GSE57338, n = 313); (B) independent WGCNA replication in HCC (GSE141198, n = 148); (C) parallel ssGSEA pathway activity scoring across both diseases with quantitative comparison of effect sizes; (D) external validation of TGS prognostic value in three independent HCC cohorts; (E) systematic screening for upstream transcriptional regulators of the translation co-expression program. The "mirror regulation" hypothesis — conserved module structure, disease-specific perturbation direction — is tested across all five layers.
 
@@ -58,7 +58,7 @@ The GSE141198 WGCNA blue module (1,315 genes) showed "cytoplasmic translation" a
 
 Notably, module–trait association analysis showed that no module in GSE141198 was significantly associated with overall survival (OS) status (all modules p > 0.05, uncorrected for multiple comparisons), suggesting that while the translation co-expression module is conserved, its association with prognosis may be TCGA-LIHC-specific.
 
-![Figure 2: WGCNA of GSE141198 HCC cohort](figures/Figure2_WGCNA_GSE141198.png)
+[Figure 2 goes here — Figure2_WGCNA_GSE141198.png]
 
 **Figure 2. WGCNA of the GSE141198 HCC cohort.** (A) Sample clustering dendrogram and module–trait heatmap. The blue module (1,315 genes) shows the strongest association with HCC phenotype among all identified modules. (B) GO Biological Process enrichment bubble plot for the blue module. "Cytoplasmic translation" (GO:0002181) is the most significantly enriched term (adjusted p = 6.3 × 10⁻¹²). Bubble size indicates gene count; color intensity indicates −log₁₀(p.adjust). Translation/ribosome-related terms are highlighted in red.
 
@@ -70,7 +70,7 @@ The Spearman correlation of effect sizes across all 83 pathways between the two 
 
 Detailed examination of translation pathway effect sizes revealed a consistent pattern: all translation pathways showed positive effect sizes in HCC (higher expression in tumor vs. normal tissue, Cohen's d > 0), whereas the vast majority of translation pathways showed negative effect sizes in HF (lower expression in failing vs. non-failing myocardium). Among the 33 translation pathways, 31 exhibited a HCC-positive/HF-negative paired pattern (binomial test p < 0.0001). The most strongly upregulated pathways in HCC were E2F Targets (d = +2.35), G2M Checkpoint (d = +2.13), and MYC Targets V1 (d = +1.83), reflecting the strong cell cycle and proliferation transcriptional programs in HCC. The most upregulated pathways in HF were Bile Acid Metabolism (d = +0.79) and Interferon Alpha Response (d = +0.67), though their absolute effect sizes were far smaller than those of proliferation pathways in HCC, consistent with the heterogeneous nature of chronic HF transcriptomic alterations.
 
-![Figure 3: Cross-disease ssGSEA pathway effect size comparison](figures/Figure_ssGSEA_cross_disease.png)
+[Figure 3 goes here — Figure_ssGSEA_cross_disease.png]
 
 **Figure 3. Cross-disease comparison of pathway effect sizes.** Scatter plot of Cohen's d effect sizes for 83 pathways in HCC (TCGA-LIHC, tumor vs. normal, x-axis) versus HF (GSE57338, failing vs. non-failing, y-axis). Translation/ribosome-related pathways (n = 33) are shown as red points; non-translation pathways (n = 50) as gray points. The Spearman correlation for translation pathways is ρ = −0.598 (p = 0.0003; 10,000 permutations, p = 0.0079). Dashed lines mark d = 0. Quadrant I (upper right, HCC↑ HF↑): 2 pathways; Quadrant IV (lower right, HCC↑ HF↓): 31 of 33 translation pathways, demonstrating the mirror regulation pattern.
 
@@ -82,13 +82,13 @@ TGS did not discriminate between high- and low-risk groups in this cohort (Log-r
 
 The divergence between conservation of the translation co-expression module (Section 2.2) and the cohort-specificity of TGS prognostic value is one of the core findings of this study: the translation co-expression network structure is conserved, but its association with clinical outcome is highly dependent on cohort characteristics (etiology composition, stage distribution, treatment background).
 
-![Figure 4: TGS external validation](figures/Figure4_TGS_Validation.png)
+[Figure 4 goes here — Figure4_TGS_Validation.png]
 
 **Figure 4. External validation of TGS prognostic value.** Kaplan–Meier survival curves for TGS (median dichotomization) in three independent HCC cohorts. (A) GSE14520 (n = 221); (B) GSE76427 (n = 115); (C) GSE141198 (n = 148). (D) Forest plot summarizing univariate Cox regression results across cohorts. TGS is not significantly associated with overall survival in any of the three independent validation cohorts. HR, hazard ratio; CI, confidence interval.
 
-![Supplementary Figure S4: GSE141198 TGS and RPL39 Kaplan–Meier survival curves](figures/GSE141198_TGS_KM.png)
+[Figure S4A goes here — GSE141198_TGS_KM.png]
 
-![Supplementary Figure S4 (continued): RPL39 single-gene survival analysis](figures/GSE141198_RPL39_KM.png)
+[Figure S4B goes here — GSE141198_RPL39_KM.png]
 
 **Supplementary Figure S4. TGS and RPL39 survival analysis in GSE141198.** (A) Kaplan–Meier curve for TGS (median dichotomization) in the GSE141198 Taiwanese HCC cohort (n = 148). Log-rank p = 0.479; TGS does not significantly stratify patients by overall survival. (B) Kaplan–Meier curve for RPL39 single-gene expression in GSE141198. RPL39 was selected as a representative hub gene; its expression alone does not show significant prognostic value in this cohort.
 
@@ -110,13 +110,13 @@ At the pathway activity level, **the correlation of MYC target pathway activity 
 
 None of the seven hub genes are present in the canonical Hallmark MYC Targets V1 (200 genes) or V2 (58 genes) gene sets. Although these Hallmark sets contain other ribosomal protein genes (e.g., RPL14, RPS10), the seven hub genes represent an atypical group of translation genes whose co-expression pattern was independently discovered through data-driven analysis in this study, rather than being a simple recapitulation of known MYC target genes. Fisher's exact test confirmed no significant enrichment of the seven hub genes in any Hallmark TF target gene set (MYC V1/V2, E2F, mTORC1: all p = 1.00; Supplementary Figure S3).
 
-![Supplementary Figure S3: Fisher's exact test for hub gene enrichment in TF target gene sets](figures/Figure_TF_Fisher_enrichment.png)
+[Figure S3 goes here — Figure_TF_Fisher_enrichment.png]
 
 **Supplementary Figure S3. Independence of hub genes from canonical TF target gene sets.** Fisher's exact test results for the enrichment of the seven translation hub genes in Hallmark TF target gene sets (MYC Targets V1, MYC Targets V2, E2F Targets, mTORC1 Signaling). All p-values = 1.00, confirming that none of the seven hub genes appear in any of these canonical gene sets. The hub genes thus represent a translation co-expression signature independently discovered through data-driven WGCNA analysis, rather than a recapitulation of known MYC or mTORC1 target genes.
 
-![Figure 5: Upstream transcription factor analysis](figures/Figure_TF_TGS_correlation.png)
+[Figure 5A goes here — Figure_TF_TGS_correlation.png]
 
-![Figure 5 (continued): Pathway–TGS correlation](figures/Figure_Pathway_TGS_correlation.png)
+[Figure 5B goes here — Figure_Pathway_TGS_correlation.png]
 
 **Figure 5. Upstream regulator analysis of the translation gene program.** (A) Spearman correlation of 19 candidate transcription factors with TGS in TCGA-LIHC tumor samples (n = 371). Red bars: positive correlation (FDR < 0.05); blue bars: negative correlation (FDR < 0.05); gray: not significant. ATF4 is the strongest TF correlate (ρ = +0.439, FDR < 0.0001). (B) Spearman correlation of Hallmark pathway ssGSEA scores with TGS. MYC Targets V2 pathway activity shows the strongest correlation with TGS (ρ = +0.613, p < 0.0001), far exceeding the explanatory power of MYC mRNA level alone (ρ = +0.297).
 
@@ -124,7 +124,7 @@ None of the seven hub genes are present in the canonical Hallmark MYC Targets V1
 
 At the individual gene level, the Spearman correlation of cross-disease log2FC directionality across the seven hub genes was not significant (ρ = 0.486, p = 0.356), forming an informative contrast with the significant negative correlation observed at the pathway level (ρ = −0.598, p = 0.0003; Section 2.3). The specific log2FC values, FDR, and direction concordance annotations for the seven hub genes in HF and HCC are provided in Supplementary Table S3. The methodological implications of this gene–pathway level discrepancy are addressed in the Discussion.
 
-![Figure S2: Cross-disease hub gene direction consistency](figures/Figure_S2_Direction_Consistency.png)
+[Figure S2 goes here — Figure_S2_Direction_Consistency.png]
 
 **Supplementary Figure S2. Cross-disease directional consistency of seven hub genes.** Scatter plot of log2 fold-change values for the seven translation hub genes in HCC (TCGA-LIHC, tumor vs. normal) versus HF (GSE57338, failing vs. non-failing). Spearman ρ = 0.486 (p = 0.356), indicating non-significant directional consistency at the individual gene level — in contrast to the significant cross-disease negative correlation observed at the pathway level (ρ = −0.598, Section 2.3). RPS28 (red) exhibits opposite directionality and was excluded from TGS.
 
@@ -184,7 +184,7 @@ A methodological finding of this study merits particular discussion: the cross-d
 
 Translational co-expression is a conserved molecular organizational principle between HF and HCC, but the perturbation direction is disease-type-specific. The ATF4/ISR stress-adaptation axis and the MYC proliferative program cooperatively regulate translation upregulation in HCC, whereas translation downregulation in HF more likely reflects adaptive metabolic suppression driven by energy depletion. This "mirror regulation" framework provides conceptual integration for translational transcriptional control across diseases, reconciles seemingly contradictory observations in the literature, and offers disease-context-dependent considerations for therapeutic strategies targeting translational regulation.
 
-![Figure 6: Mirror regulation mechanistic model](figures/Figure6_Mechanistic_Model.png)
+[Figure 6 goes here — Figure6_Mechanistic_Model.png]
 
 **Figure 6. The "mirror regulation" framework: a mechanistic model of translational dysregulation in HF versus HCC.** In HCC (right), microenvironmental stress (ER stress, hypoxia, nutrient deprivation) activates the integrated stress response (ISR), leading to eIF2α phosphorylation and selective ATF4 translation. ATF4, together with the MYC proliferative program, drives upregulation of ribosomal protein and translation factor genes, promoting translational output to support uncontrolled proliferation. In HF (left), chronic energy deficit and mTORC1 suppression lead to coordinated downregulation of the same translation co-expression program, representing an adaptive energy-conservation response. The translation co-expression module is structurally conserved across diseases (the "mirror"), but the perturbation direction is disease-type-specific (the "reflection").
 
@@ -200,9 +200,9 @@ Translational co-expression is a conserved molecular organizational principle be
 
 WGCNA input data consisted of gene expression matrices filtered and normalized as described in Section 4.1. Signed network analysis was performed using the WGCNA package. The soft threshold β was selected by the scale-free topology fit R² ≥ 0.85 criterion (GSE57338: β = 12, R² = 0.92; GSE141198: β = 4, R² = 0.84). The blockwiseModules one-step function was used for network construction (minModuleSize = 30, mergeCutHeight = 0.25, TOMType = "signed", randomSeed = 42). Module functional enrichment was performed using clusterProfiler for GO Biological Process analysis, with translation modules identified by the keywords "translation|ribosom|peptide|ribonucleoprotein|rRNA|translational" in GO term descriptions.
 
-![Figure S1: Soft threshold selection](figures/Figure_S1_SoftThreshold_GSE141198.png)
+[Figure S1A goes here — Figure_S1_SoftThreshold_GSE141198.png]
 
-![Figure S1 (continued): GSE57338 soft threshold](figures/Figure_S1_SoftThreshold_GSE57338.png)
+[Figure S1B goes here — Figure_S1_SoftThreshold_GSE57338.png]
 
 **Supplementary Figure S1. Soft threshold selection for WGCNA.** Scale-free topology model fit (R², left panels) and mean connectivity (right panels) as a function of soft threshold power (β). (A) GSE141198 (HCC): β = 4 (R² = 0.84). (B) GSE57338 (HF): β = 12 (R² = 0.92). The R² ≥ 0.85 criterion (dashed red line) was used for threshold selection.
 
