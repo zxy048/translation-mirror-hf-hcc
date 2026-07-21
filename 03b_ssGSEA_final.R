@@ -233,6 +233,7 @@ plot_df <- data.frame(
 
 p1 <- ggplot(plot_df, aes(x = es_hcc, y = es_hf)) +
   geom_point(aes(color = is_translation, size = is_translation), alpha = 0.7) +
+  geom_abline(slope = -1, intercept = 0, linetype = "dotted", color = "grey50", alpha = 0.5) +
   geom_smooth(method = "lm", se = TRUE, color = "grey50", alpha = 0.25, linewidth = 0.8) +
   geom_hline(yintercept = 0, linetype = "dashed", alpha = 0.3) +
   geom_vline(xintercept = 0, linetype = "dashed", alpha = 0.3) +

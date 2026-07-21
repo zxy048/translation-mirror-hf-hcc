@@ -337,16 +337,30 @@ if (nrow(fisher_results) > 0) {
   fisher_results$pathway <- factor(fisher_results$pathway,
     levels = c("MYC V1", "MYC V2", "E2F", "mTORC1"))
 
+  # 将 Hub 基因 p=1.00 的无富集结果加一个最小可视高度（避免柱子为零）
+  hub_mask <- fisher_results$level == "7 Hub Genes"
+  fisher_results$bar_height <- fisher_results$log10p
+  fisher_results$bar_height[hub_mask] <- pmax(fisher_results$log10p[hub_mask], 0.15)
+
+  # 为 Hub 基因准备独立标签（p=1.00 时 -log10=0，标签放柱子顶部）
+  fisher_results$label_y <- fisher_results$bar_height + 0.5
+  fisher_results$label <- ifelse(hub_mask & fisher_results$p > 0.99,
+    sprintf("p=1.00\n(no enrichment)"),
+    sprintf("OR=%.1f\np=%.1e", fisher_results$OR, fisher_results$p))
+
   p_fisher <- ggplot(fisher_results,
-    aes(x = pathway, y = log10p, fill = level)) +
+    aes(x = pathway, y = bar_height, fill = level)) +
     geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.6) +
     geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "grey50") +
-    geom_text(aes(label = sprintf("OR=%.1f\np=%.1e", OR, p),
-                  vjust = -0.3), position = position_dodge(width = 0.8),
+    annotate("text", x = 4.5, y = -log10(0.05) + 0.3,
+             label = expression(p==0.05), size = 3, color = "grey50", hjust = 1) +
+    geom_text(aes(label = label, y = label_y,
+                  vjust = 0), position = position_dodge(width = 0.8),
               size = 3, lineheight = 0.9) +
     scale_fill_manual(values = c("7 Hub Genes" = "#E41A1C",
                                   "All Ribosome (KEGG)" = "#377EB8")) +
     labs(title = "Fisher Enrichment: Translation Genes in TF Target Sets",
+         subtitle = "Hub genes show no enrichment in canonical TF target sets (p = 1.00)",
          x = "TF Target Gene Set", y = expression(-log[10](p)),
          fill = "") +
     theme_minimal(base_size = 12) +

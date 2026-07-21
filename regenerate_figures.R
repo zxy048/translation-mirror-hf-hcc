@@ -66,7 +66,7 @@ p <- ggplot() +
     xmx = c(3.2, 5.6,  8.0, 10.4),
     lbl = c("WGCNA\n(Signed Network)", "ssGSEA\nPathway Activity", "Survival\nValidation", "Upstream\nTF Prediction"),
     sub = c("Module discovery\nHub gene identification\nGO enrichment",
-            "83 pathways\nHallmark + KEGG + Reactome\nCross-disease effect sizes",
+            "81 pathways\nHallmark + KEGG + Reactome\nCross-disease effect sizes",
             "TGS (6-gene score)\nKM + Cox regression\nGSE141198 / GSE14520 / GSE76427",
             "19 TF candidates\nTF-TGS correlation\nMYC/E2F/mTORC1/ATF4"),
     stringsAsFactors = FALSE

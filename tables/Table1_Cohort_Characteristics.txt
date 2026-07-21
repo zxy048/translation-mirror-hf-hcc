@@ -26,7 +26,7 @@ Abbreviations: DCM, dilated cardiomyopathy; ICM, ischemic cardiomyopathy; NF, no
 NR, not reported; N/A, not applicable; OS, overall survival; NBNC, non-HBV non-HCV.
 
 a TCGA-LIHC clinical data (data_clinical_patient.txt, n=377) includes patients with complete clinical annotations.
-  Expression-level analyses (WGCNA, TGS) used n=424 samples (371 tumor + 50 normal liver + 3 adjacent normal).
+  Expression-level analyses (WGCNA, TGS) used n=424 samples (371 tumor + 50 normal liver + 3 recurrent tumor).
 b GSE57338 disease subtypes from "disease status:ch1".
 c TCGA-LIHC AJCC pathologic stage (7th ed.): Stage I (n=175), Stage II (n=87), Stage III/IIIA/IIIB/IIIC
   (n=86), Stage IV/IVA/IVB (n=5); 22 not available, 2 discrepant.

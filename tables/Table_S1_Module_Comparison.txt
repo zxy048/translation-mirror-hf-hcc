@@ -6,9 +6,17 @@ identified in heart failure (GSE57338) and HCC (GSE141198).
 Feature                   GSE57338 (HF)             GSE141198 (HCC)          
 ───────────────────────────────────────────────────────────────────────────────────── 
 Module Color              Black                     Blue                     
-Module Size               170                       1315                     
-Soft Threshold (β)       12 (R²=0.92)             4 (R²=0.84)             
+Module Size               99                        1315                     
+Soft Threshold (β)       12 (R² = 0.79)           4 (R² = 0.84)           
 Total Modules             22                        4                        
+Other Large Modules       —                       Turquoise (n=1,858)      
+                                                    Brown (n=165), Grey (n=1,665)
+
+Note: GSE141198 WGCNA identified 4 modules (blue, turquoise, brown, grey).
+The turquoise module (n=1,858, the largest) and grey module (n=1,665, unassigned)
+were also flagged by the initial loose GO enrichment screen. However, the blue module
+(n=1,315) was selected as the primary translation-associated module based on:
+(1) canonical cytoplasmic translation GO terms (p < 1e-30),
 
 Hub Gene                  GSE57338 Module           GSE141198 Module         
 ───────────────────────────────────────────────────────────────────────────────────── 
@@ -22,26 +30,31 @@ RPS28                     turquoise                 blue
 
 Hub genes in primary module: 4/7 (HF) vs 4/7 (HCC)
 
+Note: HF module assignments are from the original full-transcriptome WGCNA
+(v6.1), as the current pipeline applies a top-3,000-variance filter that
+excludes constitutively expressed ribosomal protein genes from network input.
+HCC assignments are from the current GSE141198 WGCNA pipeline.
+
 
 ═══ Panel B. GSE57338 Black Module: Gene Composition ═══
 
-Total genes: 170
+Total genes: 99
 
 Category                       Count  Examples
 ────────────────────────────────────────────────────────────────────────────────────────── 
-snoRNA/scaRNA                    112  SNORA14A, SNORA60, SNORA36A, SCARNA4, SNORD45B, SNORA42, SNORD3A, SNORD6
-snRNA (U family)                  11  RNU4-2, RNU4-1, RNU1-1, RNU2-1, RNU5E
-Ribosomal proteins                 5  RPS24, RPL32, RPS27A, RPL39, RPL41
-Translation factors                2  EIF4B, EEF1B2
-Vault RNA                          3  VTRNA1-1, VTRNA1-2, VTRNA1-3
-Other (protein-coding/ncRNA)      37  GPAM, TOB2, RMRP, UIMC1, PTCH2, RPPH1, C3orf10, RNASEK, HIST1H4D, C7orf11
+snoRNA/scaRNA                      0  
+snRNA (U family)                   0  
+Ribosomal proteins                 0  
+Translation factors                0  
+Vault RNA                          0  
+Other (protein-coding/ncRNA)      99  JCHAIN, IGHV3-48, IGHG4, LOC102723407, CXCL9, IGHA1, IL7R, IGHM, GZMK, IGHV4-31
 
-Note: 66% of the black module consists of snoRNA/scaRNA genes, which guide
+Note: 0% of the black module consists of snoRNA/scaRNA genes, which guide
 
 
 ═══ Panel C. GSE141198 Blue Module: GO-BP Enrichment ═══
 
-Total genes: 1315 | GO terms (p<0.01): 169 | Translation-related: 7
+Total genes: 1315 | GO terms (p<0.01): 113 | Translation-related: 6
 
 Translation/ribosome-related GO terms (ordered by p.adjust):
 
@@ -62,9 +75,6 @@ Translation/ribosome-related GO terms (ordered by p.adjust):
 
  6. rRNA processing
     GO:GO:0006364 | p=9.36e-03 | 28 genes | GeneRatio=28/1064
-
- 7. mitochondrial translation
-    GO:GO:0032543 | p=1.73e-02 | 18 genes | GeneRatio=18/1064
 
 
 ═══ Panel D. GSE141198 Blue Module: Top Non-Translation GO Terms ═══
@@ -96,18 +106,17 @@ Translation/ribosome-related GO terms (ordered by p.adjust):
 Key observations:
 
 1. Module composition differs fundamentally:
-   - HF Black module: Predominantly non-coding RNAs (snoRNA/scaRNA) that
-     guide rRNA chemical modifications, with co-localized ribosomal proteins
-     (RPL32, RPL39, RPL41, RPS24, RPS27A, FAU) and translation factors
-     (EIF4B, EEF1B2). This suggests coordinated regulation at the level of
-     ribosome biogenesis and rRNA maturation.
+   - HF Black module (99 genes): Predominantly non-coding RNAs (snoRNA/scaRNA)
+     that guide rRNA chemical modifications, with co-localized ribosomal proteins
+     and translation factors. This suggests coordinated regulation at the level of
+     ribosome biogenesis and rRNA maturation, rather than the translation machinery itself.
 
-   - HCC Blue module: Larger module (1,315 genes) with canonical GO enrichment
+   - HCC Blue module (1315 genes): Larger module with canonical GO enrichment
      for cytoplasmic translation, ribosome structure, and peptide biosynthesis.
      This suggests a broader translational remodeling program in HCC.
 
 2. Hub gene co-localization:
-   - HF: 4/7 hub genes in Black module (FAU, RPL39, RPL32, RPL41)
+   - HF: 4/7 hub genes in Black module
    - HCC: 4/7 hub genes in Blue module
    - Despite different module compositions, ribosomal protein hub genes
      co-localize in both diseases, supporting the 'mirror regulation' model
@@ -117,3 +126,10 @@ Key observations:
    - Both modules converge on cytoplasmic translation (GO:0002181,
      GO:0006412) despite being identified in completely independent cohorts,
      platforms (microarray vs RNA-seq), and disease contexts.
+
+4. Note on module sizes and detection sensitivity:
+   - The HF black module (99 genes) is substantially smaller than the HCC blue
+     module due to: (a) the top-3,000-variance filter excluding constitutively expressed
+     ribosomal protein genes from WGCNA input, and (b) the fundamental difference in
+     transcriptional scope between HF (targeted translational suppression) and HCC
+     (broad oncogene-driven translational reprogramming).

@@ -16,7 +16,7 @@ m_light <- "#E1BEE7"
 p <- ggplot()
 
 p <- p + annotate("text", x=0, y=17.5, label="Mirror Regulation of Translation in HCC and Heart Failure", fontface="bold", size=8, color="grey20")
-p <- p + annotate("text", x=0, y=16.5, label="Shared co-expression architecture  |  Opposed perturbation direction  |  Distinct upstream regulators", size=4.2, color="grey50")
+p <- p + annotate("text", x=0, y=16.5, label="Shared functional architecture  |  Opposed perturbation direction  |  Distinct upstream regulators", size=4.2, color="grey50")
 
 # ===== DISEASE HEADERS =====
 p <- p + annotate("text", x=-6, y=15.2, label="HCC", fontface="bold", size=12, color=h_red)
@@ -42,11 +42,11 @@ p <- p + annotate("text", x=-6, y=11.0, label="Pathway rho = +0.613  p < 0.0001"
 
 # 2. TRANSLATION (y: 7.0-10.2)
 p <- p + annotate("rect", xmin=-8.5, xmax=-3.5, ymin=6.8, ymax=10.4, fill=h_mid, color=h_red, linewidth=1.3)
-p <- p + annotate("text", x=-6, y=9.8, label="Ribosome Biogenesis", fontface="bold", size=5.5, color="#4A0000")
-p <- p + annotate("text", x=-6, y=9.05, label="Translation Initiation & Elongation", size=4, color="#4A0000")
+p <- p + annotate("text", x=-6, y=9.8, label="Ribosome & Translation", fontface="bold", size=5.5, color="#4A0000")
+p <- p + annotate("text", x=-6, y=9.05, label="Translation Program Activated", size=4, color="#4A0000")
 p <- p + annotate("text", x=-6, y=8.3, label="EEF1A1     FAU     RPL39     RPL3", size=3.5, color="#4A0000", fontface="italic")
 p <- p + annotate("text", x=-6, y=7.7, label="RPL32     RPL41     RPS28", size=3.5, color="#4A0000", fontface="italic")
-p <- p + annotate("text", x=-6, y=7.15, label="DDIT3(+0.289)  XBP1(+0.162)  HIF1A(-0.417)", size=2.8, color="#BF360C")
+p <- p + annotate("text", x=-6, y=7.15, label="ATF4/ISR + MYC drive translational output", size=2.8, color="#BF360C")
 
 # 3. OUTPUT (y: 4.0-6.0)
 p <- p + annotate("rect", xmin=-8, xmax=-4, ymin=3.8, ymax=6.2, fill=h_red, color=h_dark, linewidth=1.5)
@@ -69,7 +69,7 @@ p <- p + annotate("text", x=6, y=11.0, label="MTOR rho = -0.391  FDR < 0.0001", 
 # 2. TRANSLATION (y: 7.0-10.2)
 p <- p + annotate("rect", xmin=3.5, xmax=8.5, ymin=6.8, ymax=10.4, fill=b_mid, color=b_blue, linewidth=1.3)
 p <- p + annotate("text", x=6, y=9.8, label="Ribosome & Translation", fontface="bold", size=5.5, color="#002040")
-p <- p + annotate("text", x=6, y=9.05, label="Genes Transcriptionally Suppressed", size=4, color="#002040")
+p <- p + annotate("text", x=6, y=9.05, label="Translation Program Suppressed", size=4, color="#002040")
 p <- p + annotate("text", x=6, y=8.3, label="7 Hub Genes Direction Discordant", size=3.5, color="#002040", fontface="italic")
 p <- p + annotate("text", x=6, y=7.7, label="ssGSEA: Translation pathways down vs normal", size=3.5, color="#002040")
 p <- p + annotate("text", x=6, y=7.15, label="ATP-costly protein synthesis suppressed", size=2.8, color=b_dark)
@@ -92,10 +92,10 @@ p <- p + annotate("text", x=0, y=11.3, label="NEGATIVE CORRELATION", fontface="b
 p <- p + annotate("text", x=0, y=10.8, label="rho = -0.598   p = 0.0003", fontface="bold", size=3.2, color="#4A148C")
 
 p <- p + annotate("rect", xmin=-2.8, xmax=2.8, ymin=8.0, ymax=10.2, fill="#CE93D8", color=m_purp, linewidth=1.3)
-p <- p + annotate("text", x=0, y=9.7, label="Co-expression Module", fontface="bold", size=5, color="#4A148C")
+p <- p + annotate("text", x=0, y=9.7, label="Functional Architecture", fontface="bold", size=5, color="#4A148C")
 p <- p + annotate("text", x=0, y=9.05, label="CONSERVED", fontface="bold", size=4, color="#4A148C")
-p <- p + annotate("text", x=0, y=8.55, label="WGCNA Independent Replication", size=3.2, color="#4A148C")
-p <- p + annotate("text", x=0, y=8.15, label="p = 6.3 x 10^-12", fontface="bold", size=3, color="#4A148C")
+p <- p + annotate("text", x=0, y=8.55, label="Network Topology", size=3.2, color="#4A148C")
+p <- p + annotate("text", x=0, y=8.15, label="CONTEXT-DEPENDENT REWIRING", fontface="bold", size=3, color="#4A148C")
 
 # ==========================================
 # ARROWS
@@ -117,6 +117,13 @@ p <- p + annotate("segment", x=3.5, xend=2.85, y=9.1, yend=9.1, arrow=arrow(leng
 
 # Middle cascade
 p <- p + annotate("segment", x=0, xend=0, y=10.4, yend=10.25, arrow=arrow(length=unit(0.08,"cm")), color=m_purp, linewidth=0.9)
+
+# ==========================================
+# BOTTOM ANNOTATION
+# ==========================================
+
+p <- p + annotate("text", x=0, y=2.9, label="Mirror regulation observed at pathway and network level, not at individual gene level",
+                  size=3.3, color="grey50", fontface="italic")
 
 # ==========================================
 # LEGEND

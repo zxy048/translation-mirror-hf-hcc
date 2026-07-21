@@ -40,7 +40,7 @@ an <- data.frame(
   x1=c(1.2,3.6,6.0,8.4), x2=c(3.2,5.6,8.0,10.4),
   cx=c(2.2,4.6,7.0,9.4),
   t=c("WGCNA","ssGSEA","Survival\nValidation","Upstream\nTF Prediction"),
-  s=c("Module discovery\nHub gene ID\nGO enrichment","83 pathways\nHallmark+KEGG+Reactome\nCross-disease ES","TGS (6-gene score)\nKM + Cox regression\n3 independent cohorts","19 TF candidates\nTF-TGS correlation\nATF4/MYC/E2F/mTORC1"),
+  s=c("Module discovery\nHub gene ID\nGO enrichment","81 pathways\nHallmark+KEGG+Reactome\nCross-disease ES","TGS (6-gene score)\nKM + Cox regression\n3 independent cohorts","19 TF candidates\nTF-TGS correlation\nATF4/MYC/E2F/mTORC1"),
   stringsAsFactors=FALSE
 )
 

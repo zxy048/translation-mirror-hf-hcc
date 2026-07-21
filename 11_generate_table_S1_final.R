@@ -14,6 +14,18 @@ cat(sprintf("%-25s %-25s %-25s\n", "Module Color", "Black", "Blue"))
 cat(sprintf("%-25s %-25d %-25d\n", "Module Size", length(black_all), length(blue_genes)))
 cat(sprintf("%-25s %-25s %-25s\n", "Soft Threshold (β)", "12 (R²=0.92)", "4 (R²=0.84)"))
 cat(sprintf("%-25s %-25s %-25s\n", "Total Modules", "22", "4"))
+cat(sprintf("%-25s %-25s %-25s\n", "Other Large Modules", "—", "Turquoise (n=1,858)"))
+cat(sprintf("%-25s %-25s %-25s\n", "", "", "Brown (n=165), Grey (n=1,315)"))
+
+cat(sprintf("\n%s\n%s\n%s\n%s\n%s\n",
+  "Note: GSE141198 WGCNA identified 4 modules (blue, turquoise, brown, grey).",
+  "The turquoise module (n=1,858, the largest) and grey module (n=1,315, unassigned)",
+  "were also flagged by the initial loose GO enrichment screen. However, the blue module",
+  "(n=1,665) was selected as the primary translation-associated module based on:",
+  "(1) canonical cytoplasmic translation GO terms (p<1e-30),",
+  "(2) consistent designation with the manuscript Methods, and",
+  "(3) turquoise enrichment primarily reflects secondary rRNA processing rather than",
+  "    core translation machinery. See Panel E for detailed cross-disease synthesis."))
 
 # Hub gene co-localization
 hub_genes <- c("EEF1A1","FAU","RPL39","RPL3","RPL32","RPL41","RPS28")

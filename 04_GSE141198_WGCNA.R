@@ -90,14 +90,14 @@ sft <- pickSoftThreshold(datExpr0, powerVector = powers,
 
 # 绘制软阈值选择图
 png(file.path(PROJ_DIR, "WGCNA_GSE141198", "soft_threshold.png"),
-    width = 10, height = 5, units = "in", res = 150)
+    width = 10, height = 5, units = "in", res = 300)
 par(mfrow = c(1, 2))
 plot(sft$fitIndices[, 1], -sign(sft$fitIndices[, 3]) * sft$fitIndices[, 2],
      xlab = "Soft Threshold (power)", ylab = "Scale Free Topology Model Fit, signed R²",
      main = "Scale independence", type = "n")
 text(sft$fitIndices[, 1], -sign(sft$fitIndices[, 3]) * sft$fitIndices[, 2],
      labels = powers, col = ifelse(sft$fitIndices$SFT.R.sq > 0.8, "red", "black"))
-abline(h = 0.8, col = "red", lty = 2)
+abline(h = 0.85, col = "red", lty = 2)
 
 plot(sft$fitIndices[, 1], sft$fitIndices[, 5],
      xlab = "Soft Threshold (power)", ylab = "Mean Connectivity",

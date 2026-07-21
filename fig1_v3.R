@@ -47,7 +47,7 @@ ana <- data.frame(
   cx=c(1.8, 4.3, 6.8, 9.3),
   title=c("WGCNA", "ssGSEA", "Survival\nValidation", "Upstream\nTF Prediction"),
   desc=c("Signed co-expression\nHub gene identification\nGO / KEGG enrichment",
-         "83 pathways\nHallmark + KEGG + Reactome\nCross-disease effect sizes",
+         "81 pathways\nHallmark + KEGG + Reactome\nCross-disease effect sizes",
          "Translation Gene Score\nKM + Cox regression\n3 independent cohorts",
          "19 TF candidates\nTF-TGS Spearman correlation\nFisher enrichment test"),
   sources=c("GSE57338\nTCGA-LIHC\nGSE141198","TCGA-LIHC\nGSE57338","TCGA-LIHC\nGSE141198\nGSE14520\nGSE76427","TCGA-LIHC"),
@@ -138,7 +138,7 @@ p <- p + annotate("segment", x=0.3, xend=11.7, y=5.8, yend=5.8, linetype="dotted
 # ===== CONCLUSION BANNER =====
 p <- p + annotate("rect", xmin=0.3, xmax=11.7, ymin=0.5, ymax=1.9, fill="#FFEBEE", alpha=0.6, color=Cconc, linewidth=1.3)
 p <- p + annotate("text", x=6, y=1.4, label="Translation co-expression is conserved across HF and HCC", fontface="bold", size=4.5, color="#B71C1C")
-p <- p + annotate("text", x=6, y=0.85, label="Perturbation direction is disease-type-specific, driven by distinct upstream regulators (ATF4/ISR + MYC)", size=3.5, color="#C62828")
+p <- p + annotate("text", x=6, y=0.85, label="Perturbation direction is disease-type-specific, associated with distinct upstream regulators (ATF4/ISR + MYC)", size=3.5, color="#C62828")
 
 # ===== Layout =====
 p <- p + coord_cartesian(xlim=c(0,12), ylim=c(0,14.8))

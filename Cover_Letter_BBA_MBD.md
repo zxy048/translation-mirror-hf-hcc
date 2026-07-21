@@ -1,44 +1,73 @@
-# Cover Letter
+# Cover Letter — BBA Molecular Basis of Disease
 
-**Date**: June 28, 2026
+**Date:** July 13, 2026
 
-**To**: The Editor-in-Chief  
-*BBA – Molecular Basis of Disease*
+**To:** Editor-in-Chief, BBA – Molecular Basis of Disease
 
 ---
 
 Dear Editor,
 
-We wish to submit our manuscript entitled **"Translational Co-expression Programs Are Conserved but Directionally Opposed in Heart Failure and Hepatocellular Carcinoma: An Integrative Transcriptomic Analysis"** for consideration for publication in *BBA – Molecular Basis of Disease*.
+We are pleased to submit our manuscript entitled **"Conserved Translational Co-expression Programs Exhibit Mirror Regulation Across Heart Failure and Hepatocellular Carcinoma"** for consideration for publication in BBA – Molecular Basis of Disease.
 
-The translational apparatus — the ribosome and its associated factors — is dysregulated in both heart failure (HF) and hepatocellular carcinoma (HCC). However, whether these two diseases share a common translational transcriptional program, or whether their programs are fundamentally distinct, has never been systematically tested. This study addresses that gap by performing parallel, multi-level transcriptomic analyses across independent HF and HCC cohorts. Our core finding is a "mirror regulation" pattern: translation co-expression modules are structurally conserved across the two diseases, but their perturbation direction is disease-type-specific — consistently upregulated in HCC, consistently downregulated in HF (Spearman ρ = −0.598, permutation p = 0.0079 across 33 translation pathways).
+## Summary of the Study
 
-Key findings include:
+Heart failure (HF) and hepatocellular carcinoma (HCC) appear clinically divergent — one a chronic degenerative condition, the other an aggressive malignancy — yet both exhibit profound metabolic reprogramming and disrupted protein homeostasis. Translational dysregulation has been characterized in each disease independently, but whether the underlying transcriptional programs reflect a conserved architecture or disease-specific configurations has not been systematically tested.
 
-1. **Independent replication of the translation co-expression module.** The WGCNA translation module was first identified in an HF cohort (GSE57338, n = 313) and independently replicated in a Taiwan HCC cohort (GSE141198, n = 148), where "cytoplasmic translation" was the most significantly enriched GO term (adjusted p = 6.3 × 10⁻¹²). Four of seven hub genes co-localized to the translation module in both diseases.
+We addressed this question using a cross-disease comparative transcriptomics framework. Applying identical five-layer computational pipelines to independent HF (GSE57338, n = 313) and HCC (TCGA-LIHC, n = 424; GSE141198, n = 148) cohorts, we found:
 
-2. **Quantitative cross-disease pathway comparison.** Parallel ssGSEA scoring of 83 pathways revealed a significant negative correlation in translation pathway effect sizes between HF and HCC. Strikingly, 31 of 33 translation pathways exhibited a HCC-positive/HF-negative paired pattern, a finding confirmed by 10,000-iteration permutation testing.
+1. **Conserved co-expression architecture.** The translation co-expression module was independently identified in both diseases by WGCNA — the black module in HF and the blue module in HCC — with overlapping hub gene composition and consistent GO enrichment for cytoplasmic translation.
 
-3. **ATF4 as a novel upstream regulator.** Systematic TF–TGS correlation analysis in TCGA-LIHC (n = 371 tumors) identified ATF4 — the master transcription factor of the integrated stress response (ISR) — as the strongest TF correlate of the translation gene program (ρ = +0.439, FDR < 0.0001), extending beyond the traditional MYC-centric framework. The ATF4/ISR and MYC pathways appear to cooperatively drive translation upregulation in HCC, a hypothesis we articulate for experimental testing.
+2. **Mirror perturbation at the pathway level.** Cross-disease ssGSEA of 81 pathways revealed a negative correlation in translation pathway effect sizes (Spearman ρ = −0.598, p = 0.0003; permutation p = 0.0079). Twenty-four of 33 translation pathways were upregulated in HCC and downregulated in HF, representing a predominant mirror perturbation pattern. The nine non-mirror pathways were enriched for mitochondrial translation or miRNA-mediated translational regulation rather than core cytosolic translation.
 
-4. **Methodological insight.** Cross-disease signals were far stronger at the pathway level (ρ = −0.598) than at the individual gene level (ρ = 0.486), highlighting the value of aggregate pathway-level analysis for revealing systemic regulatory principles — a finding with implications for cross-disease comparative transcriptomics beyond the present study.
+3. **Cohort-specific prognostic value.** The translation gene score (TGS) lacked prognostic value in all three independent HCC validation cohorts, indicating that conserved molecular organization does not imply universal clinical utility.
 
-We believe this manuscript is well-suited for *BBA – Molecular Basis of Disease* for several reasons. First, the journal's scope — molecular mechanisms underlying human diseases — aligns directly with our focus on the regulatory basis of translational dysregulation in HF and HCC. Second, the "mirror regulation" concept we propose provides a novel conceptual framework that bridges the cardiovascular and cancer fields, a cross-disease perspective that we hope will interest the journal's broad readership. Third, our entirely computational approach, based exclusively on publicly available data, is fully reproducible; all analysis code has been deposited in a GitHub repository (https://github.com/zxy048/translation-mirror-hf-hcc) for anonymous peer review.
+4. **ATF4/ISR and MYC convergence.** ATF4, the master transcription factor of the integrated stress response, was the strongest transcriptional correlate of the translation co-expression program (ρ = +0.439, FDR < 0.0001). MYC target pathway activity showed the highest pathway-level association (ρ = +0.613, p < 0.0001). These findings suggest that stress-adaptive (ATF4/ISR) and proliferative (MYC) programs converge on the translational machinery.
 
-This manuscript has not been published and is not under consideration for publication elsewhere. All authors have read and approved the final version of the manuscript and declare no competing interests.
+5. **Network-level independence.** None of the seven hub genes appear in canonical Hallmark MYC target gene sets, confirming independent discovery through data-driven network analysis rather than a pre-selected candidate gene approach.
 
-We appreciate your time and consideration, and look forward to hearing from you.
+Collectively, these findings support a "mirror regulation" framework: a conserved translation co-expression architecture deployed in opposite directions according to disease context — upregulated in the proliferative HCC microenvironment, downregulated in the energy-depleted failing myocardium.
 
-Sincerely,
+## Significance and Fit for BBA – Molecular Basis of Disease
 
-Zhiyu He (on behalf of all authors)
+We believe this manuscript is well-suited for BBA – Molecular Basis of Disease for the following reasons:
+
+- **Molecular mechanism focus.** The study identifies specific molecular programs (ATF4/ISR, MYC) that converge on the translational machinery across two major diseases, providing a mechanistic framework consistent with the journal's emphasis on the molecular basis of human disease processes.
+
+- **Cross-disease perspective.** By comparing two diseases with opposing physiological demands within a single analytical framework, we distinguish conserved organizational principles from disease-specific transcriptional responses — an approach that reveals regulatory logic invisible to single-disease analyses.
+
+- **Translational implications.** While the TGS itself is not a universal prognostic biomarker, the identification of ATF4/ISR as a regulatory axis converging on translation in HCC points to a targetable stress-adaptive vulnerability with potential therapeutic relevance.
+
+- **Methodological rigor.** All analyses use publicly available data with identical computational pipelines applied across diseases, ensuring full reproducibility. Analysis code is deposited in a public GitHub repository.
+
+## Declarations
+
+- This manuscript has not been published previously and is not under consideration elsewhere.
+- All authors have approved the manuscript and agree with its submission to BBA – Molecular Basis of Disease.
+- The authors declare no competing financial interests.
+- All datasets used are publicly available: GSE57338, GSE141198, GSE14520, and GSE76427 from GEO (https://www.ncbi.nlm.nih.gov/geo/); TCGA-LIHC from the GDC Data Portal (https://portal.gdc.cancer.gov/).
+- Analysis code is available at https://github.com/zxy048/translation-mirror-hf-hcc, accessible via an anonymous link during peer review.
+
+## Suggested Reviewers
+
+We suggest the following potential reviewers with relevant expertise:
+
+1. Expert in cross-disease transcriptomics and WGCNA methodology
+2. Expert in translational regulation and ribosome biology
+3. Expert in HCC systems biology and integrated stress response
+4. Expert in heart failure transcriptomics and metabolic remodeling
+
+Specific names and contact information are available upon request.
 
 ---
 
-**Suggested Reviewers** (optional; can be omitted upon your preference):
+Thank you for considering our manuscript. We look forward to your response.
 
-1. A researcher with expertise in cardiac transcriptomics / WGCNA methodology
-2. A researcher with expertise in translational control / ribosome biology
-3. A researcher with expertise in hepatocellular carcinoma genomics
+Sincerely,
 
-We are happy to provide specific names upon request.
+**[Corresponding Author Name]**
+[Affiliation]
+[Email]
+[ORCID]
+
+On behalf of all authors.
