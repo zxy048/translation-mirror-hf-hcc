@@ -17,17 +17,17 @@ dir.create(FIG_DIR, showWarnings = FALSE, recursive = TRUE)
 # Figure 6: Mechanistic Model — Disease-context-dependent remodeling
 # ═══════════════════════════════════════════════════════════════════════════════
 
-cat("\n═══ Figure 6: Mechanistic Model ═══\n")
+cat("\n═══ Figure 5: Mechanistic Model ═══\n")
 
 # Use grid graphics to create a conceptual diagram
-png(file.path(FIG_DIR, "Figure6_Mechanistic_Model.png"),
+png(file.path(FIG_DIR, "Figure5_Mechanistic_Model.png"),
     width = 14, height = 10, units = "in", res = 300)
 
 grid.newpage()
 
-# ── Title ──
+# ── Title (no embedded figure number — journal caption provides numbering) ──
 grid.text(
-  "Figure 6. Disease-context-dependent remodeling of translation-related transcriptional programs.",
+  "Disease-Context-Dependent Remodeling of Translation-Related Transcriptional Programs",
   x = 0.02, y = 0.99, just = c(0, 1),
   gp = gpar(fontface = "bold", fontsize = 14, col = "black")
 )
@@ -232,11 +232,11 @@ popViewport()
 
 # Complementarity label
 grid.text("Complementary — not competing — regulatory dimensions",
-          x = 0.5, y = 0.005, just = c(0.5, 0.5),
+          x = 0.5, y = 0.02, just = c(0.5, 0.5),
           gp = gpar(fontsize = 9, col = "grey40", fontface = "italic"))
 
 dev.off()
 
-cat(sprintf("Figure 6 saved: %s\n",
-            file.path(FIG_DIR, "Figure6_Mechanistic_Model.png")))
-cat("\n=== Figure 6 generation complete ===\n")
+cat(sprintf("Figure 5 saved: %s\n",
+            file.path(FIG_DIR, "Figure5_Mechanistic_Model.png")))
+cat("\n=== Figure 5 generation complete ===\n")
