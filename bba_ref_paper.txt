@@ -1,0 +1,1542 @@
+Pages: 20
+
+===== PAGE 1 =====
+Regular Paper
+Multi-omics integrative analysis elucidates the molecular characteristics of 
+SMARCA4-deficient lung adenocarcinoma and the derived 
+therapeutic options
+Deyu Guo a,1, Kai Wang b,c,1, Shijie Sun c, Yuxiang Chi a, Jiajun Du a,d,*,  
+Wei Dong d,*
+a Institute of Oncology, Shandong Provincial Hospital, Shandong University, Jinan, China
+b Department of Healthcare Respiratory Medicine, Shandong Provincial Hospital, Shandong University, Jinan, China
+c Institute of Oncology, Shandong Provincial Hospital affiliated to Shandong First Medical University, Jinan, China
+d Department of Thoracic Surgery, Shandong Provincial Hospital, Shandong University, Jinan, China
+A R T I C L E I N F O
+Keywords:
+SMARCA4
+Immunotherapy
+Chemotherapy
+Lung adenocarcinoma
+Machine learning
+A B S T R A C T
+SMARCA4-deficient lung adenocarcinoma (LUAD) is highly aggressive with multiple oncogene mutations, and 
+has low sensitivity to chemotherapy, targeted therapy and immunotherapy. By integrating multi-omics analysis 
+and machine learning analysis on 20 lung adenocarcinoma datasets, we characterized SMARCA4 mutation in 
+clinical prognosis, metabolic level, immune infiltration and pathway enrichment. The key role of SMARCA4 in 
+LUAD development was confirmed by several in vitro and in vivo experiments. SMARCA4 is highly expressed in 
+LUAD tissues compared with adjacent tissues, and SMARCA4 mutation is a poor prognostic factor. Although 
+SMARCA4-deficient LUAD patients are not sensitive to common chemotherapeutic drugs, immunotherapy is an 
+alternative treatment for lung adenocarcinoma. SMARCA4 deletion is associated with a high rate of oncogene co- 
+mutation. Co-mutation of KRAS was found to have a significant impact on the response to multiple types of 
+chemotherapy. Unique metabolic profiles, abnormal cell cycle and hyperactivation of oxidative phosphorylation 
+were hallmarks of SMARCA4 mutant LUAD. We screened four chemotherapeutic agents targeting MTOR 
+pathway, oxidative stress, DNA replication or cell cycle, including rapamycin and ribociclib, as potential 
+chemotherapeutic agents for SMARCA4-deficient lung adenocarcinoma. In vitro assays showed that SMARCA4 
+knockdown significantly inhibited DNA replication, cell cycle and cell proliferation in lung adenocarcinoma 
+cells, and significantly promoted oxidative stress and apoptosis in lung adenocarcinoma cells. Our comprehen­
+sive findings advance our understanding of SMARCA4 mutant LUAD gene mutation and immune microenvi­
+ronment, providing insights into potential therapeutic approaches and research directions for SMARCA4- 
+deficient LUAD.
+1. Introduction
+SWI/SNF (SWItch/Sucrose NonFermentable) chromatin remodeling 
+complex is a member of the five subfamilies of ATP-dependent chro­
+mosome remodeling complexes. SWI/SNF complex regulates gene ac­
+tivity or expression by altering DNA-nucleosome topology, thereby 
+changing chromatin from a dense to an open state during gene tran­
+scription [1,2]. SWI/SNF complexes are involved in a variety of key 
+cellular biological processes, including chromatin repair, cell prolifera­
+tion and cell differentiation [3]. There are 10 to 15 subunits in the SWI/ 
+SNF complex, and different combinations of subunits produce various 
+complexes, with some core subunits required for complex assembly, 
+especially SMARCB1, SMARCA2, SMARCA4, ARID1A, and ARID1B [4]. 
+As an ATP-dependent catalytic subunit of SWI/SNF chromosome 
+remodeling complex, SMARCA4 participates in the regulation of chro­
+matin structure and gene expression by providing energy [5]. Studies 
+* Corresponding authors at: Department of Thoracic surgery, Shandong Provincial Hospital, Shandong University, 324 Jingwu Road, Jinan, 250021, China.
+E-mail addresses: dujiajun@sdu.edu.cn (J. Du), dr.dongwei@sdu.edu.cn (W. Dong). 
+1 These authors contributed equally to this work.
+Contents lists available at ScienceDirect
+BBA - Molecular Basis of Disease
+journal homepage: www.elsevier.com/locate/bbadis
+https://doi.org/10.1016/j.bbadis.2025.168051
+Received 15 February 2025; Received in revised form 28 August 2025; Accepted 9 September 2025  
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+Available online 12 September 2025 
+0925-4439/© 2025 Elsevier B.V. All rights are reserved, including those for text and data mining, AI training, and similar technologies. 
+
+
+===== PAGE 2 =====
+have shown that SMARCA4 is involved in several key biological pro­
+cesses in tumor cells. SMARCA4 ensures the orderly progression of 
+mitosis by recruiting topoisomerases and regulates G1/S phase DNA 
+transcription [6,7]. Meanwhile, SMARCA4 is involved in regulating the 
+expression of tumorigenic transmembrane glycoprotein CD44, thus 
+participating in the regulation of cell adhesion and metastasis [8].
+Mutations in the SWI/SNF complex are widely distributed in various 
+human tumors, and these mutations are most commonly found in the 
+SMARCA4 subunit [9]. Mutant inactivation of SMARCA4 alters chro­
+matin accessibility and transcriptional regulation of genes, resulting in 
+an invasive phenotype [10]. Studies have shown that heterozygous mice 
+with lung SMARCA4 protein conditional knockout have significantly 
+increased tumor volume [11]. Results from a public database show that 
+SMARCA4 mutated lung adenocarcinoma exhibit the same highly 
+dedifferentiated state as the relevant mouse models [12]. SMARCA4- 
+dNSCLC (SMARCA4-deficient non-small lung cancer) accounts for at 
+least 10 % of all cases of NSCLC (non-small lung cancer) [13], and is 
+associated with the aggressiveness and poor prognosis of NSCLC [14]. 
+Recent studies have shown that NSCLC patients with SMARCA4 muta­
+tions, especially homozygous deletions and truncating mutations, are 
+more likely to have drug resistance, early recurrence, and poor clinical 
+outcomes than patients with wild-type SMARCA4 [10,15].
+Regarding chemotherapy, SMARCA4 was shown to promote efficient 
+repair of cisplatin-induced DNA damage and recruitment of the DNA 
+repair factor ERCC1 after damage recognition [16]. In addition, 
+SMARCA4-dNSCLC was more sensitive to platinum-based chemo­
+therapy, and cisplatin-vincristine adjuvant therapy significantly 
+improved the disease-specific survival of SMARCA4-low stage IB/II 
+NSCLC patients [17]. However, a small retrospective study showed that 
+platinum-based doublet chemotherapy or chemotherapy combined with 
+immunotherapy did not significantly improve the prognosis of 
+SMARCA4-dNSCLC patients [18]. In terms of immunotherapy, 
+compared with SMARCA4 unmutated patients, most patients with 
+SMARCA4 mutation have low or negative expression of PD-L1 (pro­
+grammed cell death ligand 1) and high TMB (Tumor mutation burden) 
+[14,19]. Although high TMB is often associated with a better immuno­
+therapy response rate in lung adenocarcinoma, the theoretical mecha­
+nism for this phenomenon is that TMB in lung adenocarcinoma is 
+positively correlated with CD8+ T cell infiltration [20], and SMARCA4 
+mutation has been shown to reduce CD8+ T cell infiltration [21]. In 
+addition, SMARCA4 mutation patients may be in an immunosuppressive 
+microenvironment [22,23], suggesting that SMARCA4-deficient lung 
+adenocarcinoma patients are less likely to benefit from immunotherapy.
+Diversified machine learning (ML) algorithm is a data analysis 
+method that helps to find therapeutic targets for lung cancer by learning 
+from data to predict results [24]. The clinical applications of ML range 
+from diagnosis to prediction and have been applied in various clinical 
+fields [25–28]. Since there is currently no effective treatment for 
+SMARCA4-deficient lung adenocarcinoma, we used multi-omics inte­
+grative analysis and machine learning methods to simulate the in vivo 
+environment to explore the causes and potential mechanisms of drug 
+resistance and poor prognosis in SMARCA4-deficient lung adenocarci­
+noma. We analyzed the differences in the effects of SMARCA4 deletion 
+mutations and SMARCA4 low expression on the prognosis, immuno­
+therapy, chemotherapy, and cell metabolism of lung adenocarcinoma, 
+and proposed potential therapeutic modalities. This study explored 
+common SMARCA4 co-mutated genes and analyzed the effect of co- 
+mutated genes on susceptibility to chemotherapy in patients with 
+SMARCA4 mutation deletion. We used multi-dataset enrichment anal­
+ysis and in vivo/vitro assays to analyze and verify the differences in in 
+vivo and in vitro function of SMARCA4 and the metabolic characteristics 
+of SMARCA4-deficient lung adenocarcinoma. This study provides po­
+tential therapeutic targets and research direction for the clinical treat­
+ment of SMARCA4-deficient lung adenocarcinoma.
+2. Materials and methods
+2.1. Bioinformatics and ethics
+2.1.1. Clinical samples
+This study received approval from the Biomedical Research Ethics 
+Committee of Shandong Provincial Hospital (SWYX: NO. 2024–711) and 
+was conducted in accordance with the Declaration of Helsinki. All pa­
+tients were granted written informed consent for the scientific use of 
+their biomaterials.
+2.1.2. Data collection and preprocessing
+The Cancer Genome Atlas (TCGA) data encompassed RNA expression 
+matrix, and associated clinical data for 33 types of carcinomas, including 
+LUAD (lung adenocarcinoma). These data were downloaded from the 
+UCSC Xena database (https://xenabrowser.net/). RNA-seq data under­
+went log2 transformation for normalization.
+Data from the Gene Expression Omnibus (GEO, https://www.ncbi. 
+nlm.nih.gov/geo/) database for SMARCA4 differential expression 
+analysis were screened according to the following criteria: (1) lung 
+adenocarcinoma; (2) human gene expression profiles; (3) published 
+between 2007 and 2022; (4) case-control groups; (5) sample size greater 
+than 10; (6) publicly available. Finally, eight GEO datasets were 
+included in the analysis, namely GES31210, GSE31547, GSE40791, 
+GSE32863, GSE19188, GSE75037, GSE30219, and GSE10072.
+Data from the Gene Expression Omnibus (GEO, https://www.ncbi. 
+nlm.nih.gov/geo/) database for SMARCA4 prognosis analysis were 
+screened according to the following criteria: (1) lung adenocarcinoma; 
+(2) human gene expression profiles; (3) published between 2007 and 
+2022; (4) sample size greater than 50; (5) publicly available; (6) prog­
+nostic information included. Finally, five GEO datasets were included in 
+the analysis, namely GSE30219, GSE37745, GSE50081, GSE68465, 
+GSE72094.
+There is also an immunotherapy clinical cohort (IMvigor210) 
+available at http://research-pub.gene.com/IMvigor210CoreBiologies.
+Immunohistochemical images of lung adenocarcinoma and lung 
+normal tissues downloaded from THE HUMAN PROTEIN ATLAS 
+(https://www.proteinatlas.org/).
+2.1.3. Immune infiltration analyses
+Cibersort algorithm analysis was used to obtain a matrix of different 
+immune cell percentages in the TCGA-LUAD cohort. SMARCA4-related 
+immune cells were grouped from two perspectives (top 10 % of 
+SMARCA4 high expression samples and bottom 10 % of SMARCA4 low 
+expression samples, SMARCA4 mutant and non-mutant). Differential 
+analysis was performed using “limma” package to identify SMARCA4- 
+related immune cells.
+The Tumor Immune Dysfunction and Exclusion (TIDE, http://tide. 
+dfci.harvard.edu/) Website and TIDE scores were used to predict the 
+effect of SMARCA4 on immunotherapy response in TCGA-LUAD dataset.
+2.1.4. Chemotherapy response prediction
+To investigate the role of SMARCA4 in chemotherapy, R package 
+“oncoPredict” was utilized to predict the drug sensitivity concerning 
+common chemotherapeutic drugs in TCGA-LUAD cohort.
+2.1.5. Meta analysis
+In SMARCA4 mutations and the prognosis of patients with lung 
+adenocarcinoma of meta-analysis, datasets and samples were filtered 
+from the cBioPortal database (https://www.cbioportal.org/) according 
+to the following criteria: (1) lung adenocarcinoma; (2) human gene 
+mutation profiles; (3) no duplicate patients between the datasets; (4) 
+sample size greater than 50; (5) publicly available; (6) prognostic in­
+formation included. Four datasets were finally included: Lung 
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+2 
+
+
+===== PAGE 3 =====
+Adenocarcinoma (OncoSG, Nat Genet 2020), Lung Adenocarcinoma 
+(TCGA, PanCancer Atlas), Lung Adenocarcinoma Met Organotropism 
+(MSK, Cancer Cell 2023), Lung Adenocarcinoma (CPTAC, GDC).
+In SMARCA4 expression level and the prognosis of patients with lung 
+adenocarcinoma of meta-analysis, datasets and samples were filtered 
+from the cBioPortal database (https://www.cbioportal.org/) according 
+to the following criteria: (1) lung adenocarcinoma; (2) human gene 
+expression profiles; (3) no duplicate patients between the datasets; (4) 
+sample size greater than 50; (5) publicly available; (6) prognostic in­
+formation included. Two datasets were finally included: Lung Adeno­
+carcinoma (OncoSG, Nat Genet 2020) and Lung Adenocarcinoma 
+(TCGA, PanCancer Atlas). The selection criteria for the GEO dataset 
+have been described previously. In the use of the prognosis of patients 
+with single factor analysis cox HR value and 95 % CI, we use https://smu 
+onco.shinyapps.io/Onlinemeta/ for a meta-analysis [29].
+2.1.6. Enrichment analysis
+To explore the SMARCA4-related functions and pathways, we 
+analyzed SMARCA4 expression levels in TCGA-LUAD, GSE236587, and 
+GSE249062 datasets. The differentially expressed genes were grouped 
+from two perspectives (the high 10 % SMARCA4 expression of samples 
+and the low 10 % SMARCA4 expression of samples, and SMARCA4 
+mutated and unmutated samples), and the “limma” package was used to 
+screen out the differentially expressed genes in the groups. Gene set 
+enrichment analysis (GSEA), KEGG and GO analysis were used to reveal 
+the function and related pathways of SMARCA4 using the R package 
+“clusterprofiler”. In addition, “clusterprofiler” was also used for ssGSEA 
+analysis to score immune cells, metabolism, cell behavior, and related 
+pathways.
+2.1.7. Pan-cancer analysis
+The R package “limma” compared SMARCA4 expressions across 33 
+pan-cancers using combined GTEx and TCGA data. Univariate Cox 
+regression and Kaplan—Meier curves were performed in pan-cancer 
+analysis.
+2.2. Machine learning
+Models were constructed using XGBoost, Support Vector Machine 
+(SVM), or Random Forest (RF) algorithms. The 45 patients with 
+SMARCA4 mutations in the TCGA-LUAD dataset were divided into 
+training set and validation set by K-fold cross validation. The best K 
+value was determined by evaluating the prediction accuracy of K-fold 
+cross validation, which was 5, 6 and 5 for the three models XGBoost, 
+SVM and RF, respectively. According to logFC >1 and p < 0.05, the 
+differentially expressed genes between SMARCA4 mutated and non- 
+mutated samples in TCGA-LUAD dataset were screened. The expres­
+sion values of 100 differentially expressed genes were used as model 
+features, and TIDE predicted whether patients responded to immuno­
+therapy was used as model labels. The model performance was evalu­
+ated using Area under Curve (AUC), confusion matrix and accuracy 
+evaluation. We optimized several parameters of the XGBoost algorithm 
+using the Naive Bayes algorithm. The Naive Bayes algorithm is a clas­
+sification method based on Bayes' theorem and the assumption of feature 
+conditional independence. For a given training set, firstly, the joint 
+probability distribution of input/output is learned based on the 
+assumption of conditional independence of features. Subsequently, for 
+the given input data, Bayes' theorem is used to derive the output result 
+with the maximum posterior probability. SVM algorithm adopts the 
+hyperparameter optimization mode of grid search combined with cross 
+validation and uses weighted F1 score as the optimization objective. RF 
+algorithm adopts the hyperparameter optimization mode of random 
+search combined with cross validation and uses weighted F1 score as the 
+optimization objective. All model hyperparameter tuning was carried 
+out exclusively on the training data. See the Supplementary Material for 
+details of the code. Finally, the XGBoost algorithm was used to establish 
+the model [30]. The visual analysis of the model was performed using 
+Shapley additive exPlanations (SHAP) [31]. Based on cooperative game 
+theory, an additive interpretation model was constructed using SHAP, 
+and all features were regarded as “contributors”.
+2.3. In vivo and in vitro experiments
+2.3.1. Cell culture
+The lung adenocarcinoma cell lines PC-9 and NCI-H1975 were pro­
+cured from Procell Life Science & Technology Co., Ltd. (Wuhan, China). 
+Cells were maintained in RPMI 1640 (VivaCell). All cell lines were 
+supplemented with 10 % fetal bovine serum (FBS) and 1 % penicillin- 
+streptomycin (P/S) and were incubated at 37 ◦C with 5 % CO2. Impor­
+tantly, the cell lines were confirmed to be free from mycoplasma 
+contamination.
+2.3.2. Mouse xenograft model
+Four-week-old female nude mice (BALB/C nude) were obtained from 
+Beijing Vital River Laboratory Animal Technology Co., Ltd. (Beijing, 
+China). The animal room temperature was 22 ± 2 ◦C and the relative 
+humidity was 50 % ± 15 %. Experiments were performed under a 12-h 
+dark/light cycle. For mouse experiments, each mouse received a dorsal 
+injection of 3 × 106 PC-9 cells in 200 μL mixed solution (PBS: Matrigel 
+(BD356234) = 1: 1). Tumor sizes were measured every 3 days with a 
+linear caliper. Tumor volume (V) was calculated using the following 
+formula: (width)2 × height / 2. Euthanasia was performed 3 weeks after 
+tumor transplantation. The experimental design conformed to the 
+ethical requirements of animal protection and laboratory animal wel­
+fare. The study was approved by the ethics committee (No. 
+SWYX2024–711).
+2.3.3. Lentivirus transfection
+The RNAi lentiviral vector for SMARCA4 was hU6-MCS-CBh-gcGFP- 
+IRES-puromycin, which was provided by Genechem, Shanghai, China. 
+Following vector construction, the PC-9 and NCI-H1975 cell lines were 
+transfected with virus concentration at MOI of 10 and 50 for 12 h, 
+respectively. After this transfection period, the cells were switched back 
+to their standard culture medium and incubated for an additional 48 h. 
+Subsequently, a 1-week screening process was initiated using puromycin 
+(2 μg/mL, provided by Beyotime Biotech). The stable transfected cell 
+lines were used for cell viability assay and animal experiments.
+2.3.4. RNA interference assay
+Lipofectamine 3000 (Invitrogen) was used for plasmid transfection 
+according to the manufacturer's instructions. The siRNAs were synthe­
+sized by Shandong Genebio Co., LTD. (Shandong, China) as follows: si- 
+NC: 5′- UUCUCCGAACGUGUCACGUTT −3′ and 5′- ACGUGA­
+CACGUUCGGAGAATT −3′; siSMARCA4–1: 5′- GCUCAGAAGAA­
+GAGGAAGATT −3′ and 5′- UCUUCCUCUUCUUCUGAGCTT −3′; 
+siSMARCA4–2: 
+5′- 
+CCAAGAAGAUGAAGAAGAUTT 
+−3′ and 
+5′- 
+AUCUUCUUCAUCUUCUUGGTT- 3′.
+2.3.5. Western blot
+Proteins were extracted from cells and tissues in a 100:1 ratio with 
+RIPA buffer supplemented with phenylsulfonyl fluoride (PMSF) (ST506, 
+Beyotime Biotech, Shanghai, China). Protein extracts were subjected to 
+10 % SDS-PAGE (120 V, 60 min) for western blotting analysis. The 
+isolated protein bands were subsequently transferred to a poly­
+vinylidene difluoride membrane for 1.5 h at 100 V using a Bio-Rad 
+transfer apparatus.
+The Western blotting process was then blocked with TBS/Tween 20 
+solution containing 5 % BSA and incubated with antibodies overnight at 
+4 ◦C. Bands were visualized using a ChemiDoc TM MP Imaging System 
+(BIO-RAD, California, USA).
+Antibodies information is detailed in the Supplementary Table 1.
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+3 
+
+
+===== PAGE 4 =====
+2.3.6. Gel electrophoresis assays
+Total RNA was extracted using AG RNAex Pro reagent from Accurate 
+Biotechnology (Hunan) Co., LTD. Subsequently, cDNA was synthesized 
+by reverse transcription using Evo MMLVRT Master Mix kit, also from 
+China Accurate Biotechnology (Hunan) Co., LTD. After electrophoresis 
+in a 3 % agarose gel at 60 V for 1 h, samples were visualized using a 
+ChemiDoc TM MP Imaging System (BIO-RAD, California, USA).
+The primer sequences used in this study as follows: 18 s: forward: 5′- 
+CAGCCACCCGAGATTGAGCA 
+−3′ 
+and 
+reverse: 
+5′- 
+TAGTAGC­
+GACGGGCGGTGTG -3′; SMARCA4: forward: 5′- ATCGCGCTCATCACG­
+TACCTC -3′ and reverse: 5′- CTCGTACGCCCAGTTGGACA −3′.
+2.3.7. Cell proliferation assay
+Cell proliferation was measured by sulforhodamine B (SRB) assay 
+and cells were seeded in 96-well plates at a density of 1500 cells/well. 
+After 24 h of culture, when the cells were fully adherent, the initial cell 
+adherence was recorded at zero hour, and subsequent samples were 
+collected every 24 h. Each well was fixed with 80 μL trichloroacetic acid 
+(TCA) for at least 6 h at 4 ◦C. After fixation, the plates were rinsed five 
+times with tap water and dried overnight at room temperature. Subse­
+quently, each well was stained with 0.057 % (wt/vol) SRB solution (100 
+μL) for 30 min, followed by washing at least five times with 1 % acetic 
+acid and drying overnight at room temperature. Each well was treated 
+with 150 μL of 10 mM Tris alkaline solution and shaken at 2000 rpm for 
+20 s on an IKA MS 3 digital device (Thermo Fisher, USA). The absor­
+bance of the solution at 540 nm was measured using a microplate reader 
+(Bio-Rad, USA).
+2.3.8. Cell viability assay
+The half maximal inhibitory concentration (IC50) of cells was 
+detected by sulforhodamine B (SRB) method. Briefly, cells were spread 
+in 96-well dishes at a density of 5000 cells per well. After 24 h, when all 
+cells were adherent, cisplatin (HY-17394, MCE), paclitaxel (HY-B0015, 
+MCE), gemcitabine (IG0070, Solarbio), etoposide (HY-13629, MCE), 
+doxorubicin (SC0159, Beyotime), ribociclib (SC6668, Beyotime), rapa­
+mycin (HY-10219, MCE), IACS-010759 (HY-112037, MCE) or enaside­
+nib (SD7252, Beyotime) were added for 24 h or 48 h, respectively. Cells 
+were fixed with 60 μL of 10 % cold trichloroacetic acid (TCA) in each 
+well and incubated for at least 6 h at 4 ◦C. They were washed five times 
+with purified water and allowed to dry overnight at room temperature. 
+100 μL 0.057 % (wt/vol) SRB solution was added to each well for 20 min 
+for staining. Plates were washed with 1 % acetic acid and stored over­
+night at room temperature. Plates were incubated with 150 μL of 10 mM 
+Tris and shaken. The absorbance value at 540 nm was measured using a 
+microplate reader (Thermo Fisher, USA), and the results were analyzed 
+using GraphPad Prism8.0.2 (GraphPad Software, USA).
+2.3.9. Colony formation assay
+The colony formation assay was performed by culturing cells in 6- 
+well plates at a density of 500 cells/well in a 5 % CO2 incubator at 
+37 ◦C for 2 weeks. Afterward, the cells in each well were fixed with 
+paraformaldehyde for 30 min and stained with 500 μL of 0.1 % crystal 
+violet for at least 20 min. Quantification was conducted using ImageJ 
+software.
+2.3.10. EdU assay
+Cells were seeded in 12-well plates at 40 % density. After 24 h of 
+culture, when cells were fully adherent, the BeyoClick™ EdU Cell pro­
+liferation kit with Alexa Fluor 488 (Beyotime biotech, C0071L) was used 
+for analysis according to the manufacturer's instructions. Images were 
+taken with a ZEISS fluorescence inverted microscope, processed with 
+ZEN Blue Lite, and cell counting was performed using ImageJ software.
+2.3.11. Annexin V-FITC/PI cell apoptosis detection
+Cells were plated at 50 % density in 24-well plates. After 24 h of 
+culture, when the cells were completely attached to the wall, the cells 
+were collected after enzymatic digestion and centrifugation. Cells were 
+washed with precooled PBS, stained with Annexin V-FITC/PI kit (YEA­
+SEN, 40302), and analyzed with BD LSRFortessa and FlowJo v10.
+2.3.12. Glutathione (GSH), superoxide dismutase (SOD) and 
+malondialdehyde (MDA) measurement
+GSH assay kit (A006–1-1), SOD assay kit (A001–3-2) and MDA assay 
+kit (A003–1-2) were purchased from Nanjing Jiancheng Bioengineering 
+Institute. The cells were plated in a 10 cm dish at 70 % density. After 24 
+h of culture, when the cells had adhered completely, all experiments 
+were performed in accordance with the manufacturer's instructions.
+2.3.13. Cell cycle analysis
+Cells at 50 % density were seeded in 6-well plates. After 24 h of 
+culture, the cells were completely adherent. Cells were washed with PBS 
+and isolated by enzymatic digestion. The enzymatic separation was 
+terminated with medium containing FBS. The cells were centrifuged. 
+The residue was re-suspended in 70 % pre-cooled ethanol solution and 
+fixed at −20 ◦C for at least 4 h. The cells were centrifuged and washed 
+twice with PBS. Cells were re-suspended in 0.5 mL PI/RNase staining 
+buffer (550825, BD, Shanghai, China) and incubated for 15 min at room 
+temperature in the dark. Cell cycles were determined using a Cytoflex 
+cell analyzer and analyzed using FlowJo v10.
+2.3.14. Determination of ROS levels
+Cells were incubated with 10 mM 2′, 7′ - dichlorofluorescein diac­
+etate (DCFH-DA) (S0033S, Beyotime) for 20 min and then washed three 
+times with PBS. The fluorescence intensity was then measured using a 
+flow cytometer (FACSCalibur, BD Biosciences, USA).
+2.4. Statistical analysis
+All statistical data analyses were conducted using R software 
+(version 4.2.1). Parts of the statistical analyses were performed by 
+GraphPad Prism (version 8.0.2) and ImageJ (version 1.6.0). p < 0.05 
+was considered to be statistically significant. *p < 0.05; **p < 0.01 and 
+***p < 0.001; ns, not significant.
+3. Results
+3.1. SMARCA4 is highly expressed in lung adenocarcinoma
+To evaluate SMARCA4 expression in lung adenocarcinoma, we 
+analyzed mRNA levels in tumor and normal tissues using eight GEO lung 
+adenocarcinoma datasets and TCGA lung adenocarcinoma dataset 
+(TCGA-LUAD). SMARCA4 expression was significantly higher in tumor 
+tissues compared to adjacent normal tissues (Fig. 1A and B). This finding 
+was further validated by gel electrophoresis, which demonstrated 
+elevated SMARCA4 mRNA levels in 16 paired samples of lung adeno­
+carcinoma and adjacent non-tumor tissues (Fig. 1C and D). Additionally, 
+immunohistochemistry data from The Human Protein Atlas confirmed 
+significantly increased SMARCA4 protein expression in lung adenocar­
+cinoma tissues relative to normal lung tissues (Fig. 1E-G).
+3.2. Mutations in SMARCA4, rather than expression, have a more 
+significant impact on the prognosis of patients with lung adenocarcinoma
+Considering the high frequency of SMARCA4 deletion in lung 
+adenocarcinoma patients and the poor prognosis of SMARCA4-deficient 
+lung adenocarcinoma patients, we further analyzed the effect of 
+SMARCA4 mutation on the prognosis of patients with lung adenocar­
+cinoma from four lung adenocarcinoma mutation datasets in cBioPortal 
+database. The prognostic analysis results from all four datasets sug­
+gested that SMARCA4 mutation patients had a poor prognosis, with p =
+0.03 in the TCGA-LUAD dataset and p < 0.0001 in the MSK, Cancer Cell 
+2023 dataset. The prognostic analysis curves of OncoSG, Nat Genet 2020 
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+4 
+
+
+===== PAGE 5 =====
+Fig. 1. Differential expression of SMARCA4 in lung adenocarcinoma tissues and adjacent tissues. (A) Differential expression of SMARCA4 in eight GEO lung 
+adenocarcinoma datasets (GSE31210, GSE31547, GSE40791, GSE32863, GSE19188, GSE75037, GSE30219, GSE10072). (B) Differential expression of SMARCA4 in 
+lung adenocarcinoma dataset in TCGA database. (C, D) The expression of SMARCA4 in 16 pairs of lung adenocarcinoma and adjacent normal tissues was detected by 
+gel electrophoresis. (E-G) The difference of SMARCA4 protein expression between normal lung tissues and lung adenocarcinoma tissues according to The Human 
+Protein Atlas website. *p < 0.05, **p < 0.01, ***p < 0.001. p values were calculated using unpaired or paired Student's t-test. Mean ± s.e.m. was presented.
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+5 
+
+
+===== PAGE 6 =====
+and CPTAC, GDC datasets showed that SMARCA4-mutated patients had 
+a shorter overall prognosis than SMARCA4-normal patients, although 
+SMARCA4 mutation was not statistically significant in these two data­
+sets (p > 0.05). The differences in prognostic analysis among the four 
+data sets may be related to insufficient sample size, short follow-up time 
+or differences in SMARCA4 mutation types (Fig. 2A-D). To better un­
+derstand the impact of SMARCA4 mutation on the prognosis of patients 
+with lung adenocarcinoma, we performed a meta-analysis of the four 
+lung adenocarcinoma mutation datasets mentioned earlier. SMARCA4 
+mutation was found to be associated with poor prognosis (Fig. 2E, p <
+0.01).
+Considering the significantly high expression of SMARCA4 in lung 
+adenocarcinoma, we further analyzed the impact of SMARCA4 expres­
+sion on patient prognosis. OncoSG, Nat Genet 2020 dataset prognostic 
+analysis suggested that low SMARCA4 expression was a poor prognostic 
+factor in lung adenocarcinoma patients, the other 5 GEO datasets, TCGA 
+lung adenocarcinoma dataset, and our follow-up data showed that the 
+SMARCA4 expression had no significant effect on patient prognosis 
+(Fig. 2F-M). We further quintile SMARCA4 expression in two lung 
+adenocarcinoma datasets from GEO and TCGA and analyzed the prog­
+nosis of lung adenocarcinoma patients with different SMARCA4 
+expression intervals. The results indicated that patients with SMARCA4 
+expressions of 40–60 % had the best prognosis in the three datasets, 
+suggesting no linear correlation between SMARCA4 expression and the 
+prognosis of patients with lung adenocarcinoma (Fig. 2N-P). The results 
+of the meta-analysis of 7 lung adenocarcinoma datasets revealed that 
+patients with high SMARCA4 expression had better prognosis (Fig. 2Q). 
+Although the prognostic significance of the SMARCA4 mutation was 
+significantly higher than that of the SMARCA4 expression in the meta- 
+analysis, the SMARCA4 expression acted as a potential prognostic 
+marker for patients with lung adenocarcinoma.
+3.3. SMARCA4 mutations are often accompanied by high mutations in 
+tumor-associated genes
+Previous studies have demonstrated that patients with SMARCA4 
+mutation-deletion NSCLC have higher mutation rates of KRAS, TP53, 
+STK11, and other tumor-related genes. We conducted SMARCA4 co- 
+mutation analysis using the respective largest lung adenocarcinoma 
+dataset from five databases with no duplicates in the cBioPortal data­
+base. The results suggested that the genes with a high mutation rate in 
+the SMARCA4 mutant group were TP53, KEAP1, KRAS, STK11, and TTN 
+(Table 1 and Supplementary Table 2). Further, specificity analysis re­
+sults indicated that the genes that specifically mutated in the SMARCA4- 
+mutant group mainly included ACIN1, OTUD6A, PHF14, KEAP1, and 
+STK11 (Table 2 and Supplementary Table 3). Meanwhile, EGFR muta­
+tions are mutually exclusive with SMARCA4 mutations. The results 
+suggested that SMARCA4 mutation was associated with a variety of 
+tumor-related gene mutations, which may be a potential factor for the 
+resistance of SMARCA4-deletion mutant lung adenocarcinoma to 
+chemotherapy and immunotherapy.
+3.4. Immunotherapy is one of the treatment options for SMARCA4 
+mutation patients
+The prognostic analysis of the four lung adenocarcinoma mutation 
+datasets treated with immunotherapy suggested that overall survival 
+(OS) and progression-free survival (PFS) were not statistically different 
+between SMARCA4-mutated and SMARCA4-unmutated lung adenocar­
+cinoma patients treated with immunotherapy (Fig. 3A, p > 0.05). 
+SMARCA4-mutant patients had a worse prognosis in the overall prog­
+nostic analysis, while SMARCA4-mutant patients who received immu­
+notherapy showed a similar prognosis to SMARCA4-unmutated patients. 
+Therefore, immunotherapy could be one of the treatment options for 
+SMARCA4 mutation-null lung adenocarcinoma. Meanwhile, TMB may 
+drive effective anti-tumor immune response and eventually lead to 
+sustained clinical response to immunotherapy, while TMB analysis re­
+sults showed that SMARCA4-mutant lung adenocarcinoma patients had 
+higher TMB (Fig. 3B). These analyses suggested that SMARCA4-mutated 
+patients with lung adenocarcinoma may benefit from immunotherapy. 
+We then used machine learning to screen genes that influence the 
+response to immunotherapy in patients with SMARCA4 mutations. The 
+results of ROC curve, confusion matrix and accuracy evaluation showed 
+that XGBoost model had better prediction effect than SVM and RF model 
+(Fig. 3C-E). Considering the “black box” nature of XGBoost models, we 
+introduced SHAP interpretable analysis to visualize the importance 
+ranking of features of XGBoost models. The results showed the top five 
+genes with influence on the immunotherapy response in SMARCA4 
+mutant group (Fig. 3F). Among them, SCGB3A1, CP, HLA-DQB2 and 
+SLC5A5 expression were positively correlated with immunotherapy 
+response, while RRAD expression was negatively correlated with 
+immunotherapy response (Fig. 3G). Prognostic analysis and immuno­
+therapy response results of IMvigor210 in the immunotherapy cohort 
+showed that the SMARCA4 expression did not significantly affect the 
+efficacy of immunotherapy in patients with urothelial carcinoma (Sup­
+plementary Fig. 1A-D).
+To further explore the mechanism of the difference in immune 
+response between SMARCA4 mutant and SMARCA4 low expression 
+patients, we analyzed the levels of immune cell infiltration in different 
+types of patients. Our results indicated that nearly half of the SMARCA4- 
+mutant patients had SMARCA4 expression of <10 % in TCGA-LUAD 
+cohort (19/45); accordingly, we defined patients with SMARCA4 
+expression <10 % as SMARCA4 low-express group to explore the 
+treatment difference between SMARCA4 mutant and SMARCA4 low- 
+express patients in TCGA-LUAD cohort. The clinical information of the 
+two groups is shown in the Supplementary Table 4 and Supplementary 
+Table 5, in which the SMARCA4 mutant group had more male patients, 
+while there was no significant difference in the SMARCA4 low-express 
+group. Immune-infiltration analysis revealed that, when compared 
+with the SMARCA4 non-mutant group, the SMARCA4-mutant group had 
+a lower infiltration level of resting CD4+ memory T cells, resting mast 
+cells and resting dendritic cells, but a higher infiltration level of M0 
+macrophages (Fig. 3H). When compared with the SMARCA4-high 
+expression group, the SMARCA4 low-expression group only showed a 
+slight increase in the infiltration level of γδT cells and neutrophils 
+(Supplementary Fig. 1E), which may be the underlying reason for the 
+difference in the immunotherapy response between the SMARCA4- 
+mutant group and the SMARCA4 low-expression group.
+3.5. Response of SMARCA4 mutation group and non-mutation group to 
+chemotherapy drugs in lung adenocarcinoma
+SMARCA4 mutations are associated with poor chemotherapy re­
+sponses in lung adenocarcinoma. We analyzed the relationship between 
+SMARCA4 mutations and prognosis in patients treated with chemo­
+therapy using two lung adenocarcinoma datasets. Patients with 
+SMARCA4 mutations exhibited significantly worse OS in MSK, Cancer 
+Cell 2023 dataset (Fig. 4A, p < 0.0001). While SMARCA4 mutations had 
+no statistically significant impact on OS (p = 0.06) or PFS (p = 0.08) in 
+the TCGA-LUAD dataset, the trend indicated shorter OS and PFS in the 
+SMARCA4 mutation group compared to the non-mutation group after 
+chemotherapy (Fig. 4B and C). The relationship between SMARCA4 
+expression and prognosis was also examined in two chemotherapy- 
+treated lung adenocarcinoma datasets. In the OncoSG, Nat Genet 2020 
+dataset, low SMARCA4 expression was associated with shorter OS 
+(Supplementary Fig. 2A, p = 0.046). However, in the TCGA-LUAD 
+dataset, SMARCA4 expression did not significantly affect patient prog­
+nosis (Supplementary Fig. 2B and C). The impact of SMARCA4 muta­
+tions and low expression on sensitivity to common chemotherapies was 
+further investigated. SMARCA4 mutation group showed increased 
+sensitivity to rapamycin, but no significant change in sensitivity to 
+cisplatin, gemcitabine and other chemotherapy agents (Fig. 4D). The 
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+6 
+
+
+===== PAGE 7 =====
+Fig. 2. The effect of SMARCA4 mutation and low expression on the prognosis of patients with lung adenocarcinoma. (A-D) Prognostic impact of SMARCA4 
+mutations in patients with lung adenocarcinoma in four lung adenocarcinoma datasets. (E) Meta-analysis of SMARCA4 mutation and prognosis of lung adenocar­
+cinoma patients in four lung adenocarcinoma datasets. (F-J) Effect of SMARCA4 expression on the prognosis of patients with lung adenocarcinoma in five GEO lung 
+adenocarcinoma datasets. (K) The effect of SMARCA4 expression on the prognosis of patients with lung adenocarcinoma in the lung adenocarcinoma (OncoSG, Nat 
+Genet 2020) dataset of cBioPortal database. (L) The effect of SMARCA4 expression on the prognosis of patients with lung adenocarcinoma in TCGA database. (M) The 
+effect of SMARCA4 expression on the prognosis of 48 lung adenocarcinoma patients in Shandong Provincial Hospital. (N–P) Prognostic impact of different 
+SMARCA4 expression levels in three lung adenocarcinoma datasets (GSE68465, GSE72094 and TCGA-LUAD cohort). (Q) Meta-analysis of SMARCA4 expression and 
+prognosis of lung adenocarcinoma patients in seven lung adenocarcinoma datasets.
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+7 
+
+
+===== PAGE 8 =====
+SMARCA4 low expression group was more sensitive to gemcitabine and 
+cisplatin, but resistant to epirubicin (Supplementary Fig. 2D). To 
+investigate the effect of tumor-related gene mutations on chemotherapy 
+in SMARCA4-mutant or SMARCA4-low lung adenocarcinoma patients, 
+we merged the top 10 SMARCA4 co-mutation genes with the top 10 
+SMARCA4 co-mutation specificity genes mentioned earlier. Finally, 18 
+tumor-related genes with mutation rates closely related to SMARCA4 
+mutation were obtained. To further reduce the analytical error caused 
+by the small sample size, we removed the mutant genes with a mutation 
+rate of less than 10 % in the SMARCA4 mutation and low expression 
+groups respectively. Five genes, namely ACIN1, AUTS2, OTUD6A, 
+PHF14 and STK11, were deleted in the SMARCA4 low-expression sam­
+ple group. In the SMARCA4 mutant sample group, the ACIN1 and 
+OTUD6A genes were deleted. In the SMARCA4 mutation group, we 
+found that the AUTS2 mutation made the samples more sensitive to 
+rapamycin, while the KRAS mutation led to resistance of the samples to 
+gemcitabine, ribociclib and cisplatin (Fig. 4E). In the SMARCA4 low- 
+expression group, mutations in RYR2 lead to resistance of the samples 
+to gemcitabine and epirubicin, mutations in EGFR lead to resistance of 
+the samples to epirubicin and cisplatin, and mutations in CSMD3 and 
+KRAS respectively lead to greater resistance and sensitivity of the sam­
+ples to epirubicin (Supplementary Fig. 2E). These analyses provide a 
+foundation for optimizing chemotherapy regimens for SMARCA4- 
+deficient lung adenocarcinoma. Detection of co-mutations in genes 
+such as KRAS and EGFR may aid in selecting effective chemotherapy 
+agents.
+3.6. SMARCA4 mutation and low SMARCA4 expression have unique 
+functional and metabolic features
+To investigate the regulatory pathways influenced by SMARCA4 in 
+lung adenocarcinoma, KEGG, GO, GSEA and GSVA enrichment analyses 
+were conducted on four groups of differentially expressed genes. In vitro 
+enrichment analysis of lung adenocarcinoma cell line NCI-H1299 
+showed that SMARCA4 was closely related to amino acid metabolism, 
+ferroptosis, apoptosis and hypoxia. SMARCA4 was also involved in the 
+regulation of MAPK, MTOR and PI3K-Akt tumor-related pathways 
+(Fig. 5A). In addition to lung adenocarcinoma cell lines, the enrichment 
+analysis of ID8 ovarian tumor cells also showed that SMARCA4 function 
+was closely related to amino acid metabolism and hypoxia, and was also 
+involved in the regulation of MAPK and PI3K-Akt tumor-related path­
+ways (Fig. 5B). Enrichment analysis of the TCGA-LUAD cohort showed 
+that SMARCA4 mutations mainly affected tyrosine and steroid hormone 
+metabolism and ferroptosis, but had no significant effect on tumor- 
+related pathways in vivo (Fig. 5C). Cell progression analysis and GSVA 
+analysis showed that SMARCA4 mutation was closely related to cell 
+cycle and G2/M checkpoint, and regulated oxidative phosphorylation 
+(Supplementary Fig. 3A and B). Meanwhile, by analyzing the enrich­
+ment analysis results of high and low 10 % expression of SMARCA4 in 
+the TCGA lung adenocarcinoma cohort, we found that the expression of 
+SMARCA4 mainly affected histone modification in vivo, and influenced 
+multiple tumor-related pathways (Fig. 5D). GSVA enrichment analysis 
+showed that SMARCA4 expression was negatively correlated with 
+oxidative phosphorylation (Supplementary Fig. 4A), and GSEA analysis 
+showed that SMARCA4 arrested the cell cycle (Supplementary Fig. 4B). 
+The main difference in biological processes affected by SMARCA4 
+deletion in vivo and in vitro is the regulation of tumor-related pathways 
+such as MAPK and PI3K-Akt pathway. In vivo, SMARCA4 deficiency 
+affected metabolism and ferroptosis, while SMARCA4 low expression 
+mainly affected histone modification and tumor-related pathways. The 
+results of enrichment analysis suggested that SMARA4 mutation and low 
+expression of SMARCA4 had different effects on cell functions, and 
+SMARCA4 also played different biological functions in vivo and in vitro.
+We further analyzed the effects of SMARCA4 mutation and 
+SMARCA4 low expression on 84 lung adenocarcinoma metabolic path­
+ways in a lung adenocarcinoma cohort of TCGA. The results showed that 
+low expression of SMARCA4 mainly affected glyoxylate and dicarbox­
+ylate metabolism and glutathione metabolism (Fig. 6A and B), while 
+SMARCA4 mutation mainly affected fatty acid metabolism (Fig. 6A and 
+D). Only one metabolism-related pathway, fatty acid elongation, is 
+affected by both of them (Fig. 6C and E).
+3.7. SMARCA4 regulates lung adenocarcinoma cell proliferation, DNA 
+replication, and cell cycle
+Analysis of cellular progression revealed that SMARCA4 expression 
+plays a crucial role in regulating cell growth and the cell cycle (Fig. 7A). 
+To validate these findings, we investigated the function of SMARCA4 by 
+knocking down its expression in lung adenocarcinoma cells (Fig. 7B). 
+Cell proliferation assay demonstrated a significant reduction in the 
+proliferation rate of lung adenocarcinoma cells following SMARCA4 
+knockdown (Fig. 7C). Similarly, the colony formation ability of 
+SMARCA4-deficient cells was significantly reduced (Fig. 7D and E). 
+Given that previous enrichment analyses suggested a role for SMARCA4 
+in regulating mitosis, flow cytometry was performed to assess its impact 
+on the cell cycle. The results indicated that SMARCA4 knockdown led to 
+significant arrest of lung adenocarcinoma cells in the G2/M phase 
+(Fig. 7F and G). Meanwhile, EdU assays further confirmed that 
+SMARCA4 knockdown inhibited DNA replication in lung adenocarci­
+noma cells (Fig. 7H and I). Western Blot analysis of cell cycle-related 
+proteins revealed decreased levels of CDK2 and CyclinB1, both of 
+which are essential for G2/M phase progression, in SMARCA4- 
+knockdown PC-9 and NCI-H1975 cell lines (Fig. 7J). Additionally, pro­
+tein levels of CDK1 and CyclinA2, key regulators of the S phase, were 
+also reduced to varying degrees. These findings suggest that SMARCA4 
+exerts complex and multifaceted regulatory functions in the cell cycle of 
+lung adenocarcinoma cells.
+3.8. SMARCA4 affects oxidative stress and apoptosis in lung 
+adenocarcinoma
+Previous enrichment analyses indicated that SMARCA4 is closely 
+associated with oxidative phosphorylation and plays a regulatory role in 
+the MTOR and PI3K-Akt pathways in lung adenocarcinoma. To experi­
+mentally validate these findings, we conducted functional assays. ROS 
+assays revealed a significant increase in oxidative stress levels in lung 
+adenocarcinoma cells following SMARCA4 knockdown (Fig. 8A and B). 
+Further detection of the expression levels of oxidative stress-related 
+molecules showed that the expression levels of SOD and GSH, which 
+inhibit the oxidative level of cells, were decreased in different degrees 
+after SMARCA4 knockdown, while the level of oxidative stress product 
+MDA was increased (Fig. 8C). Western blot results showed that KEAP1- 
+NRF2 pathway was activated in response to oxidative stress induced by 
+ROS stimulation after SMARCA4 knockdown (Fig. 8D). Concurrently, 
+apoptosis assays demonstrated that SMARCA4 knockdown significantly 
+elevated apoptosis levels in these cells (Fig. 8E and F). Western blot 
+analysis further elucidated the molecular mechanisms underlying these 
+effects. SMARCA4 knockdown significantly inhibited the activation of 
+the Erk pathway. Additionally, phosphorylation levels of 4EBP1 and 
+p70S6K, key components of the mTOR pathway, were notably 
+decreased, suggesting that SMARCA4 influences oxidative stress and 
+apoptosis through its modulation of these pathways (Fig. 8G).
+3.9. Knockdown of SMARCA4 induces changes in the sensitivity of lung 
+adenocarcinoma to different chemotherapy drugs
+Drug sensitivity analysis of lung adenocarcinoma patients showed 
+that SMARCA4 mutant and low expression samples had different 
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+8 
+
+
+===== PAGE 9 =====
+Fig. 3. Impact of SMARCA4 mutation on immunotherapy in patients with lung adenocarcinoma. (A) The correlation between SMARCA4 mutations and 
+prognosis in four immunotherapy-treated lung adenocarcinoma cohorts (TCGA, Nat Genet 2016; MSK, Nat Genet 2019; MSK, J Clin oncol 2018; MSK Mind, Nature 
+Cancer 2022). (B) Tumor mutational burden of SMARCA4 mutated versus unmutated groups in four lung adenocarcinoma datasets. (C) ROC curves of the XGBoost, 
+SVM and RF models. (D) The confusion matrices of the XGBoost, SVM and RF models. (E) Accuracy evaluation of the XGBoost, SVM and RF models. (F) SHAP 
+visualization analysis shows the ranking of feature importance of the XGBoost model. (G) SHAP visualization analysis shows the influence of different features on the 
+output results of the model. (H) CIBERSORT immune infiltration analysis was used to analyze the difference in immune cell infiltration levels between SMARCA4 
+mutation group and non-mutation group in TCGA-LUAD dataset. *p < 0.05, **p < 0.01, ***p < 0.001. p values were calculated using unpaired Student's t-test. Mean 
+± s.e.m. was presented.
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+9 
+
+
+===== PAGE 10 =====
+sensitivity to different types of chemotherapy drugs. We evaluated the 
+IC50 values of SMARCA4 knockdown lung adenocarcinoma cells, 
+revealing alterations in resistance to nine widely used chemotherapy 
+agents. The IC50 values of gemcitabine, rapamycin, ribociclib and IACS- 
+010759 were decreased in SMARCA4 knockdown lung adenocarcinoma 
+cells, suggesting that SMARCA4 is more sensitive to these drugs 
+(Fig. 9A). However, the IC50 values of cisplatin, paclitaxel, etoposide, 
+enasidenib and doxorubicin were increased or not significantly different 
+(Fig. 9B). These findings suggest that SMARCA4 mutations and low 
+expression may affect biological processes differently. Furthermore, 
+complex co-mutation and compensatory mechanisms within the in vivo 
+environment may contribute to discrepancies between in vitro drug 
+Fig. 4. Effect of SMARCA4 mutation on chemotherapy in patients with lung adenocarcinoma. (A) Effect of SMARCA4 mutations on overall survival in lung 
+adenocarcinoma dataset MSK, Cancer Cell 2023. (B, C) Effect of SMARCA4 mutation on overall survival and progression-free survival in TCGA-LUAD dataset. (D) 
+Differences in sensitivity of SMARCA4 mutated and unmutated groups to four chemotherapy drugs (rapamycin, gemcitabine, ribociclib, cisplatin) in TCGA-LUAD 
+cohort. (E) The influence of mutations in 16 genes on the sensitivity of the SMARCA4 mutant group to different chemotherapy drugs.
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+10 
+
+
+===== PAGE 11 =====
+Fig. 5. Functional analysis of SMARCA4 low expression and mutation in lung adenocarcinoma. (A) KEGG pathways analysis and Gene Ontology analysis (BP 
+biological process, MF molecular function, CC cellular component) of RNA-seq of GSE236587 dataset (control group: Y23 (SMARCA2 PROTAC) treated NCI-H1299 
+cell line samples, SMARCA4 deletion group: ACBI1 (SMARCA2 and SMARCA4 PROTAC) treated NCI-H1299 cell line samples). (B) KEGG pathways analysis and Gene 
+Ontology analysis (BP biological process, MF molecular function, CC cellular component) of RNA-seq of GSE249062 dataset (control group: DMSO-treated ID8 cell 
+line samples, SMARCA4 deletion group: AU15330 (SMARCA4 PROTAC) treated ID8 cell line samples). (C) KEGG pathways analysis and Gene Ontology analysis (BP 
+biological process, MF molecular function, CC cellular component) of TCGA-LUAD cohort (45 SMARCA4 mutant samples and 465 SMARCA4 normal samples). (D) 
+KEGG pathways analysis and Gene Ontology analysis (BP biological process, MF molecular function, CC cellular component) of TCGA-LUAD cohort (51 SMARCA4 10 
+% low expression samples and 51 SMARCA4 10 % high expression samples).
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+11 
+
+
+===== PAGE 12 =====
+Table 1 
+List of genes with a high mutation rate in the SMARCA4 mutant group.
+Union of five data sets
+Group
+SMARCA4
+Chi-square test
+CbioPortal data
+Mutation information
+SMARCA4 co-mutated 
+genes ranking (number)
+Mutant
+Normal
+X2
+p-value
+Log2 
+Ratio
+p-value
+Mutation rate of 
+SMARCA4 mutant group
+Mutation rate of SMARCA4 mutant 
+group /SMARCA4 normal group
+TP53
+Mutant
+181
+1653
+1.35
+0.2457
+0.09
+0.248
+54.85 %
+1.07
+Normal
+149
+1557
+KEAP1
+Mutant
+120
+396
+138.74
+1.00E- 
+09
+1.56
+1.27E- 
+25
+36.36 %
+2.95
+Normal
+210
+2814
+KRAS
+Mutant
+115
+898
+6.92
+8.52E- 
+03
+0.36
+3.48E- 
+03
+35.94 %
+1.28
+Normal
+215
+2312
+STK11
+Mutant
+102
+432
+71.14
+1.00E- 
+09
+1.2
+1.31E- 
+14
+30.91 %
+2.30
+Normal
+228
+2778
+TTN
+Mutant
+80
+488
+18.15
+2.038E- 
+05
+0.67
+5.29E- 
+05
+24.24 %
+1.59
+Normal
+250
+2722
+RYR2
+Mutant
+70
+409
+18.35
+1.84E- 
+05
+0.74
+6.24E- 
+05
+21.21 %
+1.66
+Normal
+260
+2801
+CSMD3
+Mutant
+68
+385
+19.89
+8.21E- 
+06
+0.78
+2.80E- 
+05
+20.61 %
+1.72
+Normal
+262
+2825
+USH2A
+Mutant
+65
+339
+24.71
+6.68E- 
+07
+0.9
+4.19E- 
+06
+19.70 %
+1.87
+Normal
+265
+2871
+LRP1B
+Mutant
+61
+345
+17.64
+2.67E- 
+05
+0.78
+8.33E- 
+05
+18.48 %
+1.72
+Normal
+269
+2865
+MUC16
+Mutant
+60
+432
+5.58
+1.82E- 
+02
+0.43
+0.0237
+18.18 %
+1.35
+Normal
+270
+2778
+Table 2 
+List of mutant genes related to or mutually exclusive to SMARCA4 mutations.
+Union of five data sets
+Group
+SMARCA4
+Chi-square test
+CbioPortal data
+Mutation information
+SMARCA4 co-mutated 
+genes ranking (p value)
+Mutant
+Normal
+X2
+p-value
+Log2 
+Ratio
+p-value
+Mutation rate of 
+SMARCA4 mutant group
+Mutation rate of SMARCA4 mutant 
+group /SMARCA4 normal group
+KEAP1
+Mutant
+120
+396
+138.74
+1.00E- 
+09
+1.56
+1.27E- 
+25
+36.36 %
+2.95
+Normal
+210
+2814
+STK11
+Mutant
+102
+432
+71.14
+1.00E- 
+09
+1.2
+1.31E- 
+14
+30.91 %
+2.30
+Normal
+228
+2778
+EGFR
+Mutant
+44
+997
+45.29
+1.00E- 
+09
+−1.22
+9.82E- 
+13
+13.33 %
+0.43
+Normal
+286
+2213
+PCDHGA9
+Mutant
+12
+27
+21.46
+3.62E- 
+06
+3.95
+2.23E- 
+10
+13.04 %
+15.52
+Normal
+318
+3183
+AUTS2
+Mutant
+12
+36
+14.15
+1.69E- 
+04
+3.85
+2.51E- 
+10
+16.22 %
+14.48
+Normal
+318
+3174
+ZNF208
+Mutant
+17
+89
+5.83
+0.01575
+2.74
+2.18E- 
+09
+18.48 %
+6.67
+Normal
+313
+3121
+ACIN1
+Mutant
+10
+19
+21.9
+2.88E- 
+06
+4.2
+2.23E- 
+09
+10.87 %
+18.42
+Normal
+320
+3191
+OTUD6A
+Mutant
+10
+20
+20.64
+5.55E- 
+06
+4.12
+3.27E- 
+09
+10.87 %
+17.53
+Normal
+320
+3190
+OR6K2
+Mutant
+11
+38
+10.13
+1.46E- 
+03
+3.65
+5.24E- 
+09
+14.86 %
+12.59
+Normal
+319
+3172
+PHF14
+Mutant
+10
+25
+15.5
+8.27E- 
+05
+3.93
+7.39E- 
+09
+11.90 %
+15.26
+Normal
+320
+3185
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+12 
+
+
+===== PAGE 13 =====
+Fig. 6. Effect of SMARCA4 low expression and SMARCA4 mutation on lung adenocarcinoma metabolism. (A) Differences in metabolic pathways between 
+SMARCA4 high and low 10 % expression groups. Metabolic pathway differences between SMARCA4 mutant and non-mutant groups. (B, C) Representative metabolic 
+pathway analysis of SMARCA4 high and low 10 % expression groups. (D, E) Representative metabolic pathway analysis of SMARCA4 mutated and normal groups. *p 
+< 0.05, **p < 0.01, ***p < 0.001. p values were calculated using unpaired Student's t-test. Mean ± s.e.m. was presented.
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+13 
+
+
+===== PAGE 14 =====
+Fig. 7. Effects of SMARCA4 depletion on proliferation, cell cycle, and DNA replication in lung adenocarcinoma cell lines. (A) ssGSEA analyzed the influence 
+of SMARCA4 expression on cell behavior. (B) Western blot validation of SMARCA4 depletion in PC-9 and NCI-H1975 cell lines. (C) SRB staining assay was used to 
+detect cell proliferation. (D) Representative images of colony formation assays for SMARCA4 depleted PC-9 and NCI-H1975 cell lines. (E) Quantitation histogram 
+showing colony numbers. (F, G) Flow cytometry analysis showed the effect of SMARCA4 depletion on the cell cycle of PC-9 and NCI-H1975 cell lines. (H, I) EdU 
+experiments showed the effect of SMARCA4 depletion on DNA replication. (J) Western Blot analysis was used to detect the effect of SMARCA4 depletion on the 
+expression of cell cyclin-related proteins in PC-9 and NCI-H1975 cell lines. *p < 0.05, **p < 0.01, ***p < 0.001. n = 3 independently treated cultures, p values were 
+calculated using unpaired student's t-test or one-way ANOVA with Tukey's post hoc test. Mean ± s.e.m. was presented.
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+14 
+
+
+===== PAGE 15 =====
+Fig. 8. Effects of SMARCA4 depletion on oxidative stress, apoptosis and tumor-related pathways in lung adenocarcinoma cell lines. (A, B) ROS assay was 
+used to investigate the changes of ROS level in SMARCA4 depleted lung adenocarcinoma cell lines. (C) Determination of the relative concentrations of SOD, MDA, 
+and GSH in SMARCA4 knockdown and control groups. (D) Determination of the protein expression of KEAP1 and NRF2 in SMARCA4 knockdown and control groups. 
+(E) Flow cytometry analysis of apoptosis in PC-9 and NCI-H1975 cells with SMARCA4 depletion and control cells. (F) Quantitation histogram showed the ratio of 
+apoptotic cells. (G) Western blot was used to detect the activation of Akt, MTOR and MAPK pathways in SMARCA4 depleted lung adenocarcinoma cell lines. *p <
+0.05, **p < 0.01, ***p < 0.001. n = 3 independently treated cultures, p values were calculated using unpaired student's t-test. Mean ± s.e.m. was presented.
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+15 
+
+
+===== PAGE 16 =====
+sensitivity simulation experiments and actual in vivo chemotherapy 
+outcomes.
+3.10. Exploring the effects of SMARCA4 on lung adenocarcinoma in vivo
+Apart from its role in promoting tumor growth in vitro, the present 
+study also investigated whether SMARCA4 affects lung adenocarcinoma 
+cell growth in vivo. SMARCA4-knockdown PC-9 cells were subcutane­
+ously injected into nude mice, and the tumor size was measured regu­
+larly (Fig. 10A). The results showed that the tumors in nude mice 
+injected with PC-9 with SMARCA4 knockdown were significantly 
+smaller than those in the control group (Fig. 10B). In addition, 
+SMARCA4 knockdown inhibited tumor growth (Fig. 10C).
+The present study also investigated the regulation of SMARCA4 on 
+oxidative stress and cell cycle-related molecules in vivo. Consistent with 
+the in vitro results, SMARCA4 knockdown inhibited the expression of 
+CyclinA2 and CDK2, while NRF2 protein level was significantly 
+increased (Fig. 10D and E).
+3.11. Expression, prognosis and functional analysis of SMARCA4 in pan- 
+cancer
+To determine whether SMARCA4 functions similarly across various 
+tumor types, pan-cancer enrichment and prognostic analyses were 
+conducted. Results showed that SMARCA4 is highly expressed in most 
+solid tumors, including lung adenocarcinoma and ovarian cancers 
+(Fig. 11A). Prognostic analysis revealed that low SMARCA4 expression 
+is associated with poor outcomes in esophageal and endometrial can­
+cers, while high SMARCA4 expression is a poor prognostic factor in clear 
+cell renal cell carcinoma and hepatocellular carcinoma (Supplementary 
+Fig. 5A and B). Enrichment analyses indicated that SMARCA4 signifi­
+cantly regulates the G2/M checkpoint and mitotic spindle across mul­
+tiple tumor types, suggesting that the biological processes involving 
+SMARCA4 are conserved in different cancers (Fig. 11B).
+4. Discussion
+Lung adenocarcinoma with low SMARCA4 expression is multifac­
+eted. On the one hand, SMARCA4-dNSCLC is considered to be a highly 
+malignant type of lung cancer, which is considered to be highly malig­
+nant, drug resistant, and lack of effective treatment. On the other hand, 
+our in vitro results suggested that SMARCA4 knockdown resulted in 
+decreased proliferation, increased apoptosis and cell cycle arrest in lung 
+adenocarcinoma cell lines. By comparing the sequencing results of lung 
+adenocarcinoma clinical samples from the TCGA-LUAD dataset 
+(SMARCA4 high 10 % and low 10 % expression group) and SMARCA4 
+knockdown RNA sequencing results, we speculated that the undiffer­
+entiated and high-grade malignant features of SMARCA4-dNSCLC could 
+not be attributed to the decreased expression of SMARCA4 single gene. It 
+is more likely to be caused by a combination of low SMARCA4 expres­
+sion, accompanied by highly invasive mutations, and functional 
+compensation pathways and molecules. In conclusion, we suggest that 
+SMARCA4 is essential for cell survival and function, and knockdown of 
+SMARCA4 leads to defective transcription of essential genes, leading to 
+impaired cell survival and proliferation, as well as mTORC1 pathway 
+activation. In SMARCA4-deficient lung adenocarcinoma, the survival of 
+SMARCA4-deficient lung adenocarcinoma is due to the compensatory 
+increase of other SWI/SNF complex components function, such as 
+SMARCA2, and the increased activity of other mechanisms and path­
+ways, such as ATR pathway, which gives SMARCA4-deficient lung 
+adenocarcinoma its versatility [32]. SMARCA4 mutations were shown 
+to be mutually exclusive with mutations in the most common targeted 
+oncogene mutations in NSCLC, such as EGFR, ALK, MET, ROS1, and 
+RET, with EGFR mutations showing the strongest mutual exclusion [10]. 
+A total of 407 NSCLC patients with SMARCA4 mutations were analyzed. 
+SMARCA4 deletion mutations were accompanied by mutations in a large 
+Fig. 9. Effect of SMARCA4 depletion on the sensitivity of lung adenocarcinoma cell lines to nine chemotherapeutic drugs. (A) Altered drug sensitivity of PC- 
+9 and NCI-H1975 cells to gemcitabine, rapamycin, ribociclib and IACS-010759 after SMARCA4 depleted. (B) Altered drug sensitivity of SMARCA4 depleted PC-9 and 
+NCI-H1975 cells to cisplatin, paclitaxel, etoposide, enasidenib, doxorubicin. n = 3 independently treated cultures.
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+16 
+
+
+===== PAGE 17 =====
+number of tumor-related genes, including TP53 mutation (56 %), KEAP1 
+mutation (41 %), STK11 mutation (39 %), and KRAS mutation (36 %) 
+[14]. A higher proportion of concomitant mutations such as TP53 and 
+KRAS could also rescue the impaired cell survival and proliferation 
+caused by decreased SMARCA4 expression, preserving not only the high 
+invasiveness and drug resistance caused by the above gene mutations, 
+but also the poor differentiation and drug resistance caused by low 
+SMARCA4 expression. Studies have shown that co-mutation with KRAS 
+or STK11 or KEAP1 have worse overall survival [14,33], and KRAS 
+combined with SMARCA4 mutation showed a decrease in CD8+ T cell 
+infiltration [22]. Meanwhile, KEAP1 and STK11 are tumor immune- 
+negative mutations, which form a suppressive tumor microenviron­
+ment and are more likely to develop immune primary drug resistance 
+[34]. Our drug sensitivity analysis results showed that co-mutation of 
+KRAS promoted resistance to chemotherapy drugs such as gemcitabine, 
+cisplatin and ribociclib in patients with SMARCA4-deletion lung 
+adenocarcinoma. Ultimately, SMARCA4-deficient non-small cell lung 
+cancer is highly malignant.
+Although current clinical trials have not yielded uniform results on 
+whether SMARCA4-deficient lung adenocarcinoma patients can benefit 
+from chemotherapy and immunotherapy, the study of biomarkers and 
+tumor biological characteristics of SMARCA4-deficient lung adenocar­
+cinoma patients has found potential treatment methods. Due to the 
+compensatory role of SMARCA2 in SMARCA4-deletion lung cancer, the 
+SMARCA2 degraders PRT3789 and PRT7732 have been applied in the 
+treatment of SMARCA4-mutated tumors. Among them, PRT3789 has 
+demonstrated certain anti-tumor activity in patients with NSCLC or 
+esophageal cancer (NCT06560645, NCT05639751, NCT06682806). 
+Studies have shown that loss of SMARCA4 restricts chromatin accessi­
+bility and inhibits transcriptional activation of CCND1 (cyclin D1), 
+resulting in CCND1 down-regulation. Both SMARCA4-deficient cell lines 
+and clinical cohorts show decreased CCND1 expression and sensitivity to 
+CDK4/6 inhibitors [35]. There is a synthetic lethal interaction between 
+SMARCA4 deficiency and CDK4/6 inhibition, which may be a useful 
+therapeutic strategy for SMARCA4-deficient lung adenocarcinoma. In 
+addition to studies targeting cyclins, recent evidence indicates that 
+SMARCA4 mutant cells have increased oxygen consumption due to 
+reduced glycolytic capacity and increased anabolic responses, and 
+SMARCA4-deficient lung adenocarcinoma both exhibits enhanced 
+oxidative phosphorylation [36]. Therefore, targeting oxidative phos­
+phorylation may be a promising strategy for SMARCA4-deficient lung 
+adenocarcinoma.
+In the realm of immunotherapy, based on the statistics of patients' 
+prognosis and TMB, we believed that SMARCA4-deficient lung adeno­
+carcinoma patients may potentially benefit from immunotherapy. We 
+employed machine learning to screen five key genes that influence the 
+predictive efficacy of immunotherapy in patients with SMARCA4- 
+deficient lung adenocarcinoma. These genes include HLA-DQB2, a 
+member of the MHC-II class genes involved in immune response regu­
+lation; SCGB3A1, which affects tumor stemness; RRAD, which regulates 
+Fig. 10. Effect of SMARCA4 on lung adenocarcinoma cell growth in vivo. (A) Typical images of subcutaneously transplanted tumors in nude mice (N = 6/group). 
+The LV-si-NC and LV-si-SMARCA4 PC-9 cells were subcutaneously injected into nude mice to establish xenotransplantation models. After 21 days, the xenografts 
+were removed and imaged. (B) The tumor volume of mice SMARCA4 deleted was smaller than that of the control group. (C) The tumor growth rate of mice with low 
+expression of SMARCA4 was slower than that of the control group. (D, E) KEAP1-NRF2 and cell cycle-related proteins were detected in the tumors of the two groups. 
+*p < 0.05, **p < 0.01, ***p < 0.001. n = 3 independently treated cultures, p values were calculated using unpaired Student's t-test or one or two-way ANOVA with 
+Tukey's post hoc test. Mean ± s.e.m. was presented.
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+17 
+
+
+===== PAGE 18 =====
+Fig. 11. Expression difference and enrichment analysis of SMARCA4 in pan-cancer. (A) Pan-cancer analysis of different expression of SMARCA4 between tumor 
+and para-tumor. (B) Enrichment analysis of SMARCA4 in pan-cancer. *p < 0.05, **p < 0.01, ***p < 0.001. p values were calculated using unpaired Student's t-test. 
+Mean ± s.e.m. was presented.
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+18 
+
+
+===== PAGE 19 =====
+cellular metabolism; CP, which regulates intracellular REDOX reactions, 
+and SLC5A5, which regulates the transport of molecules across mem­
+branes. These five genes may represent potential targets for enhancing 
+the efficacy of immunotherapy in patients with SMARCA4-deficient lung 
+adenocarcinoma. In terms of chemotherapy, bioinformatics analysis of 
+high-throughput sequencing results from clinical samples revealed that 
+the mTORC1 pathway was activated in the SMARCA4 low-expression 
+group. Drug sensitivity analysis suggested that rapamycin could be 
+one of the viable treatment options. Our drug sensitivity experimental 
+results demonstrated that, in addition to rapamycin, SMARCA4- 
+knockdown lung adenocarcinoma cells were also sensitive to gemcita­
+bine, which affects DNA synthesis, the CDK4/6 inhibitor ribociclib, and 
+the oxidative phosphorylation inhibitor IACS-010759. Combining pre­
+vious research findings with our experimental results, small-molecule 
+drugs targeting the MTOR pathway, cell cycle, and oxidative phos­
+phorylation may offer potential benefits to patients with SMARCA4- 
+deficient lung adenocarcinoma. For patients with SMARCA4-deficient 
+lung adenocarcinoma or SMARCA4-knockdown lung adenocarcinoma 
+cell lines, they were not sensitive to common lung cancer chemotherapy 
+drugs such as cisplatin and paclitaxel. Based on multiple enrichment 
+analyses, we believed that there were mainly the following possible drug 
+resistance mechanisms. In vivo, the mutation of SMARCA4 had a certain 
+impact on the cellular drug resistance pathway Abc-transporters and 
+multiple cellular metabolic pathways. The low expression of SMARCA4 
+affected multiple tumor growth pathways including MTOR and MAPK, 
+and led to stemness changes in lung adenocarcinoma cells. The above- 
+mentioned series of changes in tumor biology may be the underlying 
+mechanism for the insensitivity of SMARCA4-deficient lung adenocar­
+cinoma to conventional chemotherapy drugs, and it is also an important 
+research direction for the future.
+SMARCA4 plays a multifaceted regulatory role in tumor cells and 
+cannot be simply classified as either an oncogene or a tumor suppressor 
+gene. As SMARCA4 is essential for key biological processes such as cell 
+invasion and DNA repair, SMARCA4 knockdown negatively impacts 
+tumor cell growth in vitro and in vivo due to co-mutation and other 
+compensatory mechanisms. The impact of SMARCA4 mutation or 
+deletion on tumor cells may differ from the results observed in in vitro 
+experiments. Due to the complex compensatory relationships in 
+SMARCA4-deficient lung adenocarcinoma, it is challenging to directly 
+explore these mechanisms in vivo using in vitro models. Given the sig­
+nificant differences in prognostic analysis, immunotherapy and 
+chemotherapy response predictions, and enrichment analysis results 
+between SMARCA4 mutation and low expression samples, we believe 
+that these represent two different biological subtypes. We recommend 
+that clinical studies simultaneously assess SMARCA4 mutation and ex­
+pressions, rather than relying solely on immunohistochemistry to detect 
+SMARCA4 protein expression. Most importantly, accurate biomarkers 
+must be used to identify populations likely to benefit from different 
+treatment modalities.
+Supplementary data to this article can be found online at https://doi. 
+org/10.1016/j.bbadis.2025.168051.
+CRediT authorship contribution statement
+Deyu Guo: Writing – original draft, Validation, Resources, Meth­
+odology, Investigation, Formal analysis, Data curation, Conceptualiza­
+tion. Kai Wang: Writing – original draft, Validation, Supervision, 
+Resources, Methodology, Investigation, Formal analysis, Data curation, 
+Conceptualization. Shijie Sun: Software, Resources, Project adminis­
+tration, Methodology, Data curation, Conceptualization. Yuxiang Chi: 
+Validation, Software, Resources, Methodology, Investigation. Jiajun 
+Du: Writing – review & editing, Validation, Supervision, Project 
+administration, Formal analysis, Data curation, Conceptualization. Wei 
+Dong: Writing – review & editing, Visualization, Validation, Supervi­
+sion, Project administration, Methodology, Investigation, Formal anal­
+ysis, Conceptualization.
+Funding
+No funds are involved in this article.
+Declaration of competing interest
+The authors declare that they have no known competing financial 
+interests or personal relationships that could have appeared to influence 
+the work reported in this paper.
+Acknowledgments
+We thank all TCGA, GEO, cBioPortal, The Human Protein Atlas 
+database researchers and patients involved in the article, for their 
+willingness to share relevant data and their contributions to medical 
+progress.
+Data availability
+The data and code for machine learning have been uploaded to the 
+supplementary materials.
+References
+[1] X. Wang, J.R. Haswell, C.W. Roberts, Molecular pathways: SWI/SNF (BAF) 
+complexes are frequently mutated in cancer–mechanisms and potential therapeutic 
+insights, Clin. Cancer Res. 20 (2014) 21–27.
+[2] C.R. Clapier, B.R. Cairns, The biology of chromatin remodeling complexes, Annu. 
+Rev. Biochem. 78 (2009) 273–304.
+[3] P. Mittal, C.W.M. Roberts, The SWI/SNF complex in cancer - biology, biomarkers 
+and therapy, Nat. Rev. Clin. Oncol. 17 (2020) 435–448.
+[4] S. Savas, G. Skardasi, The SWI/SNF complex subunit genes: their functions, 
+variations, and links to risk and survival outcomes in human cancers, Crit. Rev. 
+Oncol. Hematol. 123 (2018) 114–131.
+[5] K. Mardinian, J.J. Adashek, G.P. Botta, S. Kato, R. Kurzrock, SMARCA4: 
+implications of an altered chromatin-remodeling gene for cancer development and 
+therapy, Mol. Cancer Ther. 20 (2021) 2341–2351.
+[6] T.J. Pugh, S.D. Weeraratne, T.C. Archer, D.A. Pomeranz Krummel, D. Auclair, 
+J. Bochicchio, M.O. Carneiro, S.L. Carter, K. Cibulskis, R.L. Erlich, H. Greulich, M. 
+S. Lawrence, N.J. Lennon, A. McKenna, J. Meldrim, A.H. Ramos, M.G. Ross, 
+C. Russ, E. Shefler, A. Sivachenko, B. Sogoloff, P. Stojanov, P. Tamayo, J. 
+P. Mesirov, V. Amani, N. Teider, S. Sengupta, J.P. Francois, P.A. Northcott, M. 
+D. Taylor, F. Yu, G.R. Crabtree, A.G. Kautzman, S.B. Gabriel, G. Getz, N. J¨ager, D. 
+T. Jones, P. Lichter, S.M. Pfister, T.M. Roberts, M. Meyerson, S.L. Pomeroy, Y. 
+J. Cho, Medulloblastoma exome sequencing uncovers subtype-specific somatic 
+mutations, Nature 488 (2012) 106–110.
+[7] C. Love, Z. Sun, D. Jima, G. Li, J. Zhang, R. Miles, K.L. Richards, C.H. Dunphy, W. 
+W. Choi, G. Srivastava, P.L. Lugar, D.A. Rizzieri, A.S. Lagoo, L. Bernal-Mizrachi, K. 
+P. Mann, C.R. Flowers, K.N. Naresh, A.M. Evens, A. Chadburn, L.I. Gordon, M. 
+B. Czader, J.I. Gill, E.D. Hsi, A. Greenough, A.B. Moffitt, M. McKinney, A. Banerjee, 
+V. Grubor, S. Levy, D.B. Dunson, S.S. Dave, The genetic landscape of mutations in 
+Burkitt lymphoma, Nat. Genet. 44 (2012) 1321–1325.
+[8] M.W. Strobeck, M.F. DeCristofaro, F. Banine, B.E. Weissman, L.S. Sherman, E. 
+S. Knudsen, The BRG-1 subunit of the SWI/SNF complex regulates CD44 
+expression, J. Biol. Chem. 276 (2001) 9273–9278.
+[9] S. Abou Alaiwi, A.H. Nassar, W. Xie, Z. Bakouny, J.E. Berchuck, D.A. Braun, S. 
+C. Baca, P.V. Nuzzo, R. Flippot, T.H. Mouhieddine, L.F. Spurr, Y.Y. Li, T. Li, 
+A. Flaifel, J.A. Steinharter, C.A. Margolis, N.I. Vokes, H. Du, S.A. Shukla, A. 
+D. Cherniack, G. Sonpavde, R.I. Haddad, M.M. Awad, M. Giannakis, F.S. Hodi, X. 
+S. Liu, S. Signoretti, C. Kadoch, M.L. Freedman, D.J. Kwiatkowski, E.M. Van Allen, 
+T.K. Choueiri, Mammalian SWI/SNF complex genomic alterations and immune 
+checkpoint blockade in solid tumors, Cancer Immunol. Res. 8 (2020) 1075–1084.
+[10] T.M. Fernando, R. Piskol, R. Bainer, E.S. Sokol, S.E. Trabucco, Q. Zhang, H. Trinh, 
+S. Maund, M. Kschonsak, S. Chaudhuri, Z. Modrusan, T. Januario, R.L. Yauch, 
+Functional characterization of SMARCA4 variants identified by targeted exome- 
+sequencing of 131,668 cancer patients, Nat. Commun. 11 (2020) 5551.
+[11] S. Glaros, G.M. Cirrincione, A. Palanca, D. Metzger, D. Reisman, Targeted knockout 
+of BRG1 potentiates lung cancer development, Cancer Res. 68 (2008) 3689–3696.
+[12] C.P. Concepcion, S. Ma, L.M. LaFave, A. Bhutkar, M. Liu, L.P. DeAngelo, J.Y. Kim, 
+I. Del Priore, A.J. Schoenfeld, M. Miller, V.K. Kartha, P.M.K. Westcott, F.J. S´anchez- 
+Rivera, K. Meli, M. Gupta, R.T. Bronson, G.J. Riely, N. Rekhtman, C.M. Rudin, C. 
+F. Kim, A. Regev, J.D. Buenrostro, T. Jacks, Smarca4 inactivation promotes 
+lineage-specific transformation and early metastatic features in the lung, Cancer 
+Discov. 12 (2022) 562–585.
+[13] E. Herpel, R.J. Rieker, H. Dienemann, T. Muley, M. Meister, A. Hartmann, 
+A. Warth, A. Agaimy, SMARCA4 and SMARCA2 deficiency in non-small cell lung 
+cancer: immunohistochemical survey of 316 consecutive specimens, Ann. Diagn. 
+Pathol. 26 (2017) 47–51.
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+19 
+
+
+===== PAGE 20 =====
+[14] A.J. Schoenfeld, C. Bandlamudi, J.A. Lavery, J. Montecalvo, A. Namakydoust, 
+H. Rizvi, J. Egger, C.P. Concepcion, S. Paul, M.E. Arcila, Y. Daneshbod, J. Chang, J. 
+L. Sauter, A. Beras, M. Ladanyi, T. Jacks, C.M. Rudin, B.S. Taylor, M.T. 
+A. Donoghue, G. Heller, M.D. Hellmann, N. Rekhtman, G.J. Riely, The genomic 
+landscape of SMARCA4 alterations and associations with outcomes in patients with 
+lung cancer, Clin. Cancer Res. 26 (2020) 5701–5708.
+[15] G.D. Jones, W.S. Brandt, R. Shen, F. Sanchez-Vega, K.S. Tan, A. Martin, J. Zhou, 
+M. Berger, D.B. Solit, N. Schultz, H. Rizvi, Y. Liu, A. Adamski, J.E. Chaft, G.J. Riely, 
+G. Rocco, M.J. Bott, D. Molena, M. Ladanyi, W.D. Travis, N. Rekhtman, B.J. Park, 
+P.S. Adusumilli, D. Lyden, M. Imielinski, M.W. Mayo, B.T. Li, D.R. Jones, 
+A genomic-pathologic annotated risk model to predict recurrence in early-stage 
+lung adenocarcinoma, JAMA Surg. 156 (2021) e205601.
+[16] A. Kothandapani, K. Gopalakrishnan, B. Kahali, D. Reisman, S.M. Patrick, 
+Downregulation of SWI/SNF chromatin remodeling factor subunits modulates 
+cisplatin cytotoxicity, Exp. Cell Res. 318 (2012) 1973–1986.
+[17] E.H. Bell, A.R. Chakraborty, X. Mo, Z. Liu, K. Shilo, S. Kirste, P. Stegmaier, 
+M. McNulty, N. Karachaliou, R. Rosell, G. Bepler, D.P. Carbone, A. Chakravarti, 
+SMARCA4/BRG1 is a novel prognostic biomarker predictive of cisplatin-based 
+chemotherapy outcomes in resected non-small cell lung cancer, Clin. Cancer Res. 
+22 (2016) 2396–2404.
+[18] I. Dagogo-Jack, A.B. Schrock, M. Kem, N. Jessop, J. Lee, S.M. Ali, J.S. Ross, J. 
+K. Lennerz, A.T. Shaw, M. Mino-Kenudson, Clinicopathologic characteristics of 
+BRG1-deficient NSCLC, J. Thorac. Oncol. 15 (2020) 766–776.
+[19] G. Lamberti, L.F. Spurr, Y. Li, B. Ricciuti, G. Recondo, R. Umeton, M. Nishino, L. 
+M. Sholl, M.L. Meyerson, A.D. Cherniack, M.M. Awad, Clinicopathological and 
+genomic correlates of programmed cell death ligand 1 (PD-L1) expression in 
+nonsquamous non-small-cell lung cancer, Ann. Oncol. 31 (2020) 807–814.
+[20] D.J. McGrail, P.G. Pili´e, N.U. Rashid, L. Voorwerk, M. Slagter, M. Kok, E. Jonasch, 
+M. Khasraw, A.B. Heimberger, B. Lim, N.T. Ueno, J.K. Litton, R. Ferrarotto, J. 
+T. Chang, S.L. Moulder, S.Y. Lin, High tumor mutation burden fails to predict 
+immune checkpoint blockade response across all cancer types, Ann. Oncol. 32 
+(2021) 661–672.
+[21] X.W. Wei, C. Lu, Y.C. Zhang, X. Fan, C.R. Xu, Z.H. Chen, F. Wang, X.R. Yang, J. 
+Y. Deng, M.Y. Yang, Q. Gou, S.Q. Mei, W.C. Luo, R.W. Zhong, W.Z. Zhong, J. 
+J. Yang, X.C. Zhang, H.Y. Tu, Y.L. Wu, Q. Zhou, Redox(high) phenotype mediated 
+by KEAP1/STK11/SMARCA4/NRF2 mutations diminishes tissue-resident memory 
+CD8+ T cells and attenuates the efficacy of immunotherapy in lung 
+adenocarcinoma, Oncoimmunology 13 (2024) 2340154.
+[22] J.V. Alessi, B. Ricciuti, L.F. Spurr, H. Gupta, Y.Y. Li, C. Glass, M. Nishino, A. 
+D. Cherniack, J. Lindsay, B. Sharma, K.D. Felt, S.J. Rodig, M.L. Cheng, L.M. Sholl, 
+M.M. Awad, SMARCA4 and other SWItch/sucrose nonfermentable family genomic 
+alterations in NSCLC: clinicopathologic characteristics and outcomes to immune 
+checkpoint inhibition, J. Thorac. Oncol. 16 (2021) 1176–1187.
+[23] Y. Velut, E. Decroix, H. Blons, M. Alifano, K. Leroy, F. Petitprez, A. Boni, S. Garinet, 
+J. Biton, I. Cremer, M. Wislez, P. Boudou-Rouquette, J. Arrondeau, F. Goldwasser, 
+L. Fournel, D. Damotte, A. Mansuet-Lupo, SMARCA4-deficient lung carcinoma is an 
+aggressive tumor highly infiltrated by FOXP3+ cells and neutrophils, Lung Cancer 
+169 (2022) 13–21.
+[24] W. Jin, Q. Yang, H. Chi, K. Wei, P. Zhang, G. Zhao, S. Chen, Z. Xia, X. Li, Ensemble 
+deep learning enhanced with self-attention for predicting immunotherapeutic 
+responses to cancers, Front. Immunol. 13 (2022) 1025330.
+[25] S.M. Mousavi, G.C. Beroza, Deep-learning seismology, Science 377 (2022) 
+eabm4470.
+[26] Z. Obermeyer, E.J. Emanuel, Predicting the future - big data, machine learning, 
+and clinical medicine, N. Engl. J. Med. 375 (2016) 1216–1219.
+[27] D. Shillan, J.A.C. Sterne, A. Champneys, B. Gibbison, Use of machine learning to 
+analyse routinely collected intensive care unit data: a systematic review, Crit. Care 
+23 (2019) 284.
+[28] Z. Zhang, K.M. Ho, Y. Hong, Machine learning for the prediction of volume 
+responsiveness in patients with oliguric acute kidney injury in critical care, Crit. 
+Care 23 (2019) 112.
+[29] Y. Yi, A. Lin, C. Zhou, Z. Jian, S. Wang, P. Luo, (2022).
+[30] T. Chen, C. Guestrin, XGBoost, in: Proceedings of the 22nd ACM SIGKDD 
+International Conference on Knowledge Discovery and Data Mining, 2016, 
+pp. 785–794.
+[31] S.M. Lundberg, S.-I. Lee, A unified approach to interpreting model predictions, 
+Adv. Neural Inf. Proces. Syst. 30 (2017).
+[32] M. Gupta, C.P. Concepcion, C.G. Fahey, H. Keshishian, A. Bhutkar, C.F. Brainson, F. 
+J. Sanchez-Rivera, P. Pessina, J.Y. Kim, A. Simoneau, M. Paschini, M.C. Beytagh, C. 
+R. Stanclift, M. Schenone, D.R. Mani, C. Li, A. Oh, F. Li, H. Hu, A. Karatza, R. 
+T. Bronson, A.T. Shaw, A.N. Hata, K.K. Wong, L. Zou, S.A. Carr, T. Jacks, C.F. Kim, 
+BRG1 loss predisposes lung cancers to replicative stress and ATR dependency, 
+Cancer Res. 80 (2020) 3841–3854.
+[33] D. Boiarsky, C.A. Lydon, E.S. Chambers, L.M. Sholl, M. Nishino, F. Skoulidis, J. 
+V. Heymach, J. Luo, M.M. Awad, P.A. Janne, E.M. Van Allen, D.A. Barbie, N. 
+I. Vokes, Molecular markers of metastatic disease in KRAS-mutant lung 
+adenocarcinoma, Ann. Oncol. 34 (2023) 589–604.
+[34] A.M. Zavitsanou, R. Pillai, Y. Hao, W.L. Wu, E. Bartnicki, T. Karakousi, 
+S. Rajalingam, A. Herrera, A. Karatza, A. Rashidfarrokhi, S. Solis, M. Ciampricotti, 
+A.H. Yeaton, E. Ivanova, C.A. Wohlhieter, T.B. Buus, M. Hayashi, B. Karadal- 
+Ferrena, H.I. Pass, J.T. Poirier, C.M. Rudin, K.K. Wong, A.L. Moreira, K.M. Khanna, 
+A. Tsirigos, T. Papagiannakopoulos, S.B. Koralov, KEAP1 mutation in lung 
+adenocarcinoma promotes immune evasion and immunotherapy resistance, Cell 
+Rep. 42 (2023) 113295.
+[35] Y. Tian, L. Xu, X. Li, H. Li, M. Zhao, SMARCA4: current status and future 
+perspectives in non-small-cell lung cancer, Cancer Lett. 554 (2023) 216022.
+[36] Y. Lissanu Deribe, Y. Sun, C. Terranova, F. Khan, J. Martinez-Ledesma, J. Gay, 
+G. Gao, R.A. Mullinax, T. Khor, N. Feng, Y.H. Lin, C.C. Wu, C. Reyes, Q. Peng, 
+F. Robinson, A. Inoue, V. Kochat, C.G. Liu, J.M. Asara, C. Moran, F. Muller, 
+J. Wang, B. Fang, V. Papadimitrakopoulou, I.I. Wistuba, K. Rai, J. Marszalek, P. 
+A. Futreal, Mutations in the SWI/SNF complex induce a targetable dependence on 
+oxidative phosphorylation in lung cancer, Nat. Med. 24 (2018) 1047–1057.
+D. Guo et al.                                                                                                                                                                                                                                     
+BBA - Molecular Basis of Disease 1872 (2026) 168051 
+20 
+

@@ -1,0 +1,7 @@
+# Highlights
+
+- Conserved translational co-expression programs span heart failure and liver cancer.
+- 24 of 33 translation pathways show opposite perturbation directions across diseases.
+- Mirror regulation is a descriptive cross-disease framework, not a causal mechanism.
+- ATF4/ISR and MYC programs correlate with translational remodeling in HCC.
+- Conserved molecular organization does not imply universal prognostic utility.
