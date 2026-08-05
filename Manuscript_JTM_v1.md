@@ -178,12 +178,6 @@ To assess the cross-cohort robustness of the mirror perturbation, an independent
 
 To distinguish disease-specific mirror perturbation from constitutive tissue-specific differences, two same-organ disease comparisons were performed: (i) hypertrophic cardiomyopathy (HCM) vs. non-failing myocardium (GSE141910; *n* = 28 HCM, *n* = 166 NF), as a cardiac disease comparison; and (ii) cirrhosis vs. normal liver (GSE89377; *n* = 12 cirrhosis, *n* = 13 normal), as a liver disease comparison. The identical ssGSEA pipeline was applied, and cross-disease effect size correlations with TCGA-LIHC were computed for each. A null or non-negative correlation in same-organ comparisons, contrasted with the negative correlation in the HF–HCC comparison, would support disease-context dependence rather than organ-specific baseline confounding.
 
-## Availability of data and materials
-
-All datasets used in this study are publicly available: GSE57338, GSE141198, GSE14520, and GSE76427 from the Gene Expression Omnibus (https://www.ncbi.nlm.nih.gov/geo/); TCGA-LIHC from the GDC Data Portal (https://portal.gdc.cancer.gov/).
-
-Analysis code is publicly available at https://github.com/zxy048/translation-mirror-hf-hcc (project name: translation-mirror-hf-hcc). The repository contains the complete WGCNA, ssGSEA, TF correlation, and direction consistency analysis pipelines. Programming language: R and Python. License: MIT. An archived version will be deposited in Zenodo with a permanent DOI upon acceptance.
-
 ## References
 
 1. Mericskay, M., Zuurbier, C. J., Lopaschuk, G. D. & Taegtmeyer, H. Cardiac intermediary metabolism in heart failure: substrate use, signalling roles and therapeutic targets. *Nat. Rev. Cardiol.* **22**, 704–727 (2025).
@@ -247,6 +241,10 @@ All datasets used in this study are publicly available and were originally colle
 ### Consent for publication
 
 Not applicable.
+
+### Availability of data and materials
+
+All datasets used in this study are publicly available: GSE57338, GSE141198, GSE14520, and GSE76427 from the Gene Expression Omnibus (https://www.ncbi.nlm.nih.gov/geo/); TCGA-LIHC from the GDC Data Portal (https://portal.gdc.cancer.gov/). Analysis code is publicly available at https://github.com/zxy048/translation-mirror-hf-hcc (project name: translation-mirror-hf-hcc). The repository contains the complete WGCNA, ssGSEA, TF correlation, and direction consistency analysis pipelines. Programming language: R and Python. License: MIT. An archived version will be deposited in Zenodo with a permanent DOI upon acceptance.
 
 ### Competing interests
 
