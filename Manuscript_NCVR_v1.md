@@ -240,11 +240,13 @@ We thank all TCGA, GEO, and MSigDB database researchers and patients involved in
 
 ## Author contributions
 
-**[Author 1]**: Writing – original draft, Visualization, Validation, Software, Methodology, Investigation, Formal analysis, Data curation, Conceptualization.
+**Author 1 (First author)**: Writing – original draft, Visualization, Software, Methodology, Investigation, Formal analysis, Data curation, Conceptualization.
 
-**[Author 2]**: Methodology, Data curation, Formal analysis, Writing – review & editing.
+**Author 2 (Co-first author)**: Methodology, Data curation, Formal analysis, Writing – review & editing.
 
-**[Corresponding Author]**: Writing – review & editing, Validation, Supervision, Project administration, Methodology, Investigation, Formal analysis, Conceptualization.
+**Author 3 (Co-first author)**: Data curation, Investigation, Writing – review & editing.
+
+**Author 4 (Corresponding author)**: Writing – review & editing, Supervision, Project administration, Methodology, Conceptualization.
 
 All authors have read and approved the final version of the manuscript.
 

@@ -18,19 +18,22 @@ Our study provides the first systematic cross-disease comparative analysis of tr
 
 **Double-blind peer review.** We request double-blind peer review. As per journal guidelines, the manuscript file has been fully anonymized. The full author list, affiliations, and contact information are provided below:
 
-[Author 1 Full Name], [Department, Institution, City, Country]
+Yuhe Hong<sup>1</sup> (ORCID: 0009-0008-5028-0035), Yili Liu<sup>1</sup>, Xianqi Li<sup>1</sup>, Junhong Wang<sup>1,2*</sup> (ORCID: 0000-0003-2314-1810)
 
-[Author 2 Full Name], [Department, Institution, City, Country]
+<sup>1</sup> Department of Cardiology, The First Affiliated Hospital of Nanjing Medical University, Nanjing, China
 
-[Corresponding Author Full Name] (Corresponding author), [Department, Institution, City, Country]. Email: [corresponding.author@institution.edu]
+<sup>2</sup> Department of Cardiology, Liyang People's Hospital, Liyang, China
+
+<sup>*</sup> Corresponding author. Email: wangjunhong@jsph.org.cn
 
 We appreciate your consideration of our work.
 
 Sincerely,
 
-[Corresponding Author Name]
-[Department, Institution]
-[Email address]
+Junhong Wang, MD, PhD
+Department of Cardiology, The First Affiliated Hospital of Nanjing Medical University
+Nanjing, China
+Email: wangjunhong@jsph.org.cn
 
 ---
 *On behalf of all authors*
