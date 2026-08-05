@@ -1,9 +1,10 @@
-"""Post-process NCVR docx: convert [N]-style citations to superscript numbers."""
+"""Post-process docx: convert [N]-style citations to superscript numbers."""
 import re
+import sys
 from docx import Document
 from docx.shared import Pt
 
-DOCX_PATH = r"D:\R_projects\revision_analysis\Manuscript_NCVR_v1.docx"
+DOCX_PATH = sys.argv[1] if len(sys.argv) > 1 else r"D:\R_projects\revision_analysis\Manuscript_JTM_v1.docx"
 
 doc = Document(DOCX_PATH)
 
