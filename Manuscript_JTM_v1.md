@@ -164,7 +164,7 @@ Cross-disease log<sub>2</sub> fold-change (log<sub>2</sub>FC) values for transla
 
 ### Large language model usage
 
-No large language models or generative AI tools were used in the design, execution, analysis, or writing of this study. All data analyses, statistical tests, and manuscript composition were performed by the authors.
+Generative AI tools (GPT-4) were used for English language editing and refinement of the manuscript text. No large language models or generative AI tools were used in the design, execution, or analysis of this study. All data analyses, statistical tests, and scientific conclusions were performed and verified by the authors, who assume full responsibility for the content of this manuscript.
 
 ### Statistical analysis
 
@@ -182,7 +182,7 @@ To distinguish disease-specific mirror perturbation from constitutive tissue-spe
 
 All datasets used in this study are publicly available: GSE57338, GSE141198, GSE14520, and GSE76427 from the Gene Expression Omnibus (https://www.ncbi.nlm.nih.gov/geo/); TCGA-LIHC from the GDC Data Portal (https://portal.gdc.cancer.gov/).
 
-Analysis code has been deposited in a GitHub repository and is accessible via an anonymous link during peer review: https://anonymous.4open.science/r/translation-mirror-hf-hcc-4622/. The repository (project name: translation-mirror-hf-hcc) contains the complete WGCNA, ssGSEA, TF correlation, and direction consistency analysis pipelines. Programming language: R and Python. License: MIT. Upon acceptance, the repository will be made publicly available and assigned a permanent DOI through Zenodo.
+Analysis code is publicly available at https://github.com/zxy048/translation-mirror-hf-hcc (project name: translation-mirror-hf-hcc). The repository contains the complete WGCNA, ssGSEA, TF correlation, and direction consistency analysis pipelines. Programming language: R and Python. License: MIT. An archived version will be deposited in Zenodo with a permanent DOI upon acceptance.
 
 ## References
 
