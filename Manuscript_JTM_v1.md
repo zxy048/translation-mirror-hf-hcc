@@ -1,12 +1,14 @@
 # Distinct networks drive mirror perturbation of translation-related transcription in heart failure and hepatocellular carcinoma
 
-Yuhe Hong<sup>1</sup> (ORCID: 0009-0008-5028-0035), Yili Liu<sup>1</sup>, Xianqi Li<sup>1</sup>, Junhong Wang<sup>1,2*</sup> (ORCID: 0000-0003-2314-1810)
+Yuhe Hong<sup>1</sup> (ORCID: 0009-0008-5028-0035), Yili Liu<sup>1</sup>, Xianqi Li<sup>1</sup>, Xin Wu<sup>3*</sup>, Junhong Wang<sup>1,2*</sup> (ORCID: 0000-0003-2314-1810)
 
 <sup>1</sup> Department of Cardiology, The First Affiliated Hospital of Nanjing Medical University, Nanjing, China
 
 <sup>2</sup> Department of Cardiology, Liyang People's Hospital, Liyang, China
 
-<sup>*</sup> Corresponding author. Email: wangjunhong@jsph.org.cn
+<sup>3</sup> Department of Reproduction Medicine, The First Affiliated Hospital of Nanjing Medical University, Nanjing, China
+
+<sup>*</sup> Co-corresponding authors. Email: wuxin0220@aliyun.com (X.W.); wangjunhong@jsph.org.cn (J.W.)
 
 ---
 
@@ -256,7 +258,7 @@ This research did not receive any specific grant from funding agencies in the pu
 
 ### Authors' contributions
 
-Y.H.: Writing – original draft, Visualization, Software, Methodology, Investigation, Formal analysis, Data curation, Conceptualization. Y.L.: Methodology, Data curation, Formal analysis, Writing – review & editing. X.L.: Data curation, Investigation, Writing – review & editing. J.W.: Writing – review & editing, Supervision, Project administration, Methodology, Conceptualization. All authors have read and approved the final version of the manuscript.
+Y.H.: Writing – original draft, Visualization, Software, Methodology, Investigation, Formal analysis, Data curation, Conceptualization. Y.L.: Methodology, Data curation, Formal analysis, Writing – review & editing. X.L.: Data curation, Investigation, Writing – review & editing. X.W.: Writing – review & editing, Supervision, Conceptualization. J.W.: Writing – review & editing, Supervision, Project administration, Methodology, Conceptualization. All authors have read and approved the final version of the manuscript.
 
 ### Acknowledgements
 
