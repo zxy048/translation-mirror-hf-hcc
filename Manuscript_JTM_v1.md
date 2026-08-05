@@ -1,6 +1,6 @@
 # Distinct networks drive mirror perturbation of translation-related transcription in heart failure and hepatocellular carcinoma
 
-Yuhe Hong<sup>1</sup> (ORCID: 0009-0008-5028-0035), Yili Liu<sup>1</sup>, Xianqi Li<sup>1</sup>, Xin Wu<sup>3*</sup>, Junhong Wang<sup>1,2*</sup> (ORCID: 0000-0003-2314-1810)
+Yuhe Hong<sup>1</sup> (ORCID: 0009-0008-5028-0035), Yili Liu<sup>1</sup>, Xianqi Li<sup>1</sup>, Xin Wu<sup>3#</sup>, Junhong Wang<sup>1,2*</sup> (ORCID: 0000-0003-2314-1810)
 
 <sup>1</sup> Department of Cardiology, The First Affiliated Hospital of Nanjing Medical University, Nanjing, China
 
@@ -8,7 +8,9 @@ Yuhe Hong<sup>1</sup> (ORCID: 0009-0008-5028-0035), Yili Liu<sup>1</sup>, Xianqi
 
 <sup>3</sup> Department of Reproduction Medicine, The First Affiliated Hospital of Nanjing Medical University, Nanjing, China
 
-<sup>*</sup> Co-corresponding authors. Email: wuxin0220@aliyun.com (X.W.); wangjunhong@jsph.org.cn (J.W.)
+<sup>*</sup> Lead corresponding author. Email: wangjunhong@jsph.org.cn
+
+<sup>#</sup> Co-corresponding author. Email: wuxin0220@aliyun.com
 
 ---
 

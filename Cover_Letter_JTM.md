@@ -16,7 +16,7 @@ We submit for consideration at *Journal of Translational Medicine* our manuscrip
 
 **Author information.**
 
-Yuhe Hong<sup>1</sup> (ORCID: 0009-0008-5028-0035; yuhe994@163.com), Yili Liu<sup>1</sup> (yili20000612@163.com), Xianqi Li<sup>1</sup> (l2840655442@163.com), Xin Wu<sup>3*</sup> (wuxin0220@aliyun.com), Junhong Wang<sup>1,2*</sup> (ORCID: 0000-0003-2314-1810)
+Yuhe Hong<sup>1</sup> (ORCID: 0009-0008-5028-0035; yuhe994@163.com), Yili Liu<sup>1</sup> (yili20000612@163.com), Xianqi Li<sup>1</sup> (l2840655442@163.com), Xin Wu<sup>3#</sup> (wuxin0220@aliyun.com), Junhong Wang<sup>1,2*</sup> (ORCID: 0000-0003-2314-1810)
 
 <sup>1</sup> Department of Cardiology, The First Affiliated Hospital of Nanjing Medical University, Nanjing, China
 
@@ -24,7 +24,9 @@ Yuhe Hong<sup>1</sup> (ORCID: 0009-0008-5028-0035; yuhe994@163.com), Yili Liu<su
 
 <sup>3</sup> Department of Reproduction Medicine, The First Affiliated Hospital of Nanjing Medical University, Nanjing, China
 
-<sup>*</sup> Co-corresponding authors. Email: wuxin0220@aliyun.com (X.W.); wangjunhong@jsph.org.cn (J.W.)
+<sup>*</sup> Lead corresponding author. Email: wangjunhong@jsph.org.cn
+
+<sup>#</sup> Co-corresponding author. Email: wuxin0220@aliyun.com
 
 We appreciate your consideration of our work.
 
