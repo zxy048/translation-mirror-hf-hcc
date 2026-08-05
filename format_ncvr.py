@@ -72,6 +72,7 @@ def format_ncvr(path):
                 run.font.bold = True  # figure captions bold per NCVR
             else:
                 run.font.size = BODY_SIZE
+                run.font.bold = False
 
         if is_caption:
             para.alignment = WD_ALIGN_PARAGRAPH.LEFT
