@@ -7,7 +7,7 @@
 # =============================================================================
 
 from docx import Document
-from docx.shared import Pt, Cm
+from docx.shared import Pt, Cm, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 import sys
@@ -38,6 +38,7 @@ def format_ncvr(path):
         font.name = FONT_NAME
         font.size = size
         font.bold = bold
+        font.color.rgb = RGBColor(0, 0, 0)
         pf = style.paragraph_format
         pf.space_before = Pt(0)
         pf.space_after = Pt(6)
@@ -55,6 +56,7 @@ def format_ncvr(path):
 
         for run in para.runs:
             run.font.name = FONT_NAME
+            run.font.color.rgb = RGBColor(0, 0, 0)
 
             if para.style.name.startswith('Heading 1'):
                 run.font.size = H1_SIZE
