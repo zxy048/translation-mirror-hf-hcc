@@ -178,7 +178,7 @@ All datasets used in this study are publicly available: GSE57338, GSE141198, GSE
 
 ## Code availability
 
-Analysis code has been deposited in a GitHub repository (https://github.com/zxy048/translation-mirror-hf-hcc), containing the complete WGCNA, ssGSEA, TF correlation, and direction consistency analysis pipelines, accessible via an anonymous link during peer review.
+Analysis code has been deposited in a GitHub repository and is accessible via an anonymous link during peer review: https://anonymous.4open.science/r/translation-mirror-hf-hcc-4622/. The repository contains the complete WGCNA, ssGSEA, TF correlation, and direction consistency analysis pipelines. Upon acceptance, the repository will be made publicly available with a permanent DOI.
 
 ## References
 

@@ -116,5 +116,5 @@ All datasets are publicly available:
 
 ## Contact
 
-For questions regarding the analysis code, please open an issue on the GitHub repository:
-https://github.com/zxy048/translation-mirror-hf-hcc
+For questions regarding the analysis code, please open an issue via the anonymous review repository:
+https://anonymous.4open.science/r/translation-mirror-hf-hcc-4622/ (the repository will be made public upon acceptance).
