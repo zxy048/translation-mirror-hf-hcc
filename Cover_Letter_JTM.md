@@ -28,6 +28,8 @@ Yuhe Hong<sup>1</sup> (ORCID: 0009-0008-5028-0035; yuhe994@163.com), Yili Liu<su
 
 <sup>#</sup> Co-corresponding author. Email: wuxin0220@aliyun.com
 
+**Note on corresponding author:** Junhong Wang is the lead corresponding author and Xin Wu is the co-corresponding author, as indicated in the manuscript and this cover letter by the asterisk (*) and hash (#) markers. For operational convenience during the submission process, Yuhe Hong (first author) is listed as the corresponding author in the submission system. The manuscript and this cover letter serve as the authoritative record for authorship and correspondence.
+
 We appreciate your consideration of our work.
 
 Sincerely,
