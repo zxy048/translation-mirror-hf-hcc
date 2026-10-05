@@ -1,0 +1,502 @@
+﻿[19:38:00] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Rscript.exe : Warning messages:
+At line:1 char:365
++ ... evision_v2; & "C:/Program Files/R/R-4.6.0/bin/Rscript.exe" --vanilla  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning messages::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[19:38:00] === R04 start === 
+[19:38:01] HF: 177 samples x 10213 genes; 24 modules 
+[19:38:01] HCC: 148 samples x 10213 genes; 21 modules 
+  ..checking data for excessive amounts of missing data..
+     Flagging genes and samples with too many missing values...
+      ..step 1
+     Flagging genes and samples with too many missing values...
+      ..step 1
+  ..unassigned 'module' name: grey 
+  ..all network sample 'module' name: gold
+  ..calculating observed preservation values
+  ..calculating permutation Z scores
+ ..Working with set 1 as reference set
+ ....working with set 2 as test set
+  ......working on permutation 1
+  ......working on permutation 2
+  ......working on permutation 3
+  ......working on permutation 4
+  ......working on permutation 5
+  ......working on permutation 6
+  ......working on permutation 7
+  ......working on permutation 8
+  ......working on permutation 9
+  ......working on permutation 10
+  ......working on permutation 11
+  ......working on permutation 12
+  ......working on permutation 13
+  ......working on permutation 14
+  ......working on permutation 15
+  ......working on permutation 16
+  ......working on permutation 17
+  ......working on permutation 18
+  ......working on permutation 19
+  ......working on permutation 20
+  ......working on permutation 21
+  ......working on permutation 22
+  ......working on permutation 23
+  ......working on permutation 24
+  ......working on permutation 25
+  ......working on permutation 26
+  ......working on permutation 27
+  ......working on permutation 28
+  ......working on permutation 29
+  ......working on permutation 30
+  ......working on permutation 31
+  ......working on permutation 32
+  ......working on permutation 33
+  ......working on permutation 34
+  ......working on permutation 35
+  ......working on permutation 36
+  ......working on permutation 37
+  ......working on permutation 38
+  ......working on permutation 39
+  ......working on permutation 40
+  ......working on permutation 41
+  ......working on permutation 42
+  ......working on permutation 43
+  ......working on permutation 44
+  ......working on permutation 45
+  ......working on permutation 46
+  ......working on permutation 47
+  ......working on permutation 48
+  ......working on permutation 49
+  ......working on permutation 50
+  ......working on permutation 51
+  ......working on permutation 52
+  ......working on permutation 53
+  ......working on permutation 54
+  ......working on permutation 55
+  ......working on permutation 56
+  ......working on permutation 57
+  ......working on permutation 58
+  ......working on permutation 59
+  ......working on permutation 60
+  ......working on permutation 61
+  ......working on permutation 62
+  ......working on permutation 63
+  ......working on permutation 64
+  ......working on permutation 65
+  ......working on permutation 66
+  ......working on permutation 67
+  ......working on permutation 68
+  ......working on permutation 69
+  ......working on permutation 70
+  ......working on permutation 71
+  ......working on permutation 72
+  ......working on permutation 73
+  ......working on permutation 74
+  ......working on permutation 75
+  ......working on permutation 76
+  ......working on permutation 77
+  ......working on permutation 78
+  ......working on permutation 79
+  ......working on permutation 80
+  ......working on permutation 81
+  ......working on permutation 82
+  ......working on permutation 83
+  ......working on permutation 84
+  ......working on permutation 85
+  ......working on permutation 86
+  ......working on permutation 87
+  ......working on permutation 88
+  ......working on permutation 89
+  ......working on permutation 90
+  ......working on permutation 91
+  ......working on permutation 92
+  ......working on permutation 93
+  ......working on permutation 94
+  ......working on permutation 95
+  ......working on permutation 96
+  ......working on permutation 97
+  ......working on permutation 98
+  ......working on permutation 99
+  ......working on permutation 100
+  ......working on permutation 101
+  ......working on permutation 102
+  ......working on permutation 103
+  ......working on permutation 104
+  ......working on permutation 105
+  ......working on permutation 106
+  ......working on permutation 107
+  ......working on permutation 108
+  ......working on permutation 109
+  ......working on permutation 110
+  ......working on permutation 111
+  ......working on permutation 112
+  ......working on permutation 113
+  ......working on permutation 114
+  ......working on permutation 115
+  ......working on permutation 116
+  ......working on permutation 117
+  ......working on permutation 118
+  ......working on permutation 119
+  ......working on permutation 120
+  ......working on permutation 121
+  ......working on permutation 122
+  ......working on permutation 123
+  ......working on permutation 124
+  ......working on permutation 125
+  ......working on permutation 126
+  ......working on permutation 127
+  ......working on permutation 128
+  ......working on permutation 129
+  ......working on permutation 130
+  ......working on permutation 131
+  ......working on permutation 132
+  ......working on permutation 133
+  ......working on permutation 134
+  ......working on permutation 135
+  ......working on permutation 136
+  ......working on permutation 137
+  ......working on permutation 138
+  ......working on permutation 139
+  ......working on permutation 140
+  ......working on permutation 141
+  ......working on permutation 142
+  ......working on permutation 143
+  ......working on permutation 144
+  ......working on permutation 145
+  ......working on permutation 146
+  ......working on permutation 147
+  ......working on permutation 148
+  ......working on permutation 149
+  ......working on permutation 150
+  ......working on permutation 151
+  ......working on permutation 152
+  ......working on permutation 153
+  ......working on permutation 154
+  ......working on permutation 155
+  ......working on permutation 156
+  ......working on permutation 157
+  ......working on permutation 158
+  ......working on permutation 159
+  ......working on permutation 160
+  ......working on permutation 161
+  ......working on permutation 162
+  ......working on permutation 163
+  ......working on permutation 164
+  ......working on permutation 165
+  ......working on permutation 166
+  ......working on permutation 167
+  ......working on permutation 168
+  ......working on permutation 169
+  ......working on permutation 170
+  ......working on permutation 171
+  ......working on permutation 172
+  ......working on permutation 173
+  ......working on permutation 174
+  ......working on permutation 175
+  ......working on permutation 176
+  ......working on permutation 177
+  ......working on permutation 178
+  ......working on permutation 179
+  ......working on permutation 180
+  ......working on permutation 181
+  ......working on permutation 182
+  ......working on permutation 183
+  ......working on permutation 184
+  ......working on permutation 185
+  ......working on permutation 186
+  ......working on permutation 187
+  ......working on permutation 188
+  ......working on permutation 189
+  ......working on permutation 190
+  ......working on permutation 191
+  ......working on permutation 192
+  ......working on permutation 193
+  ......working on permutation 194
+  ......working on permutation 195
+  ......working on permutation 196
+  ......working on permutation 197
+  ......working on permutation 198
+  ......working on permutation 199
+  ......working on permutation 200
+ ..Working with set 2 as reference set
+ ....working with set 1 as test set
+  ......working on permutation 1
+  ......working on permutation 2
+  ......working on permutation 3
+  ......working on permutation 4
+  ......working on permutation 5
+  ......working on permutation 6
+  ......working on permutation 7
+  ......working on permutation 8
+  ......working on permutation 9
+  ......working on permutation 10
+  ......working on permutation 11
+  ......working on permutation 12
+  ......working on permutation 13
+  ......working on permutation 14
+  ......working on permutation 15
+  ......working on permutation 16
+  ......working on permutation 17
+  ......working on permutation 18
+  ......working on permutation 19
+  ......working on permutation 20
+  ......working on permutation 21
+  ......working on permutation 22
+  ......working on permutation 23
+  ......working on permutation 24
+  ......working on permutation 25
+  ......working on permutation 26
+  ......working on permutation 27
+  ......working on permutation 28
+  ......working on permutation 29
+  ......working on permutation 30
+  ......working on permutation 31
+  ......working on permutation 32
+  ......working on permutation 33
+  ......working on permutation 34
+  ......working on permutation 35
+  ......working on permutation 36
+  ......working on permutation 37
+  ......working on permutation 38
+  ......working on permutation 39
+  ......working on permutation 40
+  ......working on permutation 41
+  ......working on permutation 42
+  ......working on permutation 43
+  ......working on permutation 44
+  ......working on permutation 45
+  ......working on permutation 46
+  ......working on permutation 47
+  ......working on permutation 48
+  ......working on permutation 49
+  ......working on permutation 50
+  ......working on permutation 51
+  ......working on permutation 52
+  ......working on permutation 53
+  ......working on permutation 54
+  ......working on permutation 55
+  ......working on permutation 56
+  ......working on permutation 57
+  ......working on permutation 58
+  ......working on permutation 59
+  ......working on permutation 60
+  ......working on permutation 61
+  ......working on permutation 62
+  ......working on permutation 63
+  ......working on permutation 64
+  ......working on permutation 65
+  ......working on permutation 66
+  ......working on permutation 67
+  ......working on permutation 68
+  ......working on permutation 69
+  ......working on permutation 70
+  ......working on permutation 71
+  ......working on permutation 72
+  ......working on permutation 73
+  ......working on permutation 74
+  ......working on permutation 75
+  ......working on permutation 76
+  ......working on permutation 77
+  ......working on permutation 78
+  ......working on permutation 79
+  ......working on permutation 80
+  ......working on permutation 81
+  ......working on permutation 82
+  ......working on permutation 83
+  ......working on permutation 84
+  ......working on permutation 85
+  ......working on permutation 86
+  ......working on permutation 87
+  ......working on permutation 88
+  ......working on permutation 89
+  ......working on permutation 90
+  ......working on permutation 91
+  ......working on permutation 92
+  ......working on permutation 93
+  ......working on permutation 94
+  ......working on permutation 95
+  ......working on permutation 96
+  ......working on permutation 97
+  ......working on permutation 98
+  ......working on permutation 99
+  ......working on permutation 100
+  ......working on permutation 101
+  ......working on permutation 102
+  ......working on permutation 103
+  ......working on permutation 104
+  ......working on permutation 105
+  ......working on permutation 106
+  ......working on permutation 107
+  ......working on permutation 108
+  ......working on permutation 109
+  ......working on permutation 110
+  ......working on permutation 111
+  ......working on permutation 112
+  ......working on permutation 113
+  ......working on permutation 114
+  ......working on permutation 115
+  ......working on permutation 116
+  ......working on permutation 117
+  ......working on permutation 118
+  ......working on permutation 119
+  ......working on permutation 120
+  ......working on permutation 121
+  ......working on permutation 122
+  ......working on permutation 123
+  ......working on permutation 124
+  ......working on permutation 125
+  ......working on permutation 126
+  ......working on permutation 127
+  ......working on permutation 128
+  ......working on permutation 129
+  ......working on permutation 130
+  ......working on permutation 131
+  ......working on permutation 132
+  ......working on permutation 133
+  ......working on permutation 134
+  ......working on permutation 135
+  ......working on permutation 136
+  ......working on permutation 137
+  ......working on permutation 138
+  ......working on permutation 139
+  ......working on permutation 140
+  ......working on permutation 141
+  ......working on permutation 142
+  ......working on permutation 143
+  ......working on permutation 144
+  ......working on permutation 145
+  ......working on permutation 146
+  ......working on permutation 147
+  ......working on permutation 148
+  ......working on permutation 149
+  ......working on permutation 150
+  ......working on permutation 151
+  ......working on permutation 152
+  ......working on permutation 153
+  ......working on permutation 154
+  ......working on permutation 155
+  ......working on permutation 156
+  ......working on permutation 157
+  ......working on permutation 158
+  ......working on permutation 159
+  ......working on permutation 160
+  ......working on permutation 161
+  ......working on permutation 162
+  ......working on permutation 163
+  ......working on permutation 164
+  ......working on permutation 165
+  ......working on permutation 166
+  ......working on permutation 167
+  ......working on permutation 168
+  ......working on permutation 169
+  ......working on permutation 170
+  ......working on permutation 171
+  ......working on permutation 172
+  ......working on permutation 173
+  ......working on permutation 174
+  ......working on permutation 175
+  ......working on permutation 176
+  ......working on permutation 177
+  ......working on permutation 178
+  ......working on permutation 179
+  ......working on permutation 180
+  ......working on permutation 181
+  ......working on permutation 182
+  ......working on permutation 183
+  ......working on permutation 184
+  ......working on permutation 185
+  ......working on permutation 186
+  ......working on permutation 187
+  ......working on permutation 188
+  ......working on permutation 189
+  ......working on permutation 190
+  ......working on permutation 191
+  ......working on permutation 192
+  ......working on permutation 193
+  ......working on permutation 194
+  ......working on permutation 195
+  ......working on permutation 196
+  ......working on permutation 197
+  ......working on permutation 198
+  ......working on permutation 199
+  ......working on permutation 200
+[20:45:45] modulePreservation finished in 67.7 min 
+[20:45:45] raw modulePreservation object saved: R04_preservation_raw.rds 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S19_module_preservation.csv 
+
+=== modulePreservation (Zsummary: >10 strong, 2-10 weak, <2 none) ===
+
+-- HCC modules tested in the other disease (21 modules) --
+       module moduleSize Zsummary.pres Zdensity.pres Zconnectivity.pres
+          red        302     15.011490     17.568832         12.4541477
+  greenyellow        130     12.308378     16.955959          7.6607967
+       yellow        347      8.890145      8.962888          8.8174011
+    lightcyan         90      8.752053     11.340488          6.1636174
+    turquoise       1000      7.961334      8.268882          7.6537857
+      magenta        146      7.093597     10.345025          3.8421682
+        brown        389      5.220600      7.563114          2.8780856
+        green        323      4.812310      6.306097          3.3185226
+ midnightblue         96      4.722096      3.244552          6.1996406
+        black        255      3.783779      5.182947          2.3846113
+       purple        145      2.912804      4.863553          0.9620536
+    royalblue         43      2.807021      3.129289          2.4847521
+ medianRank.pres p_summary_bh
+               3 2.560490e-52
+               1 2.276161e-39
+               6 6.587780e-18
+               2 5.976425e-19
+               9 5.698741e-14
+               5 7.995128e-15
+              10 3.591963e-07
+              11 1.993040e-06
+               7 1.386384e-05
+              13 7.575102e-04
+              16 6.612843e-03
+               6 7.022189e-02
+
+-- HF modules tested in the other disease (24 modules) --
+        module moduleSize Zsummary.pres Zdensity.pres Zconnectivity.pres
+         green        425     11.508546     18.942595          4.0744969
+        purple        153     11.025925     17.781355          4.2704952
+          grey       1000     10.757809      3.635578         17.8800398
+          pink        173     10.589170     17.038324          4.1400158
+     turquoise       1000      9.293683     16.554124          2.0332410
+         black        184      8.377234     13.958823          2.7956437
+  midnightblue         93      5.584960     11.064169          0.1057506
+     royalblue         52      4.769385      6.912809          2.6259618
+          blue       1000      2.862843     -1.077960          6.8036472
+        salmon        105      2.478317      3.290949          1.6656858
+   lightyellow         58      2.385506      4.666138          0.1048741
+ darkturquoise         39      2.222399      2.053062          2.3917349
+ medianRank.pres p_summary_bh
+               6 1.165219e-42
+               3 4.192586e-41
+              14 2.421910e-39
+               4 1.142063e-38
+              10 2.836483e-31
+               5 7.198706e-24
+               3 5.831458e-15
+               2 6.265982e-06
+              15 3.011137e-05
+              10 1.988115e-01
+               7 9.258766e-03
+               9 4.679807e-01
+
+modules with Zsummary > 10 : 6 / 45
+modules with Zsummary <  2 : 18 / 45
+modules with BH p < 0.05  : 23 / 45
+
+=== the two designated translation modules, in both directions ===
+ reference  module test moduleSize Zsummary.pres medianRank.pres p_summary_bh
+       HCC magenta   HF        146      7.093597               5 7.995128e-15
+        HF  purple  HCC        153     11.025925               3 4.192586e-41
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S20_designated_module_preservation.csv 
+ reference  module test  Zsummary            verdict
+       HCC magenta   HF  7.093597   weakly preserved
+        HF  purple  HCC 11.025925 strongly preserved
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S20b_designated_module_verdict.csv 
+[20:45:45] === R04 done === 

@@ -1,0 +1,99 @@
+[00:59:09] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[00:59:13] === R10c start === 
+[00:59:15] --- annotation available per cohort --- 
+[00:59:15]   GSE57338: gsm, tissue, heart.failure, disease.status, gender, age, group, etiology 
+[00:59:15]   GSE141198: no annotation in the frozen cohort object 
+[00:59:15]   TCGA_LIHC: no annotation in the frozen cohort object 
+[00:59:15]   GSE116250: no annotation in the frozen cohort object 
+[00:59:15]   GSE14520_GPL3921: gsm, Tissue, Disease.state, Individual 
+[00:59:15]   GSE14520_GPL571: gsm, Tissue, Disease.state, Individual 
+[00:59:15]   GSE76427: gsm, diagnosis, patient.id, tissue, event_os, duryears_os, event_rfs, duryears_rfs, age..years., gender..1.m..2.f., bclc_staging, tnm_staging_clinical 
+[00:59:15]   GSE141910: gsm, etiology, Sex, race, age 
+[00:59:20] --- age / sex coverage --- 
+    cohort n_samples n_age n_sex age_range n_female n_male
+  GSE57338       313   313   313      0-80       96    217
+ GSE141910       366   366   366     15-83      172    194
+ GSE116250        64    64    64     20-66       13     51
+ TCGA_LIHC       424   423   424     16-87      143    281
+                             source
+         series matrix: age, gender
+            series matrix: age, Sex
+            series matrix: age, Sex
+ GDC clinical: age_at_index, gender
+[00:59:20] --- cohorts not adjusted, and the reason --- 
+[00:59:20]   GSE141198: cohort object carries no annotation at all 
+[00:59:20]   GSE14520_GPL3921: no age or sex column in the series matrix (gsm, Tissue, Disease.state, Individual) 
+[00:59:20]   GSE14520_GPL571: no age or sex column in the series matrix (gsm, Tissue, Disease.state, Individual) 
+[00:59:20]   GSE76427: age..years. present for arm x measured -> 52:0/52  0:115/115 
+[00:59:20]   GSE57338: 313/313 samples with age and sex 
+[00:59:42]   GSE141910: 366/366 samples with age and sex 
+[01:00:06]   GSE116250: 64/64 samples with age and sex 
+[01:00:20]   TCGA_LIHC: 420/421 samples with age and sex 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S37_clinical_covariate_adjustment.csv 
+[01:00:45] --- scale check: unadjusted beta/sigma vs R07 Hedges g --- 
+[01:00:45]   GSE116250: rho = 1.000 over 40 sets 
+[01:00:45]   GSE141910: rho = 1.000 over 41 sets 
+[01:00:45]   GSE57338: rho = 1.000 over 41 sets 
+[01:00:45]   TCGA_LIHC: rho = 1.000 over 41 sets 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S38_age_sex_mirror_recheck.csv 
+
+=== TCGA-LIHC effect, adjusted vs unadjusted (Tier A) ===
+                                                                                 set
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                                        REACTOME_TRNA_AMINOACYLATION
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                            REACTOME_RRNA_PROCESSING
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                                                REACTOME_TRANSLATION
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                                                       KEGG_RIBOSOME
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+   n g_unadjusted g_adjusted   attenuation p_unadjusted   p_adjusted survives
+ 420    1.1733675  1.1600253  0.0113708952 5.444766e-14 1.254193e-13     TRUE
+ 420    1.1185810  1.1161368  0.0021851058 6.434753e-13 8.845674e-13     TRUE
+ 420    1.1005440  1.0687032  0.0289318356 1.423711e-12 6.861543e-12     TRUE
+ 420    1.0237517  1.0230708  0.0006650783 3.755796e-11 4.622374e-11     TRUE
+ 420    0.9665295  0.9261528  0.0417749070 3.824826e-10 2.145594e-09     TRUE
+ 420    0.8786061  0.8433477  0.0401299722 1.102599e-08 4.479704e-08     TRUE
+ 420    0.8551876  0.8175941  0.0439593772 2.585400e-08 1.100040e-07     TRUE
+ 420    0.8332459  0.7992448  0.0408056034 5.649311e-08 2.057804e-07     TRUE
+ 420    0.7321378  0.6950284  0.0506863702 1.670853e-06 5.776579e-06     TRUE
+ 420    0.6849482  0.6595109  0.0371376885 7.173069e-06 1.648008e-05     TRUE
+ 420    0.6592333  0.6610437 -0.0027463391 1.533913e-05 1.576587e-05     TRUE
+ 420    0.6375393  0.5960865  0.0650200335 2.858386e-05 9.559714e-05     TRUE
+ 420   -0.2566036 -0.2902222 -0.1310135005 8.930452e-02 5.576463e-02    FALSE
+ 420    0.1763119  0.1604392  0.0900264886 2.426058e-01 2.895631e-01    FALSE
+ 420    0.1234931  0.1069915  0.1336240052 4.129090e-01 4.798588e-01    FALSE
+
+=== does the mirror survive age and sex adjustment? ===
+ hf_cohort tier n_sets rho_unadjusted mirror_unadjusted rho_adjusted
+ GSE116250    A     15      0.2107143                 1   0.27500000
+ GSE116250  ALL     40      0.2859287                 7   0.29380863
+ GSE141910    A     15     -0.1464286                 1  -0.12142857
+ GSE141910  ALL     41     -0.0858885                15  -0.07264808
+  GSE57338    A     15     -0.5500000                10  -0.46071429
+  GSE57338  ALL     41     -0.4562718                26  -0.39285714
+ mirror_adjusted                                                       gate
+               1 opposite signs, |g| >= 0.2, CI excludes 0 in both diseases
+               7 opposite signs, |g| >= 0.2, CI excludes 0 in both diseases
+               1 opposite signs, |g| >= 0.2, CI excludes 0 in both diseases
+              12 opposite signs, |g| >= 0.2, CI excludes 0 in both diseases
+              10 opposite signs, |g| >= 0.2, CI excludes 0 in both diseases
+              26 opposite signs, |g| >= 0.2, CI excludes 0 in both diseases
+
+=== age and sex effects on the Tier A sets (is either a confounder?) ===
+  |b_age|  median 0.088, max 0.285, sets with p_age < 0.05: 16/60
+  |b_sex|  median 0.257, max 1.073, sets with p_sex < 0.05: 33/60
+  max VIF across all fits: 1.03
+  Tier A set-cohort pairs: 60; sign kept 60; survives gate 32
+  median attenuation of |g|: 2.9%
+[01:00:45] === R10c done === 

@@ -1,0 +1,9 @@
+"cohort","disease","tech","n_samples","n_tierA_sets","n_tierA_expected","genes_HF_module","genes_HF_present","frac_HF_present","genes_HCC_module","genes_HCC_present","frac_HCC_present","HF_in_tierA","HCC_in_tierA","shared_HF_HCC"
+"GSE57338","HF","array",313,15,15,153,153,1,146,146,1,73,26,5
+"GSE141198","HCC","RNA-seq",148,15,15,153,153,1,146,146,1,73,26,5
+"TCGA_LIHC","HCC","RNA-seq",421,15,15,153,152,0.993,146,142,0.973,73,25,5
+"GSE116250","HF","RNA-seq",64,15,15,153,145,0.948,146,131,0.897,72,22,5
+"GSE14520_GPL3921","HCC","array",445,14,15,153,103,0.673,146,78,0.534,62,13,2
+"GSE14520_GPL571","HCC","array",41,15,15,153,97,0.634,146,91,0.623,53,18,3
+"GSE76427","HCC","array",167,14,15,153,135,0.882,146,116,0.795,71,20,5
+"GSE141910","HF","RNA-seq",366,15,15,153,152,0.993,146,143,0.979,72,25,5

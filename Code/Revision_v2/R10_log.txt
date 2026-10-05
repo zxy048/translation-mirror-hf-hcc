@@ -1,0 +1,117 @@
+[17:24:44] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[17:24:44] === R10 start === 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S21_cohort_heterogeneity.csv 
+=== heterogeneity across cohorts, per disease (Tier A) ===
+
+-- HCC (4 cohorts) --
+                                                                                 set
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                                                REACTOME_TRANSLATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                            REACTOME_RRNA_PROCESSING
+                                                        REACTOME_TRNA_AMINOACYLATION
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                                                       KEGG_RIBOSOME
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+ n_cohorts   g_pooled I2_pct          p_Q
+         4  1.6176521   94.2 3.254731e-11
+         4  1.4845876   94.0 8.794191e-11
+         4  1.4719639   97.1 3.251035e-22
+         4  1.2981198   89.7 2.212702e-06
+         4  1.2639910   91.8 5.566182e-08
+         4  1.2474304   49.6 1.137344e-01
+         2  1.1800048    0.0 8.093914e-01
+         4  1.1503165   90.3 8.766868e-07
+         4  0.9885002   33.1 2.134560e-01
+         4  0.9477382   85.3 1.390172e-04
+         4  0.8647217   95.1 3.846874e-13
+         4  0.8507499   95.6 7.822765e-15
+         4  0.8457526   73.1 1.083731e-02
+         4  0.6805892   78.2 3.257091e-03
+         4 -0.2117596   82.1 7.854442e-04
+   I2 < 50% (homogeneous): 3 / 15 sets
+
+-- HF (3 cohorts) --
+                                                                                 set
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                                            REACTOME_RRNA_PROCESSING
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                                                REACTOME_TRANSLATION
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                        REACTOME_TRNA_AMINOACYLATION
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                                       KEGG_RIBOSOME
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+ n_cohorts    g_pooled I2_pct          p_Q
+         3 -0.74361823   82.3 3.523549e-03
+         3  0.52412700    0.0 8.927839e-01
+         3 -0.30735875   93.7 1.219783e-07
+         3 -0.28563933   69.1 3.930605e-02
+         3 -0.28259608   88.2 2.055821e-04
+         3 -0.19822599   79.3 7.900402e-03
+         3 -0.17387788   93.1 5.162316e-07
+         3 -0.13549503   76.0 1.550351e-02
+         3 -0.12768307   89.0 1.128799e-04
+         3 -0.11245464   72.3 2.700558e-02
+         3 -0.07609452   92.6 1.403030e-06
+         3  0.05329890   92.5 1.658016e-06
+         3 -0.04593608   93.1 5.494444e-07
+         3  0.01551806   91.7 6.065009e-06
+         3 -0.00277064   59.8 8.306472e-02
+   I2 < 50% (homogeneous): 1 / 15 sets
+[17:24:47] --- GSE57338 stratified by aetiology --- 
+[17:24:47]   NF=136 DCM=82 ICM=95 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S22_HF_aetiology_stratified.csv 
+
+=== GSE57338: aetiology-stratified effect sizes (Tier A) ===
+                                                                                 set
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                                            REACTOME_RRNA_PROCESSING
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                                                REACTOME_TRANSLATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                                        REACTOME_TRNA_AMINOACYLATION
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                                                       KEGG_RIBOSOME
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+ g_DCM_vs_NF g_ICM_vs_NF same_direction
+ -0.81034260 -0.84609611           TRUE
+ -0.66264070 -0.75878060           TRUE
+  0.59847354  0.55064637           TRUE
+ -0.47137834 -0.72685478           TRUE
+ -0.46185194 -0.60294179           TRUE
+ -0.45643231 -0.65779278           TRUE
+ -0.37817427 -0.72748110           TRUE
+ -0.35637574 -0.35570276           TRUE
+ -0.35409971 -0.68009979           TRUE
+ -0.29224709 -0.59139115           TRUE
+ -0.27458297 -0.55630106           TRUE
+ -0.20704810 -0.20820071           TRUE
+ -0.12219065 -0.09263337           TRUE
+ -0.05923181 -0.09920431           TRUE
+ -0.05858459 -0.11231438           TRUE
+
+Tier A sets where DCM and ICM point the SAME way: 15 / 15
+[17:24:47] === R10 done === 

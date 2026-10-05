@@ -1,0 +1,92 @@
+
+--- universe and network construction ---
+  OK   common universe U: computed='10,213' prose='10,213 genes'
+  OK   HF named modules: computed='23 named co-expression modules in HF' prose='-'
+  OK   HCC named modules: computed='20 in HCC' prose='-'
+  OK   common beta: computed='β = 14' prose='-'
+  OK   HF fit at common beta: computed='0.861' prose='0.861'
+  OK   HCC fit at common beta: computed='0.778' prose='0.778'
+
+--- translation module designation ---
+  OK   HF purple module size: computed='HF purple (153 genes)' prose='-'
+  OK   HF purple Tier A overlap: computed='73' prose='-'
+  OK   HF purple fold: computed='10.7-fold' prose='-'
+  OK   HCC magenta module size: computed='HCC magenta (146 genes)' prose='-'
+  OK   HCC magenta Tier A overlap: computed='26' prose='-'
+  OK   HCC magenta fold: computed='4.0-fold' prose='-'
+
+--- module preservation ---
+  OK   HF purple Zsummary: computed='11.03' prose='-'
+  OK   HF purple rank: computed='rank 2 of 23' prose='rank 2 of 23'
+  OK   HCC magenta Zsummary: computed='7.09' prose='-'
+  OK   HCC magenta rank: computed='rank 6 of 20' prose='rank 6 of 20'
+  OK   HF preservation classes: computed='3 of 23 are strongly preserved and 11 of 23 show no evidence' prose='-'
+  OK   HCC preservation classes: computed='2 of 20 and 6 of 20 respectively' prose='-'
+
+--- mirror perturbation ---
+  OK   primary mirror (Tier A): computed='10/15' prose='**10 of 15 Tier A sets**'
+  OK   primary mirror P: computed='permutation *P* = 1 × 10⁻⁴' prose='-'
+  OK   cluster mirror: computed='3 of 5 clusters' prose='-'
+  OK   cluster mirror P: computed='*P* = 0.0031' prose='-'
+  OK   Tier C mirror: computed='21 of 33 sets' prose='-'
+
+--- effect sizes and cross-cohort correlation ---
+  OK   rho Tier A (TCGA vs GSE57338): computed='ρ = −0.550' prose='-'
+  OK   rho all sets: computed='ρ = −0.455' prose='-'
+  OK   matrix rho TCGA_LIHC vs GSE57338: computed='−0.550' prose='−0.550 (TCGA-LIHC, 10/15'
+  OK   matrix rho GSE14520_GPL3921 vs GSE57338: computed='−0.702' prose='−0.702 (GSE14520 GPL3921, 9/14)'
+  OK   matrix rho GSE14520_GPL571 vs GSE57338: computed='−0.764' prose='−0.764 (GSE14520 GPL571, 9/15)'
+  OK   matrix rho GSE76427 vs GSE57338: computed='−0.587' prose='−0.587 (GSE76427, 9/14)'
+  OK   GSE116250 rho range: computed='−0.393 to +0.211' prose='−0.393 to +0.211'
+  OK   GSE141910 rho range: computed='−0.457 to −0.059' prose='−0.457 to −0.059'
+
+--- cohort heterogeneity and aetiology ---
+  OK   median I2 HF: computed='median *I*² = 87.3% for HF' prose='-'
+  OK   median I2 HCC: computed='88.5% for HCC' prose='-'
+  OK   DCM cross-cohort rho: computed='ρ = +0.350' prose='-'
+  OK   DCM cross-cohort concordance: computed='4/15 sets concordant' prose='-'
+
+--- R15 GSE89377 cirrhosis control ---
+  OK   R15 Tier A concordant: computed='12 of 15 Tier A sets' prose='-'
+  OK   R15 Tier A rho: computed='ρ = +0.668' prose='-'
+  OK   R15 all-set concordance: computed='60% (21 up, 3 down; ρ = +0.532)' prose='-'
+  OK   KEGG_RIBOSOME trajectory: computed='0.61 (chronic hepatitis, low grade) → 1.40 (chronic hepatitis, high grade) → 2.03 (cirrhosis) → 1.07 (dysplastic nodule, low grade) → 0.15 (dysplastic nodule, high grade) → 0.20 (early HCC) → 0.47 (HCC)' prose='-'
+
+--- TF association (TCGA-LIHC, all samples, canonical TCS) ---
+  OK   TF ATF4 adjusted r (TCS, all): computed='+0.237' prose='+0.237, FDR = 1.6 × 10⁻⁶'
+  OK   TF MYC adjusted r (TCS, all): computed='+0.233' prose='+0.233, FDR = 2.2 × 10⁻⁶'
+  OK   TF DDIT3 adjusted r (TCS, all): computed='+0.193' prose='+0.193, FDR = 8.2 × 10⁻⁵'
+  OK   TF EIF4EBP1 adjusted r (TCS, all): computed='+0.163' prose='+0.163, FDR = 9.3 × 10⁻⁴'
+  OK   TF EIF2AK3 adjusted r (TCS, all): computed='−0.452' prose='-'
+  OK   TF ERN1 adjusted r (TCS, all): computed='−0.415' prose='-'
+  OK   TF MTOR adjusted r (TCS, all): computed='−0.388' prose='-'
+
+--- composition adjustment ---
+  OK   composition survivorship: computed='55 of 103 Tier A set–cohort pairs' prose='-'
+  OK   median attenuation: computed='median attenuation of 34.1%' prose='-'
+  OK   max VIF: computed='maximum VIF 1.94' prose='-'
+
+--- hub-gene threshold (S31) ---
+  OK   GSE57338 purple nesting: |GS|>0.20=76 |GS|>0.50=9 FDR<0.05=107 (all 9 top genes pass FDR: True)
+  OK   TCGA_LIHC magenta nesting: |GS|>0.20=119 |GS|>0.50=2 FDR<0.05=133 (all 2 top genes pass FDR: True)
+  OK   S31 counts quoted for HF purple: computed='76, 9 and 107 for HF purple' prose='-'
+  OK   S31 counts quoted for HCC magenta: computed='119, 2 and 133 for HCC magenta' prose='-'
+  OK   stringency claim (false: FDR admits the most genes): must not contain 'the more stringent of the three on this data'
+  OK   stringency claim, table caption form: must not contain 'showing that the FDR criterion is the more stringent'
+
+--- orphan sweep (every body number must match a table cell) ---
+  info 0.01843: pending R14 (S32/S33)
+  info 0.3256: pending R14 (S32/S33)
+  info 12.2: pending R14 (S32/S33)
+  info 14.70: pending R14 (S32/S33)
+  info 15.2: pending R14 (S32/S33)
+  info 2.99: pending R14 (S32/S33)
+  info 4.69: pending R14 (S32/S33)
+  info 74.1: pending R14 (S32/S33)
+  ok   34.1: median attenuation over Tier A pairs (recomputed above from S25)
+  ok   88.5: median I-squared for HCC (recomputed above from S26/S28)
+  no unexplained numbers (10 scanned, 8 pending R14, 2 derived)
+
+========================================================================
+VERIFIED 55 claims | FAILED 0
+All manuscript numbers reconcile with the generated tables.

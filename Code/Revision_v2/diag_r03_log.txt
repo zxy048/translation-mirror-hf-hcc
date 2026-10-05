@@ -1,0 +1,65 @@
+[13:57:17] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+=== 1. overlap composition ===
+shared genes ( 5 ): COMMD6, CWC15, MYL6B, NOP10, POLR2G 
+shared that are Tier A: NOP10 
+
+=== 2. Tier A genes inside each designated module ===
+HF  module: 73/153 Tier A (48%)
+HCC module: 26/146 Tier A (18%)
+Tier A shared between the two modules: 1  [NOP10]
+Tier A total in U: 497 ; in HF module: 73 ; in HCC module: 26
+
+=== 3. where do the Tier A genes live in each network? ===
+
+-- HF: 456/497 Tier A genes present in the network --
+       module n_tierA pct_of_module X1
+    turquoise     119             6  1
+         blue     115             8  1
+       purple      73            48  1
+         grey      65             3  1
+         pink      23            13  1
+        brown      16             1  1
+        black      14             8  1
+ midnightblue       7             8  1
+       yellow       7             1  1
+        green       5             1  1
+
+-- HCC: 456/497 Tier A genes present in the network --
+     module n_tierA pct_of_module X1
+       blue     173             9  1
+  turquoise     116             3  1
+       grey      44             3  1
+      brown      37            10  1
+    magenta      26            18  1
+      green       9             3  1
+       cyan       8             8  1
+     grey60       8            10  1
+ lightgreen       8            12  1
+       pink       8             3  1
+
+=== 4. top genes by |kME| in each designated module ===
+
+-- HF module 'purple' (n=153); top 25 by |kME| --
+RPS27 RPL29 RPS10 RPS19 RPS11 RPL31 RPL39 RPL11 RPS7 RPSA RPS15A RPS27A RPS21 RPL17 RPL12 RPL23A RPS17 RPL36A RPL35 RPL24 NBEAL1 RPL36 RPLP0 RNF181 RPS12 
+   marked * = Tier A
+RPS27* RPL29* RPS10* RPS19* RPS11* RPL31* RPL39* RPL11* RPS7* RPSA* RPS15A* RPS27A* RPS21* RPL17* RPL12* RPL23A* RPS17* RPL36A* RPL35* RPL24* NBEAL1 RPL36* RPLP0* RNF181 RPS12* GUK1 RPS9* ELOB* SNRPD2 RPS8* RPS20* JTB RPS3* RPL13A* EEF1B2* UBA52* RPS25* RPS14* RPL9* RPS18* 
+
+-- HCC module 'magenta' (n=146); top 25 by |kME| --
+COX6A1 MIEN1 UBL5 CHCHD2 COX8A COX5A NOP10 HIGD2A SEM1 COPRS ATP5PD TIMM8B NDUFA6 MRPL11 TSR3 ARPC1A MRPS26 SLIRP ATP5MG ATP5MC2 UQCRB ATP6V1F NDUFAF3 NDUFA8 EXOSC7 
+   marked * = Tier A
+COX6A1 MIEN1 UBL5 CHCHD2 COX8A COX5A NOP10* HIGD2A SEM1* COPRS ATP5PD TIMM8B NDUFA6 MRPL11* TSR3* ARPC1A MRPS26* SLIRP ATP5MG ATP5MC2 UQCRB ATP6V1F NDUFAF3 NDUFA8 EXOSC7* CD63 CUEDC2 PRR13 NDUFAF2 PTRHD1 MRPL57* DPCD COX7B GATC MRPL36* MRPS16* PDAP1 COX7A2 COPZ1 POLR2G 
+
+=== 5. do the two modules connect? cross-tab of Tier A membership ===
+            in_HCC_module
+in_HF_module FALSE TRUE
+       FALSE     0  141
+       TRUE    148    5
+
+among Tier A genes:
+            in_HCC_module
+in_HF_module FALSE TRUE
+       FALSE     0   25
+       TRUE     72    1

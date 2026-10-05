@@ -1,0 +1,3 @@
+"disease","module","n_genes","power","n_samples","k_universe_mean","k_module_mean","obs_mean_intra_TOM","unmatched_null_mean","unmatched_null_sd","obs_over_unmatched_null","Z_unmatched","P_unmatched","matched_null_mean","matched_null_sd","obs_over_matched_null","Z_matched","P_matched","n_perm","n_bins","jackknife_CV_of_mean_kIM_pct","jackknife_median_pergene_CV_pct","jackknife_n_degenerate"
+"HF","purple",153,14,177,15.2,6.6,0.007868,0.002745,0.000372,2.87,13.77,1e-04,0.0007144,1.591e-05,11.01,449.74,1e-04,10000,20,2.66,53.28,0
+"HCC","magenta",146,14,148,74.1,21.1,0.01798,0.01834,0.002483,0.98,-0.14,0.544,0.003839,0.000161,4.68,87.83,1e-04,10000,20,2.48,49.68,0

@@ -1,0 +1,7 @@
+"hf_cohort","tier","n_sets","rho_unadjusted","mirror_unadjusted","rho_adjusted","mirror_adjusted","gate"
+"GSE116250","A",15,0.210714285714286,1,0.275,1,"opposite signs, |g| >= 0.2, CI excludes 0 in both diseases"
+"GSE116250","ALL",40,0.285928705440901,7,0.293808630393996,7,"opposite signs, |g| >= 0.2, CI excludes 0 in both diseases"
+"GSE141910","A",15,-0.146428571428571,1,-0.121428571428571,1,"opposite signs, |g| >= 0.2, CI excludes 0 in both diseases"
+"GSE141910","ALL",41,-0.0858885017421603,15,-0.0726480836236934,12,"opposite signs, |g| >= 0.2, CI excludes 0 in both diseases"
+"GSE57338","A",15,-0.55,10,-0.460714285714286,10,"opposite signs, |g| >= 0.2, CI excludes 0 in both diseases"
+"GSE57338","ALL",41,-0.456271777003484,26,-0.392857142857143,26,"opposite signs, |g| >= 0.2, CI excludes 0 in both diseases"

@@ -1,0 +1,310 @@
+﻿[19:38:34] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Rscript.exe : Warning messages:
+At line:1 char:365
++ ... evision_v2; & "C:/Program Files/R/R-4.6.0/bin/Rscript.exe" --vanilla  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning messages::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[19:38:34] === R12 start === 
+[19:38:39] HF module 'purple' = 153 genes; HCC module 'magenta' = 146 genes 
+[19:38:40] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S27_TATS_gene_accounting.csv 
+
+=== exact genes behind each score, per cohort (R1 #4) ===
+           cohort disease    tech n_samples n_tierA_sets n_tierA_expected
+         GSE57338      HF   array       313           15               15
+        GSE141198     HCC RNA-seq       148           15               15
+        TCGA_LIHC     HCC RNA-seq       421           15               15
+        GSE116250      HF RNA-seq        64           15               15
+ GSE14520_GPL3921     HCC   array       445           14               15
+  GSE14520_GPL571     HCC   array        41           15               15
+         GSE76427     HCC   array       167           14               15
+        GSE141910      HF RNA-seq       366           15               15
+ genes_HF_module genes_HF_present frac_HF_present genes_HCC_module
+             153              153           1.000              146
+             153              153           1.000              146
+             153              152           0.993              146
+             153              145           0.948              146
+             153              103           0.673              146
+             153               97           0.634              146
+             153              135           0.882              146
+             153              152           0.993              146
+ genes_HCC_present frac_HCC_present HF_in_tierA HCC_in_tierA shared_HF_HCC
+               146            1.000          73           26             5
+               146            1.000          73           26             5
+               142            0.973          73           25             5
+               131            0.897          72           22             5
+                78            0.534          62           13             2
+                91            0.623          53           18             3
+               116            0.795          71           20             5
+               143            0.979          72           25             5
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S28_TATS_score_concordance.csv 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S29_TATS_effect_sizes.csv 
+
+=== agreement among the three score definitions (R2 #2) ===
+  GSE57338            TCS~ME_HF r=+0.636   TCS~ME_HCC r=+0.716   ME_HF~ME_HCC r=+0.308
+  GSE141198           TCS~ME_HF r=+0.463   TCS~ME_HCC r=+0.549   ME_HF~ME_HCC r=+0.773
+  TCGA_LIHC           TCS~ME_HF r=+0.602   TCS~ME_HCC r=+0.472   ME_HF~ME_HCC r=+0.912
+  GSE116250           TCS~ME_HF r=+0.265   TCS~ME_HCC r=+0.423   ME_HF~ME_HCC r=+0.873
+  GSE14520_GPL3921    TCS~ME_HF r=+0.785   TCS~ME_HCC r=+0.703   ME_HF~ME_HCC r=+0.727
+  GSE14520_GPL571     TCS~ME_HF r=+0.904   TCS~ME_HCC r=+0.852   ME_HF~ME_HCC r=+0.804
+  GSE76427            TCS~ME_HF r=+0.803   TCS~ME_HCC r=+0.686   ME_HF~ME_HCC r=+0.688
+  GSE141910           TCS~ME_HF r=+0.874   TCS~ME_HCC r=+0.917   ME_HF~ME_HCC r=+0.951
+
+=== disease vs control effect of each score ===
+           cohort           score     hedges_g        p_fdr
+        GSE116250 ME_HCC_weighted -0.015727010 9.706648e-01
+        GSE116250  ME_HF_weighted  0.154140198 9.706648e-01
+        GSE116250             TCS -0.160467407 9.706648e-01
+        GSE141910 ME_HCC_weighted -0.000208011 9.984037e-01
+        GSE141910  ME_HF_weighted  0.078680969 6.792833e-01
+        GSE141910             TCS  0.127775072 6.535145e-01
+ GSE14520_GPL3921 ME_HCC_weighted  2.043984558 1.118855e-70
+ GSE14520_GPL3921  ME_HF_weighted  1.603654736 4.987669e-50
+ GSE14520_GPL3921             TCS  2.042735540 1.215910e-68
+  GSE14520_GPL571 ME_HCC_weighted  1.521036847 3.971790e-05
+  GSE14520_GPL571  ME_HF_weighted  1.362641592 1.113438e-04
+  GSE14520_GPL571             TCS  1.100548710 8.481946e-04
+         GSE57338 ME_HCC_weighted -0.661149567 5.052819e-08
+         GSE57338  ME_HF_weighted -0.552570160 3.905361e-06
+         GSE57338             TCS -0.569198625 2.984484e-06
+         GSE76427 ME_HCC_weighted  1.885737655 5.459209e-23
+         GSE76427  ME_HF_weighted  1.765046999 1.813888e-20
+         GSE76427             TCS  1.511983208 1.888356e-13
+        TCGA_LIHC ME_HCC_weighted  1.432857272 6.401212e-17
+        TCGA_LIHC  ME_HF_weighted  1.355938499 1.503792e-16
+        TCGA_LIHC             TCS  0.871590687 7.330786e-15
+[19:38:42] TFs that are themselves Tier A set members: EIF4EBP1, EIF4E, EIF4G1 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S30_TF_translation_association.csv 
+
+=== TF associations, disease arm only, adjusted for composition ===
+(r_unadj / r_adj; association only, NOT regulation)
+
+-- GSE57338 (HF, n=177; covar: cardiomyocyte+fibroblast+immune_pan) --
+       tf tf_in_translation_sets r_unadjusted  r_adjusted p_fdr_unadjusted
+      MYC                  FALSE  -0.34746647 -0.09669370     0.0000279938
+     ATF6                  FALSE  -0.31207694 -0.21382999     0.0001528527
+    DDIT3                  FALSE   0.28606886  0.28680858     0.0004915185
+    RPTOR                  FALSE  -0.23294748 -0.27273522     0.0058727385
+     ERN1                  FALSE  -0.22109613 -0.10498554     0.0080679615
+     MTOR                  FALSE   0.18411294 -0.05144450     0.0306853079
+ EIF4EBP1                   TRUE   0.14413637  0.28937459     0.1032874996
+     ATF4                  FALSE  -0.13814054  0.18787423     0.1084044643
+     TSC2                  FALSE  -0.10820362 -0.25708598     0.2191156638
+  EIF2AK3                  FALSE  -0.10084383 -0.04962092     0.2362090179
+     XBP1                  FALSE  -0.03648977  0.10667109     0.7441600918
+   EIF4G1                   TRUE   0.01592126 -0.09077126     0.9028600213
+     TSC1                  FALSE  -0.00739855 -0.29258254     0.9221425319
+ p_fdr_adjusted direction_kept
+   0.2605652749           TRUE
+   0.0092428758           TRUE
+   0.0004709730           TRUE
+   0.0007800898           TRUE
+   0.2373495054           TRUE
+   0.5118947792          FALSE
+   0.0004709730           TRUE
+   0.0227967117          FALSE
+   0.0014343827           TRUE
+   0.5118947792           TRUE
+   0.2373495054          FALSE
+   0.2712680090          FALSE
+   0.0004709730           TRUE
+
+-- TCGA_LIHC (HCC, n=371; covar: hepatocyte+proliferation+immune_pan) --
+       tf tf_in_translation_sets r_unadjusted  r_adjusted p_fdr_unadjusted
+  EIF2AK3                  FALSE  -0.44224320 -0.46185842     4.737983e-18
+     ERN1                  FALSE  -0.42000783 -0.42871366     1.921735e-16
+     MTOR                  FALSE  -0.38996154 -0.40931664     2.966458e-14
+      MYC                  FALSE   0.26329194  0.27245297     9.347631e-07
+   EIF4G1                   TRUE  -0.25791599 -0.27880122     1.327458e-06
+    EIF4E                   TRUE  -0.24990649 -0.27262098     2.540657e-06
+     ATF4                  FALSE   0.24685627  0.24570269     2.967124e-06
+    RPTOR                  FALSE  -0.23979168 -0.28268215     5.233713e-06
+     TSC1                  FALSE  -0.23122534 -0.28214171     1.057995e-05
+     ATF6                  FALSE  -0.21955255 -0.23658912     2.776371e-05
+ EIF4EBP1                   TRUE   0.17754556  0.17516055     7.525948e-04
+    DDIT3                  FALSE   0.16920910  0.16601399     1.246660e-03
+     TSC2                  FALSE  -0.16017733 -0.16898252     2.120752e-03
+     XBP1                  FALSE  -0.05710049 -0.07572938     2.726340e-01
+ p_fdr_adjusted direction_kept
+   7.429853e-20           TRUE
+   3.572179e-17           TRUE
+   9.472775e-16           TRUE
+   1.706493e-07           TRUE
+   1.107116e-07           TRUE
+   1.706493e-07           TRUE
+   2.591446e-06           TRUE
+   9.027049e-08           TRUE
+   9.027049e-08           TRUE
+   5.713169e-06           TRUE
+   8.938352e-04           TRUE
+   1.433627e-03           TRUE
+   1.266404e-03           TRUE
+   1.454424e-01           TRUE
+
+-- GSE116250 (HF, n=50; covar: cardiomyocyte+fibroblast+immune_pan) --
+       tf tf_in_translation_sets r_unadjusted  r_adjusted p_fdr_unadjusted
+     TSC2                  FALSE -0.459309276 -0.37221104       0.01110030
+    RPTOR                  FALSE -0.407630424 -0.25428247       0.02310383
+   EIF4G1                   TRUE -0.292584846 -0.16205535       0.18300483
+     ATF6                  FALSE -0.196373594 -0.09077166       0.60090735
+     MTOR                  FALSE  0.172219938  0.21318246       0.64881778
+      MYC                  FALSE -0.112018470  0.06297285       0.89866521
+ EIF4EBP1                   TRUE  0.109435227  0.02435349       0.89866521
+     XBP1                  FALSE -0.091180157  0.07813556       0.92550447
+     ATF4                  FALSE  0.072163884  0.20722178       0.92782353
+     TSC1                  FALSE  0.057279008  0.02149910       0.92782353
+    DDIT3                  FALSE  0.050235133  0.18650364       0.92782353
+    EIF4E                   TRUE  0.034660151  0.01008146       0.94632862
+  EIF2AK3                  FALSE -0.007632782 -0.06140844       0.97424419
+     ERN1                  FALSE -0.004684351 -0.20939608       0.97424419
+ p_fdr_adjusted direction_kept
+      0.1088310           TRUE
+      0.4165129           TRUE
+      0.5217098           TRUE
+      0.8550536           TRUE
+      0.4165129           TRUE
+      0.8550536          FALSE
+      0.9446033           TRUE
+      0.8550536          FALSE
+      0.4165129           TRUE
+      0.9446033           TRUE
+      0.4542704           TRUE
+      0.9446033           TRUE
+      0.8550536           TRUE
+      0.4165129           TRUE
+
+-- GSE14520_GPL3921 (HCC, n=225; covar: hepatocyte+proliferation+immune_pan) --
+       tf tf_in_translation_sets r_unadjusted  r_adjusted p_fdr_unadjusted
+      MYC                  FALSE   0.46778555  0.54364992     1.360039e-12
+     ATF4                  FALSE   0.24663882  0.19123501     1.024791e-03
+    EIF4E                   TRUE   0.15640301  0.07432117     6.931013e-02
+     TSC1                  FALSE  -0.14087662 -0.17381877     9.540587e-02
+     TSC2                  FALSE  -0.09238418 -0.02132013     3.490147e-01
+   EIF4G1                   TRUE   0.08761872  0.04030758     3.490147e-01
+  EIF2AK3                  FALSE  -0.07307413 -0.10642155     4.133442e-01
+     ATF6                  FALSE  -0.06844992 -0.01278821     4.133442e-01
+    DDIT3                  FALSE  -0.06414123 -0.15828164     4.133442e-01
+ EIF4EBP1                   TRUE   0.04301580 -0.02741604     5.730031e-01
+     XBP1                  FALSE   0.01535596  0.05002949     8.188146e-01
+ p_fdr_adjusted direction_kept
+   1.158304e-17           TRUE
+   2.192994e-02           TRUE
+   4.893842e-01           TRUE
+   3.293984e-02           TRUE
+   8.254860e-01           TRUE
+   7.528307e-01           TRUE
+   2.450681e-01           TRUE
+   8.487117e-01           TRUE
+   4.812929e-02           TRUE
+   8.254860e-01          FALSE
+   7.153557e-01           TRUE
+
+-- GSE14520_GPL571 (HCC, n=22; covar: hepatocyte+proliferation+immune_pan) --
+       tf tf_in_translation_sets r_unadjusted  r_adjusted p_fdr_unadjusted
+     XBP1                  FALSE   0.75190261  0.74318188     0.0006003772
+      MYC                  FALSE   0.71685079  0.82163563     0.0009578218
+    EIF4E                   TRUE   0.46070611  0.33886111     0.1134592170
+     ATF4                  FALSE   0.34605006  0.21961874     0.3153287608
+   EIF4G1                   TRUE   0.30177627  0.37736343     0.3790219129
+     ATF6                  FALSE   0.23513480  0.24783627     0.4488589326
+    DDIT3                  FALSE  -0.22322315 -0.34570108     0.4488589326
+  EIF2AK3                  FALSE  -0.21945974 -0.46442636     0.4488589326
+     TSC1                  FALSE  -0.17563129 -0.28708728     0.5308474345
+     TSC2                  FALSE   0.08684085 -0.01164102     0.7708554410
+ EIF4EBP1                   TRUE  -0.05042931 -0.12441095     0.8236376706
+ p_fdr_adjusted direction_kept
+   4.074818e-04           TRUE
+   3.029265e-05           TRUE
+   2.253333e-01           TRUE
+   3.985467e-01           TRUE
+   2.253333e-01           TRUE
+   3.659034e-01           TRUE
+   2.253333e-01           TRUE
+   1.079530e-01           TRUE
+   3.066981e-01           TRUE
+   9.589944e-01          FALSE
+   6.393240e-01           TRUE
+
+-- GSE76427 (HCC, n=115; covar: hepatocyte+proliferation+immune_pan) --
+       tf tf_in_translation_sets r_unadjusted   r_adjusted p_fdr_unadjusted
+     ERN1                  FALSE  -0.42574268 -0.420534504     2.731609e-05
+      MYC                  FALSE   0.41113995  0.481076272     3.257057e-05
+     XBP1                  FALSE   0.39139040  0.395485029     6.604104e-05
+     TSC1                  FALSE  -0.22589371 -0.231861365     4.941880e-02
+   EIF4G1                   TRUE  -0.20594627 -0.209895654     7.081180e-02
+     TSC2                  FALSE   0.19838145  0.208966805     7.271045e-02
+ EIF4EBP1                   TRUE   0.15457042  0.121156576     1.839778e-01
+    EIF4E                   TRUE   0.08996146  0.079289447     5.175492e-01
+     ATF4                  FALSE  -0.08568770 -0.115008002     5.175492e-01
+     ATF6                  FALSE   0.07953998  0.065897805     5.175492e-01
+    DDIT3                  FALSE   0.05433281  0.003246217     6.667009e-01
+  EIF2AK3                  FALSE  -0.04213252 -0.059394684     7.093825e-01
+    RPTOR                  FALSE   0.03465338  0.003089411     7.131216e-01
+ p_fdr_adjusted direction_kept
+   1.870831e-05           TRUE
+   6.845206e-07           TRUE
+   5.274402e-05           TRUE
+   4.112681e-02           TRUE
+   5.418904e-02           TRUE
+   5.418904e-02           TRUE
+   3.590989e-01           TRUE
+   5.772103e-01           TRUE
+   3.590989e-01           TRUE
+   6.244065e-01           TRUE
+   9.738593e-01           TRUE
+   6.244065e-01           TRUE
+   9.738593e-01           TRUE
+
+-- GSE141910 (HF, n=200; covar: cardiomyocyte+fibroblast+immune_pan) --
+       tf tf_in_translation_sets r_unadjusted  r_adjusted p_fdr_unadjusted
+ EIF4EBP1                   TRUE    0.7625762  0.81824566     3.638286e-38
+     ATF6                  FALSE   -0.7471763 -0.77483658     3.920427e-36
+     ERN1                  FALSE   -0.7344768 -0.77120828     1.652239e-34
+  EIF2AK3                  FALSE   -0.7216937 -0.72828795     6.371131e-33
+    DDIT3                  FALSE    0.6842889  0.68750381     1.612437e-28
+     ATF4                  FALSE    0.6797057  0.74774055     4.302079e-28
+     TSC1                  FALSE   -0.5243371 -0.68461687     3.210536e-15
+     MTOR                  FALSE   -0.5181840 -0.60065507     6.795799e-15
+    EIF4E                   TRUE   -0.4585775 -0.50554325     1.333030e-11
+    RPTOR                  FALSE    0.3990425  0.42905082     6.763342e-09
+     TSC2                  FALSE    0.3911788  0.43270569     1.298758e-08
+   EIF4G1                   TRUE   -0.3684018 -0.36725482     9.324032e-08
+      MYC                  FALSE   -0.1659377 -0.08492027     2.030960e-02
+     XBP1                  FALSE   -0.1150125 -0.08891264     1.048648e-01
+ p_fdr_adjusted direction_kept
+   2.397922e-48           TRUE
+   1.868435e-40           TRUE
+   4.974063e-40           TRUE
+   6.867311e-34           TRUE
+   5.864491e-29           TRUE
+   1.621050e-36           TRUE
+   1.058850e-28           TRUE
+   9.389717e-21           TRUE
+   3.510809e-14           TRUE
+   2.944465e-10           TRUE
+   2.190803e-10           TRUE
+   1.029972e-07           TRUE
+   2.318577e-01           TRUE
+   2.267619e-01           TRUE
+
+=== how often does the TF association survive adjustment? ===
+  all           TCS              : |r|>0.2 & FDR<0.05 unadjusted  48/104 -> adjusted  46/104 ; sign kept  90/104
+  all           ME_HF_weighted   : |r|>0.2 & FDR<0.05 unadjusted  70/104 -> adjusted  63/104 ; sign kept  94/104
+  all           ME_HCC_weighted  : |r|>0.2 & FDR<0.05 unadjusted  68/104 -> adjusted  56/104 ; sign kept  97/104
+  disease_only  TCS              : |r|>0.2 & FDR<0.05 unadjusted  37/ 90 -> adjusted  35/ 90 ; sign kept  82/ 90
+  disease_only  ME_HF_weighted   : |r|>0.2 & FDR<0.05 unadjusted  42/ 90 -> adjusted  38/ 90 ; sign kept  83/ 90
+  disease_only  ME_HCC_weighted  : |r|>0.2 & FDR<0.05 unadjusted  42/ 90 -> adjusted  37/ 90 ; sign kept  82/ 90
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S31_gene_significance_threshold.csv 
+
+=== gene-significance threshold sensitivity (R3 #4) ===
+    cohort  module n_module_genes n_present n_absGS_gt_020 n_absGS_gt_050
+  GSE57338  purple            153       153             76              9
+ TCGA_LIHC magenta            146       142            119              2
+ n_absGS_gt_050_and_FDR05 n_FDR05_alone median_abs_GS
+                        9           107     0.1968606
+                        2           133     0.3114837
+[19:38:46] === R12 done === 

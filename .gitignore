@@ -19,3 +19,21 @@ __pycache__/
 # Temp/embedded repos
 translation-mirror-hf-hcc-temp/
 CLAUDE.md
+
+# Peer-review material. NEVER publish this repository's peer-review
+# correspondence: the editor's decision letter and the reviewers' comments are
+# confidential, and the response letters quote them. This repository is public,
+# and it is also the working directory, so submission packages sit in the same
+# tree as the analysis code and a plain `git add -A` would sweep them in.
+# `pre_publish_check.py` enforces the same rule by reading what git would
+# actually stage, because a path list only covers names someone thought of.
+*Decision_Letter*
+*Reviewer_Comments*
+*Response_to_Reviewers*
+rebuttal*
+*_Submission/*.docx
+*_Submission/*.pdf
+# ...and the assembly checklists, which quote the reviewers' points by number to
+# say which one each change answers.
+*_Submission/*.md
+v2_output/logs/transcript_msg_*.txt

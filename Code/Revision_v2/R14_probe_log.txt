@@ -1,0 +1,42 @@
+﻿[21:25:38] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Rscript.exe : Warning messages:
+At line:1 char:302
++ ... tch {} } }; & "C:/Program Files/R/R-4.6.0/bin/Rscript.exe" --vanilla  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning messages::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+R02 names: HF, HCC, HF_sens, HCC_sens, wpar, pbHF, pbHCC, common, hf_dis, hcc_all, datHF, datHCC, gxHF, gxHCC, U, inv, fit, module_trait_HF, kmeHF, kmeHCC 
+R03 names: trkHF, trkHCC, desHF, desHCC, corr, hypHF, hypHCC, trans_genes, overlap, tierA_genes 
+r2$U length: 10213 
+-- HF --
+  r2[[t]] names: net, power, minutes, n_samples, n_genes 
+  power: 14 
+  net names: colors, unmergedColors, MEs, goodSamples, goodGenes, dendrograms, TOMFiles, blockGenes, blocks, MEsOK 
+  n colors: 10213 
+  dat dim: 177 x 10213 
+  gx dim: 10213 x 177 
+  r3[[ desHF ]] names: module, n_module, n_overlap, fold, p, fdr, expected, tracking_mean_abs_r, tracking_rank, most_significant, most_significant_fold, best_tracking, agree_with_tracking 
+  module: purple 
+-- HCC --
+  r2[[t]] names: net, power, minutes, n_samples, n_genes 
+  power: 14 
+  net names: colors, unmergedColors, MEs, goodSamples, goodGenes, dendrograms, TOMFiles, blockGenes, blocks, MEsOK 
+  n colors: 10213 
+  dat dim: 148 x 10213 
+  gx dim: 10213 x 148 
+  r3[[ desHCC ]] names: module, n_module, n_overlap, fold, p, fdr, expected, tracking_mean_abs_r, tracking_rank, most_significant, most_significant_fold, best_tracking, agree_with_tracking 
+  module: magenta 
+..connectivity..
+..matrix multiplication (system BLAS)..
+..normalization..
+..done.
+HF: power=14  off-diag max|diff|=3.608e-16  diag(ref)=1.0000 diag(mine)=0.0116
+..connectivity..
+..matrix multiplication (system BLAS)..
+..normalization..
+..done.
+HCC: power=14  off-diag max|diff|=6.384e-16  diag(ref)=1.0000 diag(mine)=0.0021
+PROBE DONE

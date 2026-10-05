@@ -1,0 +1,46 @@
+﻿[23:16:13] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Rscript.exe : Warning messages:
+At line:1 char:367
++ ... vision_v2"; & "C:\Program Files\R\R-4.6.0\bin\Rscript.exe" "00_probe_ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning messages::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+=== rows per direction, and is grey present? ===
+
+reference=HCC  n=21  modules: black, blue, brown, cyan, green, greenyellow, grey, grey60, lightcyan, lightgreen, lightyellow, magenta, midnightblue, pink, purple, red, royalblue, salmon, tan, turquoise, yellow
+  grey present: TRUE 
+
+reference=HF  n=24  modules: black, blue, brown, cyan, darkgreen, darkred, darkturquoise, green, greenyellow, grey, grey60, lightcyan, lightgreen, lightyellow, magenta, midnightblue, pink, purple, red, royalblue, salmon, tan, turquoise, yellow
+  grey present: TRUE 
+
+=== class breakdown INCLUDING grey ===
+     
+      none strong weak-mod
+  HCC    7      2       12
+  HF    11      4        9
+
+=== class breakdown EXCLUDING grey (named modules only) ===
+     
+      none strong weak-mod
+  HCC    6      2       12
+  HF    11      3        9
+
+counts per direction:
+
+HCC  HF 
+ 20  23 
+
+=== the designated modules ===
+ reference  module test  Zsummary            verdict
+       HCC magenta   HF  7.093597   weakly preserved
+        HF  purple  HCC 11.025925 strongly preserved
+ reference  module test moduleSize Zsummary.pres medianRank.pres
+       HCC magenta   HF        146      7.093597               5
+        HF  purple  HCC        153     11.025925               3
+
+=== ranked position of designated module among NAMED modules ===
+Error: object 'DES_HCC' not found
+Execution halted

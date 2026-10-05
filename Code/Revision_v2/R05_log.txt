@@ -1,0 +1,49 @@
+[14:22:15] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[14:22:21] === R05 start === 
+[14:22:21] --- GSE57338 (HF array, discovery) --- 
+[14:22:22]   12090 genes x 313 samples; control 136 disease 177 
+[14:22:22] --- GSE141198 (HCC RNA-seq, discovery) --- 
+[14:22:22]   13178 genes x 148 samples (all tumour) 
+[14:22:22] --- TCGA-LIHC (HCC RNA-seq) --- 
+[14:22:30]   raw: 60660 features x 421 samples; control 50 disease 371 
+[14:22:31]   after count filter + collapse: 17146 genes 
+[14:22:31] --- GSE116250 (HF RNA-seq) --- 
+[14:22:35]   states: dilated cardiomyopathy 37 | ischemic cardiomyopathy 13 | non-failing 14 
+[14:22:35]   after filter + collapse: 26261 genes 
+[14:22:35] --- GSE14520 (HCC array, GPL3921 + GPL571) --- 
+[14:22:43]   GPL3921: 7629 genes x 445 samples; control 220 disease 225 
+[14:22:45]   GPL571: 7733 genes x 43 samples; control 19 disease 22 NA 2 
+[14:22:45]   GSE14520_GPL571: dropping 2 sample(s) with undetermined group 
+[14:22:45] --- GSE76427 (HCC array, GPL10558) --- 
+[14:22:54]   16907 genes x 167 samples; control 52 disease 115 
+[14:22:54] --- GSE141910 (HF RNA-seq, per-sample CSVs) --- 
+[14:22:54]   per-sample files: 366 
+[14:23:12]   GSM match to series matrix: 366/366 
+'select()' returned 1:many mapping between keys and columns
+[14:23:14]   16978 genes x 366 samples; control 166 disease 200 
+[14:23:14] --- coverage per cohort --- 
+[14:23:14] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+           cohort disease    tech n_genes n_samples n_disease n_control
+         GSE57338      HF   array   12090       313       177       136
+        GSE141198     HCC RNA-seq   13178       148       148         0
+        TCGA_LIHC     HCC RNA-seq   17146       421       371        50
+        GSE116250      HF RNA-seq   26261        64        50        14
+ GSE14520_GPL3921     HCC   array    7629       445       225       220
+  GSE14520_GPL571     HCC   array    7733        41        22        19
+         GSE76427     HCC   array   16907       167       115        52
+        GSE141910      HF RNA-seq   16978       366       200       166
+ n_unlabeled tierA_covered tierA_total tierA_pct
+           0           459         497      92.4
+           0           487         497      98.0
+           0           483         497      97.2
+           0           439         497      88.3
+           0           299         497      60.2
+           0           322         497      64.8
+           0           417         497      83.9
+           0           482         497      97.0
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S11_cohort_coverage.csv 
+[14:23:15] NOTE: cohorts with no control arm cannot yield an effect size: GSE141198 
+[14:23:25] === R05 done: 8 cohorts === 

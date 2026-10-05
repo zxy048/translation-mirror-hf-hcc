@@ -1,0 +1,41 @@
+[14:23:29] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[14:23:39] === R06 start === 
+[14:23:42] unique canonical sets to score: 41 
+[14:23:43] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[14:23:43] --- GSE57338 (12090 genes x 313 samples) --- 
+[14:23:46]   scored 41 sets x 313 samples 
+[14:23:46] --- GSE141198 (13178 genes x 148 samples) --- 
+[14:23:48]   scored 41 sets x 148 samples 
+[14:23:48] --- TCGA_LIHC (17146 genes x 421 samples) --- 
+[14:23:52]   scored 41 sets x 421 samples 
+[14:23:52] --- GSE116250 (26261 genes x 64 samples) --- 
+[14:23:52]   dropped (1 sets, <5 genes measured): REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION 
+[14:23:53]   scored 40 sets x 64 samples 
+[14:23:53] --- GSE14520_GPL3921 (7629 genes x 445 samples) --- 
+[14:23:53]   dropped (7 sets, <5 genes measured): REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION, REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION, REACTOME_REGULATION_OF_CDH1_MRNA_TRANSLATION_BY_MICRORNAS, REACTOME_REGULATION_OF_CDH11_MRNA_TRANSLATION_BY_MICRORNAS, REACTOME_REGULATION_OF_PTEN_MRNA_TRANSLATION, REACTOME_REGULATION_OF_NPAS4_MRNA_TRANSLATION, REACTOME_REGULATION_OF_PD_L1_CD274_TRANSLATION 
+[14:23:56]   scored 34 sets x 445 samples 
+[14:23:56] --- GSE14520_GPL571 (7733 genes x 41 samples) --- 
+[14:23:56]   dropped (5 sets, <5 genes measured): REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION, REACTOME_REGULATION_OF_CDH11_MRNA_TRANSLATION_BY_MICRORNAS, REACTOME_REGULATION_OF_PTEN_MRNA_TRANSLATION, REACTOME_REGULATION_OF_NPAS4_MRNA_TRANSLATION, REACTOME_REGULATION_OF_PD_L1_CD274_TRANSLATION 
+[14:23:56]   scored 36 sets x 41 samples 
+[14:23:56] --- GSE76427 (16907 genes x 167 samples) --- 
+[14:23:56]   dropped (6 sets, <5 genes measured): REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION, REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION, REACTOME_REGULATION_OF_CDH11_MRNA_TRANSLATION_BY_MICRORNAS, REACTOME_REGULATION_OF_PTEN_MRNA_TRANSLATION, REACTOME_REGULATION_OF_NPAS4_MRNA_TRANSLATION, REACTOME_REGULATION_OF_PD_L1_CD274_TRANSLATION 
+[14:23:58]   scored 35 sets x 167 samples 
+[14:23:58] --- GSE141910 (16978 genes x 366 samples) --- 
+[14:24:01]   scored 41 sets x 366 samples 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S12_set_coverage_per_cohort.csv 
+
+=== sets actually scored per cohort ===
+           cohort n_sets_total n_tierA n_tierB n_tierC
+         GSE57338           41      15      21      33
+        GSE141198           41      15      21      33
+        TCGA_LIHC           41      15      21      33
+        GSE116250           40      15      20      33
+ GSE14520_GPL3921           34      14      19      27
+  GSE14520_GPL571           36      15      20      29
+         GSE76427           35      14      19      28
+        GSE141910           41      15      21      33
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S13_scored_set_counts.csv 
+[14:24:01] === R06 done === 

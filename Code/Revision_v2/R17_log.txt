@@ -1,0 +1,72 @@
+﻿Rscript.exe : Warning messages:
+At line:1 char:367
++ ... vision_v2"; & "C:\Program Files\R\R-4.6.0\bin\Rscript.exe" "R17_figur ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning messages::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+1: package 'ggplot2' was built under R version 4.6.1 
+2: package 'patchwork' was built under R version 4.6.1 
+3: package 'scales' was built under R version 4.6.1 
+[23:30:14] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+cairo available: TRUE 
+designated modules from R04$verdict:
+ reference  module test  Zsummary            verdict
+       HCC magenta   HF  7.093597   weakly preserved
+        HF  purple  HCC 11.025925 strongly preserved
+=== R17 figures start ===
+  preservation class counts (named modules only):
+                          
+                           none strong weak-moderate
+  HCC network tested in HF    6      2            12
+  HF network tested in HCC   11      3             9
+  HCC: designated magenta is rank 6 of 20 named modules (Z = 7.09)
+  HF: designated purple is rank 2 of 23 named modules (Z = 11.03)
+  wrote Fig1_harmonised_networks 
+  recomputed mirror, TCGA vs GSE57338: Tier A 10/15, all 26/41
+  R09 primary row 'primary (v1 cohorts)' tier A: 10/15 sets, 3/5 clusters
+  Fig2d cohort matrix (Tier A):
+              hcc        hf mirror    rho
+        TCGA_LIHC  GSE57338  10/15 -0.550
+        TCGA_LIHC GSE116250   1/15  0.211
+        TCGA_LIHC GSE141910   1/15 -0.146
+ GSE14520_GPL3921  GSE57338   9/14 -0.702
+ GSE14520_GPL3921 GSE116250   2/14 -0.022
+ GSE14520_GPL3921 GSE141910   0/14 -0.132
+  GSE14520_GPL571  GSE57338   9/15 -0.764
+  GSE14520_GPL571 GSE116250   3/15 -0.393
+  GSE14520_GPL571 GSE141910   1/15 -0.457
+         GSE76427  GSE57338   9/14 -0.587
+         GSE76427 GSE116250   2/14  0.169
+         GSE76427 GSE141910   0/14 -0.059
+  GSE116250 rho range: -0.393 to +0.211 | GSE141910 range: -0.457 to -0.059 
+  wrote Fig2_pathway_mirror 
+  wrote Fig3_same_organ_controls 
+  wrote FigS1_hub_gene_threshold 
+  wrote FigS2_score_concordance 
+  wrote FigS3_soft_threshold 
+  !! FAILED: S4 -> Error in try(expr, silent = TRUE) : 
+  R14_tom_robustness.rds not present yet (R14 still running)
+ 
+  wrote FigS5_heterogeneity 
+
+=== R17 summary ===
+succeeded: Fig1, Fig2, Fig3, S1, S2, S3, S5 
+FAILED:
+   S4 : Error in try(expr, silent = TRUE) : 
+  R14_tom_robustness.rds not present yet (R14 still running)
+ 
+
+files in figures/:
+ [1] "Fig1_harmonised_networks.pdf" "Fig1_harmonised_networks.png"
+ [3] "Fig2_pathway_mirror.pdf"      "Fig2_pathway_mirror.png"     
+ [5] "Fig3_same_organ_controls.pdf" "Fig3_same_organ_controls.png"
+ [7] "FigS1_hub_gene_threshold.pdf" "FigS1_hub_gene_threshold.png"
+ [9] "FigS2_score_concordance.pdf"  "FigS2_score_concordance.png" 
+[11] "FigS3_soft_threshold.pdf"     "FigS3_soft_threshold.png"    
+[13] "FigS5_heterogeneity.pdf"      "FigS5_heterogeneity.png"     
+
+R17 DONE

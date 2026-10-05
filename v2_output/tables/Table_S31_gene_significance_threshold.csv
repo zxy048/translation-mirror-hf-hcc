@@ -1,0 +1,3 @@
+"cohort","module","n_module_genes","n_present","n_absGS_gt_020","n_absGS_gt_050","n_absGS_gt_050_and_FDR05","n_FDR05_alone","median_abs_GS"
+"GSE57338","purple",153,153,76,9,9,107,0.196860562880269
+"TCGA_LIHC","magenta",146,142,119,2,2,133,0.311483729294444

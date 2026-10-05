@@ -1,0 +1,3 @@
+"module_disease","module","tested_in","n_genes_module","n_genes_present","obs_mean_pairwise_r","null_mean_r","null_sd_r","Z","p","n_perm"
+"HF","purple","HCC",153,153,0.3256,0.02396,0.01357,22.22,0.000999,1000
+"HCC","magenta","HF",146,146,0.14,0.0355,0.007714,13.54,0.000999,1000

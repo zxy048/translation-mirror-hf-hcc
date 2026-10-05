@@ -1,0 +1,91 @@
+[13:46:51] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[13:47:03] === R03 start === 
+[13:47:05] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S8_set_module_correlation.csv 
+
+=== Tier A: modules ranked by mean |r| with canonical translation sets ===
+
+-- HF --
+      module mean_abs_r
+      MEblue  0.5714412
+     MEbrown  0.5216562
+    MEpurple  0.5034236
+      MEpink  0.4172223
+ MElightcyan  0.4017630
+ MEturquoise  0.3948859
+      MEcyan  0.3912693
+   MEmagenta  0.3678722
+
+-- HCC --
+       module mean_abs_r
+    MEmagenta  0.5011597
+  MEturquoise  0.3505886
+       MEblue  0.3502514
+     MEyellow  0.3271325
+      MEbrown  0.3171171
+      MEgreen  0.3104788
+ MElightgreen  0.2822702
+     MEgrey60  0.2708351
+
+HF  translation module: MEblue (mean|r|=0.571, 15 sets, FWER p=0.9960)
+HCC translation module: MEmagenta (mean|r|=0.501, 15 sets, FWER p=1.0000)
+
+-- top Tier A sets for the HF translation module --
+                                           set         r      p_fwer
+            REACTOME_MITOCHONDRIAL_TRANSLATION 0.9097397 0.000999001
+ REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION 0.9038592 0.000999001
+ REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION 0.8923013 0.000999001
+    REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION 0.8339982 0.000999001
+              KEGG_AMINOACYL_TRNA_BIOSYNTHESIS 0.8251362 0.000999001
+                  REACTOME_TRNA_AMINOACYLATION 0.8067173 0.000999001
+                          REACTOME_TRANSLATION 0.7800077 0.000999001
+        REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION 0.5889711 0.000999001
+
+-- top Tier A sets for the HCC translation module --
+                                                                                 set
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                                                       KEGG_RIBOSOME
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                                            REACTOME_RRNA_PROCESSING
+                                                                REACTOME_TRANSLATION
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+         r      p_fwer
+ 0.8861429 0.000999001
+ 0.8823094 0.000999001
+ 0.6760071 0.000999001
+ 0.6696002 0.000999001
+ 0.6442908 0.000999001
+ 0.6015028 0.000999001
+ 0.5796950 0.000999001
+ 0.5401308 0.000999001
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S9_translation_overrepresentation.csv 
+
+=== hypergeometric over-representation of Tier A genes ===
+
+-- HF --
+    module n_module n_overlap expected  fold            p          fdr disease
+    purple      153        73      6.8 10.69 2.367466e-58 5.681919e-57      HF
+      blue     1525       115     68.1  1.69 2.920749e-09 3.504898e-08      HF
+      pink      173        23      7.7  2.98 2.511933e-06 2.009547e-05      HF
+ turquoise     2132       119     95.2  1.25 3.603701e-03 2.162220e-02      HF
+     black      184        14      8.2  1.70 3.598414e-02 1.727239e-01      HF
+
+-- HCC --
+     module n_module n_overlap expected fold            p          fdr disease
+       blue     1948       173     87.0 1.99 4.698094e-22 9.865998e-21     HCC
+    magenta      146        26      6.5 3.99 1.164597e-09 1.222827e-08     HCC
+      brown      389        37     17.4 2.13 1.052575e-05 7.368025e-05     HCC
+ lightgreen       68         8      3.0 2.63 1.046832e-02 5.495867e-02     HCC
+     grey60       78         8      3.5 2.30 2.262471e-02 9.502379e-02     HCC
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S10_translation_module_genes.csv 
+
+translation modules: HF=0 genes, HCC=0 genes, overlap=0 (Jaccard=NaN)
+Tier A genes in HF module:  0 
+Tier A genes in HCC module: 0 
+[13:47:17] === R03 done === 
+EXIT=0

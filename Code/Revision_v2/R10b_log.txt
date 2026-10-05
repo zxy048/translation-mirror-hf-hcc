@@ -1,0 +1,84 @@
+﻿[19:47:51] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Rscript.exe : Warning messages:
+At line:1 char:302
++ ... tch {} } }; & "C:/Program Files/R/R-4.6.0/bin/Rscript.exe" "D:/R_proj ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning messages::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[19:47:51] === R10b start === 
+
+-- GSE57338: 136 control (donor/NF) --
+
+ICM DCM 
+ 95  82 
+
+-- GSE141910: 166 control (donor/NF) --
+
+     Dilated cardiomyopathy (DCM) Hypertrophic cardiomyopathy (HCM) 
+                              166                                28 
+ Peripartum cardiomyopathy (PPCM) 
+                                6 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S22b_HF_aetiology_effect_sizes.csv 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S22c_HF_aetiology_vs_HCC.csv 
+
+=== each HF aetiology subgroup vs TCGA-LIHC (Tier A) ===
+(negative rho / many mirrors = the subgroup reproduces the discovery pattern)
+    cohort                         aetiology n_aetiology n_control n_sets
+ GSE141910      Dilated cardiomyopathy (DCM)         166       166     15
+ GSE141910  Peripartum cardiomyopathy (PPCM)           6       166     15
+ GSE141910 Hypertrophic cardiomyopathy (HCM)          28       166     15
+  GSE57338                               ICM          95       136     15
+  GSE57338                               DCM          82       136     15
+ spearman_rho_vs_HCC mirror_sets_abs_g_ge_020 mirror_sets_gated n_gated
+          -0.1928571                        1                 1      13
+           0.1142857                        3                 3      13
+          -0.1000000                        2                 2      13
+          -0.5964286                       11                11      13
+          -0.5535714                       11                11      13
+     mean_g
+  0.1319128
+ -0.1262658
+ -0.0194585
+ -0.4310099
+ -0.2911138
+
+=== DCM vs DCM: GSE57338 vs GSE141910 ===
+  15 Tier A sets; Spearman rho = +0.350
+  same direction in both cohorts: 4 / 15
+                                                                                 set
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                                            REACTOME_RRNA_PROCESSING
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                                                REACTOME_TRANSLATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                                        REACTOME_TRNA_AMINOACYLATION
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                                                       KEGG_RIBOSOME
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+ g_GSE57338_DCM g_GSE141910_DCM
+    -0.81034260     -0.41631979
+    -0.66264070     -0.00596690
+     0.59847354      0.58116659
+    -0.47137834      0.20508171
+    -0.46185194      0.09562341
+    -0.45643231      0.22349273
+    -0.37817427      0.19096296
+    -0.35637574      0.07556632
+    -0.35409971      0.09461137
+    -0.29224709      0.33250076
+    -0.27458297      0.33061968
+    -0.20704810      0.15611526
+    -0.12219065     -0.13939512
+    -0.05923181      0.15135048
+    -0.05858459      0.10328183
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S22d_DCM_across_cohorts.csv 
+[19:47:55] === R10b done === 

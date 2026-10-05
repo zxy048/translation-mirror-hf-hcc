@@ -1,0 +1,77 @@
+[14:30:59] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[14:30:59] === R09 start === 
+
+--- primary (v1 cohorts) | Tier A (15 sets, 5 clusters) ---
+  set level     : 10/15 mirror   ; permutation P = 0.0001 (null mean 0.11)
+  cluster level :  3/ 5 mirror   ; permutation P = 0.0031 (null mean 0.06)
+  n_eff of this tier: 9.4 (Nyholt) / 5.0 (Li & Ji)
+
+--- primary (v1 cohorts) | Tier C (33 sets, 19 clusters) ---
+  set level     : 21/33 mirror   ; permutation P = 0.0001 (null mean 0.23)
+  cluster level : 14/19 mirror   ; permutation P = 0.0001 (null mean 0.18)
+  n_eff of this tier: 32.4 (Nyholt) / 15.0 (Li & Ji)
+
+--- HCC array vs HF RNA-seq | Tier A (14 sets, 5 clusters) ---
+  set level     :  2/14 mirror   ; permutation P = 0.1744 (null mean 0.79)
+  cluster level :  1/ 5 mirror   ; permutation P = 0.2705 (null mean 0.39)
+  n_eff of this tier: 9.2 (Nyholt) / 5.5 (Li & Ji)
+
+--- HCC array vs HF RNA-seq | Tier C (28 sets, 19 clusters) ---
+  set level     :  5/28 mirror   ; permutation P = 0.0934 (null mean 1.61)
+  cluster level :  4/19 mirror   ; permutation P = 0.0868 (null mean 1.26)
+  n_eff of this tier: 31.0 (Nyholt) / 16.5 (Li & Ji)
+
+--- HCC array vs HF RNA-seq 2 | Tier A (14 sets, 5 clusters) ---
+  set level     :  0/14 mirror   ; permutation P = 1.0000 (null mean 0.01)
+  cluster level :  0/ 5 mirror   ; permutation P = 1.0000 (null mean 0.01)
+  n_eff of this tier: 8.7 (Nyholt) / 5.0 (Li & Ji)
+
+--- HCC array vs HF RNA-seq 2 | Tier C (27 sets, 18 clusters) ---
+  set level     : 11/27 mirror   ; permutation P = 0.0002 (null mean 0.03)
+  cluster level : 10/18 mirror   ; permutation P = 0.0001 (null mean 0.02)
+  n_eff of this tier: 27.0 (Nyholt) / 14.0 (Li & Ji)
+
+--- HCC array vs HF array-adjacent | Tier A (15 sets, 5 clusters) ---
+  set level     :  9/15 mirror   ; permutation P = 0.0014 (null mean 0.31)
+  cluster level :  3/ 5 mirror   ; permutation P = 0.0091 (null mean 0.18)
+  n_eff of this tier: 9.4 (Nyholt) / 5.5 (Li & Ji)
+
+--- HCC array vs HF array-adjacent | Tier C (29 sets, 19 clusters) ---
+  set level     : 19/29 mirror   ; permutation P = 0.0002 (null mean 0.61)
+  cluster level : 14/19 mirror   ; permutation P = 0.0001 (null mean 0.50)
+  n_eff of this tier: 28.8 (Nyholt) / 13.0 (Li & Ji)
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S17_mirror_sets.csv 
+
+=== SUMMARY ===
+                           pair tier n_sets n_clusters n_mirror_sets
+           primary (v1 cohorts)    A     15          5            10
+           primary (v1 cohorts)    C     33         19            21
+        HCC array vs HF RNA-seq    A     14          5             2
+        HCC array vs HF RNA-seq    C     28         19             5
+      HCC array vs HF RNA-seq 2    A     14          5             0
+      HCC array vs HF RNA-seq 2    C     27         18            11
+ HCC array vs HF array-adjacent    A     15          5             9
+ HCC array vs HF array-adjacent    C     29         19            19
+ null_sets_mean p_perm_sets n_mirror_clusters null_clusters_mean
+           0.11  0.00009999                 3               0.06
+           0.23  0.00009999                14               0.18
+           0.79  0.17438256                 1               0.39
+           1.61  0.09339066                 4               1.26
+           0.01  1.00000000                 0               0.01
+           0.03  0.00019998                10               0.02
+           0.31  0.00139986                 3               0.18
+           0.61  0.00019998                14               0.50
+ p_perm_clusters p_binom_v1_style n_eff_nyholt n_eff_li_ji
+      0.00309969       1.00000000         9.44         5.0
+      0.00009999       0.06356812        32.37        15.0
+      0.27047295       0.37500000         9.18         5.5
+      0.08679132       0.01921082        30.98        16.5
+      1.00000000       0.06250000         8.68         5.0
+      0.00009999       0.81452942        27.03        14.0
+      0.00909909       1.00000000         9.39         5.5
+      0.00009999       0.06356812        28.80        13.0
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S18_mirror_summary.csv 
+[14:31:26] === R09 done === 

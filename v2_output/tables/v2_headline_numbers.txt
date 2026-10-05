@@ -1,0 +1,653 @@
+
+### 01  cohort inventory
+------------------------------------------------------------------------------
+  cohort              samples  sets  tierA
+  GSE57338              313    41     15
+  GSE141198             148    41     15
+  TCGA_LIHC             421    41     15
+  GSE116250              64    40     15
+  GSE14520_GPL3921      445    34     14
+  GSE14520_GPL571        41    36     15
+  GSE76427              167    35     14
+  GSE141910             366    41     15
+
+### 02  Tier A effect sizes per cohort (R07)
+------------------------------------------------------------------------------
+  cohort            n_sets  |g|>=0.20  CI excl 0     mean_g     min_g     max_g
+  GSE57338              15         12        11     -0.391    -0.918    +0.557
+  TCGA_LIHC             15         13        13     +0.714    -0.258    +1.173
+  GSE116250             15         12         4     -0.117    -1.033    +0.422
+  GSE14520_GPL3921      14         14        14     +1.395    -0.595    +2.499
+  GSE14520_GPL571       15         14        12     +0.839    +0.054    +1.290
+  GSE76427              14         13        13     +1.162    -0.076    +1.603
+  GSE141910             15          7         6     +0.105    -0.444    +0.510
+
+  cols: cohort, disease, tech, set, tier, n_disease, n_control, mean_disease, mean_control, sd_disease, sd_control, cohens_d_equalweight, pooled_sd_nweighted, hedges_J, d_nweighted, hedges_g, ci_lo, ci_hi, p_ttest, ci_excludes_0, meets_min_effect, mirror_candidate, p_fdr
+
+### 03  redundancy / effective tests (R08)
+------------------------------------------------------------------------------
+  clusters               data.frame 41 x 5
+  hclust                 list: merge, height, order, labels, method, call, dist.method
+  jaccard                dist
+  cut: 0.7
+  representatives        character
+
+-- n_eff --
+           cohort tierA_m tierA_nyholt tierA_li_ji all_m all_nyholt all_li_ji
+         GSE57338      15        10.25           5    41      32.18        13
+        GSE141198      15        10.54           6    41      33.47        15
+        TCGA_LIHC      15         8.63           5    41      32.56        17
+        GSE116250      15        10.37           6    40      35.18        17
+ GSE14520_GPL3921      14         9.30           6    34      25.43        15
+  GSE14520_GPL571      15         8.53           6    36      25.42        13
+         GSE76427      14         7.99           5    35      26.77        16
+        GSE141910      15         8.05           4    41      28.63        13
+
+### 04  the mirror test (R09)  --  the manuscript's central claim
+------------------------------------------------------------------------------
+  results                list: 1, 2, 3, 4, 5, 6, 7, 8
+
+-- summary --
+                           pair tier n_sets n_clusters n_mirror_sets
+           primary (v1 cohorts)    A     15          5            10
+           primary (v1 cohorts)    C     33         19            21
+        HCC array vs HF RNA-seq    A     14          5             2
+        HCC array vs HF RNA-seq    C     28         19             5
+      HCC array vs HF RNA-seq 2    A     14          5             0
+      HCC array vs HF RNA-seq 2    C     27         18            11
+ HCC array vs HF array-adjacent    A     15          5             9
+ HCC array vs HF array-adjacent    C     29         19            19
+ null_sets_mean p_perm_sets n_mirror_clusters null_clusters_mean
+           0.11  0.00009999                 3               0.06
+           0.23  0.00009999                14               0.18
+           0.79  0.17438256                 1               0.39
+           1.61  0.09339066                 4               1.26
+           0.01  1.00000000                 0               0.01
+           0.03  0.00019998                10               0.02
+           0.31  0.00139986                 3               0.18
+           0.61  0.00019998                14               0.50
+ p_perm_clusters p_binom_v1_style n_eff_nyholt n_eff_li_ji
+      0.00309969       1.00000000         9.44         5.0
+      0.00009999       0.06356812        32.37        15.0
+      0.27047295       0.37500000         9.18         5.5
+      0.08679132       0.01921082        30.98        16.5
+      1.00000000       0.06250000         8.68         5.0
+      0.00009999       0.81452942        27.03        14.0
+      0.00909909       1.00000000         9.39         5.5
+      0.00009999       0.06356812        28.80        13.0
+  obs                    data.frame 175 x 11
+
+### 05  between-cohort heterogeneity (R10)
+------------------------------------------------------------------------------
+
+-- heterogeneity -- (82 x 10)
+ disease
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+     HCC
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+                                                                                          set
+                                                      REACTOME_TRNA_PROCESSING_IN_THE_NUCLEUS
+                                                                     REACTOME_TRNA_PROCESSING
+                                                                      HALLMARK_MYC_TARGETS_V1
+    REACTOME_RESPIRATORY_SYNCYTIAL_VIRUS_RSV_GENOME_REPLICATION_TRANSCRIPTION_AND_TRANSLATION
+                                     REACTOME_DENGUE_VIRUS_GENOME_TRANSLATION_AND_REPLICATION
+          REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                 REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                                                         REACTOME_TRANSLATION
+                           REACTOME_REGULATION_OF_PD_L1_CD274_POST_TRANSLATIONAL_MODIFICATION
+                                     REACTOME_SARS_COV_2_MODULATES_HOST_TRANSLATION_MACHINERY
+                         REACTOME_CARBOXYTERMINAL_POST_TRANSLATIONAL_MODIFICATIONS_OF_TUBULIN
+                         REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                                     REACTOME_RRNA_PROCESSING
+                                                                 REACTOME_TRNA_AMINOACYLATION
+                                        REACTOME_TRNA_MODIFICATION_IN_THE_NUCLEUS_AND_CYTOSOL
+                                                       REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                                   REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                                                      HALLMARK_MYC_TARGETS_V2
+                                                                    HALLMARK_MTORC1_SIGNALING
+                                       REACTOME_TRANSLATION_OF_SARS_COV_2_STRUCTURAL_PROTEINS
+                                        REACTOME_RRNA_MODIFICATION_IN_THE_NUCLEUS_AND_CYTOSOL
+                                                   REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                                                                KEGG_RIBOSOME
+                                                REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                           REACTOME_MITOCHONDRIAL_TRANSLATION
+                                                             KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                                   REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+ REACTOME_TRANSCRIPTIONAL_AND_POST_TRANSLATIONAL_REGULATION_OF_MITF_M_EXPRESSION_AND_ACTIVITY
+                                     REACTOME_SARS_COV_1_MODULATES_HOST_TRANSLATION_MACHINERY
+                                                REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                              REACTOME_TRNA_MODIFICATION_IN_THE_MITOCHONDRION
+                                    REACTOME_REGULATION_OF_CDH1_MRNA_TRANSLATION_BY_MICRORNAS
+  REACTOME_REGULATION_OF_CDH1_POSTTRANSLATIONAL_PROCESSING_AND_TRAFFICKING_TO_PLASMA_MEMBRANE
+      REACTOME_TRANSLATION_OF_REPLICASE_AND_ASSEMBLY_OF_THE_REPLICATION_TRANSCRIPTION_COMPLEX
+                                   REACTOME_REGULATION_OF_CDH11_MRNA_TRANSLATION_BY_MICRORNAS
+                                                REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                                REACTOME_REGULATION_OF_NPAS4_MRNA_TRANSLATION
+                  REACTOME_POST_TRANSLATIONAL_MODIFICATION_SYNTHESIS_OF_GPI_ANCHORED_PROTEINS
+                                               REACTOME_REGULATION_OF_PD_L1_CD274_TRANSLATION
+                                                 REACTOME_REGULATION_OF_PTEN_MRNA_TRANSLATION
+                                       REACTOME_TRANSLATION_OF_SARS_COV_1_STRUCTURAL_PROTEINS
+ REACTOME_TRANSCRIPTIONAL_AND_POST_TRANSLATIONAL_REGULATION_OF_MITF_M_EXPRESSION_AND_ACTIVITY
+                         REACTOME_CARBOXYTERMINAL_POST_TRANSLATIONAL_MODIFICATIONS_OF_TUBULIN
+                                       REACTOME_TRANSLATION_OF_SARS_COV_2_STRUCTURAL_PROTEINS
+                                                                    HALLMARK_MTORC1_SIGNALING
+                                                       REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                              REACTOME_TRNA_MODIFICATION_IN_THE_MITOCHONDRION
+                                       REACTOME_TRANSLATION_OF_SARS_COV_1_STRUCTURAL_PROTEINS
+    REACTOME_RESPIRATORY_SYNCYTIAL_VIRUS_RSV_GENOME_REPLICATION_TRANSCRIPTION_AND_TRANSLATION
+                                                                     REACTOME_TRNA_PROCESSING
+                                                   REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                                                      HALLMARK_MYC_TARGETS_V1
+                                                                      HALLMARK_MYC_TARGETS_V2
+                                                      REACTOME_TRNA_PROCESSING_IN_THE_NUCLEUS
+                                        REACTOME_TRNA_MODIFICATION_IN_THE_NUCLEUS_AND_CYTOSOL
+                                        REACTOME_RRNA_MODIFICATION_IN_THE_NUCLEUS_AND_CYTOSOL
+                                     REACTOME_DENGUE_VIRUS_GENOME_TRANSLATION_AND_REPLICATION
+                  REACTOME_POST_TRANSLATIONAL_MODIFICATION_SYNTHESIS_OF_GPI_ANCHORED_PROTEINS
+  REACTOME_REGULATION_OF_CDH1_POSTTRANSLATIONAL_PROCESSING_AND_TRAFFICKING_TO_PLASMA_MEMBRANE
+                                                REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION
+                           REACTOME_REGULATION_OF_PD_L1_CD274_POST_TRANSLATIONAL_MODIFICATION
+                                                                     REACTOME_RRNA_PROCESSING
+                                    REACTOME_REGULATION_OF_CDH1_MRNA_TRANSLATION_BY_MICRORNAS
+                                               REACTOME_REGULATION_OF_PD_L1_CD274_TRANSLATION
+                                                REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                                                         REACTOME_TRANSLATION
+                                                 REACTOME_REGULATION_OF_PTEN_MRNA_TRANSLATION
+                                                REACTOME_REGULATION_OF_NPAS4_MRNA_TRANSLATION
+      REACTOME_TRANSLATION_OF_REPLICASE_AND_ASSEMBLY_OF_THE_REPLICATION_TRANSCRIPTION_COMPLEX
+                                                           REACTOME_MITOCHONDRIAL_TRANSLATION
+                                                   REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                                REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+          REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                                 REACTOME_TRNA_AMINOACYLATION
+                                     REACTOME_SARS_COV_1_MODULATES_HOST_TRANSLATION_MACHINERY
+                                                 REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                   REACTOME_REGULATION_OF_CDH11_MRNA_TRANSLATION_BY_MICRORNAS
+                                                   REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                         REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                                                KEGG_RIBOSOME
+                                     REACTOME_SARS_COV_2_MODULATES_HOST_TRANSLATION_MACHINERY
+                                                             KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+    tier n_cohorts            Q          p_Q I2_pct    g_pooled  se_pooled
+ B_extra         4  67.68158601 1.338400e-14   95.6  2.25498167 0.43442049
+ B_extra         4  59.91409435 6.131964e-13   95.0  2.09857218 0.41043862
+    C_v1         4  71.96727298 1.617806e-15   95.8  2.06517603 0.40622348
+    C_v1         4  15.86769622 1.207051e-03   81.1  1.66228281 0.20134025
+    C_v1         4  25.00089815 1.543382e-05   88.0  1.62738733 0.28788770
+       A         4  51.83057801 3.254731e-11   94.2  1.61765215 0.39371099
+       A         4  49.80421843 8.794191e-11   94.0  1.48458756 0.38619640
+       A         4 103.15960510 3.251035e-22   97.1  1.47196387 0.50560201
+    C_v1         4  31.93635069 5.397631e-07   90.6  1.46309879 0.28875941
+    C_v1         4  78.04181569 8.072359e-17   96.2  1.45107928 0.43481293
+    C_v1         4  21.27637832 9.223970e-05   85.9  1.37736614 0.21710762
+       A         4  29.02481465 2.212702e-06   89.7  1.29811983 0.29464066
+       A         4  36.60921030 5.566182e-08   91.8  1.26399102 0.24814716
+       A         4   5.95673080 1.137344e-01   49.6  1.24743040 0.10635523
+ B_extra         4  20.71316766 1.207482e-04   85.5  1.21292965 0.21538404
+       A         2   0.05818288 8.093914e-01    0.0  1.18000484 0.11554587
+       A         4  30.93635237 8.766868e-07   90.3  1.15031653 0.26307780
+    C_v1         4  28.78212833 2.488359e-06   89.6  1.13620969 0.22703415
+    C_v1         4  72.65949499 1.149836e-15   95.9  1.11911839 0.38126567
+    C_v1         4  11.81203025 8.055602e-03   74.6  1.09771351 0.15209068
+ B_extra         4  27.55566891 4.501824e-06   89.1  1.09183928 0.21612181
+       A         4   4.48696368 2.134560e-01   33.1  0.98850016 0.09697470
+       A         4  20.41827191 1.390172e-04   85.3  0.94773821 0.21504197
+       A         4  60.86180085 3.846874e-13   95.1  0.86472173 0.35361897
+       A         4  68.77115102 7.822765e-15   95.6  0.85074989 0.37295736
+       A         4  11.17078948 1.083731e-02   73.1  0.84575263 0.13950329
+       A         4  13.75581765 3.257091e-03   78.2  0.68058924 0.15497634
+    C_v1         4   9.17045309 2.710840e-02   67.3  0.67752887 0.12628873
+    C_v1         4   6.55926043 8.735449e-02   54.3  0.60075539 0.11429022
+ B_extra         1           NA           NA     NA -0.51167595 0.08026268
+ B_extra         4  33.41413807 2.633758e-07   91.0  0.50250058 0.22802342
+    C_v1         3   2.45883359 2.924631e-01   18.7 -0.46788606 0.10192948
+    C_v1         4   6.21553146 1.015823e-01   51.7  0.44977747 0.09852174
+    C_v1         4  87.54894258 7.360926e-19   96.6  0.35728812 0.35900041
+    C_v1         1           NA           NA     NA  0.35198972 0.10971623
+       A         4  16.77696678 7.854442e-04   82.1 -0.21175963 0.15562020
+    C_v1         1           NA           NA     NA  0.15606510 0.11948180
+    C_v1         4  10.86656389 1.246974e-02   72.4 -0.04295718 0.12558680
+    C_v1         1           NA           NA     NA -0.03293010 0.11653979
+    C_v1         1           NA           NA     NA -0.02132594 0.11857892
+    C_v1         4  12.94688245 4.752895e-03   76.8 -0.01429337 0.14501892
+    C_v1         3  15.78872131 3.728402e-04   87.3 -1.26136360 0.27368180
+    C_v1         3   8.02979560 1.804480e-02   75.1 -0.94467742 0.18781610
+    C_v1         3  17.59328938 1.512397e-04   88.6 -0.87348293 0.26444877
+    C_v1         3   8.60813824 1.351346e-02   76.8 -0.78795229 0.17766300
+       A         3  11.29657312 3.523549e-03   82.3 -0.74361823 0.20373245
+ B_extra         3   6.88355005 3.200782e-02   70.9 -0.71416109 0.16487438
+    C_v1         3  77.32370366 1.619463e-17   97.4 -0.66659345 0.56883607
+    C_v1         3  21.75566593 1.887197e-05   90.8 -0.60423480 0.28532058
+ B_extra         3   2.34248954 3.099808e-01   14.6 -0.55614926 0.08326020
+       A         3   0.22682154 8.927839e-01    0.0  0.52412700 0.07571843
+    C_v1         3  21.06098681 2.670944e-05   90.5 -0.45962573 0.25193942
+    C_v1         3  55.09941862 1.084709e-12   96.4 -0.45423448 0.39596765
+ B_extra         3   5.04012047 8.045476e-02   60.3 -0.42897916 0.13272092
+ B_extra         3   8.04835180 1.787815e-02   75.2 -0.41504015 0.17253915
+ B_extra         3  23.31152623 8.668948e-06   91.4 -0.41081654 0.26411705
+    C_v1         3  13.18695639 1.369269e-03   84.8 -0.39749634 0.22122711
+    C_v1         3   2.18473300 3.354218e-01    8.5 -0.38164619 0.07955744
+    C_v1         3  62.87512598 2.222490e-14   96.8 -0.34748411 0.47963534
+ B_extra         2   0.32902898 5.662314e-01    0.0 -0.32192357 0.07671061
+    C_v1         3   8.55856353 1.385261e-02   76.6 -0.31506039 0.16900588
+       A         3  31.83884605 1.219783e-07   93.7 -0.30735875 0.32006552
+    C_v1         3   1.14149993 5.651015e-01    0.0 -0.29126791 0.07212694
+    C_v1         3   8.21568364 1.644322e-02   75.7 -0.28799980 0.16846625
+       A         3   6.47275370 3.930605e-02   69.1 -0.28563933 0.14322559
+       A         3  16.97932984 2.055821e-04   88.2 -0.28259608 0.24448205
+    C_v1         3  18.29458349 1.065079e-04   89.1 -0.26677417 0.24497281
+    C_v1         3  20.31652100 3.875462e-05   90.2 -0.23561790 0.25843123
+    C_v1         3  21.73091974 1.910692e-05   90.8 -0.21223652 0.27219237
+       A         3   9.68168330 7.900402e-03   79.3 -0.19822599 0.18382570
+       A         3  28.95342069 5.162316e-07   93.1 -0.17387788 0.33254668
+       A         3   8.33337706 1.550351e-02   76.0 -0.13549503 0.16973223
+       A         3  18.17837202 1.128799e-04   89.0 -0.12768307 0.26684799
+       A         3   7.22342367 2.700558e-02   72.3 -0.11245464 0.15654422
+    C_v1         3  36.73162902 1.056399e-08   94.6  0.11047006 0.38267659
+       A         3  26.95375227 1.403030e-06   92.6 -0.07609452 0.32312267
+    C_v1         3  14.18696242 8.305012e-04   85.9 -0.05933304 0.22222012
+       A         3  26.61977742 1.658016e-06   92.5  0.05329890 0.33033268
+       A         3  28.82871665 5.494444e-07   93.1 -0.04593608 0.34339200
+       A         3  24.02594903 6.065009e-06   91.7  0.01551806 0.30899152
+    C_v1         3  36.42468558 1.231629e-08   94.5  0.01363942 0.37821373
+       A         3   4.97627036 8.306472e-02   59.8 -0.00277064 0.13010362
+                                                cohorts
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+                             TCGA_LIHC; GSE14520_GPL571
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+                                              TCGA_LIHC
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+                   TCGA_LIHC; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+                                              TCGA_LIHC
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+                                              TCGA_LIHC
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+                                              TCGA_LIHC
+                                              TCGA_LIHC
+ TCGA_LIHC; GSE14520_GPL3921; GSE14520_GPL571; GSE76427
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                                    GSE57338; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+                         GSE57338; GSE116250; GSE141910
+
+-- stratified -- (41 x 5)
+                                                                                          set
+                                                                                KEGG_RIBOSOME
+                                                             KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                                                         REACTOME_TRANSLATION
+                                                   REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                                   REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                                                 REACTOME_TRNA_AMINOACYLATION
+                                                       REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                                                     REACTOME_RRNA_PROCESSING
+                         REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                 REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+          REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                           REACTOME_MITOCHONDRIAL_TRANSLATION
+                                                REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                   REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                                REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                                                     REACTOME_TRNA_PROCESSING
+                                                      REACTOME_TRNA_PROCESSING_IN_THE_NUCLEUS
+                                        REACTOME_TRNA_MODIFICATION_IN_THE_NUCLEUS_AND_CYTOSOL
+                                        REACTOME_RRNA_MODIFICATION_IN_THE_NUCLEUS_AND_CYTOSOL
+                                              REACTOME_TRNA_MODIFICATION_IN_THE_MITOCHONDRION
+                                                REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION
+                         REACTOME_CARBOXYTERMINAL_POST_TRANSLATIONAL_MODIFICATIONS_OF_TUBULIN
+                                                                      HALLMARK_MYC_TARGETS_V1
+                           REACTOME_REGULATION_OF_PD_L1_CD274_POST_TRANSLATIONAL_MODIFICATION
+                                     REACTOME_DENGUE_VIRUS_GENOME_TRANSLATION_AND_REPLICATION
+    REACTOME_RESPIRATORY_SYNCYTIAL_VIRUS_RSV_GENOME_REPLICATION_TRANSCRIPTION_AND_TRANSLATION
+                                                                      HALLMARK_MYC_TARGETS_V2
+                                     REACTOME_SARS_COV_2_MODULATES_HOST_TRANSLATION_MACHINERY
+  REACTOME_REGULATION_OF_CDH1_POSTTRANSLATIONAL_PROCESSING_AND_TRAFFICKING_TO_PLASMA_MEMBRANE
+                                       REACTOME_TRANSLATION_OF_SARS_COV_2_STRUCTURAL_PROTEINS
+                                     REACTOME_SARS_COV_1_MODULATES_HOST_TRANSLATION_MACHINERY
+                                                                    HALLMARK_MTORC1_SIGNALING
+      REACTOME_TRANSLATION_OF_REPLICASE_AND_ASSEMBLY_OF_THE_REPLICATION_TRANSCRIPTION_COMPLEX
+                                    REACTOME_REGULATION_OF_CDH1_MRNA_TRANSLATION_BY_MICRORNAS
+                  REACTOME_POST_TRANSLATIONAL_MODIFICATION_SYNTHESIS_OF_GPI_ANCHORED_PROTEINS
+ REACTOME_TRANSCRIPTIONAL_AND_POST_TRANSLATIONAL_REGULATION_OF_MITF_M_EXPRESSION_AND_ACTIVITY
+                                   REACTOME_REGULATION_OF_CDH11_MRNA_TRANSLATION_BY_MICRORNAS
+                                       REACTOME_TRANSLATION_OF_SARS_COV_1_STRUCTURAL_PROTEINS
+                                                 REACTOME_REGULATION_OF_PTEN_MRNA_TRANSLATION
+                                                REACTOME_REGULATION_OF_NPAS4_MRNA_TRANSLATION
+                                               REACTOME_REGULATION_OF_PD_L1_CD274_TRANSLATION
+ g_DCM_vs_NF g_ICM_vs_NF    tier same_direction
+ -0.27458297 -0.55630106       A           TRUE
+ -0.20704810 -0.20820071       A           TRUE
+ -0.46185194 -0.60294179       A           TRUE
+ -0.47137834 -0.72685478       A           TRUE
+ -0.29224709 -0.59139115       A           TRUE
+ -0.35637574 -0.35570276       A           TRUE
+ -0.81034260 -0.84609611       A           TRUE
+ -0.66264070 -0.75878060       A           TRUE
+ -0.45643231 -0.65779278       A           TRUE
+ -0.37817427 -0.72748110       A           TRUE
+ -0.35409971 -0.68009979       A           TRUE
+ -0.05858459 -0.11231438       A           TRUE
+ -0.05923181 -0.09920431       A           TRUE
+  0.59847354  0.55064637       A           TRUE
+ -0.12219065 -0.09263337       A           TRUE
+ -0.40406393 -0.42487386 B_extra           TRUE
+ -0.48223210 -0.58134955 B_extra           TRUE
+ -0.18473885 -0.08592829 B_extra           TRUE
+ -0.74349312 -0.76004387 B_extra           TRUE
+ -0.47668913 -0.47725674 B_extra           TRUE
+ -0.33076334 -0.41948797 B_extra           TRUE
+ -0.56311392 -0.65871296    C_v1           TRUE
+ -0.74639190 -0.76656117    C_v1           TRUE
+ -0.50913873 -0.62778136    C_v1           TRUE
+ -0.68413784 -0.73311066    C_v1           TRUE
+ -0.93236165 -1.03063941    C_v1           TRUE
+ -1.09804361 -1.00990281    C_v1           TRUE
+ -0.46672841 -0.70819951    C_v1           TRUE
+ -1.01288654 -1.17946857    C_v1           TRUE
+ -1.12554074 -1.14204458    C_v1           TRUE
+ -0.36156352 -0.64106706    C_v1           TRUE
+ -1.06619394 -0.80978357    C_v1           TRUE
+ -0.06269187  0.13540623    C_v1          FALSE
+ -0.24307317 -0.33039394    C_v1           TRUE
+ -0.83613150 -0.34394351    C_v1           TRUE
+ -1.54831147 -1.68255168    C_v1           TRUE
+  0.43677167  0.19512465    C_v1           TRUE
+ -1.13260216 -1.04103405    C_v1           TRUE
+  0.26853274  0.03703499    C_v1           TRUE
+  0.33035284  0.07489201    C_v1           TRUE
+  0.06916117 -0.21702605    C_v1          FALSE
+  groups                 list: nf, dcm, icm
+
+### 06  composition adjustment, Tier A (R11)
+------------------------------------------------------------------------------
+  set-cohort pairs 103; survive 55 (53.4%); median attenuation 34.1%; max VIF 1.94
+    GSE57338           11 / 15 survive
+    TCGA_LIHC          12 / 15 survive
+    GSE116250           3 / 15 survive
+    GSE14520_GPL3921   12 / 14 survive
+    GSE14520_GPL571     0 / 15 survive
+    GSE76427           13 / 14 survive
+    GSE141910           4 / 15 survive
+
+### 07  HF aetiology stratification (R10b)
+------------------------------------------------------------------------------
+
+-- each HF subgroup vs TCGA-LIHC --
+    cohort                         aetiology n_aetiology n_control n_sets
+ GSE141910      Dilated cardiomyopathy (DCM)         166       166     15
+ GSE141910  Peripartum cardiomyopathy (PPCM)           6       166     15
+ GSE141910 Hypertrophic cardiomyopathy (HCM)          28       166     15
+  GSE57338                               ICM          95       136     15
+  GSE57338                               DCM          82       136     15
+ spearman_rho_vs_HCC mirror_sets_abs_g_ge_020 mirror_sets_gated n_gated
+          -0.1928571                        1                 1      13
+           0.1142857                        3                 3      13
+          -0.1000000                        2                 2      13
+          -0.5964286                       11                11      13
+          -0.5535714                       11                11      13
+     mean_g
+  0.1319128
+ -0.1262658
+ -0.0194585
+ -0.4310099
+ -0.2911138
+
+  DCM vs DCM across cohorts: rho = +0.350; same direction 4 / 15
+
+### 08  TATS replacement and TF models (R12)
+------------------------------------------------------------------------------
+  scores                 list: GSE57338, GSE141198, TCGA_LIHC, GSE116250, GSE14520_GPL3921, GSE14520_GPL571, GSE76427, GSE141910
+
+-- accounting -- 8 rows
+           cohort disease    tech n_samples n_tierA_sets n_tierA_expected
+         GSE57338      HF   array       313           15               15
+        GSE141198     HCC RNA-seq       148           15               15
+        TCGA_LIHC     HCC RNA-seq       421           15               15
+        GSE116250      HF RNA-seq        64           15               15
+ GSE14520_GPL3921     HCC   array       445           14               15
+  GSE14520_GPL571     HCC   array        41           15               15
+         GSE76427     HCC   array       167           14               15
+        GSE141910      HF RNA-seq       366           15               15
+ genes_HF_module genes_HF_present frac_HF_present genes_HCC_module
+             153              153           1.000              146
+             153              153           1.000              146
+             153              152           0.993              146
+             153              145           0.948              146
+             153              103           0.673              146
+             153               97           0.634              146
+             153              135           0.882              146
+             153              152           0.993              146
+ genes_HCC_present frac_HCC_present HF_in_tierA HCC_in_tierA shared_HF_HCC
+               146            1.000          73           26             5
+               146            1.000          73           26             5
+               142            0.973          73           25             5
+               131            0.897          72           22             5
+                78            0.534          62           13             2
+                91            0.623          53           18             3
+               116            0.795          71           20             5
+               143            0.979          72           25             5
+
+-- concordance -- 24 rows
+    cohort        score_a         score_b         r
+  GSE57338            TCS  ME_HF_weighted 0.6358114
+  GSE57338            TCS ME_HCC_weighted 0.7157367
+  GSE57338 ME_HF_weighted ME_HCC_weighted 0.3084128
+ GSE141198            TCS  ME_HF_weighted 0.4628919
+ GSE141198            TCS ME_HCC_weighted 0.5489686
+ GSE141198 ME_HF_weighted ME_HCC_weighted 0.7728742
+ TCGA_LIHC            TCS  ME_HF_weighted 0.6019489
+ TCGA_LIHC            TCS ME_HCC_weighted 0.4722581
+
+-- effects -- 21 rows
+    cohort disease           score n_disease n_control mean_disease
+  GSE57338      HF             TCS       177       136  -0.16282394
+  GSE57338      HF  ME_HF_weighted       177       136  -0.14820359
+  GSE57338      HF ME_HCC_weighted       177       136  -0.10878826
+ TCGA_LIHC     HCC             TCS       371        50   0.08138145
+ TCGA_LIHC     HCC  ME_HF_weighted       371        50   0.10419962
+ TCGA_LIHC     HCC ME_HCC_weighted       371        50   0.11016571
+ GSE116250      HF             TCS        50        14  -0.02299944
+ GSE116250      HF  ME_HF_weighted        50        14   0.02091171
+ mean_control   hedges_g            p        p_fdr
+   0.21191057 -0.5691986 1.989656e-06 2.984484e-06
+   0.19288261 -0.5525702 3.905361e-06 3.905361e-06
+   0.14158472 -0.6611496 1.684273e-08 5.052819e-08
+  -0.60385035  0.8715907 7.330786e-15 7.330786e-15
+  -0.77316115  1.3559385 1.002528e-16 1.503792e-16
+  -0.81742959  1.4328573 2.133737e-17 6.401212e-17
+   0.08214085 -0.1604674 6.377642e-01 9.706648e-01
+  -0.07468467  0.1541402 7.058897e-01 9.706648e-01
+
+-- tf -- 582 rows
+   cohort disease arm score       tf tf_in_translation_sets   n r_unadjusted
+ GSE57338      HF all   TCS     ATF4                  FALSE 313   0.28423290
+ GSE57338      HF all   TCS      MYC                  FALSE 313   0.18355720
+ GSE57338      HF all   TCS     XBP1                  FALSE 313   0.31271466
+ GSE57338      HF all   TCS     ATF6                  FALSE 313   0.18726195
+ GSE57338      HF all   TCS EIF4EBP1                   TRUE 313   0.35492361
+ GSE57338      HF all   TCS  EIF2AK3                  FALSE 313   0.19603396
+ GSE57338      HF all   TCS     ERN1                  FALSE 313  -0.01230023
+ GSE57338      HF all   TCS    DDIT3                  FALSE 313   0.27628258
+ p_unadjusted r_adjusted   p_adjusted                          covariates
+ 3.148359e-07 0.30645044 3.135906e-08 cardiomyocyte+fibroblast+immune_pan
+ 1.105407e-03 0.26729545 1.605837e-06 cardiomyocyte+fibroblast+immune_pan
+ 1.579023e-08 0.32832520 2.661722e-09 cardiomyocyte+fibroblast+immune_pan
+ 8.708152e-04 0.19181616 6.455174e-04 cardiomyocyte+fibroblast+immune_pan
+ 1.007430e-10 0.38056005 3.172659e-12 cardiomyocyte+fibroblast+immune_pan
+ 4.862410e-04 0.20810199 2.091990e-04 cardiomyocyte+fibroblast+immune_pan
+ 8.284025e-01 0.03411073 5.476796e-01 cardiomyocyte+fibroblast+immune_pan
+ 6.857312e-07 0.27084928 1.151212e-06 cardiomyocyte+fibroblast+immune_pan
+ p_fdr_unadjusted p_fdr_adjusted direction_kept
+     1.010417e-06   1.019169e-07           TRUE
+     1.437029e-03   2.609484e-06           TRUE
+     6.842434e-08   1.153413e-08           TRUE
+     1.257844e-03   8.391726e-04           TRUE
+     1.309659e-09   2.062229e-11           TRUE
+     7.901416e-04   3.021764e-04           TRUE
+     8.284025e-01   5.476796e-01          FALSE
+     1.485751e-06   2.137965e-06           TRUE
+
+-- gs -- 2 rows
+    cohort  module n_module_genes n_present n_absGS_gt_020 n_absGS_gt_050
+  GSE57338  purple            153       153             76              9
+ TCGA_LIHC magenta            146       142            119              2
+ n_absGS_gt_050_and_FDR05 n_FDR05_alone median_abs_GS
+                        9           107     0.1968606
+                        2           133     0.3114837
+  tf_in_sets             character
+  genes_HF               character
+  genes_HCC              character
+
+### 09  v1 claims that v2 must NOT reproduce
+------------------------------------------------------------------------------
+  'binomial test P < 0.0001' for 24/33 -> never implemented in any script.
+     The two-sided exact binomial for 24/33 at p=0.5 is P = 0.0135.
+  'all 33 translation-related pathways showed positive effect sizes in HCC'
+     -> tables/Table_S2_ssGSEA_Effect_Sizes.csv contains 6 negative values.
+
+  v2 designated modules (R03):
+  R03 object             list: trkHF, trkHCC, desHF, desHCC, corr, hypHF, hypHCC, trans_genes, overlap, tierA_genes
+[20:06:19] === R13 done === 

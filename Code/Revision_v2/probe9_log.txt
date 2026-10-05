@@ -1,0 +1,69 @@
+[14:05:09] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+========== GSE116250 (HF, RNA-seq) ==========
+-- rpkm.txt.gz --
+Gene	Common_name	NF10	NF11	NF12	NF13	NF14	NF1	NF3	NF5	NF7	NF15	NF2	NF4	NF6	NF8	DCM8	DCM14	DCM12	DCM13	DCM11	DCM17	DCM16	DCM18	DCM19	DCM21	DCM20	DCM22	DCM24	DCM26	DCM28	DCM29	DCM2	DCM31	DCM32	DCM33	DCM
+ENSG00000000003	TSPAN6	7.74818	5.37347	5.3283	6.0459	6.20967	8.33783	8.50334	7.48377	4.15484	6.09009	9.03744	6.93337	7.76157	7.17385	8.97867	13.6397	6.96114	9.17849	8.61573	10.2588	6.37301	11.0232	9.9
+ENSG00000000005	TNMD	0.135775	0.462738	0.226807	0.185448	0.0347241	0.214899	0.0727206	0	0.113386	0.0971107	0.128276	0.101474	0.144305	0.112144	0.0735454	3.515	3.20473	0.476482	5.66055	0.830385	0.44011 
+
+-- series matrix (!Sample lines) --
+!Sample_title	"NF1"	"NF10"	"NF11"	"NF12"	"NF13"	"NF14"	"NF15"	"NF2"	"NF3"	"NF4"	"NF5"	"NF6"	"NF7"	"NF8"	"DCM2"	"DCM3"	"DCM4"	"DCM6"	"DCM8"	"DCM11"	"DCM12"	"DCM13"	"DCM14"	"DCM16"	"DCM17"	"DCM18"	"DCM1
+!Sample_source_name_ch1	"left ventricle"	"left ventricle"	"left ventricle"	"left ventricle"	"left ventricle"	"left ventricle"	"left ventricle"	"left ventricle"	"left ventricle"	"left ventricle"	"left 
+!Sample_characteristics_ch1	"tissue: left ventricle"	"tissue: left ventricle"	"tissue: left ventricle"	"tissue: left ventricle"	"tissue: left ventricle"	"tissue: left ventricle"	"tissue: left ventricl
+!Sample_characteristics_ch1	"disease: non-failing"	"disease: non-failing"	"disease: non-failing"	"disease: non-failing"	"disease: non-failing"	"disease: non-failing"	"disease: non-failing"	"disease: n
+!Sample_characteristics_ch1	"age: 43"	"age: 54"	"age: 41"	"age: 56"	"age: 58"	"age: 60"	"age: 52"	"age: 46"	"age: 60"	"age: 46"	"age: 40"	"age: 54"	"age: 31"	"age: 46"	"age: 38"	"age: 66"	"age: 26"	"a
+!Sample_characteristics_ch1	"Sex: Male"	"Sex: Male"	"Sex: Female"	"Sex: Female"	"Sex: Female"	"Sex: Male"	"Sex: Male"	"Sex: Male"	"Sex: Male"	"Sex: Male"	"Sex: Male"	"Sex: Male"	"Sex: Male"	"Sex: Male 
+table_begin at: 74 
+
+========== GSE141910 (HF, RNA-seq) ==========
+-- series matrix !Sample lines --
+!Sample_title	"C00039"	"C00055"	"C00074"	"C00085"	"C00105"	"C00120"	"C00132"	"C00158"	"C00168"	"C00186"	"C00188"	"C00190"	"C00192"	"C00193"	"C00195"	"C00196"	"C00197"	"C00198"	"C00199"	"C00202"	"C01413"	"C01418"	"C01631"
+!Sample_source_name_ch1	"Left Ventricle"	"Left Ventricle"	"Left Ventricle"	"Left Ventricle"	"Left Ventricle"	"Left Ventricle"	"Left Ventricle"	"Left Ventricle"	"Left Ventricle"	"Left Ventricle"	"Left Ventricle"	"Left Ven
+!Sample_characteristics_ch1	"etiology: Non-Failing Donor"	"etiology: Non-Failing Donor"	"etiology: Non-Failing Donor"	"etiology: Non-Failing Donor"	"etiology: Non-Failing Donor"	"etiology: Non-Failing Donor"	"etiology: N
+!Sample_characteristics_ch1	"Sex: Male"	"Sex: Male"	"Sex: Male"	"Sex: Female"	"Sex: Female"	"Sex: Male"	"Sex: Male"	"Sex: Female"	"Sex: Female"	"Sex: Female"	"Sex: Male"	"Sex: Male"	"Sex: Male"	"Sex: Female"	"Sex: Male"	
+!Sample_characteristics_ch1	"race: African American"	"race: African American"	"race: African American"	"race: African American"	"race: African American"	"race: Caucasian"	"race: African American"	"race: African American"
+!Sample_characteristics_ch1	"age: 18"	"age: 26"	"age: 17"	"age: 59"	"age: 59"	"age: 50"	"age: 15"	"age: 53"	"age: 62"	"age: 16"	"age: 51"	"age: 25"	"age: 54"	"age: 62"	"age: 75"	"age: 62"	"age: 58"	"age: 33"	"age: 67"	"a 
+-- per-sample raw file example --
+file: GSM4215858_C00039.csv.gz 
+"","C00039"
+"ENSG00000000003",11.5153174780371
+"ENSG00000000005",4.13854090615415 
+n raw files: 366 
+
+========== GSE14520 (HCC, array) ==========
+-- GPL3921: table_begin=90 --
+!Sample_title	"Liver Tumor Tissue LCS-079A"	"Liver Tumor Tissue LCS-092A"	"Liver Tumor Tissue LCS-101A"	"Liver Non-Tumor Tissue LCS-079B"	"Liver Non-Tumor Tissue LCS-092B"	"Liver Non-Tumor Tissue LCS-
+!Sample_characteristics_ch1	"Tissue: Liver Tumor Tissue"	"Tissue: Liver Tumor Tissue"	"Tissue: Liver Tumor Tissue"	"Tissue: Liver Non-Tumor Tissue"	"Tissue: Liver Non-Tumor Tissue"	"Tissue: Liver Non-
+!Sample_characteristics_ch1	"Disease state: Hepatocellular carcinoma (HCC)"	"Disease state: Hepatocellular carcinoma (HCC)"	"Disease state: Hepatocellular carcinoma (HCC)"	"Disease state: Hepatocellul
+!Sample_characteristics_ch1	"Individual: 02-271A"	"Individual: 02-301A"	"Individual: 02-321A"	"Individual: 02-271B"	"Individual: 02-301B"	"Individual: 02-321B"	"Individual: 02-284A"	"Individual: 02-30 
+  first data row: "1007_s_at"	6.876	7.648	7.915	6.662	7.124	6.799	6.981	6.634	7.390	6.488	6.557	6.605	6.562	6.878	5.799	6.477	6.309	6.497	5.957	5.636	6.079	6. 
+-- GPL571: table_begin=90 --
+!Sample_title	"Liver Tumor Tissue LCS-005A"	"Liver Tumor Tissue LCS-019A"	"Liver Tumor Tissue LCS-029A"	"Liver Tumor Tissue LCS-039A"	"Liver Non-Tumor Tissue LCS-039B"	"Liver Tumor Tissue LCS-254A"	"L
+!Sample_characteristics_ch1	"Tissue: Liver Tumor Tissue"	"Tissue: Liver Tumor Tissue"	"Tissue: Liver Tumor Tissue"	"Tissue: Liver Tumor Tissue"	"Tissue: Liver Non-Tumor Tissue"	"Tissue: Liver Tumor Ti
+!Sample_characteristics_ch1	"Disease state: Hepatocellular carcinoma (HCC)"	"Disease state: Hepatocellular carcinoma (HCC)"	"Disease state: Hepatocellular carcinoma (HCC)"	"Disease state: Hepatocellul
+!Sample_characteristics_ch1	"Individual: 02-407A"	"Individual: 03-050A"	"Individual: 03-114A"	"Individual: 03-212A"	"Individual: 03-212B"	"Individual: 03-356A"	"Individual: 03-356B"	"Individual: 03-36 
+  first data row: "1007_s_at"	6.471	7.572	8.450	7.384	6.801	7.267	6.892	7.497	7.231	7.026	6.643	7.756	6.938	7.101	6.931	6.890	6.707	9.344	6.929	8.570	7.660	7. 
+
+========== GSE76427 (HCC, array GPL10558) ==========
+table_begin: 69 
+!Sample_title	"Primary HCC tumor tissue, 19"	"Primary HCC tumor tissue, 62"	"Primary HCC tumor tissue, 21"	"Primary HCC tumor tissue, 63"	"Primary HCC tumor tissue, 46"	"Primary HCC tumor tissue, 60"	
+!Sample_characteristics_ch1	"diagnosis: hepatocellular carcinoma (HCC)"	"diagnosis: hepatocellular carcinoma (HCC)"	"diagnosis: hepatocellular carcinoma (HCC)"	"diagnosis: hepatocellular carcinoma (HC
+!Sample_characteristics_ch1	"patient id: HCC19"	"patient id: HCC62"	"patient id: HCC21"	"patient id: HCC63"	"patient id: HCC46"	"patient id: HCC60"	"patient id: HCC8"	"patient id: HCC66"	"patient id: 
+!Sample_characteristics_ch1	"tissue: primary hepatocellular carcinoma tumor"	"tissue: primary hepatocellular carcinoma tumor"	"tissue: primary hepatocellular carcinoma tumor"	"tissue: primary hepatoce 
+first data row: "ILMN_1343291"	31094.59	28303.97	36160.09	33676.72	43642.21	37903.67	38078.11	34237.36	27781.44	38455.86	29377.63	34105.36	41058.65	33373.01 
+
+========== TCGA-LIHC SummarizedExperiment ==========
+dim: 60660 x 424 
+sample_type:
+
+      Primary Tumor     Recurrent Tumor Solid Tissue Normal 
+                371                   3                  50 
+tumor_descriptor:
+
+Not Applicable        Primary     Recurrence 
+            50            371              3 
+assay 'unstranded' range: 0.0 .. 12581910.0 
+has rownames(ensembl): ENSG00000000003.15 ENSG00000000005.6 ENSG00000000419.13 
+rowData cols: source, type, score, phase, gene_id, gene_type, gene_name, level, hgnc_id, havana_gene 

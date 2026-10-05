@@ -1,0 +1,156 @@
+﻿[23:00:34] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Rscript.exe : Warning messages:
+At line:1 char:367
++ ... vision_v2"; & "C:\Program Files\R\R-4.6.0\bin\Rscript.exe" "00_probe_ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning messages::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+=== R02$HF ===
+  net              list
+  power            numeric
+  minutes          numeric
+  n_samples        integer
+  n_genes          integer
+=== R02$HCC ===
+  net              list
+  power            numeric
+  minutes          numeric
+  n_samples        integer
+  n_genes          integer
+
+module_trait_HF traits:  ICM, male, age 
+head module_trait_HF:
+         module trait           r           p       fdr
+       MEpurple   ICM -0.10020035 0.184516625 0.6410376
+   MElightgreen   ICM  0.17651858 0.018759607 0.5952523
+          MEtan   ICM  0.20328917 0.006651203 0.4589330
+        MEgreen   ICM  0.09784592 0.195098395 0.6410376
+        MEblack   ICM  0.16594067 0.027287382 0.5952523
+ MEmidnightblue   ICM  0.02303225 0.760904325 0.8668558
+
+MEs HF dim:    | cn:   
+MEs HCC dim:    | cn:   
+colors HF:   
+n modules HF:  0  | HCC:  0 
+
+=== R04$table columns ===
+NULL
+reference
+test
+module
+moduleSize
+Zsummary.pres
+Zdensity.pres
+Zconnectivity.pres
+Z.propVarExplained.pres
+Z.meanSignAwareKME.pres
+Z.meanSignAwareCorDat.pres
+Z.meanAdj.pres
+Z.meanMAR.pres
+Z.cor.kIM
+Z.cor.kME
+Z.cor.kMEall
+Z.cor.cor
+Z.cor.MAR
+moduleSize.obs
+medianRank.pres
+medianRankDensity.pres
+medianRankConnectivity.pres
+propVarExplained.pres
+meanSignAwareKME.pres
+meanSignAwareCorDat.pres
+meanAdj.pres
+meanMAR.pres
+cor.kIM
+cor.kME
+cor.kMEall
+cor.cor
+cor.MAR
+log.p.Bonfsummary.pres
+log.p.Bonfdensity.pres
+log.p.Bonfconnectivity.pres
+p_summary
+p_summary_bh
+preservation_class 
+
+--- medianRank-ish values, first 6 rows ---
+rank cols: medianRank.pres, medianRankDensity.pres, medianRankConnectivity.pres 
+ reference test      module moduleSize Zsummary.pres medianRank.pres
+       HCC   HF         red        302     15.011490               3
+       HCC   HF greenyellow        130     12.308378               1
+       HCC   HF      yellow        347      8.890145               6
+       HCC   HF   lightcyan         90      8.752053               2
+       HCC   HF   turquoise       1000      7.961334               9
+       HCC   HF     magenta        146      7.093597               5
+ medianRankDensity.pres medianRankConnectivity.pres
+                    3.5                           2
+                    1.0                           1
+                    7.5                           5
+                    2.0                           3
+                   13.5                           8
+                    4.0                           7
+
+reference values: HCC, HF 
+test values: HF, HCC 
+
+=== R06 cohort/disease map ===
+           cohort n_sets_total n_tierA n_tierB n_tierC
+         GSE57338           41      15      21      33
+        GSE141198           41      15      21      33
+        TCGA_LIHC           41      15      21      33
+        GSE116250           40      15      20      33
+ GSE14520_GPL3921           34      14      19      27
+  GSE14520_GPL571           36      15      20      29
+         GSE76427           35      14      19      28
+        GSE141910           41      15      21      33
+
+=== R12$scores names ===
+GSE57338, GSE141198, TCGA_LIHC, GSE116250, GSE14520_GPL3921, GSE14520_GPL571, GSE76427, GSE141910 
+=== R12$gs ===
+    cohort  module n_module_genes n_present n_absGS_gt_020 n_absGS_gt_050
+  GSE57338  purple            153       153             76              9
+ TCGA_LIHC magenta            146       142            119              2
+ n_absGS_gt_050_and_FDR05 n_FDR05_alone median_abs_GS
+                        9           107     0.1968606
+                        2           133     0.3114837
+
+=== R15$stages ===
+Normal | CH_low | CH_high | Cirrhosis | DN_low | DN_high | eHCC | HCC 
+=== R15$crosscheck ===
+                                                                                 set
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                                                       KEGG_RIBOSOME
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                            REACTOME_RRNA_PROCESSING
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                                REACTOME_TRANSLATION
+                                                        REACTOME_TRNA_AMINOACYLATION
+    HCC TCGA_LIHC GSE14520_GPL3921 GSE14520_GPL571 GSE76427
+  0.216     1.024            0.598          0.6662   1.0419
+  0.473     0.639            1.348          0.6263   1.0131
+  0.630     1.173               NA          1.2900       NA
+  0.626     0.880            1.070          0.4440   1.1890
+  0.583     0.734            1.599          0.9839   1.2062
+  0.216     0.123            1.371          0.8371   1.0809
+  0.253     0.176            1.355          0.8308   1.1038
+  0.347     0.656            0.598          0.0544   1.1753
+  0.931     0.967            2.355          1.1046   1.4120
+  0.859     1.100            2.499          1.2467   1.5302
+  0.458     0.834            1.710          1.2444   1.2649
+ -0.128    -0.258           -0.595          0.3713  -0.0764
+  0.807     0.856            1.885          0.9826   1.3415
+  0.659     0.686            2.340          1.2035   1.6034
+  0.475     1.119            1.392          0.6957   1.3770
+
+PROBE DONE

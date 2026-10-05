@@ -1,0 +1,647 @@
+[13:06:57] R00 config loaded: v2.0-2026-10-01 | Tier A=14 Tier B=21 Tier C(v1)=33 
+[13:08:16] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:08:35] msigdb table built and cached: msigdb_26.1.0_Homo_sapiens.rds (765965 rows) 
+[13:09:09] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:09:42] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:10:28] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:10:34] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[13:11:23] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:11:23] === R01 start === 
+[13:11:23] --- HF: GSE57338 --- 
+[13:11:52] series matrix: 33297 features x 313 samples 
+[13:11:52] HF disease samples: 177  (config says 177) 
+[13:12:00] array filter: global median=5.007 -> 16632/33297 probes detected (50.0%) 
+[13:12:00] HF after collapse: 12090 genes 
+[13:12:00] --- HCC: GSE141198 --- 
+[13:12:00] counts: 15036 genes x 148 samples (vst agrees) 
+[13:12:00] RNA-seq filter: count>=10 in >=50% -> 13178/15036 genes (87.6%) 
+[13:12:01] HCC after collapse: 13178 genes 
+[13:12:01] === universe U: 10213 genes === 
+[13:12:01] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[13:12:02] Tier A genes absent from U: 41 / 497 
+[13:12:05] === R01 done: |U| = 10213 genes; HF 313 samples; HCC 148 samples === 
+[13:12:44] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:12:44] === R01 start === 
+[13:12:44] --- HF: GSE57338 --- 
+[13:13:13] series matrix: 33297 features x 313 samples 
+[13:13:13] HF disease samples: 177  (config says 177) 
+[13:13:21] array filter: global median=5.007 -> 16632/33297 probes detected (50.0%) 
+[13:13:21] HF after collapse: 12090 genes 
+[13:13:21] --- HCC: GSE141198 --- 
+[13:13:21] counts: 15036 genes x 148 samples (vst agrees) 
+[13:13:21] RNA-seq filter: count>=10 in >=50% -> 13178/15036 genes (87.6%) 
+[13:13:21] HCC after collapse: 13178 genes 
+[13:13:21] === universe U: 10213 genes === 
+[13:13:22] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[13:13:22] Tier A genes absent from U: 41 / 497 
+[13:13:26] === R01 done: |U| = 10213 genes; HF 313 samples; HCC 148 samples === 
+[13:16:56] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:16:56] === R02 start === 
+[13:17:52] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:17:52] === R02 start === 
+[13:17:53] HF network  : 10213 genes x 177 disease samples 
+[13:17:53] HCC network : 10213 genes x 148 disease samples 
+[13:17:53] --- HF: pickSoftThreshold --- 
+[13:17:54] HF: chose power=12 (scale-free R^2=-0.052, fallback=TRUE) 
+[13:17:54] --- HF: blockwiseModules --- 
+[13:18:05] HF: blockwiseModules done in 0.2 min; 1 modules (incl. grey) 
+[13:18:05] --- HCC: pickSoftThreshold --- 
+[13:18:05] HCC: chose power=12 (scale-free R^2=-0.378, fallback=TRUE) 
+[13:18:05] --- HCC: blockwiseModules --- 
+[13:18:14] HCC: blockwiseModules done in 0.1 min; 1 modules (incl. grey) 
+[13:18:14] parameter parity OK (power may legitimately differ: HF=12 HCC=12) 
+[13:19:33] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:20:42] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:24:39] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:24:39] === R02 start === 
+[13:24:40] orientation OK: HF 177x10213 | HCC 148x10213 (samples x genes) 
+[13:25:16] HF: rule -> beta=14 (cut), R2=0.861, reached cut=TRUE 
+[13:25:48] HCC: rule -> beta=5 (max_r2), R2=0.790, reached cut=FALSE 
+[13:25:48] common beta = 14  [HF chose beta=14 (cut, R2=0.861); HCC chose beta=5 (max_r2, R2=0.790)] 
+[13:25:48] --- HF: blockwiseModules at beta=14 --- 
+[13:28:05] HF: 2.3 min; 24 modules; sizes: 2210 2132 1525 1516 496 425 
+[13:28:05] --- HCC: blockwiseModules at beta=14 --- 
+[13:30:33] HCC: 2.5 min; 21 modules; sizes: 3771 1948 1445 389 347 323 
+[13:30:33] --- HCC_ownbeta: blockwiseModules at beta=5 --- 
+[13:32:59] HCC_ownbeta: 2.4 min; 19 modules; sizes: 4097 1875 1131 505 404 385 
+[13:32:59] parameter parity OK; both networks built at beta=14 
+[13:33:02] === R02 done === 
+[13:46:51] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:47:03] === R03 start === 
+[13:47:05] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[13:47:17] === R03 done === 
+[13:53:37] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:53:48] === R03 start === 
+[13:53:50] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[13:54:02] === R03 done === 
+[13:56:14] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:56:25] === R03 start === 
+[13:56:27] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[13:56:39] === R03 done === 
+[13:57:17] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:58:12] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:58:14] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[13:59:25] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:05:09] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:09:18] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:09:18] === R01 start === 
+[14:09:18] --- HF: GSE57338 --- 
+[14:09:48] series matrix: 33297 features x 313 samples 
+[14:09:48] HF disease samples: 177  (config says 177) 
+[14:09:56] array filter: global median=5.007 -> 16632/33297 probes detected (50.0%) 
+[14:09:57] HF after collapse: 12090 genes 
+[14:09:57] --- HCC: GSE141198 --- 
+[14:09:57] counts: 15036 genes x 148 samples (vst agrees) 
+[14:09:57] RNA-seq filter: count>=10 in >=50% -> 13178/15036 genes (87.6%) 
+[14:09:57] HCC after collapse: 13178 genes 
+[14:09:57] === universe U: 10213 genes === 
+[14:09:58] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[14:09:58] Tier A genes absent from U: 41 / 497 
+[14:10:02] === R01 done: |U| = 10213 genes; HF 313 samples; HCC 148 samples === 
+[14:11:24] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:11:30] === R05 start === 
+[14:11:30] --- GSE57338 (HF array, discovery) --- 
+[14:11:31]   12090 genes x 313 samples; control 136 disease 177 
+[14:11:31] --- GSE141198 (HCC RNA-seq, discovery) --- 
+[14:11:31]   13178 genes x 148 samples (all tumour) 
+[14:11:31] --- TCGA-LIHC (HCC RNA-seq) --- 
+[14:11:39]   raw: 60660 features x 421 samples; control 50 disease 371 
+[14:11:40]   after count filter + collapse: 17146 genes 
+[14:11:40] --- GSE116250 (HF RNA-seq) --- 
+[14:11:44]   states: dilated cardiomyopathy 37 | ischemic cardiomyopathy 13 | non-failing 14 
+[14:11:44]   after filter + collapse: 26261 genes 
+[14:11:44] --- GSE14520 (HCC array, GPL3921 + GPL571) --- 
+[14:11:52]   GPL3921: 0 genes x 445 samples; control 220 disease 225 
+[14:12:28] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:13:31] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:13:37] === R05 start === 
+[14:13:37] --- GSE57338 (HF array, discovery) --- 
+[14:13:38]   12090 genes x 313 samples; control 136 disease 177 
+[14:13:38] --- GSE141198 (HCC RNA-seq, discovery) --- 
+[14:13:38]   13178 genes x 148 samples (all tumour) 
+[14:13:38] --- TCGA-LIHC (HCC RNA-seq) --- 
+[14:13:46]   raw: 60660 features x 421 samples; control 50 disease 371 
+[14:13:46]   after count filter + collapse: 17146 genes 
+[14:13:47] --- GSE116250 (HF RNA-seq) --- 
+[14:13:51]   states: dilated cardiomyopathy 37 | ischemic cardiomyopathy 13 | non-failing 14 
+[14:13:51]   after filter + collapse: 26261 genes 
+[14:13:51] --- GSE14520 (HCC array, GPL3921 + GPL571) --- 
+[14:13:59]   GPL3921: 7629 genes x 445 samples; control 220 disease 225 
+[14:14:01]   GPL571: 7733 genes x 43 samples; control 19 disease 22 NA 2 
+[14:14:01] --- GSE76427 (HCC array, GPL10558) --- 
+[14:14:10]   16907 genes x 167 samples; control 52 disease 115 
+[14:14:10] --- GSE141910 (HF RNA-seq, per-sample CSVs) --- 
+[14:14:11]   per-sample files: 366 
+[14:14:33]   GSM match to series matrix: 0/366 
+[14:14:35]   16978 genes x 0 samples;  
+[14:14:35] --- coverage per cohort --- 
+[14:14:36] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[14:14:36] NOTE: cohorts with no control arm cannot yield an effect size: GSE141198, GSE141910 
+[14:14:45] === R05 done: 8 cohorts === 
+[14:16:19] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:16:25] === R05 start === 
+[14:16:25] --- GSE57338 (HF array, discovery) --- 
+[14:16:26]   12090 genes x 313 samples; control 136 disease 177 
+[14:16:26] --- GSE141198 (HCC RNA-seq, discovery) --- 
+[14:16:26]   13178 genes x 148 samples (all tumour) 
+[14:16:26] --- TCGA-LIHC (HCC RNA-seq) --- 
+[14:16:34]   raw: 60660 features x 421 samples; control 50 disease 371 
+[14:16:35]   after count filter + collapse: 17146 genes 
+[14:16:35] --- GSE116250 (HF RNA-seq) --- 
+[14:16:39]   states: dilated cardiomyopathy 37 | ischemic cardiomyopathy 13 | non-failing 14 
+[14:16:39]   after filter + collapse: 26261 genes 
+[14:16:39] --- GSE14520 (HCC array, GPL3921 + GPL571) --- 
+[14:16:47]   GPL3921: 7629 genes x 445 samples; control 220 disease 225 
+[14:16:49]   GPL571: 7733 genes x 43 samples; control 19 disease 22 NA 2 
+[14:16:49]   GSE14520_GPL571: dropping 2 sample(s) with undetermined group 
+[14:16:49] --- GSE76427 (HCC array, GPL10558) --- 
+[14:16:59]   16907 genes x 167 samples; control 52 disease 115 
+[14:16:59] --- GSE141910 (HF RNA-seq, per-sample CSVs) --- 
+[14:16:59]   per-sample files: 366 
+[14:17:16]   GSM match to series matrix: 366/366 
+[14:17:18]   16978 genes x 366 samples; control 166 disease 200 
+[14:17:18] --- coverage per cohort --- 
+[14:17:19] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[14:17:19] NOTE: cohorts with no control arm cannot yield an effect size: GSE141198 
+[14:17:30] === R05 done: 8 cohorts === 
+[14:18:08] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:18:19] === R06 start === 
+[14:18:23] unique canonical sets to score: 41 
+[14:18:23] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[14:18:23] --- GSE57338 (12090 genes x 313 samples) --- 
+[14:18:27]   scored 41 sets x 313 samples 
+[14:18:27] --- GSE141198 (13178 genes x 148 samples) --- 
+[14:18:28]   scored 41 sets x 148 samples 
+[14:18:28] --- TCGA_LIHC (17146 genes x 421 samples) --- 
+[14:18:33]   scored 41 sets x 421 samples 
+[14:18:33] --- GSE116250 (26261 genes x 64 samples) --- 
+[14:18:33]   dropped (1 sets, <5 genes measured): REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION 
+[14:18:34]   scored 40 sets x 64 samples 
+[14:18:34] --- GSE14520_GPL3921 (7629 genes x 445 samples) --- 
+[14:18:34]   dropped (7 sets, <5 genes measured): REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION, REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION, REACTOME_REGULATION_OF_CDH1_MRNA_TRANSLATION_BY_MICRORNAS, REACTOME_REGULATION_OF_CDH11_MRNA_TRANSLATION_BY_MICRORNAS, REACTOME_REGULATION_OF_PTEN_MRNA_TRANSLATION, REACTOME_REGULATION_OF_NPAS4_MRNA_TRANSLATION, REACTOME_REGULATION_OF_PD_L1_CD274_TRANSLATION 
+[14:18:36]   scored 34 sets x 445 samples 
+[14:18:36] --- GSE14520_GPL571 (7733 genes x 41 samples) --- 
+[14:18:36]   dropped (5 sets, <5 genes measured): REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION, REACTOME_REGULATION_OF_CDH11_MRNA_TRANSLATION_BY_MICRORNAS, REACTOME_REGULATION_OF_PTEN_MRNA_TRANSLATION, REACTOME_REGULATION_OF_NPAS4_MRNA_TRANSLATION, REACTOME_REGULATION_OF_PD_L1_CD274_TRANSLATION 
+[14:18:36]   scored 36 sets x 41 samples 
+[14:18:36] --- GSE76427 (16907 genes x 167 samples) --- 
+[14:18:37]   dropped (6 sets, <5 genes measured): REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION, REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION, REACTOME_REGULATION_OF_CDH11_MRNA_TRANSLATION_BY_MICRORNAS, REACTOME_REGULATION_OF_PTEN_MRNA_TRANSLATION, REACTOME_REGULATION_OF_NPAS4_MRNA_TRANSLATION, REACTOME_REGULATION_OF_PD_L1_CD274_TRANSLATION 
+[14:18:38]   scored 35 sets x 167 samples 
+[14:18:38] --- GSE141910 (16978 genes x 366 samples) --- 
+[14:18:41]   scored 41 sets x 366 samples 
+[14:18:41] === R06 done === 
+[14:19:14] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:19:14] === R07 start === 
+[14:19:17] --- GSE57338: 177 disease vs 136 control --- 
+[14:19:24] --- GSE141198: no control arm, skipped (no effect size) --- 
+[14:19:24] --- TCGA_LIHC: 421 disease vs 421 control --- 
+[14:22:15] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:22:21] === R05 start === 
+[14:22:21] --- GSE57338 (HF array, discovery) --- 
+[14:22:22]   12090 genes x 313 samples; control 136 disease 177 
+[14:22:22] --- GSE141198 (HCC RNA-seq, discovery) --- 
+[14:22:22]   13178 genes x 148 samples (all tumour) 
+[14:22:22] --- TCGA-LIHC (HCC RNA-seq) --- 
+[14:22:30]   raw: 60660 features x 421 samples; control 50 disease 371 
+[14:22:31]   after count filter + collapse: 17146 genes 
+[14:22:31] --- GSE116250 (HF RNA-seq) --- 
+[14:22:35]   states: dilated cardiomyopathy 37 | ischemic cardiomyopathy 13 | non-failing 14 
+[14:22:35]   after filter + collapse: 26261 genes 
+[14:22:35] --- GSE14520 (HCC array, GPL3921 + GPL571) --- 
+[14:22:43]   GPL3921: 7629 genes x 445 samples; control 220 disease 225 
+[14:22:45]   GPL571: 7733 genes x 43 samples; control 19 disease 22 NA 2 
+[14:22:45]   GSE14520_GPL571: dropping 2 sample(s) with undetermined group 
+[14:22:45] --- GSE76427 (HCC array, GPL10558) --- 
+[14:22:54]   16907 genes x 167 samples; control 52 disease 115 
+[14:22:54] --- GSE141910 (HF RNA-seq, per-sample CSVs) --- 
+[14:22:54]   per-sample files: 366 
+[14:23:12]   GSM match to series matrix: 366/366 
+[14:23:14]   16978 genes x 366 samples; control 166 disease 200 
+[14:23:14] --- coverage per cohort --- 
+[14:23:14] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[14:23:15] NOTE: cohorts with no control arm cannot yield an effect size: GSE141198 
+[14:23:25] === R05 done: 8 cohorts === 
+[14:23:29] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:23:39] === R06 start === 
+[14:23:42] unique canonical sets to score: 41 
+[14:23:43] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[14:23:43] --- GSE57338 (12090 genes x 313 samples) --- 
+[14:23:46]   scored 41 sets x 313 samples 
+[14:23:46] --- GSE141198 (13178 genes x 148 samples) --- 
+[14:23:48]   scored 41 sets x 148 samples 
+[14:23:48] --- TCGA_LIHC (17146 genes x 421 samples) --- 
+[14:23:52]   scored 41 sets x 421 samples 
+[14:23:52] --- GSE116250 (26261 genes x 64 samples) --- 
+[14:23:52]   dropped (1 sets, <5 genes measured): REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION 
+[14:23:53]   scored 40 sets x 64 samples 
+[14:23:53] --- GSE14520_GPL3921 (7629 genes x 445 samples) --- 
+[14:23:53]   dropped (7 sets, <5 genes measured): REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION, REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION, REACTOME_REGULATION_OF_CDH1_MRNA_TRANSLATION_BY_MICRORNAS, REACTOME_REGULATION_OF_CDH11_MRNA_TRANSLATION_BY_MICRORNAS, REACTOME_REGULATION_OF_PTEN_MRNA_TRANSLATION, REACTOME_REGULATION_OF_NPAS4_MRNA_TRANSLATION, REACTOME_REGULATION_OF_PD_L1_CD274_TRANSLATION 
+[14:23:56]   scored 34 sets x 445 samples 
+[14:23:56] --- GSE14520_GPL571 (7733 genes x 41 samples) --- 
+[14:23:56]   dropped (5 sets, <5 genes measured): REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION, REACTOME_REGULATION_OF_CDH11_MRNA_TRANSLATION_BY_MICRORNAS, REACTOME_REGULATION_OF_PTEN_MRNA_TRANSLATION, REACTOME_REGULATION_OF_NPAS4_MRNA_TRANSLATION, REACTOME_REGULATION_OF_PD_L1_CD274_TRANSLATION 
+[14:23:56]   scored 36 sets x 41 samples 
+[14:23:56] --- GSE76427 (16907 genes x 167 samples) --- 
+[14:23:56]   dropped (6 sets, <5 genes measured): REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION, REACTOME_TRNA_PROCESSING_IN_THE_MITOCHONDRION, REACTOME_REGULATION_OF_CDH11_MRNA_TRANSLATION_BY_MICRORNAS, REACTOME_REGULATION_OF_PTEN_MRNA_TRANSLATION, REACTOME_REGULATION_OF_NPAS4_MRNA_TRANSLATION, REACTOME_REGULATION_OF_PD_L1_CD274_TRANSLATION 
+[14:23:58]   scored 35 sets x 167 samples 
+[14:23:58] --- GSE141910 (16978 genes x 366 samples) --- 
+[14:24:01]   scored 41 sets x 366 samples 
+[14:24:01] === R06 done === 
+[14:24:04] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:24:04] === R07 start === 
+[14:24:06] --- GSE57338: 177 disease vs 136 control --- 
+[14:24:13] --- GSE141198: no control arm, skipped (no effect size) --- 
+[14:24:13] --- TCGA_LIHC: 371 disease vs 50 control --- 
+[14:24:20] --- GSE116250: 50 disease vs 14 control --- 
+[14:24:25] --- GSE14520_GPL3921: 225 disease vs 220 control --- 
+[14:24:31] --- GSE14520_GPL571: 22 disease vs 19 control --- 
+[14:24:36] --- GSE76427: 115 disease vs 52 control --- 
+[14:24:40] --- GSE141910: 200 disease vs 166 control --- 
+[14:24:48] === R07 done: 268 set x cohort effect sizes === 
+[14:26:15] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:26:15] === R08 start === 
+[14:26:16] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[14:26:16] === R08 done === 
+[14:28:06] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:28:06] === R09 start === 
+[14:29:42] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:29:42] === R09 start === 
+[14:30:59] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:30:59] === R09 start === 
+[14:31:26] === R09 done === 
+[14:32:13] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[14:32:13] === R04 start === 
+[14:32:14] HF: 177 samples x 10213 genes; 24 modules 
+[14:32:14] HCC: 148 samples x 10213 genes; 21 modules 
+[17:24:44] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[17:24:44] === R10 start === 
+[17:24:47] --- GSE57338 stratified by aetiology --- 
+[17:24:47]   NF=136 DCM=82 ICM=95 
+[17:24:47] === R10 done === 
+[18:03:20] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[18:03:20] === R11 start === 
+[18:03:25]   GSE57338: marker panel 'lymphocyte' has <3 genes present, skipped 
+[18:03:29]   GSE57338: marker panel 'proliferation' has <3 genes present, skipped 
+[18:03:29]   GSE57338: 313 samples x 6 panels 
+[18:03:33]   GSE141198: 148 samples x 8 panels 
+[18:03:51]   TCGA_LIHC: 421 samples x 8 panels 
+[18:03:56]   GSE116250: 64 samples x 8 panels 
+[18:04:02]   GSE14520_GPL3921: marker panel 'cardiomyocyte' has <3 genes present, skipped 
+[18:04:03]   GSE14520_GPL3921: 445 samples x 7 panels 
+[18:04:03]   GSE14520_GPL571: marker panel 'cardiomyocyte' has <3 genes present, skipped 
+[18:04:03]   GSE14520_GPL571: 41 samples x 7 panels 
+[18:04:10]   GSE76427: 167 samples x 8 panels 
+[18:04:25]   GSE141910: 366 samples x 8 panels 
+[18:04:25]   GSE141198: no two-arm comparison, composition shift not tested 
+[19:15:54] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:15:54] === R11 start === 
+[19:15:59]   GSE57338: marker panel 'lymphocyte' has <3 genes present, skipped 
+[19:16:03]   GSE57338: marker panel 'proliferation' has <3 genes present, skipped 
+[19:16:03]   GSE57338: 313 samples x 6 panels 
+[19:16:07]   GSE141198: 148 samples x 8 panels 
+[19:16:28]   TCGA_LIHC: 421 samples x 8 panels 
+[19:16:32]   GSE116250: 64 samples x 8 panels 
+[19:16:37]   GSE14520_GPL3921: marker panel 'cardiomyocyte' has <3 genes present, skipped 
+[19:16:38]   GSE14520_GPL3921: 445 samples x 7 panels 
+[19:16:39]   GSE14520_GPL571: marker panel 'cardiomyocyte' has <3 genes present, skipped 
+[19:16:39]   GSE14520_GPL571: 41 samples x 7 panels 
+[19:16:45]   GSE76427: 167 samples x 8 panels 
+[19:17:00]   GSE141910: 366 samples x 8 panels 
+[19:17:00]   GSE141198: no two-arm comparison, composition shift not tested 
+[19:17:02]   GSE141198: single-arm, no adjustment possible 
+[19:17:10] === R11 done === 
+[19:21:49] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:24:19] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:24:19] === R12 start === 
+[19:24:23] HF module 'purple' = 153 genes; HCC module 'magenta' = 146 genes 
+[19:24:25] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[19:24:26] TFs that are themselves Tier A set members: EIF4EBP1, EIF4E, EIF4G1 
+[19:26:33] modulePreservation finished in 294.3 min 
+[19:27:40] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:27:40] === R12 start === 
+[19:27:44] HF module 'purple' = 153 genes; HCC module 'magenta' = 146 genes 
+[19:27:45] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[19:27:46] TFs that are themselves Tier A set members: EIF4EBP1, EIF4E, EIF4G1 
+[19:27:51]   GSE141198: single arm, GS not computable 
+[19:27:51] === R12 done === 
+[19:29:00] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:31:15] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:35:14] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:35:14] === R04 start === 
+[19:35:15] HF: 177 samples x 10213 genes; 24 modules 
+[19:35:15] HCC: 148 samples x 10213 genes; 21 modules 
+[19:35:15] *** SMOKE MODE: nPermutations = 2, results NOT for the paper *** 
+[19:36:45] modulePreservation finished in 1.5 min 
+[19:36:45] raw modulePreservation object saved: R04_preservation_raw_SMOKE.rds 
+[19:36:45] === R04 done === 
+[19:38:00] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:38:00] === R04 start === 
+[19:38:01] HF: 177 samples x 10213 genes; 24 modules 
+[19:38:01] HCC: 148 samples x 10213 genes; 21 modules 
+[19:38:34] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:38:34] === R12 start === 
+[19:38:39] HF module 'purple' = 153 genes; HCC module 'magenta' = 146 genes 
+[19:38:40] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[19:38:42] TFs that are themselves Tier A set members: EIF4EBP1, EIF4E, EIF4G1 
+[19:38:46] === R12 done === 
+[19:41:37] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:44:57] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:44:57] === R10b start === 
+[19:45:01] === R10b done === 
+[19:47:07] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:47:07] === R10b start === 
+[19:47:51] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:47:51] === R10b start === 
+[19:47:55] === R10b done === 
+[19:51:23] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:51:23] === R13 start === 
+[19:51:23]   !! could not read R09_mirror_test.rds: cannot open the connection 
+[19:52:07] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:52:07] === R13 start === 
+[19:52:07]   !! could not read R09_mirror_test.rds: cannot open the connection 
+[19:52:07] === R13 done === 
+[19:53:37] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:53:37] === R13 start === 
+[19:53:37] === R13 done === 
+[19:54:55] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:54:55] === R13 start === 
+[19:54:55] === R13 done === 
+[20:06:18] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[20:06:18] === R13 start === 
+[20:06:19] === R13 done === 
+[20:45:45] modulePreservation finished in 67.7 min 
+[20:45:45] raw modulePreservation object saved: R04_preservation_raw.rds 
+[20:45:45] === R04 done === 
+[21:19:30] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[21:20:02] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[21:21:10] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[21:21:57] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[21:22:25] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[21:25:38] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[21:29:32] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[21:29:32] === R14 start === 
+[21:29:33] *** SMOKE MODE: 200 TOM perms, 100 coherence perms, 10 jackknife iters *** 
+[21:29:33] --- HF: module purple (153 genes), power 14, n 177 samples --- 
+[21:29:36]   SELFTEST HF: off-diag max|diff| = 3.608e-16 ; diag max|diff| = 9.996e-01 
+[21:30:01]   full-universe connectivity: 10213 genes, range 1.81-115.53 
+[21:31:41]   observed mean intra TOM = 0.0079 ; null 0.0028 (sd 0.0003) ; Z = 15.27 ; P = 0.0050 
+[21:31:41]   jackknife: CV of mean kIM across 10 iterations = 2.83% ; mean per-gene CV = 52.82% 
+[21:31:42]   coherence in HCC: 153 of 153 module genes present; obs mean r = 0.3256 ; Z = 21.14 ; P = 0.0099 
+[21:31:42] --- HCC: module magenta (146 genes), power 14, n 148 samples --- 
+[21:31:44]   SELFTEST HCC: off-diag max|diff| = 6.384e-16 ; diag max|diff| = 9.998e-01 
+[21:32:07]   full-universe connectivity: 10213 genes, range 1.92-490.48 
+[21:33:42]   observed mean intra TOM = 0.0180 ; null 0.0184 (sd 0.0026) ; Z = -0.17 ; P = 0.5920 
+[21:33:42]   jackknife: CV of mean kIM across 10 iterations = 2.99% ; mean per-gene CV = 49.54% 
+[21:33:42]   coherence in HF: 146 of 146 module genes present; obs mean r = 0.1400 ; Z = 12.16 ; P = 0.0099 
+[21:33:42] === R14 done === 
+[21:38:28] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[21:50:10] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[21:50:10] === R14 start === 
+[21:50:11] *** SMOKE MODE: 300 TOM perms, 100 coherence perms, 10 jackknife iters *** 
+[21:50:11] --- HF: module purple (153 genes), power 14, n 177 samples --- 
+[21:50:14]   SELFTEST HF: TOM off-diag max|diff| = 4.684e-02 ; adjacency max|diff| = 1.554e-14 
+[21:54:56] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[21:54:56] === R14 start === 
+[21:54:56] *** SMOKE MODE: 300 TOM perms, 100 coherence perms, 10 jackknife iters *** 
+[21:54:57] --- HF: module purple (153 genes), power 14, n 177 samples --- 
+[21:55:00]   SELFTEST HF: TOM off-diag max|diff| = 3.469e-16 ; adjacency max|diff| = 1.554e-14 
+[21:55:15]   full-universe k: all genes mean 15.2 median 10.0 | module mean 6.6 median 6.0 
+[21:58:59]   UNMATCHED null: obs 0.0079 | null 0.0028 (sd 0.0003) | Z = 14.70 | P = 0.0033 
+[21:58:59]   MATCHED   null: obs 0.0079 | null 0.0007 (sd 0.0000) | Z = 404.12 | P = 0.0033 
+[21:58:59]   jackknife: CV of mean kIM = 2.83% (v1's 1.6% is this quantity) ; median per-gene CV = 52.97% ; 0/153 genes with kIM < 0.05 
+[21:58:59]   coherence in HCC: 153 of 153 module genes present; obs mean r = 0.3256 ; Z = 21.14 ; P = 0.0099 
+[21:58:59] --- HCC: module magenta (146 genes), power 14, n 148 samples --- 
+[21:59:02]   SELFTEST HCC: TOM off-diag max|diff| = 7.216e-16 ; adjacency max|diff| = 6.217e-15 
+[21:59:16]   full-universe k: all genes mean 74.1 median 30.5 | module mean 21.1 median 12.9 
+[22:02:31]   UNMATCHED null: obs 0.0180 | null 0.0184 (sd 0.0026) | Z = -0.17 | P = 0.5847 
+[22:02:31]   MATCHED   null: obs 0.0180 | null 0.0038 (sd 0.0002) | Z = 89.57 | P = 0.0033 
+[22:02:31]   jackknife: CV of mean kIM = 2.99% (v1's 1.6% is this quantity) ; median per-gene CV = 50.02% ; 0/146 genes with kIM < 0.05 
+[22:02:31]   coherence in HF: 146 of 146 module genes present; obs mean r = 0.1400 ; Z = 12.16 ; P = 0.0099 
+[22:02:31] === R14 done === 
+[22:08:44] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:08:44] === R14 start === 
+[22:08:45] --- HF: module purple (153 genes), power 14, n 177 samples --- 
+[22:08:48]   SELFTEST HF: TOM off-diag max|diff| = 3.469e-16 ; adjacency max|diff| = 1.554e-14 
+[22:09:05]   full-universe k: all genes mean 15.2 median 10.0 | module mean 6.6 median 6.0 
+[22:20:42] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:20:58] === R15 start === 
+[22:21:07]   series matrix: 107 samples; phenotype levels: 
+[22:21:07]   stage counts: CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
+[22:21:23]   raw: 48803 probes x 215 columns 
+[22:21:24]   title-vs-phenotype agreement: 107 / 107 
+[22:21:26]   detection filter: 17793 / 48803 probes kept 
+[22:21:28]   after log2 + quantile: range 5.37-15.37 
+[22:21:29]   GPL6947 annot: 49577 probes; cols: ID, Gene title, Gene symbol, Gene ID 
+[22:21:29]   11756 genes x 107 samples after collapse 
+[22:21:29]   final: 11756 genes x 107 samples; CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
+[22:21:29] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[22:21:30]   ssGSEA: 40 sets x 107 samples; dropped 1 sets (<5 genes measured) 
+[22:21:30]   reference arm: Normal, n = 13 
+[22:21:30]   Normal: n = 0 < 3, skipped 
+[22:23:31] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:23:42] === R15 start === 
+[22:23:50]   series matrix: 107 samples; phenotype levels: 
+[22:23:50]   stage counts: CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
+[22:24:07]   raw: 48803 probes x 215 columns 
+[22:24:08]   title-vs-phenotype agreement: 107 / 107 
+[22:24:09]   detection filter: 17793 / 48803 probes kept 
+[22:24:11]   after log2 + quantile: range 5.37-15.37 
+[22:24:12]   GPL6947 annot: 49577 probes; cols: ID, Gene title, Gene symbol, Gene ID 
+[22:24:12]   11756 genes x 107 samples after collapse 
+[22:24:12]   final: 11756 genes x 107 samples; CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
+[22:24:13] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[22:24:14]   ssGSEA: 40 sets x 107 samples; dropped 1 sets (<5 genes measured) 
+[22:24:14]   tiers scored: A=15 B_extra=5 C_v1=20 
+[22:24:14]   reference arm: Normal, n = 13 
+[22:24:18]   CH_low (8 vs 13) done 
+[22:24:22]   CH_high (12 vs 13) done 
+[22:24:26]   Cirrhosis (12 vs 13) done 
+[22:24:31]   DN_low (11 vs 13) done 
+[22:24:35]   DN_high (11 vs 13) done 
+[22:24:39]   eHCC (5 vs 13) done 
+[22:24:43]   HCC (35 vs 13) done 
+[22:24:43] --- cirrhosis vs HCC direction agreement --- 
+[22:24:43]   Tier A     n=15 | concordant 12/15 (80.0%) | rho=0.668 
+[22:24:43]   Tier A     n=15 | concordant 12/15 (80.0%) | rho=0.668 
+[22:24:43]   ALL tiers  n=40 | concordant 24/40 (60.0%) | rho=0.532 
+[22:25:11]     unmatched null 2500/10000 
+[22:25:45] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:25:55] === R15 start === 
+[22:26:03]   series matrix: 107 samples; phenotype levels: 
+[22:26:03]   stage counts: CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
+[22:26:20]   raw: 48803 probes x 215 columns 
+[22:26:21]   title-vs-phenotype agreement: 107 / 107 
+[22:26:23]   detection filter: 17793 / 48803 probes kept 
+[22:26:25]   after log2 + quantile: range 5.37-15.37 
+[22:26:25]   GPL6947 annot: 49577 probes; cols: ID, Gene title, Gene symbol, Gene ID 
+[22:26:25]   11756 genes x 107 samples after collapse 
+[22:26:25]   final: 11756 genes x 107 samples; CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
+[22:26:26] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[22:26:27]   ssGSEA: 40 sets x 107 samples; dropped 1 sets (<5 genes measured) 
+[22:26:27]   tiers scored: A=15 B_extra=5 C_v1=20 
+[22:26:27]   reference arm: Normal, n = 13 
+[22:26:32]   CH_low (8 vs 13) done 
+[22:26:36]   CH_high (12 vs 13) done 
+[22:26:40]   Cirrhosis (12 vs 13) done 
+[22:26:44]   DN_low (11 vs 13) done 
+[22:26:48]   DN_high (11 vs 13) done 
+[22:26:53]   eHCC (5 vs 13) done 
+[22:26:57]   HCC (35 vs 13) done 
+[22:26:57] --- cirrhosis vs HCC direction agreement --- 
+[22:26:57]   Tier A     n=15 | both-up 11 | both-down  1 | discordant  3 | rho=+0.668 
+[22:26:57]   ALL tiers  n=40 | both-up 21 | both-down  3 | discordant 16 | rho=+0.532 
+[22:26:57] --- eHCC vs HCC direction agreement (is the change at the transition?) --- 
+[22:26:57]   Tier A     n=15 | both-up 13 | both-down  0 | discordant  2 | rho=+0.343 
+[22:26:57]   ALL tiers  n=40 | both-up 29 | both-down  3 | discordant  8 | rho=+0.665 
+[22:26:57] --- GSE89377 HCC arm vs the HCC cohorts v1 already used (Tier A, n=15) --- 
+[22:26:57]   vs TCGA_LIHC      n=15 | sign agreement 100% | Spearman rho=0.607 
+[22:26:57]   vs GSE14520_GPL3921 n=14 | sign agreement 100% | Spearman rho=0.790 
+[22:26:57]   vs GSE14520_GPL571 n=15 | sign agreement 93% | Spearman rho=0.596 
+[22:26:57]   vs GSE76427       n=14 | sign agreement 100% | Spearman rho=0.833 
+[22:26:57] === R15 done === 
+[22:29:34] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:31:49] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:41:42]     unmatched null 5000/10000 
+[22:44:58] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:48:47] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:58:20]     unmatched null 7500/10000 
+[22:58:40] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:00:34] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:10:04] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:14:23] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:14:55]     unmatched null 10000/10000 
+[23:16:13] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:19:04] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:25:40] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:30:14] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:32:13]     matched null 2500/10000 
+[23:48:04]     matched null 5000/10000 
+[00:02:45]     matched null 7500/10000 
+[02:52:04]     matched null 10000/10000 
+[02:52:05]   UNMATCHED null: obs 0.0079 | null 0.0027 (sd 0.0004) | Z = 13.77 | P = 0.0001 
+[02:52:05]   MATCHED   null: obs 0.0079 | null 0.0007 (sd 0.0000) | Z = 449.74 | P = 0.0001 
+[02:52:05]   jackknife: CV of mean kIM = 2.66% (v1's 1.6% is this quantity) ; median per-gene CV = 53.28% ; 0/153 genes with kIM < 0.05 
+[02:52:09]   coherence in HCC: 153 of 153 module genes present; obs mean r = 0.3256 ; Z = 22.22 ; P = 0.0010 
+[02:52:09] --- HCC: module magenta (146 genes), power 14, n 148 samples --- 
+[02:52:13]   SELFTEST HCC: TOM off-diag max|diff| = 7.216e-16 ; adjacency max|diff| = 6.217e-15 
+[02:52:28]   full-universe k: all genes mean 74.1 median 30.5 | module mean 21.1 median 12.9 
+[10:27:29]     unmatched null 2500/10000 
+[10:40:07]     unmatched null 5000/10000 
+[10:53:15]     unmatched null 7500/10000 
+[11:06:42]     unmatched null 10000/10000 
+[11:20:18]     matched null 2500/10000 
+[11:34:43]     matched null 5000/10000 
+[22:29:59] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:29:59] === R14b cohesion start === 
+[22:30:00] *** SMOKE MODE: 200 permutations *** 
+[22:30:01]   HF purple (153 genes): mean pairwise r = 0.3403 | null 0.0359 (sd 0.0080) | Z = 38.20 | P = 0.0050 
+[22:30:02]   HCC magenta (146 genes): mean pairwise r = 0.3916 | null 0.0260 (sd 0.0142) | Z = 25.67 | P = 0.0050 
+[22:30:02] === R14b done === 
+[22:30:14] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:30:14] === R14b cohesion start === 
+[22:30:19]   HF purple (153 genes): mean pairwise r = 0.3403 | null 0.0355 (sd 0.0074) | Z = 40.96 | P = 0.0010 
+[22:30:23]   HCC magenta (146 genes): mean pairwise r = 0.3916 | null 0.0239 (sd 0.0141) | Z = 26.00 | P = 0.0010 
+[22:30:23]   NOTE: S32 not present yet; k columns left out of S34 
+[22:30:23] === R14b done === 
+[22:31:24] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:31:24] === R14b cohesion start === 
+[22:31:30]   HF purple (153 genes): mean pairwise r = 0.3403 | null 0.0355 (sd 0.0074) | Z = 40.96 | P = 0.0010 
+[22:31:34]   HCC magenta (146 genes): mean pairwise r = 0.3916 | null 0.0239 (sd 0.0141) | Z = 26.00 | P = 0.0010 
+[22:31:34]   NOTE: S32 not present yet; k columns left out of S36 
+[22:31:34] === R14b done === 
+[22:42:09]     matched null 7500/10000 
+[22:57:43]     matched null 10000/10000 
+[22:57:44]   UNMATCHED null: obs 0.0180 | null 0.0183 (sd 0.0025) | Z = -0.14 | P = 0.5438 
+[22:57:44]   MATCHED   null: obs 0.0180 | null 0.0038 (sd 0.0002) | Z = 87.83 | P = 0.0001 
+[22:57:44]   jackknife: CV of mean kIM = 2.48% (v1's 1.6% is this quantity) ; median per-gene CV = 49.68% ; 0/146 genes with kIM < 0.05 
+[22:57:48]   coherence in HF: 146 of 146 module genes present; obs mean r = 0.1400 ; Z = 13.54 ; P = 0.0010 
+[22:57:48] === R14 done === 
+[23:10:10] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:10:10] === R14b cohesion start === 
+[23:10:16]   HF purple (153 genes): mean pairwise r = 0.3403 | null 0.0355 (sd 0.0074) | Z = 40.96 | P = 0.0010 
+[23:10:19]   HCC magenta (146 genes): mean pairwise r = 0.3916 | null 0.0239 (sd 0.0141) | Z = 26.00 | P = 0.0010 
+[23:10:19] === R14b done === 
+[23:11:41] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[16:14:45] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[21:35:41] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[21:44:33] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[21:53:57] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:15:54] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:19:10] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:26:51] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:35:41] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:41:02] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[00:50:52] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[00:52:05] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[00:52:44] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[00:53:17] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[00:55:15] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[00:55:19] === R10c start === 
+[00:55:22] --- annotation available per cohort --- 
+[00:55:22]   GSE57338: gsm, tissue, heart.failure, disease.status, gender, age, group, etiology 
+[00:55:22]   GSE141198: no annotation in the frozen cohort object 
+[00:55:22]   TCGA_LIHC: no annotation in the frozen cohort object 
+[00:55:22]   GSE116250: no annotation in the frozen cohort object 
+[00:55:22]   GSE14520_GPL3921: gsm, Tissue, Disease.state, Individual 
+[00:55:22]   GSE14520_GPL571: gsm, Tissue, Disease.state, Individual 
+[00:55:22]   GSE76427: gsm, diagnosis, patient.id, tissue, event_os, duryears_os, event_rfs, duryears_rfs, age..years., gender..1.m..2.f., bclc_staging, tnm_staging_clinical 
+[00:55:22]   GSE141910: gsm, etiology, Sex, race, age 
+[00:55:27] --- age / sex coverage --- 
+[00:55:27]   GSE57338: 313/313 samples with age and sex 
+[00:55:27]   GSE141910: 366/366 samples with age and sex 
+[00:55:28]   GSE116250: 64/64 samples with age and sex 
+[00:55:28]   TCGA_LIHC: 420/421 samples with age and sex 
+[00:55:29] --- scale check: unadjusted beta/sigma vs R07 Hedges g --- 
+[00:55:29]   GSE116250: rho = 1.000 over 40 sets 
+[00:55:29]   GSE141910: rho = 1.000 over 41 sets 
+[00:55:29]   GSE57338: rho = 1.000 over 41 sets 
+[00:55:29]   TCGA_LIHC: rho = 1.000 over 41 sets 
+[00:55:29] === R10c done === 
+[00:56:47] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[00:56:51] === R10c start === 
+[00:56:53] --- annotation available per cohort --- 
+[00:56:53]   GSE57338: gsm, tissue, heart.failure, disease.status, gender, age, group, etiology 
+[00:56:53]   GSE141198: no annotation in the frozen cohort object 
+[00:56:53]   TCGA_LIHC: no annotation in the frozen cohort object 
+[00:56:53]   GSE116250: no annotation in the frozen cohort object 
+[00:56:53]   GSE14520_GPL3921: gsm, Tissue, Disease.state, Individual 
+[00:56:53]   GSE14520_GPL571: gsm, Tissue, Disease.state, Individual 
+[00:56:53]   GSE76427: gsm, diagnosis, patient.id, tissue, event_os, duryears_os, event_rfs, duryears_rfs, age..years., gender..1.m..2.f., bclc_staging, tnm_staging_clinical 
+[00:56:53]   GSE141910: gsm, etiology, Sex, race, age 
+[00:56:58] --- age / sex coverage --- 
+[00:56:58]   GSE57338: 313/313 samples with age and sex 
+[00:57:20]   GSE141910: 366/366 samples with age and sex 
+[00:57:44]   GSE116250: 64/64 samples with age and sex 
+[00:57:58]   TCGA_LIHC: 420/421 samples with age and sex 
+[00:58:23] --- scale check: unadjusted beta/sigma vs R07 Hedges g --- 
+[00:58:23]   GSE116250: rho = 1.000 over 40 sets 
+[00:58:23]   GSE141910: rho = 1.000 over 41 sets 
+[00:58:23]   GSE57338: rho = 1.000 over 41 sets 
+[00:58:23]   TCGA_LIHC: rho = 1.000 over 41 sets 
+[00:58:23] === R10c done === 
+[00:59:09] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[00:59:13] === R10c start === 
+[00:59:15] --- annotation available per cohort --- 
+[00:59:15]   GSE57338: gsm, tissue, heart.failure, disease.status, gender, age, group, etiology 
+[00:59:15]   GSE141198: no annotation in the frozen cohort object 
+[00:59:15]   TCGA_LIHC: no annotation in the frozen cohort object 
+[00:59:15]   GSE116250: no annotation in the frozen cohort object 
+[00:59:15]   GSE14520_GPL3921: gsm, Tissue, Disease.state, Individual 
+[00:59:15]   GSE14520_GPL571: gsm, Tissue, Disease.state, Individual 
+[00:59:15]   GSE76427: gsm, diagnosis, patient.id, tissue, event_os, duryears_os, event_rfs, duryears_rfs, age..years., gender..1.m..2.f., bclc_staging, tnm_staging_clinical 
+[00:59:15]   GSE141910: gsm, etiology, Sex, race, age 
+[00:59:20] --- age / sex coverage --- 
+[00:59:20] --- cohorts not adjusted, and the reason --- 
+[00:59:20]   GSE141198: cohort object carries no annotation at all 
+[00:59:20]   GSE14520_GPL3921: no age or sex column in the series matrix (gsm, Tissue, Disease.state, Individual) 
+[00:59:20]   GSE14520_GPL571: no age or sex column in the series matrix (gsm, Tissue, Disease.state, Individual) 
+[00:59:20]   GSE76427: age..years. present for arm x measured -> 52:0/52  0:115/115 
+[00:59:20]   GSE57338: 313/313 samples with age and sex 
+[00:59:42]   GSE141910: 366/366 samples with age and sex 
+[01:00:06]   GSE116250: 64/64 samples with age and sex 
+[01:00:20]   TCGA_LIHC: 420/421 samples with age and sex 
+[01:00:45] --- scale check: unadjusted beta/sigma vs R07 Hedges g --- 
+[01:00:45]   GSE116250: rho = 1.000 over 40 sets 
+[01:00:45]   GSE141910: rho = 1.000 over 41 sets 
+[01:00:45]   GSE57338: rho = 1.000 over 41 sets 
+[01:00:45]   TCGA_LIHC: rho = 1.000 over 41 sets 
+[01:00:45] === R10c done === 
+[01:02:58] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 

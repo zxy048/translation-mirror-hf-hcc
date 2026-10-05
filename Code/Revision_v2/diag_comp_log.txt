@@ -1,0 +1,40 @@
+[13:58:12] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[13:58:14] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+mito Tier A sets  ( 4 ): REACTOME_MITOCHONDRIAL_TRANSLATION
+                      REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                      REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                      REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION 
+cyto Tier A sets  ( 11 ): KEGG_RIBOSOME, KEGG_AMINOACYL_TRNA_BIOSYNTHESIS, REACTOME_TRANSLATION, REACTOME_EUKARYOTIC_TRANSLATION_INITIATION, REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION, REACTOME_TRNA_AMINOACYLATION, REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION, REACTOME_RRNA_PROCESSING, REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE, REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL, REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE 
+
+Tier A genes: total 497 | mito-only 153 | cyto-ish 344
+
+=== compartment composition of the two designated modules ===
+HF module 'purple' (n=153): mito 0 (0%) | cyto 73 (48%) | neither 80
+HCC module 'magenta' (n=146): mito 15 (10%) | cyto 11 (8%) | neither 120
+
+=== where does each compartment's gene set sit in each network? ===
+
+-- HF (10213 genes in 24 modules) --
+   mito genes in network: 133 | in designated module 'purple':   0 (0%) | top modules: blue=81 turquoise=32 grey=12
+   cyto genes in network: 323 | in designated module 'purple':  73 (23%) | top modules: turquoise=87 purple=73 grey=53
+
+-- HCC (10213 genes in 21 modules) --
+   mito genes in network: 133 | in designated module 'magenta':  15 (11%) | top modules: blue=44 turquoise=32 brown=16
+   cyto genes in network: 323 | in designated module 'magenta':  11 (3%) | top modules: blue=129 turquoise=84 grey=32
+
+=== is the HF network simply missing mito genes? ===
+mito-compartment Tier A genes in U            : 133
+  ... present in HF network                   : 133
+  ... present in HCC network                  : 133
+MT-encoded Tier A genes in U                  : 15  [MT-ATP6, MT-ATP8, MT-CO1, MT-CO2, MT-CO3, MT-CYB, MT-ND1, MT-ND2, MT-ND3, MT-ND4, MT-ND4L, MT-ND5, MT-ND6, MT-RNR1, MT-RNR2]
+
+=== HCC magenta: which Tier A genes, by compartment ===
+mito: CHCHD1 ERAL1 MALSU1 MRPL11 MRPL22 MRPL33 MRPL36 MRPL4 MRPL48 MRPL57 MRPS16 MRPS26 MRPS7 RCC1L TSFM 
+cyto: BMS1 EIF3G ELOC EXOSC1 EXOSC7 NOP10 PSMB4 PSMD8 RPL41 SEM1 TSR3 
+
+=== HF purple: which Tier A genes, by compartment ===
+mito:  
+cyto: DDX49 EEF1B2 EEF1D EIF3D EIF3I EIF4EBP1 ELOB NHP2 NOP10 PSMA7 RPL10A RPL11 RPL12 RPL13 RPL13A RPL15 RPL17 RPL18 RPL18A RPL21 RPL23 RPL23A RPL24 RPL26 RPL27 RPL27A RPL29 RPL30 RPL31 RPL32 RPL35 RPL35A RPL36 RPL36A RPL36AL RPL38 RPL39 RPL4 RPL5 RPL6 RPL7A RPL9 RPLP0 RPLP1 RPLP2 RPS10 RPS11 RPS12 RPS13 RPS14 RPS15A RPS16 RPS17 RPS18 RPS19 RPS2 RPS20 RPS21 RPS24 RPS25 RPS27 RPS27A RPS28 RPS3 RPS3A RPS6 RPS7 RPS8 RPS9 RPSA SEC11A SSR4 UBA52 

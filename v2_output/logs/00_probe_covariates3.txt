@@ -1,0 +1,65 @@
+ALL COLS: barcode | patient | sample | shortLetterCode | definition | sample_submitter_id | tumor_descriptor | sample_id | pathology_report_uuid | submitter_id | sample_type | specimen_type | days_to_collection | state | initial_weight | tissue_type | preservation_method | synchronous_malignancy | ajcc_pathologic_stage | ishak_fibrosis_score | days_to_diagnosis | treatments | tissue_or_organ_of_origin | age_at_diagnosis | primary_diagnosis | child_pugh_classification | prior_malignancy | year_of_diagnosis | prior_treatment | diagnosis_is_primary_disease | ajcc_staging_system_edition | ajcc_pathologic_t | morphology | ajcc_pathologic_n | ajcc_pathologic_m | residual_disease | classification_of_tumor | diagnosis_id | icd_10_code | site_of_resection_or_biopsy | tumor_grade | tumor_of_origin | laterality | days_to_last_follow_up | follow_ups_disease_response | race | gender | ethnicity | vital_status | age_at_index | days_to_birth | demographic_id | age_is_obfuscated | sex_at_birth | country_of_residence_at_enrollment | days_to_death | bcr_patient_barcode | primary_site | project_id | disease_type | name | releasable | released | sample.aux
+  barcode                      chr n=424 (424 levels)
+  patient                      chr n=424 (371 levels)
+  sample                       chr n=424 (424 levels)
+  shortLetterCode              chr n=424: TP NT TR
+  definition                   chr n=424: Primary solid Tumor Solid Tissue Normal Recurrent Solid Tumor
+  sample_submitter_id          chr n=424 (424 levels)
+  tumor_descriptor             chr n=424: Primary Not Applicable Recurrence
+  sample_id                    chr n=424 (424 levels)
+  pathology_report_uuid        chr n=374 (375 levels)
+  submitter_id                 chr n=424 (371 levels)
+  sample_type                  chr n=424: Primary Tumor Solid Tissue Normal Recurrent Tumor
+  specimen_type                chr n=424: Solid Tissue Unknown
+  days_to_collection           numeric n=421 range=[7,6014]
+  state                        chr n=424: released
+  initial_weight               numeric n=424 range=[1,2190]
+  tissue_type                  chr n=424: Tumor Normal
+  preservation_method          chr n=424: OCT Unknown
+  synchronous_malignancy       chr n=293: No Not Reported Yes
+  ajcc_pathologic_stage        chr n=281: Stage I Stage II Stage IIIA Stage IIIC Stage III Stage IIIB Stage IV Stage 0 Stage IIB Stage IVA
+  ishak_fibrosis_score         chr n=210: 0 - No Fibrosis Unknown 6 - Established Cirrhosis 1,2 - Portal Fibrosis 3,4 - Fibrous Septa 5 - Nodular Formation and Incomplete Cirrhosis
+  days_to_diagnosis            numeric n=415 range=[-8768,2133]
+  treatments                   chr n=424 (371 levels)
+  tissue_or_organ_of_origin    chr n=424 (20 levels)
+  age_at_diagnosis             numeric n=410 range=[6072,32120]
+  primary_diagnosis            chr n=424 (14 levels)
+  child_pugh_classification    chr n=244: A Unknown B
+  prior_malignancy             chr n=293: no yes not reported
+  year_of_diagnosis            numeric n=290 range=[1995,2013]
+  prior_treatment              chr n=406: No Yes
+  diagnosis_is_primary_disease chr n=424: TRUE FALSE
+  ajcc_staging_system_edition  chr n=300: 7th 6th 5th 4th
+  ajcc_pathologic_t            chr n=298: T1 T2 T3 T3a T4 T3b T2b TX Tis
+  morphology                   chr n=424 (14 levels)
+  ajcc_pathologic_n            chr n=297: N0 NX N1
+  ajcc_pathologic_m            chr n=299: M0 MX M1
+  residual_disease             chr n=284: R0 RX R1 R2
+  classification_of_tumor      chr n=424: primary recurrence Prior primary Subsequent Primary not reported Synchronous primary
+  diagnosis_id                 chr n=424 (371 levels)
+  icd_10_code                  chr n=293: C22.0
+  site_of_resection_or_biopsy  chr n=424: Liver Not Reported
+  tumor_grade                  chr n=288: G2 G3 G1 G4
+  tumor_of_origin              chr n=109 (94 levels)
+  laterality                   chr n=7: Right Left Unknown
+  days_to_last_follow_up       numeric n=423 range=[0,3675]
+  follow_ups_disease_response  chr n=412: TF-Tumor Free WT-With Tumor Unknown
+  race                         chr n=424: white asian black or african american not reported Unknown american indian or alaska native
+  gender                       chr n=424: male female
+  ethnicity                    chr n=424: not hispanic or latino not reported hispanic or latino Unknown
+  vital_status                 chr n=424: Alive Dead
+  age_at_index                 numeric n=423 range=[16,87]
+  days_to_birth                numeric n=418 range=[-32120,-5862]
+  demographic_id               chr n=424 (371 levels)
+  age_is_obfuscated            chr n=424: FALSE TRUE
+  sex_at_birth                 chr n=424: male female
+  country_of_residence_at_enrollment chr n=416: United States South Korea Vietnam Canada Russia Brazil United Kingdom Algeria
+  days_to_death                numeric n=164 range=[9,3258]
+  bcr_patient_barcode          chr n=424 (424 levels)
+  primary_site                 chr n=424: 
+  project_id                   chr n=424: TCGA-LIHC
+  disease_type                 chr n=424: 
+  name                         chr n=424: Liver Hepatocellular Carcinoma
+  releasable                   chr n=424: TRUE
+  released                     chr n=424: TRUE
+  sample.aux                   chr n=424 (423 levels)

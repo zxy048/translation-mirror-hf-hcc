@@ -1,0 +1,25 @@
+[22:48:47] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+cols: set, tier, GSE57338, TCGA_LIHC, GSE116250, GSE14520_GPL3921, GSE14520_GPL571, GSE76427, GSE141910 
+
+TCGA_LIHC          vs GSE57338   TierA n=15 rho=-0.550
+TCGA_LIHC          vs GSE57338   All   n=41 rho=-0.455
+TCGA_LIHC          vs GSE116250  TierA n=15 rho=+0.211
+TCGA_LIHC          vs GSE116250  All   n=40 rho=+0.286
+TCGA_LIHC          vs GSE141910  TierA n=15 rho=-0.146
+TCGA_LIHC          vs GSE141910  All   n=41 rho=-0.087
+GSE14520_GPL3921   vs GSE57338   TierA n=14 rho=-0.702
+GSE14520_GPL3921   vs GSE57338   All   n=34 rho=-0.223
+
+--- every HCC cohort vs GSE57338, Tier A ---
+  TCGA_LIHC          n=15 rho=-0.550
+  GSE14520_GPL3921   n=14 rho=-0.702
+  GSE14520_GPL571    n=15 rho=-0.764
+  GSE76427           n=14 rho=-0.587
+
+--- GSE89377 (R15) ---
+  TierA  n=15 | cirrhosis vs TCGA rho=+0.104 | GSE89377-HCC vs TCGA rho=+0.607 | GSE89377-HCC vs GSE57338 rho=-0.679
+  All    n=40 | cirrhosis vs TCGA rho=+0.378 | GSE89377-HCC vs TCGA rho=+0.708 | GSE89377-HCC vs GSE57338 rho=-0.184
+PROBE DONE

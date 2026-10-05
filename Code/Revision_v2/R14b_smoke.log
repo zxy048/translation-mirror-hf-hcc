@@ -1,0 +1,21 @@
+[22:29:59] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[22:29:59] === R14b cohesion start === 
+[22:30:00] *** SMOKE MODE: 200 permutations *** 
+[22:30:01]   HF purple (153 genes): mean pairwise r = 0.3403 | null 0.0359 (sd 0.0080) | Z = 38.20 | P = 0.0050 
+[22:30:02]   HCC magenta (146 genes): mean pairwise r = 0.3916 | null 0.0260 (sd 0.0142) | Z = 25.67 | P = 0.0050 
+[written] D:/R_projects/revision_analysis/v2_output/tables/SMOKE_Table_S34_within_disease_cohesion.csv 
+
+=== R14b within-disease connectivity-free cohesion ===
+ disease  module n_genes n_samples n_genes_universe obs_mean_pairwise_r
+      HF  purple     153       177            10213              0.3403
+     HCC magenta     146       148            10213              0.3916
+ null_mean_r null_sd_r     Z       p n_perm k_module_mean k_universe_mean
+     0.03586   0.00797 38.20 0.00498    200           6.6            15.2
+     0.02598   0.01425 25.67 0.00498    200          21.1            74.1
+ k_module_over_universe
+                  0.434
+                  0.285
+[22:30:02] === R14b done === 

@@ -1,0 +1,157 @@
+﻿[22:58:40] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Rscript.exe : Warning messages:
+At line:1 char:367
++ ... vision_v2"; & "C:\Program Files\R\R-4.6.0\bin\Rscript.exe" "00_probe_ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning messages::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+
+### R02_wgcna : class=list
+  $HF                     list               (other)
+  $HCC                    list               (other)
+  $HF_sens                NULL               (other)
+  $HCC_sens               list               (other)
+  $wpar                   list               (other)
+  $pbHF                   list               (other)
+  $pbHCC                  list               (other)
+  $common                 list               (other)
+  $hf_dis                 character          len 177 | GSM1379812, GSM1379813, GSM1379814, GSM1379815, GSM1379816, GSM1379817
+  $hcc_all                character          len 148 | GSM4196911, GSM4196912, GSM4196913, GSM4196914, GSM4196915, GSM4196916
+  $datHF                  matrix/array       matrix 177x10213 | rn: GSM1379812,GSM1379813,GSM1379814 | cn: A2M,A4GALT,AAAS,AACS,AADAT,AAGAB
+  $datHCC                 matrix/array       matrix 148x10213 | rn: GSM4196911,GSM4196912,GSM4196913 | cn: A2M,A4GALT,AAAS,AACS,AADAT,AAGAB
+  $gxHF                   matrix/array       matrix 10213x177 | rn: A2M,A4GALT,AAAS | cn: GSM1379812,GSM1379813,GSM1379814,GSM1379815,GSM1379816,GSM1379817
+  $gxHCC                  matrix/array       matrix 10213x148 | rn: A2M,A4GALT,AAAS | cn: GSM4196911,GSM4196912,GSM4196913,GSM4196914,GSM4196915,GSM4196916
+  $U                      character          len 10213 | A2M, A4GALT, AAAS, AACS, AADAT, AAGAB
+  $inv                    data.frame         dim 45x5 | cols: disease, module, n_genes, power, pct_of_genes
+  $fit                    data.frame         dim 30x5 | cols: disease, power, fit, chosen_own, chosen_common
+  $module_trait_HF        data.frame         dim 69x5 | cols: module, trait, r, p, fdr
+  $kmeHF                  data.frame         dim 10213x4 | cols: gene, module, kME, disease
+  $kmeHCC                 data.frame         dim 10213x4 | cols: gene, module, kME, disease
+
+### R03_translation_module : class=list
+  $trkHF                  list               (other)
+  $trkHCC                 list               (other)
+  $desHF                  list               (other)
+  $desHCC                 list               (other)
+  $corr                   data.frame         dim 2967x8 | cols: set, module, r, tier, disease, p_fwer, module_agg, p_module
+  $hypHF                  data.frame         dim 24x8 | cols: module, n_module, n_overlap, expected, fold, p, fdr, disease
+  $hypHCC                 data.frame         dim 21x8 | cols: module, n_module, n_overlap, expected, fold, p, fdr, disease
+  $trans_genes            list               (other)
+  $overlap                character          len 5 | COMMD6, CWC15, MYL6B, NOP10, POLR2G
+  $tierA_genes            character          len 497 | FAU, MRPL13, RPL10, RPL10A, RPL10L, RPL11
+
+### R04_preservation : class=list
+  $table                  data.frame         dim 45x37 | cols: reference, test, module, moduleSize, Zsummary.pres, Zdensity.pres, Zconnectivity.pres, Z.propVarExplained.pres, Z.meanSignAwareKME.pres, Z.meanSignAwareCorDat.pres, Z.meanAdj.pres, Z.meanMAR.pres, Z.cor.kIM, Z.cor.kME
+  $designated             data.frame         dim 2x37 | cols: reference, module, test, moduleSize, Zsummary.pres, Zdensity.pres, Zconnectivity.pres, Z.propVarExplained.pres, Z.meanSignAwareKME.pres, Z.meanSignAwareCorDat.pres, Z.meanAdj.pres, Z.meanMAR.pres, Z.cor.kIM, Z.cor.kME
+  $verdict                data.frame         dim 2x5 | cols: reference, module, test, Zsummary, verdict
+  $nPermutations          numeric            len 1 | 200
+  $elapsed_min            numeric            len 1 | 67.7240407466888
+  $raw_file               character          len 1 | D:/R_projects/revision_analysis/v2_output/intermediate/R04_preservation_raw.rds
+  $smoke                  logical            len 1 | FALSE
+
+### R06_ssgsea : class=list
+  $scores                 list               (other)
+  $coverage               data.frame         dim 328x4 | cols: cohort, set, n_genes_in_cohort, scored
+  $sizes                  data.frame         dim 8x5 | cols: cohort, n_sets_total, n_tierA, n_tierB, n_tierC
+  $ALL_SETS               character          len 41 | KEGG_RIBOSOME, KEGG_AMINOACYL_TRNA_BIOSYNTHESIS, REACTOME_TRANSLATION, REACTOME_EUKARYOTIC_TRANSLATION_INITIATION, REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION, REACTOME_TRNA_AMINOACYLATION
+  $tier_of                character          len 41 | A, A, A, A, A, A
+
+### R07_effect_sizes : class=data.frame
+  $cohort                 character          len 268 | GSE57338, GSE57338, GSE57338, GSE57338, GSE57338, GSE57338
+  $disease                character          len 268 | HF, HF, HF, HF, HF, HF
+  $tech                   character          len 268 | array, array, array, array, array, array
+  $set                    character          len 268 | KEGG_RIBOSOME, KEGG_AMINOACYL_TRNA_BIOSYNTHESIS, REACTOME_TRANSLATION, REACTOME_EUKARYOTIC_TRANSLATION_INITIATION, REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION, REACTOME_TRNA_AMINOACYLATION
+  $tier                   character          len 268 | A, A, A, A, A, A
+  $n_disease              integer            len 268 | 177, 177, 177, 177, 177, 177
+  $n_control              integer            len 268 | 136, 136, 136, 136, 136, 136
+  $mean_disease           numeric            len 268 | 0.564612204029208, 0.220221956062157, 0.406833826134447, 0.561238087886687, 0.577416725499028, 0.205267504504207
+  $mean_control           numeric            len 268 | 0.574138580416991, 0.225258004347184, 0.415558687705903, 0.572542485833585, 0.586693571829332, 0.213745655802393
+  $sd_disease             numeric            len 268 | 0.0186042425664543, 0.0242569380154598, 0.0164441329419422, 0.013954194189793, 0.0169691933134107, 0.0227136115377105
+  $sd_control             numeric            len 268 | 0.0243700606371888, 0.0240302538460828, 0.0158465594536863, 0.0209914287357923, 0.0223751658343325, 0.0243019110137748
+  $cohens_d_equalweight   numeric            len 268 | -0.439414839550588, -0.20858503461383, -0.540302315477613, -0.634238544429554, -0.46718247421678, -0.360447661282322
+  $pooled_sd_nweighted    numeric            len 268 | 0.021299670195514, 0.0241587993901246, 0.0161874458844472, 0.0173628802691171, 0.0195007878516715, 0.0234163025419908
+  $hedges_J               numeric            len 268 | 0.997586484312148, 0.997586484312148, 0.997586484312148, 0.997586484312148, 0.997586484312148, 0.997586484312148
+  $d_nweighted            numeric            len 268 | -0.447254642928172, -0.208456066201925, -0.53898938929204, -0.65106697573699, -0.475716489039622, -0.362061913189836
+  $hedges_g               numeric            len 268 | -0.446175186831, -0.207952954215918, -0.537688529945398, -0.649495615377207, -0.474568339830355, -0.361188071082379
+  $ci_lo                  numeric            len 268 | -0.682553528877304, -0.42492044652059, -0.746307790614628, -0.88778546580913, -0.717249965956526, -0.57813112899385
+  $ci_hi                  numeric            len 268 | -0.219294815025635, 0.0224292298062042, -0.325361317478938, -0.424933262375144, -0.2489335821176, -0.138025703453763
+  $p_ttest                numeric            len 268 | 0.000190611943711065, 0.0682170833489449, 3.18023590985148e-06, 1.49866780975861e-07, 7.55970884898673e-05, 0.00182659413468415
+  $ci_excludes_0          logical            len 268 | TRUE, FALSE, TRUE, TRUE, TRUE, TRUE
+  $meets_min_effect       logical            len 268 | TRUE, TRUE, TRUE, TRUE, TRUE, TRUE
+  $mirror_candidate       logical            len 268 | TRUE, FALSE, TRUE, TRUE, TRUE, TRUE
+  $p_fdr                  numeric            len 268 | 0.000289447766376062, 0.0847545581002043, 6.153501044816e-06, 4.38895572857878e-07, 0.000119210793387868, 0.00249634531740167
+
+### R08_redundancy : class=list
+  $clusters               data.frame         dim 41x5 | cols: set, tier, cluster, is_representative, n_genes
+  $hclust                 hclust             (other)
+  $jaccard                dist               len 820 | 1, 0.769436997319035, 0.308943089430894, 0.123711340206186, 1, 1
+  $cut                    numeric            len 1 | 0.7
+  $representatives        character          len 23 | REACTOME_RRNA_PROCESSING, REACTOME_TRNA_AMINOACYLATION, REACTOME_TRANSLATION, REACTOME_MITOCHONDRIAL_TRANSLATION, REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION, REACTOME_TRNA_PROCESSING
+  $n_eff                  data.frame         dim 8x7 | cols: cohort, tierA_m, tierA_nyholt, tierA_li_ji, all_m, all_nyholt, all_li_ji
+
+### R09_mirror : class=list
+  $results                list               (other)
+  $summary                data.frame         dim 8x13 | cols: pair, tier, n_sets, n_clusters, n_mirror_sets, null_sets_mean, p_perm_sets, n_mirror_clusters, null_clusters_mean, p_perm_clusters, p_binom_v1_style, n_eff_nyholt, n_eff_li_ji
+  $obs                    data.frame         dim 175x11 | cols: set, g_HCC, g_HF, hcc_solid, hf_solid, mirror, same_direction, hcc_cohort, hf_cohort, tier, cluster
+
+### R10_heterogeneity : class=list
+  $heterogeneity          data.frame         dim 82x10 | cols: disease, set, tier, n_cohorts, Q, p_Q, I2_pct, g_pooled, se_pooled, cohorts
+  $stratified             data.frame         dim 41x5 | cols: set, g_DCM_vs_NF, g_ICM_vs_NF, tier, same_direction
+  $groups                 list               (other)
+
+### R10b_hf_aetiology : class=list
+  $stratified             data.frame         dim 75x9 | cols: cohort, aetiology, n_aetiology, n_control, set, tier, hedges_g, direction, acronym
+  $vs_hcc                 data.frame         dim 5x10 | cols: cohort, aetiology, n_aetiology, n_control, n_sets, spearman_rho_vs_HCC, mirror_sets_abs_g_ge_020, mirror_sets_gated, n_gated, mean_g
+  $dcm_cross              data.frame         dim 15x3 | cols: set, g_GSE57338_DCM, g_GSE141910_DCM
+  $rho_dcm_cross          numeric            len 1 | 0.35
+
+### R12_tats_tf : class=list
+  $scores                 list               (other)
+  $accounting             data.frame         dim 8x15 | cols: cohort, disease, tech, n_samples, n_tierA_sets, n_tierA_expected, genes_HF_module, genes_HF_present, frac_HF_present, genes_HCC_module, genes_HCC_present, frac_HCC_present, HF_in_tierA, HCC_in_tierA
+  $concordance            data.frame         dim 24x4 | cols: cohort, score_a, score_b, r
+  $effects                data.frame         dim 21x10 | cols: cohort, disease, score, n_disease, n_control, mean_disease, mean_control, hedges_g, p, p_fdr
+  $tf                     data.frame         dim 582x15 | cols: cohort, disease, arm, score, tf, tf_in_translation_sets, n, r_unadjusted, p_unadjusted, r_adjusted, p_adjusted, covariates, p_fdr_unadjusted, p_fdr_adjusted
+  $gs                     data.frame         dim 2x9 | cols: cohort, module, n_module_genes, n_present, n_absGS_gt_020, n_absGS_gt_050, n_absGS_gt_050_and_FDR05, n_FDR05_alone, median_abs_GS
+  $tf_in_sets             character          len 3 | EIF4EBP1, EIF4E, EIF4G1
+  $genes_HF               character          len 153 | AHCY, AIP, ASL, ATOX1, BAD, BLOC1S1
+  $genes_HCC              character          len 146 | ALKBH3, ANXA11, AP1S1, ARL3, ARMC7, ARPC1A
+
+### R15_cirrhosis_control : class=list
+  $es                     data.frame         dim 280x16 | cols: cohort, set, tier, stage, stage_index, n_stage, n_control, mean_stage, mean_control, hedges_g, ci_lo, ci_hi, p_ttest, ci_excludes_0
+  $wide                   data.frame         dim 40x11 | cols: set, tier, CH_low, CH_high, Cirrhosis, DN_low, DN_high, eHCC, HCC, cirrhosis_same_direction_as_HCC, cirrhosis_magnitude_ratio
+  $scores                 matrix/array       matrix 40x107 | rn: KEGG_RIBOSOME,KEGG_AMINOACYL_TRNA_BIOSYNTHESIS,REACTOME_TRANSLATION | cn: GSM2367554,GSM2367555,GSM2367556,GSM2367557,GSM2367558,GSM2367559
+  $stage                  character          len 107 | Normal, Normal, Normal, Normal, Normal, Normal
+  $crosscheck             data.frame         dim 15x6 | cols: set, HCC, TCGA_LIHC, GSE14520_GPL3921, GSE14520_GPL571, GSE76427
+  $stages                 character          len 8 | Normal, CH_low, CH_high, Cirrhosis, DN_low, DN_high
+
+### R01_universe
+  class: list | names: E_hf_full, E_hcc_full, U, ann_hf, loss, coverage 
+  $E_hf_full          matrix/array   len 3784170 | 10.68228375, 5.962148516, 7.663260977, 6.099032497
+  $E_hcc_full         matrix/array   len 1950344 | 6.04265069962987, 6.16114716226709, 8.80205655062258, 10.902261521043
+  $U                  character      len 10213 | A2M, A4GALT, AAAS, AACS
+  $ann_hf             data.frame     
+  $loss               data.frame     
+  $coverage           data.frame     
+
+### SETS_TIER_A
+  n = 15 
+   KEGG_RIBOSOME
+   KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+   REACTOME_TRANSLATION
+   REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+   REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+   REACTOME_TRNA_AMINOACYLATION
+   REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+   REACTOME_RRNA_PROCESSING
+   REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+   REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+   REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+   REACTOME_MITOCHONDRIAL_TRANSLATION
+   REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+   REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+   REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION 
+
+PROBE DONE

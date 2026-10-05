@@ -1,0 +1,82 @@
+[13:56:14] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[13:56:25] === R03 start === 
+[13:56:27] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S8_set_module_correlation.csv 
+
+=== Criterion 1: eigengene tracking (modules ranked by mean |r| to Tier A sets) ===
+
+-- HF --
+    module mean_abs_r    p_module
+      blue  0.5714412 0.000999001
+     brown  0.5216562 0.000999001
+    purple  0.5034236 0.000999001
+      pink  0.4172223 0.000999001
+ lightcyan  0.4017630 0.000999001
+ turquoise  0.3948859 0.000999001
+      cyan  0.3912693 0.000999001
+   magenta  0.3678722 0.000999001
+
+-- HCC --
+     module mean_abs_r    p_module
+    magenta  0.5011597 0.000999001
+  turquoise  0.3505886 0.000999001
+       blue  0.3502514 0.000999001
+     yellow  0.3271325 0.000999001
+      brown  0.3171171 0.000999001
+      green  0.3104788 0.000999001
+ lightgreen  0.2822702 0.000999001
+     grey60  0.2708351 0.000999001
+
+HF  best-tracking module: blue (mean|r|=0.571, perm p=0.0010)
+HCC best-tracking module: magenta (mean|r|=0.501, perm p=0.0010)
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S9_translation_overrepresentation.csv 
+
+=== Criterion 2: hypergeometric over-representation of Tier A genes ===
+
+-- HF --
+       module n_module n_overlap expected  fold            p          fdr
+       purple      153        73      6.8 10.69 2.367466e-58 5.681919e-57
+         blue     1525       115     68.1  1.69 2.920749e-09 3.504898e-08
+         pink      173        23      7.7  2.98 2.511933e-06 2.009547e-05
+    turquoise     2132       119     95.2  1.25 3.603701e-03 2.162220e-02
+        black      184        14      8.2  1.70 3.598414e-02 1.727239e-01
+ midnightblue       93         7      4.2  1.69 1.214117e-01 4.856469e-01
+ disease
+      HF
+      HF
+      HF
+      HF
+      HF
+      HF
+
+-- HCC --
+     module n_module n_overlap expected fold            p          fdr disease
+       blue     1948       173     87.0 1.99 4.698094e-22 9.865998e-21     HCC
+    magenta      146        26      6.5 3.99 1.164597e-09 1.222827e-08     HCC
+      brown      389        37     17.4 2.13 1.052575e-05 7.368025e-05     HCC
+ lightgreen       68         8      3.0 2.63 1.046832e-02 5.495867e-02     HCC
+     grey60       78         8      3.5 2.30 2.262471e-02 9.502379e-02     HCC
+       cyan       99         8      4.4 1.81 7.454364e-02 2.609027e-01     HCC
+
+=== DESIGNATION (rule b: max fold among FDR<alpha, applied to both) ===
+
+HF: translation module = purple
+    size          : 153 genes
+    Tier A members: 73 (expected 6.8) -> fold 10.69, p=2.37e-58, FDR=5.68e-57
+    tracking      : mean|r|=0.503, rank 3 of 23 modules
+    rule agreement: by significance=purple (fold 10.69) | by tracking=blue [differs from primary]
+
+HCC: translation module = magenta
+    size          : 146 genes
+    Tier A members: 26 (expected 6.5) -> fold 3.99, p=1.16e-09, FDR=1.22e-08
+    tracking      : mean|r|=0.501, rank 1 of 23 modules
+    rule agreement: by significance=blue (fold 1.99) | by tracking=magenta [matches primary]
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S10_translation_module_genes.csv 
+
+translation modules: HF=153 genes, HCC=146 genes, overlap=5 (Jaccard=0.017)
+Tier A genes in HF module:  73 
+Tier A genes in HCC module: 26 
+[13:56:39] === R03 done === 

@@ -1,0 +1,62 @@
+﻿[21:54:56] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Rscript.exe : Warning messages:
+At line:1 char:385
++ ... TER = "10"; & "C:/Program Files/R/R-4.6.0/bin/Rscript.exe" --vanilla  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning messages::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[21:54:56] === R14 start === 
+[21:54:56] *** SMOKE MODE: 300 TOM perms, 100 coherence perms, 10 jackknife iters *** 
+[21:54:57] --- HF: module purple (153 genes), power 14, n 177 samples --- 
+..connectivity..
+..matrix multiplication (system BLAS)..
+..normalization..
+..done.
+[21:55:00]   SELFTEST HF: TOM off-diag max|diff| = 3.469e-16 ; adjacency max|diff| = 1.554e-14 
+[21:55:15]   full-universe k: all genes mean 15.2 median 10.0 | module mean 6.6 median 6.0 
+[21:58:59]   UNMATCHED null: obs 0.0079 | null 0.0028 (sd 0.0003) | Z = 14.70 | P = 0.0033 
+[21:58:59]   MATCHED   null: obs 0.0079 | null 0.0007 (sd 0.0000) | Z = 404.12 | P = 0.0033 
+[21:58:59]   jackknife: CV of mean kIM = 2.83% (v1's 1.6% is this quantity) ; median per-gene CV = 52.97% ; 0/153 genes with kIM < 0.05 
+[21:58:59]   coherence in HCC: 153 of 153 module genes present; obs mean r = 0.3256 ; Z = 21.14 ; P = 0.0099 
+[21:58:59] --- HCC: module magenta (146 genes), power 14, n 148 samples --- 
+..connectivity..
+..matrix multiplication (system BLAS)..
+..normalization..
+..done.
+[21:59:02]   SELFTEST HCC: TOM off-diag max|diff| = 7.216e-16 ; adjacency max|diff| = 6.217e-15 
+[21:59:16]   full-universe k: all genes mean 74.1 median 30.5 | module mean 21.1 median 12.9 
+[22:02:31]   UNMATCHED null: obs 0.0180 | null 0.0184 (sd 0.0026) | Z = -0.17 | P = 0.5847 
+[22:02:31]   MATCHED   null: obs 0.0180 | null 0.0038 (sd 0.0002) | Z = 89.57 | P = 0.0033 
+[22:02:31]   jackknife: CV of mean kIM = 2.99% (v1's 1.6% is this quantity) ; median per-gene CV = 50.02% ; 0/146 genes with kIM < 0.05 
+[22:02:31]   coherence in HF: 146 of 146 module genes present; obs mean r = 0.1400 ; Z = 12.16 ; P = 0.0099 
+[written] D:/R_projects/revision_analysis/v2_output/tables/SMOKE_Table_S32_module_internal_robustness.csv 
+[written] D:/R_projects/revision_analysis/v2_output/tables/SMOKE_Table_S33_cross_disease_module_coherence.csv 
+
+=== R14 module internal robustness ===
+ disease  module n_genes power n_samples k_universe_mean k_module_mean
+      HF  purple     153    14       177            15.2           6.6
+     HCC magenta     146    14       148            74.1          21.1
+ obs_mean_intra_TOM unmatched_null_mean unmatched_null_sd Z_unmatched
+           0.007868            0.002774         0.0003465       14.70
+           0.017980            0.018430         0.0025760       -0.17
+ P_unmatched matched_null_mean matched_null_sd Z_matched P_matched n_perm
+     0.00332         0.0007133        1.77e-05    404.12   0.00332    300
+     0.58500         0.0038330        1.58e-04     89.57   0.00332    300
+ n_bins jackknife_CV_of_mean_kIM_pct jackknife_median_pergene_CV_pct
+     20                         2.83                           52.97
+     20                         2.99                           50.02
+ jackknife_n_degenerate
+                      0
+                      0
+
+=== R14 cross-disease coherence ===
+ module_disease  module tested_in n_genes_module n_genes_present
+             HF  purple       HCC            153             153
+            HCC magenta        HF            146             146
+ obs_mean_pairwise_r null_mean_r null_sd_r     Z      p n_perm
+              0.3256     0.02636  0.014150 21.14 0.0099    100
+              0.1400     0.03579  0.008571 12.16 0.0099    100
+[22:02:31] === R14 done === 

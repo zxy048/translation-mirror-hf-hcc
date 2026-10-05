@@ -1,0 +1,9 @@
+### GSE116250 series matrix annotation
+cols: gsm | tissue | disease | age | Sex 
+  gsm            chr n_nonNA=64 vals: GSM3219558, GSM3219559, GSM3219560, GSM3219561, GSM3219562, GSM3219563, GSM3219564, GSM3219565, GSM3219566, GSM3219567, GSM3219568, GSM3219569
+  tissue         chr n_nonNA=64 vals: left ventricle
+  disease        chr n_nonNA=64 vals: dilated cardiomyopathy, ischemic cardiomyopathy, non-failing
+  age            chr n_nonNA=64 vals: 20, 21, 26, 27, 28, 29, 31, 38, 39, 40, 41, 43
+  Sex            chr n_nonNA=64 vals: Female, Male
+
+### TCGA-LIHC colData columns mentioning age / gender / sex / stage

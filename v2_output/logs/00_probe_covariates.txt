@@ -1,0 +1,80 @@
+cohorts: GSE57338, GSE141198, TCGA_LIHC, GSE116250, GSE14520_GPL3921, GSE14520_GPL571, GSE76427, GSE141910 
+
+======================================================================
+GSE57338  n =313 genes =12090
+tech: array  subset: all 
+  ann dim: 313 x 8 
+  ann cols: gsm | tissue | heart.failure | disease.status | gender | age | group | etiology 
+    gsm                factor   n_levels=313  top: GSM1379812(1), GSM1379813(1), GSM1379814(1), GSM1379815(1), GSM1379816(1), GSM1379817(1), GSM1379818(1), GSM1379819(1)
+    tissue             factor   n_levels=1  top: heart left ventricle(313)
+    heart.failure      factor   n_levels=2  top: yes(177), no(136)
+    disease.status     factor   n_levels=3  top: non-failing(136), ischemic(95), idiopathic dilated CMP(82)
+    gender             factor   n_levels=2  top: male(217), female(96)
+    age                factor   n_levels=62  top: 58(19), 60(15), 62(15), 56(14), 53(12), 67(12), 57(11), 59(11)
+    group              factor   n_levels=2  top: HF(177), NF(136)
+    etiology           factor   n_levels=3  top: NF(136), ICM(95), DCM(82)
+
+======================================================================
+GSE141198  n =148 genes =13178
+tech: RNA-seq  subset: all 
+  ann: NULL
+
+======================================================================
+TCGA_LIHC  n =421 genes =17146
+tech: RNA-seq  subset: Primary Tumor / Solid Tissue Normal 
+  ann: NULL
+
+======================================================================
+GSE116250  n =64 genes =26261
+tech: RNA-seq  subset: all 
+  ann: NULL
+
+======================================================================
+GSE14520_GPL3921  n =445 genes =7629
+tech: array  subset: GPL3921 
+  ann dim: 445 x 4 
+  ann cols: gsm | Tissue | Disease.state | Individual 
+    gsm                factor   n_levels=445  top: GSM362958(1), GSM362959(1), GSM362960(1), GSM362961(1), GSM362962(1), GSM362963(1), GSM362964(1), GSM362965(1)
+    Tissue             factor   n_levels=2  top: Liver Tumor Tissue(225), Liver Non-Tumor Tissue(220)
+    Disease.state      factor   n_levels=1  top: Hepatocellular carcinoma (HCC)(445)
+    Individual         factor   n_levels=445  top: 02-269A(1), 02-269B(1), 02-271A(1), 02-271B(1), 02-284A(1), 02-284B(1), 02-285A(1), 02-285B(1)
+
+======================================================================
+GSE14520_GPL571  n =41 genes =7733
+tech: array  subset: GPL571 
+  ann dim: 43 x 4 
+  ann cols: gsm | Tissue | Disease.state | Individual 
+    gsm                factor   n_levels=43  top: GSM362947(1), GSM362948(1), GSM362949(1), GSM362950(1), GSM362951(1), GSM362952(1), GSM362953(1), GSM362954(1)
+    Tissue             factor   n_levels=4  top: Liver Tumor Tissue(22), Liver Non-Tumor Tissue(19), Liver tissue of six healthy donors(1), Liver tissue of six healthy liver donors(1)
+    Disease.state      factor   n_levels=2  top: Hepatocellular carcinoma (HCC)(41), (2)
+    Individual         factor   n_levels=42  top: (2), 02-407A(1), 03-050A(1), 03-114A(1), 03-212A(1), 03-212B(1), 03-356A(1), 03-356B(1)
+
+======================================================================
+GSE76427  n =167 genes =16907
+tech: array  subset: all 
+  ann dim: 167 x 12 
+  ann cols: gsm | diagnosis | patient.id | tissue | event_os | duryears_os | event_rfs | duryears_rfs | age..years. | gender..1.m..2.f. | bclc_staging | tnm_staging_clinical 
+    gsm                factor   n_levels=167  top: GSM2011285(1), GSM2011286(1), GSM2011287(1), GSM2011288(1), GSM2011289(1), GSM2011290(1), GSM2011291(1), GSM2011292(1)
+    diagnosis          factor   n_levels=1  top: hepatocellular carcinoma (HCC)(167)
+    patient.id         factor   n_levels=115  top: HCC101(2), HCC102(2), HCC103(2), HCC11(2), HCC14(2), HCC16(2), HCC17(2), HCC18(2)
+    tissue             factor   n_levels=2  top: primary hepatocellular carcinoma tumor(115), adjacent non-tumor liver tissue(52)
+    event_os           factor   n_levels=3  top: 0(92), (52), 1(23)
+    duryears_os        factor   n_levels=81  top: (52), 0.04(7), 0.02(5), 0.07(4), 0.78(4), 0.03(3), 0.58(3), 3.2(3)
+    event_rfs          factor   n_levels=4  top: 0(60), (52), 1(48), NA(7)
+    duryears_rfs       factor   n_levels=70  top: (52), 0.04(7), NA(7), 0.02(5), 0.07(4), 0.56(4), 0.58(4), 0.03(3)
+    age..years.        factor   n_levels=44  top: (52), 58(7), 55(6), 65(6), 71(5), 73(5), 78(5), 53(4)
+    gender..1.m..2.f.  factor   n_levels=3  top: 1(93), (52), 2(22)
+    bclc_staging       factor   n_levels=5  top: A(74), (52), B(28), C(9), 0(4)
+    tnm_staging_clinical factor   n_levels=8  top: I(55), (52), II(35), IIIA(13), IIIB(8), IVA(2), IVB(1), NA(1)
+
+======================================================================
+GSE141910  n =366 genes =16978
+tech: RNA-seq  subset: all 
+  ann dim: 366 x 5 
+  ann cols: gsm | etiology | Sex | race | age 
+    gsm                factor   n_levels=366  top: GSM4215858(1), GSM4215859(1), GSM4215860(1), GSM4215861(1), GSM4215862(1), GSM4215863(1), GSM4215864(1), GSM4215865(1)
+    etiology           factor   n_levels=4  top: Dilated cardiomyopathy (DCM)(166), Non-Failing Donor(166), Hypertrophic cardiomyopathy (HCM)(28), Peripartum cardiomyopathy (PPCM)(6)
+    Sex                factor   n_levels=2  top: Male(194), Female(172)
+    race               factor   n_levels=2  top: Caucasian(242), African American(124)
+    age                factor   n_levels=64  top: 56(24), 53(19), 58(17), 59(17), 51(16), 62(16), 54(15), 65(14)
+

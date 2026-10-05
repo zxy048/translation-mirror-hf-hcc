@@ -1,0 +1,6 @@
+"cohort","aetiology","n_aetiology","n_control","n_sets","spearman_rho_vs_HCC","mirror_sets_abs_g_ge_020","mirror_sets_gated","n_gated","mean_g"
+"GSE141910","Dilated cardiomyopathy (DCM)",166,166,15,-0.192857142857143,1,1,13,0.131912751867727
+"GSE141910","Peripartum cardiomyopathy (PPCM)",6,166,15,0.114285714285714,3,3,13,-0.126265766480472
+"GSE141910","Hypertrophic cardiomyopathy (HCM)",28,166,15,-0.1,2,2,13,-0.0194584950273803
+"GSE57338","ICM",95,136,15,-0.596428571428571,11,11,13,-0.431009888285867
+"GSE57338","DCM",82,136,15,-0.553571428571428,11,11,13,-0.291113818971985

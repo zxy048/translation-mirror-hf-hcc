@@ -1,0 +1,100 @@
+[22:25:45] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[22:25:55] === R15 start === 
+[22:26:03]   series matrix: 107 samples; phenotype levels: 
+ph
+Choronic Hepatitis with high grade  Choronic Hepatitis with low grade 
+                                12                                  8 
+                         Cirrhosis Dysplastic nodules with high grade 
+                                12                                 11 
+ Dysplastic nodules with low grade     earyl hepatocellular carcinoma 
+                                11                                  5 
+    hepatocellular carcinoma (TG1)     hepatocellular carcinoma (TG2) 
+                                 9                                 12 
+    hepatocellular carcinoma (TG3)                             Normal 
+                                14                                 13 
+[22:26:03]   stage counts: CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
+[22:26:20]   raw: 48803 probes x 215 columns 
+[22:26:21]   title-vs-phenotype agreement: 107 / 107 
+[22:26:23]   detection filter: 17793 / 48803 probes kept 
+[22:26:25]   after log2 + quantile: range 5.37-15.37 
+[22:26:25]   GPL6947 annot: 49577 probes; cols: ID, Gene title, Gene symbol, Gene ID 
+[22:26:25]   11756 genes x 107 samples after collapse 
+[22:26:25]   final: 11756 genes x 107 samples; CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
+[22:26:26] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[22:26:27]   ssGSEA: 40 sets x 107 samples; dropped 1 sets (<5 genes measured) 
+[22:26:27]   tiers scored: A=15 B_extra=5 C_v1=20 
+[22:26:27]   reference arm: Normal, n = 13 
+[22:26:32]   CH_low (8 vs 13) done 
+[22:26:36]   CH_high (12 vs 13) done 
+[22:26:40]   Cirrhosis (12 vs 13) done 
+[22:26:44]   DN_low (11 vs 13) done 
+[22:26:48]   DN_high (11 vs 13) done 
+[22:26:53]   eHCC (5 vs 13) done 
+[22:26:57]   HCC (35 vs 13) done 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S34_GSE89377_stage_spectrum_effect_sizes.csv 
+[22:26:57] --- cirrhosis vs HCC direction agreement --- 
+[22:26:57]   Tier A     n=15 | both-up 11 | both-down  1 | discordant  3 | rho=+0.668 
+[22:26:57]   ALL tiers  n=40 | both-up 21 | both-down  3 | discordant 16 | rho=+0.532 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S35_GSE89377_HCC_vs_cirrhosis_specificity.csv 
+[22:26:57] --- eHCC vs HCC direction agreement (is the change at the transition?) --- 
+[22:26:57]   Tier A     n=15 | both-up 13 | both-down  0 | discordant  2 | rho=+0.343 
+[22:26:57]   ALL tiers  n=40 | both-up 29 | both-down  3 | discordant  8 | rho=+0.665 
+
+=== Tier A: does cirrhosis move the same way as HCC? ===
+                                                                                 set
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                                REACTOME_TRANSLATION
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                                        REACTOME_TRNA_AMINOACYLATION
+                                                                       KEGG_RIBOSOME
+                                                            REACTOME_RRNA_PROCESSING
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+ CH_low CH_high Cirrhosis DN_low DN_high    eHCC    HCC
+  0.578  1.4871     1.759  1.106   0.736  1.0250  0.931
+  0.489  1.3520     1.587  0.936   0.554  0.8210  0.859
+  0.722  1.5701     2.135  1.323   0.457  0.6338  0.807
+  0.794  1.4105     1.048  1.271   1.245  1.0472  0.659
+  0.875  1.5995     0.960  0.523   1.457  0.4667  0.630
+  0.548  1.3286     1.984  1.067   0.227  0.3449  0.626
+  0.623  1.5457     1.870  1.166   0.387  0.3176  0.583
+  0.524  0.4906    -0.603  0.462   1.316  0.6450  0.475
+  0.608  1.4009     2.026  1.069   0.153  0.1955  0.473
+  0.263  1.2845     0.499  0.101   0.292 -0.0514  0.458
+  0.348  0.0976    -0.850  0.318   0.982  0.5673  0.347
+  0.587  0.8517     0.412  0.941   1.067  0.7103  0.253
+  0.338  0.1583    -0.746  0.283   1.056  0.5937  0.216
+  0.596  0.8414     0.333  0.907   1.064  0.6626  0.216
+  0.491  0.5692    -0.125  0.445   1.334  0.4034 -0.128
+ cirrhosis_same_direction_as_HCC
+                            TRUE
+                            TRUE
+                            TRUE
+                            TRUE
+                            TRUE
+                            TRUE
+                            TRUE
+                           FALSE
+                            TRUE
+                            TRUE
+                           FALSE
+                            TRUE
+                           FALSE
+                            TRUE
+                            TRUE
+[22:26:57] --- GSE89377 HCC arm vs the HCC cohorts v1 already used (Tier A, n=15) --- 
+[22:26:57]   vs TCGA_LIHC      n=15 | sign agreement 100% | Spearman rho=0.607 
+[22:26:57]   vs GSE14520_GPL3921 n=14 | sign agreement 100% | Spearman rho=0.790 
+[22:26:57]   vs GSE14520_GPL571 n=15 | sign agreement 93% | Spearman rho=0.596 
+[22:26:57]   vs GSE76427       n=14 | sign agreement 100% | Spearman rho=0.833 
+[22:26:57] === R15 done === 

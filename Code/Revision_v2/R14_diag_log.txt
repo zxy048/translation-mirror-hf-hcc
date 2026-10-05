@@ -1,0 +1,24 @@
+﻿[21:38:28] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Rscript.exe : Warning messages:
+At line:1 char:302
++ ... tch {} } }; & "C:/Program Files/R/R-4.6.0/bin/Rscript.exe" --vanilla  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning messages::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+
+================== HF module purple : 153 genes ==================
+  adjacency check vs WGCNA::adjacency: max|diff| = 2.176e-14
+  mean pairwise r: module 0.3403 | random 0.0355 (sd 0.0074) | Z = 40.96
+  kme object:  10213 x 4  cols:  gene,module,kME,disease  ...
+  full-universe k: all genes mean 15.2 median 10.0 | module genes mean 6.6 median 6.0
+
+================== HCC module magenta : 146 genes ==================
+  adjacency check vs WGCNA::adjacency: max|diff| = 1.554e-14
+  mean pairwise r: module 0.3916 | random 0.0239 (sd 0.0141) | Z = 26.00
+  kme object:  10213 x 4  cols:  gene,module,kME,disease  ...
+  full-universe k: all genes mean 74.1 median 30.5 | module genes mean 21.1 median 12.9
+
+DIAG DONE

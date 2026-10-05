@@ -1,0 +1,425 @@
+﻿[19:15:54] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Rscript.exe : Warning messages:
+At line:1 char:365
++ ... evision_v2; & "C:/Program Files/R/R-4.6.0/bin/Rscript.exe" --vanilla  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Warning messages::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[19:15:54] === R11 start === 
+[19:15:59]   GSE57338: marker panel 'lymphocyte' has <3 genes present, skipped 
+[19:16:03]   GSE57338: marker panel 'proliferation' has <3 genes present, skipped 
+[19:16:03]   GSE57338: 313 samples x 6 panels 
+[19:16:07]   GSE141198: 148 samples x 8 panels 
+[19:16:28]   TCGA_LIHC: 421 samples x 8 panels 
+[19:16:32]   GSE116250: 64 samples x 8 panels 
+[19:16:37]   GSE14520_GPL3921: marker panel 'cardiomyocyte' has <3 genes present, skipped 
+[19:16:38]   GSE14520_GPL3921: 445 samples x 7 panels 
+[19:16:39]   GSE14520_GPL571: marker panel 'cardiomyocyte' has <3 genes present, skipped 
+[19:16:39]   GSE14520_GPL571: 41 samples x 7 panels 
+[19:16:45]   GSE76427: 167 samples x 8 panels 
+[19:17:00]   GSE141910: 366 samples x 8 panels 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S23_composition_marker_coverage.csv 
+[19:17:00]   GSE141198: no two-arm comparison, composition shift not tested 
+
+=== do composition scores shift with disease? (rank score) ===
+           cohort         panel    hedges_g         p_fdr
+        GSE116250    fibroblast  1.71650664  1.237979e-03
+        GSE116250 cardiomyocyte  1.67401137  4.455996e-03
+        GSE116250   endothelial  1.34104489  4.036309e-06
+        GSE116250 proliferation -1.26585229  2.168468e-02
+        GSE116250    lymphocyte  0.95074817  7.616750e-04
+        GSE116250    immune_pan  0.54689486  4.424076e-02
+        GSE116250    hepatocyte -0.25945426  4.696876e-01
+        GSE116250       myeloid -0.20040363  4.696876e-01
+        GSE141910    lymphocyte  1.42892017  4.855219e-35
+        GSE141910    fibroblast  1.31799037  1.021886e-28
+        GSE141910 cardiomyocyte  0.81202885  9.041693e-13
+        GSE141910 proliferation -0.76421977  1.743171e-11
+        GSE141910    immune_pan  0.61979469  6.195055e-09
+        GSE141910       myeloid -0.14310706  2.048092e-01
+        GSE141910   endothelial  0.14053325  2.048092e-01
+        GSE141910    hepatocyte  0.03083199  7.714418e-01
+ GSE14520_GPL3921 proliferation  3.01748971 5.269301e-110
+ GSE14520_GPL3921    lymphocyte -0.98544216  3.184515e-22
+ GSE14520_GPL3921    hepatocyte -0.97789612  2.680402e-21
+ GSE14520_GPL3921       myeloid -0.93735804  1.045610e-20
+ GSE14520_GPL3921    immune_pan -0.82652490  8.069396e-17
+ GSE14520_GPL3921    fibroblast -0.42153706  1.182744e-05
+ GSE14520_GPL3921   endothelial -0.18098809  5.597409e-02
+  GSE14520_GPL571 proliferation  3.11579518  8.050336e-12
+  GSE14520_GPL571    hepatocyte -1.14712729  2.134817e-03
+  GSE14520_GPL571       myeloid -1.02649107  3.315881e-03
+  GSE14520_GPL571    immune_pan -0.80778927  1.701535e-02
+  GSE14520_GPL571    lymphocyte -0.76223847  1.955013e-02
+  GSE14520_GPL571    fibroblast -0.17951354  6.004885e-01
+  GSE14520_GPL571   endothelial  0.15460265  6.004885e-01
+         GSE57338       myeloid -0.49036466  7.105067e-05
+         GSE57338    fibroblast  0.44501159  2.511061e-04
+         GSE57338    hepatocyte -0.43230484  2.511061e-04
+         GSE57338   endothelial -0.37284654  1.383020e-03
+         GSE57338    immune_pan -0.35969579  1.383020e-03
+         GSE57338 cardiomyocyte  0.32228160  3.832533e-03
+         GSE76427 proliferation  1.69298664  1.220003e-21
+         GSE76427    lymphocyte -0.82489833  2.963694e-07
+         GSE76427    hepatocyte -0.81433008  1.485505e-09
+         GSE76427    immune_pan -0.65948254  3.073656e-05
+         GSE76427       myeloid -0.64322748  3.062257e-05
+         GSE76427   endothelial -0.50024096  1.428865e-03
+         GSE76427    fibroblast -0.43526213  2.803907e-03
+         GSE76427 cardiomyocyte -0.28883422  4.874913e-02
+        TCGA_LIHC proliferation  2.22675029  2.687940e-46
+        TCGA_LIHC cardiomyocyte  0.60184672  2.199329e-13
+        TCGA_LIHC    lymphocyte -0.59716275  9.983941e-08
+        TCGA_LIHC    hepatocyte -0.58221734  2.397163e-22
+        TCGA_LIHC       myeloid -0.53222176  4.459406e-05
+        TCGA_LIHC    immune_pan -0.45055280  3.091723e-04
+        TCGA_LIHC   endothelial -0.32399332  1.333003e-03
+        TCGA_LIHC    fibroblast -0.08355934  2.664879e-01
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S24_composition_shift.csv 
+[19:17:02]   GSE141198: single-arm, no adjustment possible 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S25_composition_adjustment.csv 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S26_composition_set_correlation.csv 
+
+=== Tier A: does the disease effect survive composition adjustment? ===
+
+-- GSE57338 (HF; covariates: cardiomyocyte+fibroblast+immune_pan) --
+                                                                                 set
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                                            REACTOME_RRNA_PROCESSING
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                                REACTOME_TRANSLATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                                                       KEGG_RIBOSOME
+                                                        REACTOME_TRNA_AMINOACYLATION
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+ g_unadjusted  g_adjusted attenuation p_unadjusted   p_adjusted survives
+  -0.91992740 -0.89828216  0.02352929 1.574512e-14 1.095414e-12     TRUE
+  -0.81137846 -0.75145329  0.07385601 7.726133e-12 1.680571e-09     TRUE
+  -0.65106698 -0.67857145 -0.04224522 2.643750e-08 4.490373e-08     TRUE
+  -0.60714824 -0.63971070 -0.05363181 1.943658e-07 2.332155e-07     TRUE
+  -0.59933300 -0.56096906  0.06401105 2.740965e-07 5.198916e-06     TRUE
+   0.55823213  0.76707247 -0.37411021 1.577871e-06 8.049588e-10     TRUE
+  -0.55207242 -0.46762293  0.15296814 2.033935e-06 1.346981e-04     TRUE
+  -0.53898939 -0.46106563  0.14457382 3.462000e-06 1.662857e-04     TRUE
+  -0.47571649 -0.51516036 -0.08291466 3.923678e-05 2.724111e-05     TRUE
+  -0.44725464 -0.47743755 -0.06748485 1.079759e-04 9.783162e-05     TRUE
+  -0.36206191 -0.34822693  0.03821164 1.647554e-03 4.264750e-03     TRUE
+  -0.20845607 -0.22528354 -0.08072434 6.849333e-02 6.344980e-02    FALSE
+  -0.10053542 -0.04997513  0.50291019 3.786395e-01 6.797351e-01    FALSE
+  -0.08824043  0.02850355  1.32302148 4.396129e-01 8.138374e-01    FALSE
+  -0.08120524  0.03918502  1.48254294 4.769093e-01 7.461583e-01    FALSE
+   survives adjustment: 11 / 15 sets
+
+-- TCGA_LIHC (HCC; covariates: hepatocyte+proliferation+immune_pan) --
+                                                                                 set
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                                        REACTOME_TRNA_AMINOACYLATION
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                            REACTOME_RRNA_PROCESSING
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                                                REACTOME_TRANSLATION
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                                                       KEGG_RIBOSOME
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+ g_unadjusted g_adjusted attenuation p_unadjusted   p_adjusted survives
+    1.1750453  0.7479671  0.36345681 4.975223e-14 8.719337e-05     TRUE
+    1.1211997  0.7659760  0.31682465 5.662115e-13 5.909430e-05     TRUE
+    1.1022280  0.8260776  0.25053838 1.307554e-12 1.526724e-05     TRUE
+    1.0261389  0.7065990  0.31140025 3.369077e-11 2.069642e-04     TRUE
+    0.9686392  0.7554742  0.22006642 3.488074e-10 7.421052e-05     TRUE
+    0.8813064  0.8345753  0.05302490 9.914488e-09 1.252265e-05     TRUE
+    0.8579696  0.6679503  0.22147556 2.323779e-08 4.473010e-04     TRUE
+    0.8357149  0.4899424  0.41374458 5.146652e-08 9.773627e-03     TRUE
+    0.7349424  0.4541700  0.38203315 1.521449e-06 1.655532e-02     TRUE
+    0.6874082  0.6030293  0.12274922 6.635325e-06 1.505635e-03     TRUE
+    0.6570388  0.5938981  0.09609887 1.629011e-05 1.771386e-03     TRUE
+    0.6404358  0.5653506  0.11724074 2.624113e-05 2.906384e-03     TRUE
+   -0.2581673  0.1775308  1.68765787 8.732541e-02 3.474787e-01    FALSE
+    0.1767055  0.2929721 -0.65796809 2.414806e-01 1.213840e-01    FALSE
+    0.1236504  0.2969770 -1.40174807 4.122388e-01 1.163911e-01    FALSE
+   survives adjustment: 12 / 15 sets
+
+-- GSE116250 (HF; covariates: cardiomyocyte+fibroblast+immune_pan) --
+                                                                                 set
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                                REACTOME_TRANSLATION
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                                                       KEGG_RIBOSOME
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                        REACTOME_TRNA_AMINOACYLATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                                            REACTOME_RRNA_PROCESSING
+ g_unadjusted  g_adjusted attenuation p_unadjusted  p_adjusted survives
+  -1.04612241 -0.68915512   0.3412290 0.0009838562 0.089639350    FALSE
+  -0.90566468  0.03387771   1.0374065 0.0039380222 0.932682535    FALSE
+  -0.84541068 -0.33181354   0.6075120 0.0068811045 0.409392301    FALSE
+  -0.73733741  0.14494154   1.1965742 0.0176258888 0.717945958    FALSE
+  -0.44707699  0.10452241   1.2337906 0.1443185429 0.794441579    FALSE
+   0.42693172  1.19928998  -1.8090909 0.1629659225 0.003916064     TRUE
+   0.41249982  0.26878873   0.3483907 0.1774317273 0.503536517    FALSE
+   0.36712480  0.05442324   0.8517582 0.2292945693 0.892064987    FALSE
+   0.30847112  0.26644812   0.1362299 0.3116111049 0.507245704    FALSE
+   0.22637678  0.17763629   0.2153069 0.4568865213 0.658084341    FALSE
+   0.22039829  1.11538886  -4.0607874 0.4688080593 0.007029963     TRUE
+   0.21256525  0.24742646  -0.1640024 0.4846912283 0.537927240    FALSE
+   0.10573285  0.87892151  -7.3126625 0.7277649760 0.031671298     TRUE
+  -0.04967723 -0.09112025  -0.8342458 0.8700357278 0.820303189    FALSE
+  -0.02782197 -0.05047795  -0.8143198 0.9269847518 0.899845556    FALSE
+   survives adjustment: 3 / 15 sets
+
+-- GSE14520_GPL3921 (HCC; covariates: hepatocyte+proliferation+immune_pan) --
+                                                                                 set
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                                                REACTOME_TRANSLATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                            REACTOME_RRNA_PROCESSING
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                                        REACTOME_TRNA_AMINOACYLATION
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                                       KEGG_RIBOSOME
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+ g_unadjusted g_adjusted attenuation p_unadjusted   p_adjusted survives
+    2.5035038  1.5580598   0.3776483 5.545513e-93 1.230563e-16     TRUE
+    2.3589089  1.3860288   0.4124280 3.889098e-86 1.138423e-13     TRUE
+    2.3442947  1.2103926   0.4836858 1.932156e-85 6.575686e-11     TRUE
+    1.8879034  1.3081339   0.3070970 1.787206e-63 2.069411e-12     TRUE
+    1.7127586  0.7218149   0.5785659 4.674272e-55 7.650479e-05     TRUE
+    1.6013218  0.9472268   0.4084719 9.243544e-50 2.499968e-07     TRUE
+    1.3943358  0.6292297   0.5487244 3.763953e-40 5.500984e-04     TRUE
+    1.3736224  0.5528706   0.5975090 3.274076e-39 2.362013e-03     TRUE
+    1.3572262  0.5477542   0.5964164 1.799931e-38 2.589922e-03     TRUE
+    1.3503438  0.9865230   0.2694283 3.672841e-38 8.097343e-08     TRUE
+    1.0720306  0.8120516   0.2425108 3.242972e-26 9.029655e-06     TRUE
+    0.5995125  0.2401566   0.5994135 6.272802e-10 1.847160e-01    FALSE
+    0.5995125  0.2401566   0.5994135 6.272802e-10 1.847160e-01    FALSE
+   -0.5961439 -0.3702005   0.3790082 7.742388e-10 4.117174e-02     TRUE
+   survives adjustment: 12 / 14 sets
+
+-- GSE14520_GPL571 (HCC; covariates: hepatocyte+proliferation+immune_pan) --
+                                                                                 set
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                            REACTOME_RRNA_PROCESSING
+                                                                REACTOME_TRANSLATION
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                        REACTOME_TRNA_AMINOACYLATION
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                                                       KEGG_RIBOSOME
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+ g_unadjusted  g_adjusted attenuation p_unadjusted p_adjusted survives
+   1.31542855  0.26169137   0.8010600 0.0001498408  0.6844222    FALSE
+   1.27125544  0.11495688   0.9095722 0.0002294080  0.8581668    FALSE
+   1.26896441 -0.24899316   1.1962176 0.0002345036  0.6989363    FALSE
+   1.22721144  0.17165809   0.8601235 0.0003491799  0.7896382    FALSE
+   1.12640096 -0.01087119   1.0096513 0.0008954217  0.9865134    FALSE
+   1.00330641  0.08394934   0.9163273 0.0027045191  0.8961562    FALSE
+   1.00196333  0.17493816   0.8254046 0.0027364943  0.7857197    FALSE
+   0.85366103  0.21006765   0.7539215 0.0095591326  0.7441269    FALSE
+   0.84724239  0.23384584   0.7239918 0.0100680773  0.7164005    FALSE
+   0.70946254 -0.11729929   1.1653354 0.0291255296  0.8553097    FALSE
+   0.67934024 -0.32961212   1.4851945 0.0362317312  0.6089469    FALSE
+   0.63867541 -0.06522966   1.1021327 0.0482393731  0.9192176    FALSE
+   0.45278675 -0.14949608   1.3301688 0.1562390487  0.8162540    FALSE
+   0.37859912  0.92346014  -1.4391503 0.2339950244  0.1568533    FALSE
+   0.05545542 -0.42496051   8.6631010 0.8603713283  0.5100470    FALSE
+   survives adjustment: 0 / 15 sets
+
+-- GSE76427 (HCC; covariates: hepatocyte+proliferation+immune_pan) --
+                                                                                 set
+                                                                REACTOME_TRANSLATION
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                                        REACTOME_TRNA_AMINOACYLATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                            REACTOME_RRNA_PROCESSING
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                                                       KEGG_RIBOSOME
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+ g_unadjusted g_adjusted attenuation p_unadjusted   p_adjusted survives
+   1.61075579 1.15705226  0.28167121 1.015292e-17 4.710616e-07     TRUE
+   1.53723882 1.22863999  0.20074879 1.547200e-16 1.013768e-07     TRUE
+   1.41850543 1.10550062  0.22065817 1.156597e-14 1.371983e-06     TRUE
+   1.38330593 0.85005045  0.38549353 4.058206e-14 1.652056e-04     TRUE
+   1.34763486 1.05750635  0.21528718 1.430041e-13 3.604596e-06     TRUE
+   1.27073042 0.96381583  0.24152612 2.061861e-12 2.181060e-05     TRUE
+   1.21171646 1.01483468  0.16248173 1.522907e-11 8.301488e-06     TRUE
+   1.19447470 1.07898161  0.09668944 2.708127e-11 2.347976e-06     TRUE
+   1.18063360 0.65241100  0.44740604 4.286275e-11 3.534107e-03     TRUE
+   1.10883138 0.70611909  0.36318623 4.439276e-10 1.631747e-03     TRUE
+   1.08583588 0.71602079  0.34058102 9.231315e-10 1.408081e-03     TRUE
+   1.04667509 0.71600206  0.31592710 3.149084e-09 1.408476e-03     TRUE
+   1.01773393 0.88850726  0.12697490 7.670532e-09 8.504870e-05     TRUE
+  -0.07671983 0.06685473  1.87141392 6.467721e-01 7.620035e-01    FALSE
+   survives adjustment: 13 / 14 sets
+
+-- GSE141910 (HF; covariates: cardiomyocyte+fibroblast+immune_pan) --
+                                                                                 set
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                                                       KEGG_RIBOSOME
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                                REACTOME_TRANSLATION
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+                                                        REACTOME_TRNA_AMINOACYLATION
+                                                            REACTOME_RRNA_PROCESSING
+ g_unadjusted  g_adjusted attenuation p_unadjusted   p_adjusted survives
+   0.51149931  1.24837721  -1.4406234 1.654344e-06 2.417741e-20     TRUE
+  -0.44459530 -0.63888761  -0.4370094 2.905431e-05 7.830958e-07     TRUE
+   0.33383943 -0.05541839   1.1660031 1.601466e-03 6.630117e-01    FALSE
+   0.32923021 -0.04396040   1.1335248 1.854158e-03 7.295827e-01    FALSE
+   0.22755299 -0.17812425   1.7827814 3.086294e-02 1.618464e-01    FALSE
+  -0.22007159  0.12603811   1.5727141 3.677176e-02 3.219282e-01    FALSE
+   0.20383532 -0.15559390   1.7633314 5.298505e-02 2.215790e-01    FALSE
+   0.18437123 -0.09388493   1.5092168 7.993137e-02 4.604886e-01    FALSE
+   0.11553918  0.15443042  -0.3366066 2.718771e-01 2.250463e-01    FALSE
+   0.10641740  0.49728013  -3.6729211 3.114752e-01 1.087790e-04     TRUE
+   0.08926230 -0.12960282   2.4519324 3.957994e-01 3.084509e-01    FALSE
+   0.06832034  0.01855358   0.7284325 5.156529e-01 8.839962e-01    FALSE
+   0.06533805  0.15823007  -1.4217138 5.341390e-01 2.138657e-01    FALSE
+   0.02324900  0.27265287 -10.7275075 8.248832e-01 3.256675e-02     TRUE
+  -0.01464319 -0.24491047 -15.7252143 8.891601e-01 5.472203e-02    FALSE
+   survives adjustment: 4 / 15 sets
+
+Tier A across all cohorts: 55 / 103 set-cohort pairs survive
+median attenuation of |g|: 36.3%
+
+=== strongest composition confounders of the Tier A sets ===
+
+-- GSE57338 --
+                                           set      panel          r
+    REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION immune_pan -0.5932982
+    REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION    myeloid -0.5768730
+            REACTOME_MITOCHONDRIAL_TRANSLATION fibroblast -0.5741328
+ REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION fibroblast -0.5711666
+ REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION fibroblast -0.5527278
+        p_fdr
+ 3.414241e-29
+ 1.652678e-27
+ 2.304687e-27
+ 3.812853e-27
+ 3.500514e-25
+
+-- TCGA_LIHC --
+                                           set         panel          r
+ REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION    fibroblast -0.3986952
+            REACTOME_MITOCHONDRIAL_TRANSLATION    fibroblast -0.3849968
+        REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION proliferation  0.3843367
+ REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION    fibroblast -0.3695354
+    REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION    fibroblast -0.3333183
+        p_fdr
+ 2.056546e-15
+ 1.147416e-14
+ 1.147416e-14
+ 1.363830e-13
+ 5.303995e-11
+
+-- GSE116250 --
+                                           set      panel          r
+            REACTOME_MITOCHONDRIAL_TRANSLATION fibroblast -0.5800468
+ REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION fibroblast -0.5380538
+ REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION fibroblast -0.4255361
+        REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION fibroblast -0.4151167
+        REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION lymphocyte -0.4045829
+        p_fdr
+ 6.098185e-05
+ 2.719156e-04
+ 1.823590e-02
+ 1.943313e-02
+ 2.192609e-02
+
+-- GSE14520_GPL3921 --
+                                                                                 set
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                                                REACTOME_TRANSLATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                            REACTOME_RRNA_PROCESSING
+         panel         r        p_fdr
+ proliferation 0.7775246 2.725836e-89
+ proliferation 0.7754858 7.993679e-89
+ proliferation 0.7667110 8.770623e-86
+ proliferation 0.6783381 6.837275e-60
+ proliferation 0.6715635 2.281301e-58
+
+-- GSE14520_GPL571 --
+                                    set         panel          r       p_fdr
+               REACTOME_RRNA_PROCESSING    hepatocyte -0.5922520 0.001645852
+ REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION    lymphocyte -0.5894181 0.001645852
+               REACTOME_RRNA_PROCESSING proliferation  0.5812872 0.001645852
+ REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION    immune_pan -0.5790661 0.001645852
+       KEGG_AMINOACYL_TRNA_BIOSYNTHESIS    immune_pan -0.5770289 0.001645852
+
+-- GSE76427 --
+                                                                                 set
+                                                                REACTOME_TRANSLATION
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                                        REACTOME_TRNA_AMINOACYLATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+         panel         r        p_fdr
+ proliferation 0.5372640 7.982196e-12
+ proliferation 0.5177343 4.360750e-11
+ proliferation 0.5051178 1.258696e-10
+ proliferation 0.4963857 2.514425e-10
+ proliferation 0.4905676 3.805314e-10
+
+-- GSE141910 --
+                                                                  set
+ REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                           REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                                        KEGG_RIBOSOME
+                           REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+ REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+      panel         r        p_fdr
+ hepatocyte 0.5854293 5.757490e-33
+ hepatocyte 0.5817143 9.585932e-33
+ hepatocyte 0.5708665 1.964984e-31
+ hepatocyte 0.5692818 2.405348e-31
+    myeloid 0.5678917 2.950957e-31
+[19:17:10] === R11 done === 

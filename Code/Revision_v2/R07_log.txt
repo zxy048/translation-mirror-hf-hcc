@@ -1,0 +1,133 @@
+[14:24:04] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[14:24:04] === R07 start === 
+[14:24:06] --- GSE57338: 177 disease vs 136 control --- 
+[14:24:13] --- GSE141198: no control arm, skipped (no effect size) --- 
+[14:24:13] --- TCGA_LIHC: 371 disease vs 50 control --- 
+[14:24:20] --- GSE116250: 50 disease vs 14 control --- 
+[14:24:25] --- GSE14520_GPL3921: 225 disease vs 220 control --- 
+[14:24:31] --- GSE14520_GPL571: 22 disease vs 19 control --- 
+[14:24:36] --- GSE76427: 115 disease vs 52 control --- 
+[14:24:40] --- GSE141910: 200 disease vs 166 control --- 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S14_effect_sizes_within_disease.csv 
+
+=== how much does the correction move the estimate? ===
+equal-weight d vs n-weighted Hedges g: mean |delta| = 0.040, max |delta| = 0.377
+cases where the two disagree on SIGN: 0 / 268
+
+=== Tier A effect sizes, per cohort (sorted by |g|) ===
+
+-- GSE57338 (HF, 177 vs 136) --
+                                                                  set
+                               REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                             REACTOME_RRNA_PROCESSING
+                           REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+ REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                         REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                           REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+   hedges_g      ci_lo      ci_hi        p_fdr
+ -0.9177071 -1.1376404 -0.7103357 1.525933e-11
+ -0.8094202 -1.0065842 -0.6242104 4.557477e-09
+ -0.6494956 -0.8877855 -0.4249333 4.388956e-07
+ -0.6056829 -0.8485250 -0.3790947 2.196046e-06
+ -0.5978865 -0.8299580 -0.3832938 2.467068e-06
+  0.5568848  0.3469300  0.7993426 2.196046e-06
+
+-- TCGA_LIHC (HCC, 371 vs 50) --
+                                                                                 set
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                                        REACTOME_TRNA_AMINOACYLATION
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+  hedges_g     ci_lo    ci_hi        p_fdr
+ 1.1729408 0.9511086 1.418362 3.105034e-18
+ 1.1191916 0.9216138 1.333909 5.961514e-21
+ 1.1002539 0.8834116 1.312281 2.769050e-16
+ 1.0243010 0.8292569 1.240003 3.399688e-18
+ 0.9669043 0.7459683 1.193963 4.007849e-13
+ 0.8797280 0.6589077 1.109685 4.637156e-11
+
+-- GSE116250 (HF, 50 vs 14) --
+                                           set   hedges_g      ci_lo      ci_hi
+        REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION -1.0334165 -1.7745267 -0.3332191
+            REACTOME_MITOCHONDRIAL_TRANSLATION -0.8946647 -1.4827978 -0.3389712
+ REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION -0.8351425 -1.4031548 -0.3540527
+ REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION -0.7283819 -1.2930689 -0.1913794
+                          REACTOME_TRANSLATION -0.4416469 -1.1192064  0.1799487
+    REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION  0.4217463 -0.1223863  0.9907519
+      p_fdr
+ 0.01442919
+ 0.01442919
+ 0.01442919
+ 0.03785694
+ 0.33990862
+ 0.29741746
+
+-- GSE14520_GPL3921 (HCC, 225 vs 220) --
+                                                                                 set
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                                                REACTOME_TRANSLATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                            REACTOME_RRNA_PROCESSING
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+ hedges_g    ci_lo    ci_hi        p_fdr
+ 2.499263 2.204224 2.836727 8.942479e-92
+ 2.354913 2.073235 2.704616 4.624688e-85
+ 2.340324 2.118517 2.619445 3.175484e-84
+ 1.884705 1.617893 2.239835 5.019576e-63
+ 1.709857 1.527109 1.940476 3.419258e-49
+ 1.598609 1.398332 1.839166 6.770553e-48
+
+-- GSE14520_GPL571 (HCC, 22 vs 19) --
+                                                                                 set
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                            REACTOME_RRNA_PROCESSING
+                                                                REACTOME_TRANSLATION
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+  hedges_g     ci_lo    ci_hi        p_fdr
+ 1.2899686 0.6309185 2.474447 0.0004494581
+ 1.2466505 0.5667624 2.535795 0.0006157958
+ 1.2444038 0.7637915 1.940531 0.0006157091
+ 1.2034590 0.4898553 2.680560 0.0008366311
+ 1.1045997 0.4274425 2.397753 0.0019059991
+ 0.9838876 0.3020578 2.302052 0.0039720010
+
+-- GSE76427 (HCC, 115 vs 52) --
+                                                                                 set
+                                                                REACTOME_TRANSLATION
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+                                                        REACTOME_TRNA_AMINOACYLATION
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                                            REACTOME_RRNA_PROCESSING
+ hedges_g     ci_lo    ci_hi        p_fdr
+ 1.603423 1.2246600 2.086616 1.584821e-12
+ 1.530241 1.1708057 1.982650 2.522525e-13
+ 1.412048 1.0644090 1.845997 1.178780e-11
+ 1.377009 1.0692195 1.774031 9.582329e-14
+ 1.341500 0.9917777 1.751286 6.660724e-11
+ 1.264946 0.9583459 1.608301 1.860396e-12
+
+-- GSE141910 (HF, 200 vs 166) --
+                                                                  set
+                           REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                               REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                           REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                                        KEGG_RIBOSOME
+ REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                        REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+   hedges_g       ci_lo       ci_hi        p_fdr
+  0.5104447  0.30961546  0.73000719 4.676428e-06
+ -0.4436786 -0.63737254 -0.24677712 1.321614e-04
+  0.3331511  0.12225866  0.54140415 5.255966e-03
+  0.3285514  0.11782960  0.53818151 5.643726e-03
+  0.2270838  0.02332951  0.43591562 5.653885e-02
+ -0.2196178 -0.41122324 -0.02920383 5.472881e-02
+[14:24:48] === R07 done: 268 set x cohort effect sizes === 

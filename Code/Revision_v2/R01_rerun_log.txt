@@ -1,0 +1,104 @@
+[14:09:18] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[14:09:18] === R01 start === 
+[14:09:18] --- HF: GSE57338 --- 
+[14:09:48] series matrix: 33297 features x 313 samples 
+
+HF sample annotation columns: tissue, heart.failure, disease.status, gender, age 
+
+ no yes 
+136 177 
+
+idiopathic dilated CMP               ischemic            non-failing 
+                    82                     95                    136 
+
+HF group x etiology:
+    
+     DCM ICM  NF
+  HF  82  95   0
+  NF   0   0 136
+[14:09:48] HF disease samples: 177  (config says 177) 
+'select()' returned 1:many mapping between keys and columns
+[14:09:56] array filter: global median=5.007 -> 16632/33297 probes detected (50.0%) 
+[14:09:57] HF after collapse: 12090 genes 
+[14:09:57] --- HCC: GSE141198 --- 
+[14:09:57] counts: 15036 genes x 148 samples (vst agrees) 
+[14:09:57] RNA-seq filter: count>=10 in >=50% -> 13178/15036 genes (87.6%) 
+[14:09:57] HCC after collapse: 13178 genes 
+[14:09:57] === universe U: 10213 genes === 
+                  platform                                       stage     n
+1      GPL11532 (HF array)          features on platform (matrix rows) 33297
+2      GPL11532 (HF array)               detected by expression filter 16632
+3      GPL11532 (HF array)                     mapped to a gene symbol 13229
+4      GPL11532 (HF array)             unique symbols after collapsing 12090
+5      GPL11532 (HF array)                present in common universe U 10213
+6  GSE141198 (HCC RNA-seq) features on platform (symbol-mapped counts) 15036
+7  GSE141198 (HCC RNA-seq)               detected by expression filter 13178
+8  GSE141198 (HCC RNA-seq)                     mapped to a gene symbol 13178
+9  GSE141198 (HCC RNA-seq)             unique symbols after collapsing 13178
+10 GSE141198 (HCC RNA-seq)                present in common universe U 10213
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S1_gene_universe_loss_chain.csv 
+[14:09:58] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+  tier
+ TierA
+ TierA
+ TierA
+ TierA
+ TierA
+ TierA
+ TierA
+ TierA
+ TierA
+ TierA
+ TierA
+ TierA
+ TierA
+ TierA
+ TierA
+                                                                                 set
+                                                                       KEGG_RIBOSOME
+                                                    KEGG_AMINOACYL_TRNA_BIOSYNTHESIS
+                                                                REACTOME_TRANSLATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_INITIATION
+                                          REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION
+                                                        REACTOME_TRNA_AMINOACYLATION
+                                              REACTOME_CYTOSOLIC_TRNA_AMINOACYLATION
+                                                            REACTOME_RRNA_PROCESSING
+                REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE
+                                        REACTOME_RIBOSOME_ASSOCIATED_QUALITY_CONTROL
+ REACTOME_RIBOSOME_QUALITY_CONTROL_RQC_COMPLEX_EXTRACTS_AND_DEGRADES_NASCENT_PEPTIDE
+                                                  REACTOME_MITOCHONDRIAL_TRANSLATION
+                                       REACTOME_MITOCHONDRIAL_TRANSLATION_ELONGATION
+                                          REACTOME_MITOCHONDRIAL_TRNA_AMINOACYLATION
+                                       REACTOME_RRNA_PROCESSING_IN_THE_MITOCHONDRION
+ n_genes_in_msigdb n_in_HF_platform n_in_HCC_platform n_in_common_U frac_in_U
+                88               81                85            80     0.909
+                41               40                41            40     0.976
+               414              385               406           382     0.923
+               140              132               136           130     0.929
+               115              108               110           105     0.913
+                50               49                50            49     0.980
+                30               29                30            29     0.967
+               248              226               240           223     0.899
+               133              126               129           124     0.932
+               167              160               163           158     0.946
+               108              103               105           101     0.935
+               124              104               121           104     0.839
+                99               92                96            92     0.929
+                23               23                23            23     1.000
+                20               18                18            18     0.900
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S2_canonical_set_coverage.csv 
+[14:09:58] Tier A genes absent from U: 41 / 497 
+
+ absent from both platforms         lost in HCC RNA-seq 
+                          7                           3 
+lost on HF array (GPL11532)                    retained 
+                         31                         456 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S3_tierA_gene_loss.csv 
+
+Tier A genes lost (41):
+DDX47, EEF1E1, EEF1G, EIF4E, ERI1, MPHOSPH6, MRPL13, MRPL52, MRPL54, MRPS24, MRPS6, MT-ATP6, MT-ATP8, MT-CO1, MT-CO2, MT-CO3, MT-CYB, MT-ND1, MT-ND2, MT-ND3, MT-ND4, MT-ND4L, MT-ND5, MT-ND6, MT-RNR1, MT-RNR2, PSTK, PWP2, RPL10L, RPL22, RPL22L1, RPL34, RPL39L, RPL3L, RPP21, RPP25, RPP40, RPS29, RPS4Y2, RSL24D1P11, UTP14C 
+
+[14:10:02] === R01 done: |U| = 10213 genes; HF 313 samples; HCC 148 samples === 

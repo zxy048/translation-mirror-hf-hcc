@@ -1,0 +1,11 @@
+"platform","stage","n"
+"GPL11532 (HF array)","features on platform (matrix rows)",33297
+"GPL11532 (HF array)","detected by expression filter",16632
+"GPL11532 (HF array)","mapped to a gene symbol",13229
+"GPL11532 (HF array)","unique symbols after collapsing",12090
+"GPL11532 (HF array)","present in common universe U",10213
+"GSE141198 (HCC RNA-seq)","features on platform (symbol-mapped counts)",15036
+"GSE141198 (HCC RNA-seq)","detected by expression filter",13178
+"GSE141198 (HCC RNA-seq)","mapped to a gene symbol",13178
+"GSE141198 (HCC RNA-seq)","unique symbols after collapsing",13178
+"GSE141198 (HCC RNA-seq)","present in common universe U",10213

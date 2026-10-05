@@ -1,0 +1,9 @@
+"cohort","disease","tech","n_genes","n_samples","n_disease","n_control","n_unlabeled","tierA_covered","tierA_total","tierA_pct"
+"GSE57338","HF","array",12090,313,177,136,0,459,497,92.4
+"GSE141198","HCC","RNA-seq",13178,148,148,0,0,487,497,98
+"TCGA_LIHC","HCC","RNA-seq",17146,421,371,50,0,483,497,97.2
+"GSE116250","HF","RNA-seq",26261,64,50,14,0,439,497,88.3
+"GSE14520_GPL3921","HCC","array",7629,445,225,220,0,299,497,60.2
+"GSE14520_GPL571","HCC","array",7733,41,22,19,0,322,497,64.8
+"GSE76427","HCC","array",16907,167,115,52,0,417,497,83.9
+"GSE141910","HF","RNA-seq",16978,366,200,166,0,482,497,97

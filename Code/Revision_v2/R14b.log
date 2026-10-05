@@ -1,0 +1,18 @@
+[22:31:24] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+Warning messages:
+1: package 'WGCNA' was built under R version 4.6.1 
+2: package 'msigdbr' was built under R version 4.6.1 
+[22:31:24] === R14b cohesion start === 
+[22:31:30]   HF purple (153 genes): mean pairwise r = 0.3403 | null 0.0355 (sd 0.0074) | Z = 40.96 | P = 0.0010 
+[22:31:34]   HCC magenta (146 genes): mean pairwise r = 0.3916 | null 0.0239 (sd 0.0141) | Z = 26.00 | P = 0.0010 
+[22:31:34]   NOTE: S32 not present yet; k columns left out of S36 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S36_within_disease_cohesion.csv 
+
+=== R14b within-disease connectivity-free cohesion ===
+ disease  module n_genes n_samples n_genes_universe obs_mean_pairwise_r
+      HF  purple     153       177            10213              0.3403
+     HCC magenta     146       148            10213              0.3916
+ null_mean_r null_sd_r     Z        p n_perm
+     0.03552  0.007442 40.96 0.000999   1000
+     0.02393  0.014140 26.00 0.000999   1000
+[22:31:34] === R14b done === 
