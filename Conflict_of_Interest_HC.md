@@ -1,6 +1,6 @@
 Conflict of Interest Statement
 
-Manuscript: "Translation-related transcriptional programs in hepatocellular carcinoma: disease-context-dependent remodeling revealed by cross-disease comparison with heart failure"
+Manuscript: "Translation-related transcriptional programs in HCC: disease-context-dependent remodeling versus heart failure"
 Journal: Hepatology Communications
 
 The authors declare that they have no competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
@@ -15,4 +15,4 @@ Corresponding author: Junhong Wang
 Department of Cardiology, The First Affiliated Hospital of Nanjing Medical University, Nanjing, China
 E-mail: wangjunhong@jsph.org.cn
 
-Date: August 14, 2026
+Date: August 16, 2026

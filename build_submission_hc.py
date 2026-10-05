@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Build HC submission package: cover letter + COI docx, then assemble folder."""
-import subprocess, os, shutil, glob
+import subprocess, os, shutil, glob, re
 from docx import Document
 from docx.shared import Pt, Cm, RGBColor
 
@@ -9,7 +9,16 @@ OUT = os.path.join(BASE, "HC_Submission")
 FONT = "Times New Roman"
 
 def pandoc(md, docx, extra=None):
-    cmd = ["pandoc", os.path.join(BASE, md), "-o", os.path.join(BASE, docx), "--from", "markdown"]
+    # 先把 HTML <sup>/<sub> 转为 pandoc 原生上下标语法
+    p = os.path.join(BASE, md)
+    tmp = p + ".build.md"
+    with open(p, encoding="utf-8") as f:
+        s = f.read()
+    s = re.sub(r"<sup>(.*?)</sup>", r"^\1^", s)
+    s = re.sub(r"<sub>(.*?)</sub>", r"~\1~", s)
+    with open(tmp, "w", encoding="utf-8") as f:
+        f.write(s)
+    cmd = ["pandoc", tmp, "-o", os.path.join(BASE, docx), "--from", "markdown+superscript+subscript"]
     if extra:
         cmd[4:4] = extra
     subprocess.run(cmd, check=True)
@@ -57,3 +66,19 @@ pandoc("Conflict_of_Interest_HC.md", "Conflict_of_Interest_HC.docx")
 style_simple(os.path.join(BASE, "Conflict_of_Interest_HC.docx"))
 
 print("Cover letter + COI docx built.")
+
+# 3. Assemble the submission package
+os.makedirs(OUT, exist_ok=True)
+shutil.copy2(os.path.join(BASE, "Manuscript_HC_v1.docx"),
+             os.path.join(OUT, "01_Manuscript_HC_v1.docx"))
+shutil.copy2(os.path.join(BASE, "Cover_Letter_HC.docx"),
+             os.path.join(OUT, "02_Cover_Letter.docx"))
+shutil.copy2(os.path.join(BASE, "Conflict_of_Interest_HC.docx"),
+             os.path.join(OUT, "03_Conflict_of_Interest_Statement.docx"))
+# clean temp build files
+for f in glob.glob(os.path.join(BASE, "*.build.md")):
+    os.remove(f)
+# remove Word lock artifacts
+for f in glob.glob(os.path.join(OUT, "~$*.docx")):
+    os.remove(f)
+print(f"Submission package assembled at {OUT}")

@@ -1,6 +1,6 @@
 # Cover Letter — Hepatology Communications
 
-**Date:** August 14, 2026
+**Date:** August 16, 2026
 
 **To:** Editor-in-Chief, Hepatology Communications
 
@@ -8,7 +8,7 @@
 
 Dear Editor,
 
-We are pleased to submit our manuscript entitled **"Translation-related transcriptional programs in hepatocellular carcinoma: disease-context-dependent remodeling revealed by cross-disease comparison with heart failure"** for consideration for publication in Hepatology Communications.
+We are pleased to submit our manuscript entitled **"Translation-related transcriptional programs in HCC: disease-context-dependent remodeling versus heart failure"** for consideration for publication in Hepatology Communications.
 
 ## Summary of the Study
 

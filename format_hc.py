@@ -58,6 +58,11 @@ def format_hc(path):
     for para in doc.paragraphs:
         para.paragraph_format.line_spacing = 2.0
 
+        # Title page: start Abstract on a new page so page 1 holds
+        # title/authors/affiliations/keywords only (HepComm file order item 1)
+        if para.style.name.startswith('Heading') and para.text.strip() == 'Abstract':
+            para.paragraph_format.page_break_before = True
+
         is_caption = False
         text = para.text.strip()
         if text.startswith('Fig.') and '|' in text:

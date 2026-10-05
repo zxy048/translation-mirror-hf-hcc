@@ -150,7 +150,7 @@ decl_rn = decl_rn.replace('## Declarations', '').strip()
 # ------------------------------------------------------------------
 # 8. Title, authors, abstract (HCC-first), keywords
 # ------------------------------------------------------------------
-title = "Translation-related transcriptional programs in hepatocellular carcinoma: disease-context-dependent remodeling revealed by cross-disease comparison with heart failure"
+title = "Translation-related transcriptional programs in HCC: disease-context-dependent remodeling versus heart failure"
 
 authors = "Yuhe Hong<sup>a</sup>, Yili Liu<sup>a</sup>, Xianqi Li<sup>a</sup>, Xin Wu<sup>b#</sup>, Junhong Wang<sup>a,c*</sup>"
 
