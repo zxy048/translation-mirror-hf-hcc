@@ -47,6 +47,18 @@ CLAUDE.md
 *Reviewer_Comments*
 *Response_to_Reviewers*
 rebuttal*
+# Cover letters belong to the same rule for a reason of substance rather than
+# of file type. A revision cover letter is not a neutral submission note:
+# Cover_Letter_PLOSONE_v2.md thanks the reviewers by count and concedes that
+# their central objection is correct, which is peer-review correspondence
+# however the file is named. The gate below does not catch it --
+# `pre_publish_check.py` blocks on the filenames listed here, and a cover
+# letter's name is not one of them, so it returned exit 0 with the file still
+# stageable. The letter is also a build source, since `assemble_plos_v2.py`
+# pandoc's it into 01_Cover_Letter.docx; but the response letter sits in
+# exactly that position and is ignored anyway, so the precedent is already set
+# that confidentiality outranks tracking a source.
+Cover_Letter_*
 *_Submission*/*.docx
 *_Submission*/*.pdf
 *_Submission*/*.md
