@@ -20,6 +20,14 @@ __pycache__/
 translation-mirror-hf-hcc-temp/
 CLAUDE.md
 
+# Hand-copied backups. `Manuscript_PLOSONE_v2.md.bak` is a 2026-10-03 ancestor
+# of the manuscript -- 363 lines against the current 374, missing the retitled
+# abstract -- so it is not a snapshot of any state anyone would want back. It is
+# also the only `.bak` in the tree and nothing ignored it, which made it the one
+# file here that `git add -A` would have committed *as* a backup. Backups by
+# copy are what tracking the manuscript source replaces.
+*.bak
+
 # Peer-review material. NEVER publish this repository's peer-review
 # correspondence: the editor's decision letter and the reviewers' comments are
 # confidential, and the response letters quote them. This repository is public,
@@ -27,13 +35,19 @@ CLAUDE.md
 # tree as the analysis code and a plain `git add -A` would sweep them in.
 # `pre_publish_check.py` enforces the same rule by reading what git would
 # actually stage, because a path list only covers names someone thought of.
+# The submission-directory rules carry a trailing `*` on the directory name
+# (`*_Submission*/*`, not `*_Submission/*`) on purpose. When the v2 package was
+# assembled it went into a sibling directory called PLOS_ONE_Submission_v2, and
+# the narrower pattern silently failed to match it: everything in that folder --
+# the manuscript, the figures, and the assembly checklist that quotes the
+# reviewers' points by number -- stayed stageable while the rule that was meant
+# to exclude it sat right there looking correct. `*_Submission*` matches both
+# PLOS_ONE_Submission and PLOS_ONE_Submission_v2, and any future suffix.
 *Decision_Letter*
 *Reviewer_Comments*
 *Response_to_Reviewers*
 rebuttal*
-*_Submission/*.docx
-*_Submission/*.pdf
-# ...and the assembly checklists, which quote the reviewers' points by number to
-# say which one each change answers.
-*_Submission/*.md
+*_Submission*/*.docx
+*_Submission*/*.pdf
+*_Submission*/*.md
 v2_output/logs/transcript_msg_*.txt
