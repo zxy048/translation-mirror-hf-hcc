@@ -753,3 +753,4 @@
 [00:04:03] --- TCS, continuous per-IQR, by covariate set (whole-cohort models) --- 
 [00:04:03] --- any TCS test below P = 0.05? --- 
 [00:04:03] === R23 done === 
+[13:31:54] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 

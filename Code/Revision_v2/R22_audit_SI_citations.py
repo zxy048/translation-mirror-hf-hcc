@@ -83,26 +83,48 @@ def main():
         sum(1 for _, k in defined if k == "Fig")))
     print()
 
-    failed = 0
+    # The other direction, and the one that actually breaks a submission: a body
+    # citation with no matching caption definition is a dangling reference. The
+    # reader is sent to an item that does not exist in the supplement, and PLOS
+    # renders it as a broken link. An uncited item is merely unhelpful; a
+    # dangling one is wrong, so this direction fails hard while the other stays
+    # advisory.
+    defined_ids = set(d for d, _ in defined)
+    dangling = sorted(cited - defined_ids, key=key)
+    if dangling:
+        print("DANGLING: cited in the body but never defined: %s"
+              % ", ".join(dangling))
+        print()
+
+    uncited = 0
     for kind in ("Table", "Fig"):
         ids = [d for d, k in defined if k == kind]
         missing = [d for d in ids if d not in cited]
+        uncited += len(missing)
         print("%ss cited in the body: %d/%d" % (kind, len(ids) - len(missing), len(ids)))
         if missing:
-            failed += len(missing)
             print("  never cited: %s" % ", ".join(missing))
         print()
 
-    if failed:
+    if dangling:
+        print("FAILED: %d dangling reference(s). A body citation with no caption"
+              % len(dangling))
+        print("definition points the reader at an item the supplement does not")
+        print("contain, so this must be fixed before submission.")
+        return 1
+
+    if uncited:
         # Advisory, not a compliance failure. PLOS: "We recommend that you cite
         # supporting information in the manuscript text, but this is not a
         # requirement." The list is what a human needs in order to decide.
-        print("%d SI item(s) are not cited in the manuscript body." % failed)
+        print("%d SI item(s) are not cited in the manuscript body." % uncited)
         print("PLOS recommends citation but does not require it, so this is not a")
         print("compliance failure. It is listed because v1's body did cite its SI")
         print("figures and the v2 rewrite did not carry those citations over.")
+        print("No dangling references.")
         return 1
-    print("PASSED: every SI item is cited in the manuscript body.")
+    print("PASSED: every SI item is cited in the manuscript body, and no citation")
+    print("in the body lacks a caption definition.")
     return 0
 
 

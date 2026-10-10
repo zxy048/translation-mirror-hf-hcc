@@ -114,11 +114,12 @@ run <- function(label, expr) {
 # The floor holds for everything set in ordinary text. It does not hold for
 # sub- and superscripts, and that is a deliberate exception rather than an
 # oversight, though the first version of this comment stated the floor flatly
-# enough to read as one. plotmath draws them at roughly 0.65-0.70x the base
-# size, so at a 10 pt axis title Z[summary]'s subscript measures about 6.5 pt
-# and Fig S5's I^2 superscript about 7.0. Every journal sets sub- and
-# superscripts below its body-text floor -- the manuscript's own Z_summary is a
-# subscript too -- so this is left as typography rather than "fixed" by
+# enough to read as one. plotmath draws them at roughly 0.70x the base size: at
+# a 10 pt axis title, Z[summary]'s subscript in Fig 1d and Fig S5's I^2
+# superscript both measure exactly 7.00 pt in the rendered PDF, which is what
+# the sub-8 pt spans across the eight figures come to. Every journal sets sub-
+# and superscripts below its body-text floor -- the manuscript's own Z_summary
+# is a subscript too -- so this is left as typography rather than "fixed" by
 # inflating those two labels to 12.3 pt, which would make them 23% larger than
 # every other axis title in the figure set. There are exactly two such places
 # in the eight figures; italic(g) is not one, since italics do not shrink.
@@ -343,7 +344,16 @@ run("Fig1", {
     geom_text(aes(label = lab), hjust = -0.1, size = 3.4, fontface = "bold", na.rm = TRUE) +
     coord_flip() + facet_grid(disease ~ ., scales = "free_y", space = "free_y") +
     scale_x_discrete(labels = function(x) sub("^(HF|HCC) ", "", x)) +
-    scale_y_continuous(labels = scales::label_comma()) +
+    # Breaks every 1,000 put six comma-formatted labels ("0", "1,000" ...
+    # "5,000") on a panel whose axis is ~122 pt wide. Measured in the rendered
+    # PDF, each label is 20.02 pt wide on a 20.92 pt pitch -- 0.90 pt of
+    # daylight, so at print size the axis reads as the single string
+    # "1,0002,0003,0004,0005,000" and a reviewer extracting text sees exactly
+    # that. The largest named module is 3,771 genes, so 2,000-unit breaks lose
+    # no discriminating power: every bar remains readable against the 0, 2,000
+    # and 4,000 gridlines.
+    scale_y_continuous(breaks = seq(0, 6000, 2000),
+                       labels = scales::label_comma()) +
     labs(x = NULL, y = "Genes in module", tag = "b", title = "Module inventory (\u03b2 = 14)") +
     expand_limits(y = max(inv$n_genes) * 1.30) + th +
     theme(axis.text.y = element_text(size = 8))

@@ -157,8 +157,8 @@ def rho(a, b, tier=None):
 check("rho Tier A (TCGA vs GSE57338)", f"ρ = {fnum(rho('TCGA_LIHC','GSE57338','A'))}")
 check("rho all sets", f"ρ = {fnum(rho('TCGA_LIHC','GSE57338'))}")
 for hcc, prose in (("TCGA_LIHC", "−0.550 (TCGA-LIHC, 10/15"),
-                   ("GSE14520_GPL3921", "−0.702 (GSE14520 GPL3921, 9/14)"),
-                   ("GSE14520_GPL571", "−0.764 (GSE14520 GPL571, 9/15)"),
+                   ("GSE14520_GPL3921", "−0.702 (GSE14520_GPL3921, 9/14)"),
+                   ("GSE14520_GPL571", "−0.764 (GSE14520_GPL571, 9/15)"),
                    ("GSE76427", "−0.587 (GSE76427, 9/14)")):
     check(f"matrix rho {hcc} vs GSE57338", fnum(rho(hcc, "GSE57338", "A")), prose)
 for hf, prose in (("GSE116250", "−0.393 to +0.211"), ("GSE141910", "−0.457 to −0.059")):
@@ -341,7 +341,7 @@ for c, ci_prose, prose in (
         ("TCGA_LIHC",        "[0.90–1.42]", "TCGA-LIHC HR 1.13 per IQR [0.90–1.42]"),
         ("GSE141198",        "[0.78–1.39]", "GSE141198 1.04 [0.78–1.39]"),
         ("GSE76427",         "[0.76–2.40]", "GSE76427 1.35 [0.76–2.40]"),
-        ("GSE14520_GPL3921", "[1.17–2.04]", "GSE14520 1.55 [1.17–2.04]")):
+        ("GSE14520_GPL3921", "[1.17–2.04]", "GSE14520_GPL3921 1.55 [1.17–2.04]")):
     r = srow(c, "continuous_per_IQR")
     check(f"TCS per-IQR HR, {c}", f"{num(r['hr']):.2f}", prose)
     check(f"TCS per-IQR CI, {c}",
@@ -367,9 +367,9 @@ check("the four per-IQR confidence intervals all overlap",
 g = srow("GSE14520_GPL3921", "continuous_per_IQR")
 check("GSE14520 n and event count",
       f"*n* = {g['n']}, {g['n_events']} deaths",
-      "in GSE14520 (*n* = 221, 85 deaths")
+      "in GSE14520_GPL3921 (*n* = 221, 85 deaths")
 check("GSE14520 unadjusted Cox P", f"*P* = {num(g['p_cox']):.4f}",
-      "in GSE14520 (*n* = 221, 85 deaths; *P* = 0.0020")
+      "in GSE14520_GPL3921 (*n* = 221, 85 deaths; *P* = 0.0020")
 check("GSE14520 median-split log-rank P",
       f"*P* = {num(srow('GSE14520_GPL3921', 'median_split')['p_logrank']):.4f}",
       "log-rank *P* = 0.0090 as a median split")
