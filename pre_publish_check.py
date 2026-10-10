@@ -54,6 +54,12 @@ BLOCK_CONTENT = [
     (r"Reviewer\s*#?\s*\d\s*[:.]", "reviewer comment block"),
     (r"Decision Letter", "decision letter heading"),
     (r"confidential", "explicitly marked confidential"),
+    # Reviewer points are referred to by shorthand in the assembly checklists and
+    # the response letters ("R2 Major 1", "R3#6", "R1 第 6 条"), which none of the
+    # patterns above catches -- those files spell out "Reviewer" only in their
+    # headings, if at all. This is the shorthand itself. The trailing 第 covers
+    # the Chinese form, where the point number follows the letter directly.
+    (r"\bR[1-9]\s*(?:#\s*\d|Major|Minor|第)", "reviewer point by shorthand"),
 ]
 
 # The checker's own source names these patterns, so it always matches itself.
