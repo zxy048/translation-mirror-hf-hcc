@@ -26,9 +26,11 @@ Usage:  python assemble_plos_v2.py
 """
 import hashlib
 import os
+import re
 import shutil
 import subprocess
 import sys
+import zlib
 
 ROOT = r"D:\R_projects\revision_analysis"
 PKG = os.path.join(ROOT, "PLOS_ONE_Submission_v2")
@@ -60,11 +62,12 @@ COPIES = [
      "05_Supporting_Information.pdf"),
 ]
 
-# Files that were in the package on 2026-10-04 and are NOT upload items.
-# Listed explicitly so that the assembly reports them rather than silently
-# carrying them forward: `Fig1.docx` is a scratch paste-up of the Fig 1 panels
-# (one empty paragraph, two embedded images), not something PLOS asks for.
-NOT_UPLOADED = ["Fig1.docx", "00_提交清单_勿上传.md", "preview_png"]
+# Files in the package that are NOT upload items. Listed explicitly so that the
+# assembly reports them rather than silently carrying them forward. There used
+# to be a `Fig1.docx` here -- a scratch paste-up of the Fig 1 panels, one empty
+# paragraph and two embedded images, never an upload item -- and it is deleted
+# rather than carried, since nothing can regenerate it.
+NOT_UPLOADED = ["00_提交清单_勿上传.md", "preview_png"]
 
 
 def sha256(path):
@@ -72,6 +75,45 @@ def sha256(path):
     with open(path, "rb") as fh:
         for chunk in iter(lambda: fh.read(1 << 20), b""):
             h.update(chunk)
+    return h.hexdigest()
+
+
+# cairo stamps /CreationDate into every PDF it writes, so two renders of an
+# unchanged figure are never byte-identical -- and the copy loop below duly
+# reported UPDATED for every figure on every run, which is the same as
+# reporting nothing. The stamp lives inside a Flate-compressed object stream
+# rather than in the raw bytes, so normalising it means decompressing each
+# stream before hashing it. Streams that do not decompress (the image data)
+# are hashed as they are.
+#
+# The stream start is matched as `>> stream`, not as `stream` alone. A bare
+# `stream\r?\n` occurs *inside* the compressed binary too -- 22 matches in a
+# file with 11 streams -- and each false positive desynchronised the scan so
+# that a real body was misread as raw bytes and hashed with its timestamp
+# intact. That is the whole bug: the first version of this function still
+# reported two identical renders as different, which is how it was caught.
+_DATE = re.compile(rb"D:\d{14}[^)]*")
+_STREAM = re.compile(rb">>\s*stream\r?\n")
+
+
+def pdf_content_hash(path):
+    """Hash a PDF's content, ignoring the render timestamp cairo writes."""
+    with open(path, "rb") as fh:
+        raw = fh.read()
+    h = hashlib.sha256()
+    pos = 0
+    for m in re.finditer(_STREAM, raw):
+        end = raw.find(b"endstream", m.end())
+        if end < 0:
+            break
+        h.update(raw[pos:m.end()])
+        chunk = raw[m.end():end]
+        try:
+            h.update(_DATE.sub(b"D:<date>", zlib.decompress(chunk)))
+        except zlib.error:
+            h.update(chunk)
+        pos = end
+    h.update(raw[pos:])
     return h.hexdigest()
 
 
@@ -130,11 +172,37 @@ def main():
         if not os.path.exists(src):
             sys.exit("  source missing: %s" % src)
         dst_path = os.path.join(PKG, dst)
-        same = os.path.exists(dst_path) and sha256(src) == sha256(dst_path)
+        digest = pdf_content_hash if dst.lower().endswith(".pdf") else sha256
+        same = os.path.exists(dst_path) and digest(src) == digest(dst_path)
         shutil.copy2(src, dst_path)
         print("  %-34s -> %-30s %s"
               % (os.path.relpath(src, ROOT), dst,
                  "unchanged" if same else "UPDATED"))
+
+    # preview_png/ is for eyeballing the layout; it is never uploaded. It used to
+    # be a hand-copied leftover and had drifted five days behind the figures it is
+    # supposed to preview, which is the failure mode this whole script exists to
+    # prevent -- an artifact in the package that no command can reproduce. It is
+    # rebuilt here from the same PNGs the figures are rendered to, so a preview
+    # and the figure it previews cannot disagree.
+    prev = os.path.join(PKG, "preview_png")
+    os.makedirs(prev, exist_ok=True)
+    try:
+        from PIL import Image
+    except ImportError:
+        print("  (Pillow not installed -- preview_png/ left as it was)")
+    else:
+        for src, dst in COPIES:
+            if not dst.lower().startswith("fig"):
+                continue
+            png = os.path.splitext(src)[0] + ".png"
+            if not os.path.exists(png):
+                continue
+            im = Image.open(png)
+            im = im.resize((1200, round(1200 * im.size[1] / im.size[0])), Image.LANCZOS)
+            out = os.path.join(prev, os.path.splitext(dst)[0] + ".png")
+            im.save(out)
+            print("  preview %-27s -> %s" % (os.path.basename(png), os.path.relpath(out, ROOT)))
 
     print("\n" + "=" * 74)
     print("Package contents")
