@@ -19,7 +19,8 @@ suppressPackageStartupMessages({
 })
 source("D:/R_projects/revision_analysis/Code/Revision_v2/R00_config.R")
 
-FIG <- file.path(OUT, "figures")
+FIG  <- file.path(OUT, "figures")
+EDIT <- file.path(FIG, "editable")   # hand-editable SVG/PDF; never submitted
 dir.create(FIG, showWarnings = FALSE, recursive = TRUE)
 I <- function(nm) readRDS(file.path(OUT, "intermediate", paste0(nm, ".rds")))
 
@@ -42,7 +43,7 @@ cat("cairo available:", USE_CAIRO, "\n")
 PLOS_MAX_W <- 7.5
 PLOS_MAX_H <- 8.75
 
-save_fig <- function(p, name, w = PLOS_MAX_W, h = PLOS_MAX_H) {
+save_fig <- function(p, name, w = PLOS_MAX_W, h = PLOS_MAX_H, editable = FALSE) {
   if (USE_CAIRO) {
     grDevices::cairo_pdf(file.path(FIG, paste0(name, ".pdf")), width = w, height = h)
   } else {
@@ -52,7 +53,30 @@ save_fig <- function(p, name, w = PLOS_MAX_W, h = PLOS_MAX_H) {
   grDevices::png(file.path(FIG, paste0(name, ".png")), width = w, height = h,
                  units = "in", res = 300, type = if (USE_CAIRO) "cairo" else "windows")
   print(p); grDevices::dev.off()
-  cat("  wrote", name, "\n")
+  # A second copy for hand-editing, NOT for submission. PLOS takes EPS/TIFF/PDF
+  # only, so the submission figures stay as they are; this is so a box can be
+  # nudged without re-running the pipeline.
+  #
+  # SVG rather than only the cairo PDF because of how the two devices write text.
+  # cairo's SVG/PDF backends turn each string into glyph outlines or <symbol>/<use>
+  # references, so in Illustrator or Inkscape a label is a picture of a word, not a
+  # word: you can move it, but you cannot retype it, and you cannot reflow a box
+  # around it. svglite emits real <text> elements with the font family and point
+  # size preserved, so any label can be edited and any rectangle dragged. The
+  # geometry is the same as the submitted PDF, so an edit made here can be read
+  # back off the SVG and typed into this script if it should be permanent.
+  if (editable) {
+    if (!dir.exists(EDIT)) dir.create(EDIT, recursive = TRUE)
+    if (requireNamespace("svglite", quietly = TRUE)) {
+      svglite::svglite(file.path(EDIT, paste0(name, ".svg")), width = w, height = h)
+      print(p); grDevices::dev.off()
+    } else {
+      cat("  (svglite not installed -- no editable SVG for", name, ")\n")
+    }
+    grDevices::cairo_pdf(file.path(EDIT, paste0(name, ".pdf")), width = w, height = h)
+    print(p); grDevices::dev.off()
+  }
+  cat("  wrote", name, if (editable) "(+ editable svg/pdf)" else "", "\n")
 }
 run <- function(label, expr) {
   r <- try(expr, silent = TRUE)
@@ -66,15 +90,60 @@ run <- function(label, expr) {
 # Note on units, because the two APIs differ and mixing them up is what made the
 # first attempt at this revision illegible:
 #   element_text(size = x)  ->  x is POINTS
-#   geom_text(size = x)     ->  x is multiplied by .pt (2.845), so size 2.8 ~ 8 pt
+#   geom_text(size = x)     ->  x is multiplied by .pt, so it is not points
 # A target of 8-12 pt for every label on the page therefore means axis/title
-# sizes in the 8-12 range and annotation sizes in the 2.8-4.2 range.
-th <- theme_bw(base_size = 9) +
+# sizes in the 8-12 range and annotation sizes in the 2.82-4.2 range.
+#
+# PT8 is the second of those written exactly. The obvious 2.8 is 7.97 pt once
+# ggplot multiplies it by .pt (72.27/25.4), i.e. just under the floor rather
+# than on it, so every annotation that is meant to be at the floor uses PT8.
+#
+# base_size is 10, not 9, because the theme's defaults are relative to it:
+# axis.text, legend.text and strip.text are all rel(0.8), so a base of 9 leaves
+# every tick label, legend entry and facet strip at 7.2 pt. That is under the
+# floor and nothing was forcing it -- it was simply never looked at. At base 10
+# those three are exactly 8.0 pt and the axis and legend titles are 10 pt.
+#
+# Two axes used to be pinned to 7 pt as fit-driven exceptions: Fig 1b's 43
+# module labels and Fig S5's set labels. Both were re-measured and both now run
+# at 8 pt with clear space between labels, so those exceptions are gone. Fig S5
+# is the one that shows why they were worth re-checking: it was pinned to 7 pt
+# back when it carried every scored set, and the Tier A restriction had since
+# cut it to 15.
+#
+# The floor holds for everything set in ordinary text. It does not hold for
+# sub- and superscripts, and that is a deliberate exception rather than an
+# oversight, though the first version of this comment stated the floor flatly
+# enough to read as one. plotmath draws them at roughly 0.65-0.70x the base
+# size, so at a 10 pt axis title Z[summary]'s subscript measures about 6.5 pt
+# and Fig S5's I^2 superscript about 7.0. Every journal sets sub- and
+# superscripts below its body-text floor -- the manuscript's own Z_summary is a
+# subscript too -- so this is left as typography rather than "fixed" by
+# inflating those two labels to 12.3 pt, which would make them 23% larger than
+# every other axis title in the figure set. There are exactly two such places
+# in the eight figures; italic(g) is not one, since italics do not shrink.
+PT8 <- 8 / (72.27 / 25.4)      # geom_text size that renders at exactly 8.00 pt
+th <- theme_bw(base_size = 10) +
   theme(panel.grid.minor = element_blank(),
         panel.grid.major = element_line(linewidth = 0.25, colour = "grey90"),
         strip.background = element_rect(fill = "grey93", colour = NA),
         strip.text = element_text(face = "bold"),
         plot.tag = element_text(face = "bold", size = 12),
+        # Left-align titles to the plot rather than centring them over the panel.
+        # The default ("panel") centres the title on the plotting region, and the
+        # plotting region does not start at the left of the panel's cell when the
+        # y axis carries long labels. Fig 1b's y axis is 43 module names, 1.65 in
+        # of them, so its centred title began 1.7 in to the right of the tag that
+        # introduces it -- close to Fig 1c's own tag, far enough that the reader
+        # has to guess which title goes with which letter. "plot" puts the title
+        # immediately after the tag on the same row.
+        #
+        # It also fixes a second symptom of the same cause. Centred, "Module
+        # inventory (beta = 14)" was wider than the panel region it was centred
+        # in, and ggplot dropped the closing bracket from the render: the title
+        # read "Module inventory (beta = 14" with a gap where the ")" should be.
+        # Left-aligned it has the whole plot width and fits.
+        plot.title.position = "plot",
         legend.key.size = unit(0.8, "lines"))
 C_HF <- "#2C6FA8"; C_HCC <- "#C1443B"; C_GREY <- "grey70"
 
@@ -123,29 +192,109 @@ run("Fig1", {
   # --- a: schematic ----------------------------------------------------------
   # R2 (Major 1) asked for a schematic relating the WGCNA modules, the a priori
   # canonical pathway tiers, and the derived scores. Boxes and arrows only; no
-  # data are plotted in this panel, and nothing here is a result. Box text is
-  # capped at four lines because this band is only ~1.9 in tall.
-  # Box text is kept to short lines (<= 26 characters) because a column is only
-  # ~1.3 in wide at this figure width; the longer descriptions that used to sit
-  # in these boxes overflowed them and are carried by the caption instead.
+  # data are plotted in this panel, and nothing here is a result.
+  #
+  # Sizing this panel at the 8 pt floor is constrained by measurement, not taste.
+  # Both constraints were found the hard way: the first attempt at 8 pt changed
+  # the font and left the geometry alone, and every box overflowed.
+  #
+  # 1. Width. A column here is about two inches wide, but it used to be little
+  #    more than one, and that is the whole of the author's complaint that the
+  #    boxes press on their text. Panel a is one band of a five-panel figure, and
+  #    it was being composed with patchwork's `/`, which aligns every row's panel
+  #    columns to a common range. Rows b-e set that range wide on the left (the
+  #    43 named modules on Fig 1b's y axis, 1.65 in) and on the right (the
+  #    legend, 1.70 in). Panel a has no axes at all, so lining up with them
+  #    bought it nothing and cost it a third of the page: its plotting region was
+  #    4.15 in, centred in a 7.34 in cell with 1.7 in of blank page either side.
+  #    Every box was then sized against a panel barely wide enough for its
+  #    longest line -- column 3 was 1.47 in for a 1.49 in line, i.e. 3 px of
+  #    clearance. Fig 1 is now composed with cowplot::plot_grid(align = "none")
+  #    instead (see the note at the assembly line), which hands panel a the full
+  #    7.40 in and leaves rows b-e their own patchwork alignment.
+  #
+  #    At 8 pt (geom_text size = PT8, the floor the rest of this file holds to)
+  #    the longest line in each column is 0.95, 1.33 and 1.49 in -- "23 named
+  #    modules", "HCC magenta (146 genes)", "kME-weighted; both directions".
+  #    COL_X below gives each column its longest line plus roughly 0.45 in of
+  #    clear space, and leaves 0.15 in of page margin at each end and about 1.05
+  #    in between columns for the arrows to cross. Measured off the render, the
+  #    tightest box of the seven now clears its text by 70 px (0.23 in) rather
+  #    than the 3 px it had at 4.15 in.
+  #    00_probe_fig1a_widths.R measures every label against its column rather
+  #    than estimating, prints the box width and gap that follow, and is where to
+  #    check a new label before adding it.
+  #
+  # 2. Height. One y-unit is 3.50 px at 300 dpi and one line of 8 pt text pitches
+  #    43.5 px = 12.4 units. That pitch is what the device lays down, not what
+  #    8 pt x lineheight 1.06 = 8.5 pt would suggest, which is why it is measured
+  #    rather than computed. The band is 100 units tall, so a column of two
+  #    four-line boxes needs 99 units before any padding at all: four-line labels
+  #    do not fit here at 8 pt. Columns 1 and 2 therefore carry three lines each
+  #    and column 3 -- which holds three boxes rather than two -- carries two.
+  #    Nothing that a reader needs is only here. What the boxes gave up to fit is
+  #    in the Fig 1 caption: the provenance of the Tier A sets ("KEGG + Reactome",
+  #    dropped from the tiers box) and the word "network" from the two column-1
+  #    headings, which now read "HF (GSE57338)" and "HCC (GSE141198)" under a
+  #    column header that already says "1 · Network modules". The caption's
+  #    "designate one translation module per disease" carries the rest.
+  #
+  # Heights follow from the line count and the y positions from the heights, so a
+  # rectangle and the text inside it cannot disagree. PAD_U is the only number
+  # here that is a choice rather than a measurement: ~1.7 pt of clear space
+  # beyond the text's line boxes, top and bottom.
+  LINE_PITCH_U <- 12.4
+  PAD_U        <- 2.0
+  Y_TOP <- 100; Y_BOT <- 0
+  box_h <- function(n_lines) n_lines * LINE_PITCH_U + 2 * PAD_U
+
+  # Named heights, bottom-up per column, in -> named vertical centres out. The
+  # gap is whatever is left over, so each column spans the band exactly and no
+  # box can drift past the top or bottom edge.
+  col_centres <- function(h) {
+    gap  <- (Y_TOP - Y_BOT - sum(h)) / (length(h) - 1)
+    ymin <- Y_BOT + c(0, cumsum(utils::head(h, -1) + gap))
+    stats::setNames(as.list(ymin + unname(h) / 2), names(h))
+  }
+  c1 <- col_centres(c(hcc = box_h(3), hf    = box_h(3)))
+  c2 <- col_centres(c(sg  = box_h(3), tiers = box_h(3)))
+  c3 <- col_centres(c(pre = box_h(2), eig   = box_h(2), tcs = box_h(2)))
+
+  # Column x extents, in data units. Not equal thirds: each column is sized to
+  # the longest line it has to carry, which 00_probe_fig1a_widths.R measures.
+  # Equal thirds would give column 3 1.29 in, and the eigengene box's second line
+  # needs 1.48 in. Column 1 needs the least (its longest line is "23 named
+  # modules") and column 3 the most. Everything below reads its x from here, so
+  # moving a column or resizing one moves the boxes, the headers and the arrows
+  # together.
+  # Printed verbatim by 00_probe_fig1a_widths.R, so the two cannot drift.
+  COL_X  <- list(c(2, 20), c(35, 58), c(72, 98))
+  cx     <- function(i) COL_X[[i]]
+  cmid   <- function(i) mean(COL_X[[i]])
+
   bx <- data.frame(
-    xmin = c( 1,  1, 34, 34, 69, 69, 69),
-    xmax = c(31, 31, 66, 66, 99, 99, 99),
-    ymin = c(56,  4, 56,  4, 74, 42,  4),
-    ymax = c(100, 48, 100, 48, 100, 70, 38),
+    xmin = c(cx(1)[1], cx(1)[1], cx(2)[1], cx(2)[1], cx(3)[1], cx(3)[1], cx(3)[1]),
+    xmax = c(cx(1)[2], cx(1)[2], cx(2)[2], cx(2)[2], cx(3)[2], cx(3)[2], cx(3)[2]),
+    ycen = c(c1$hf, c1$hcc, c2$tiers, c2$sg, c3$tcs, c3$eig, c3$pre),
+    nlin = c(3L, 3L, 3L, 3L, 2L, 2L, 2L),
     fill = c("#DCE7F2", "#F6DEDC", "#EDEDED", "#E4EDE4", "#FBEFD0", "#EAF3EA", "#EAF3EA"),
     edge = c(C_HF, C_HCC, "grey40", "#3B6E3B", "#8A6D00", "#3B6E3B", "#3B6E3B"),
     lab = c(
-      sprintf("HF network\nGSE57338\n177 failing LV\n%s named modules", hf_n),
-      sprintf("HCC network\nGSE141198\n148 tumours\n%s named modules", hcc_n),
-      "A priori pathway tiers\n15 Tier A sets\nexplicit membership\n(KEGG + Reactome)",
-      sprintf("ssGSEA per network\n\u2192 designated module:\nHF %s (%s genes)\nHCC %s (%s genes)",
+      sprintf("HF (GSE57338)\n177 failing LV\n%s named modules", hf_n),
+      sprintf("HCC (GSE141198)\n148 tumours\n%s named modules", hcc_n),
+      "A priori pathway tiers\n15 Tier A sets\nexplicit membership",
+      sprintf("ssGSEA per network\nHF %s (%s genes)\nHCC %s (%s genes)",
               hf_mod, hf_sz, hcc_mod, hcc_sz),
-      "TCS\nmean z of the 15 Tier A sets;\ndisease-agnostic",
-      "Module eigengene score\nkME-weighted mean z;\nboth directions",
-      "Fed to the preservation test\nand the Hedges g comparison"),
+      "TCS \u2014 disease-agnostic\nmean z, 15 Tier A sets",
+      "Module eigengene score\nkME-weighted; both directions",
+      "Preservation test and\nHedges g comparison"),
     stringsAsFactors = FALSE)
-  hd <- data.frame(x = c(16, 50, 84),
+  bx$ymin <- bx$ycen - box_h(bx$nlin) / 2
+  bx$ymax <- bx$ycen + box_h(bx$nlin) / 2
+  # Box edges and arrow endpoints that depend on the derived geometry.
+  tiers_y_bot <- c2$tiers - box_h(3) / 2
+  sg_y_top    <- c2$sg    + box_h(3) / 2
+  hd <- data.frame(x = c(cmid(1), cmid(2), cmid(3)),
                    lab = c("1 \u00b7 Network modules",
                            "2 \u00b7 Pathway tiers",
                            "3 \u00b7 Derived scores"))
@@ -154,22 +303,32 @@ run("Fig1", {
     geom_rect(data = bx, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
               fill = bx$fill, colour = bx$edge, linewidth = 0.4) +
     geom_text(data = bx, aes((xmin + xmax) / 2, (ymin + ymax) / 2, label = lab),
-              size = 2.3, lineheight = 1.06, colour = "grey10") +
-    geom_text(data = hd, aes(x, 107, label = lab), size = 2.6, fontface = "bold",
+              size = PT8, lineheight = 1.06, colour = "grey10") +
+    geom_text(data = hd, aes(x, 107, label = lab), size = PT8, fontface = "bold",
               colour = "grey25") +
-    geom_segment(aes(x = 31, xend = 34, y = 78, yend = 30), arrow = arw,
-                 linewidth = 0.4, colour = "grey35") +
-    geom_segment(aes(x = 31, xend = 34, y = 26, yend = 16), arrow = arw,
-                 linewidth = 0.4, colour = "grey35") +
-    geom_segment(aes(x = 50, xend = 50, y = 56, yend = 48), arrow = arw,
-                 linewidth = 0.4, colour = "grey35") +
-    geom_segment(aes(x = 66, xend = 69, y = 26, yend = 56), arrow = arw,
-                 linewidth = 0.4, colour = "grey35") +
+    # Endpoints are read off the same column extents and the same box centres the
+    # rectangles are built from, so moving a column or re-stacking a column moves
+    # the arrows with it and an arrow cannot end up pointing where a box used to be.
+    geom_segment(aes(x = cx(1)[2], xend = cx(2)[1], y = c1$hf, yend = c2$sg + 8),
+                 arrow = arw, linewidth = 0.4, colour = "grey35") +
+    geom_segment(aes(x = cx(1)[2], xend = cx(2)[1], y = c1$hcc, yend = c2$sg - 8),
+                 arrow = arw, linewidth = 0.4, colour = "grey35") +
+    geom_segment(aes(x = cmid(2), xend = cmid(2), y = tiers_y_bot, yend = sg_y_top),
+                 arrow = arw, linewidth = 0.4, colour = "grey35") +
+    geom_segment(aes(x = cx(2)[2], xend = cx(3)[1], y = c2$sg, yend = c3$eig),
+                 arrow = arw, linewidth = 0.4, colour = "grey35") +
     scale_x_continuous(limits = c(0, 100), expand = c(0, 0)) +
     scale_y_continuous(limits = c(0, 114), expand = c(0, 0)) +
     labs(tag = "a", title = "How the three objects relate (schematic)") +
     theme_void() +
     theme(plot.tag = element_text(face = "bold", size = 12),
+          # Panel a is the one panel that does not inherit `th` (it is theme_void),
+          # and it is also the only one where `plot.title.position = "plot"` would
+          # change nothing: with no axis labels there is no left margin for the tag
+          # to sit in, so ggplot keeps the tag on its own row and left-aligns the
+          # title under it either way. Measured, not assumed -- the two renders are
+          # identical -- so the setting is deliberately absent here rather than
+          # present and inert.
           plot.title = element_text(size = 9, face = "bold", hjust = 0,
                                     margin = margin(b = 2)))
 
@@ -187,7 +346,7 @@ run("Fig1", {
     scale_y_continuous(labels = scales::label_comma()) +
     labs(x = NULL, y = "Genes in module", tag = "b", title = "Module inventory (\u03b2 = 14)") +
     expand_limits(y = max(inv$n_genes) * 1.30) + th +
-    theme(axis.text.y = element_text(size = 7))
+    theme(axis.text.y = element_text(size = 8))
 
   # --- c: Tier A enrichment per module ---------------------------------------
   # Redesigned from a 43-category bar chart to a fold-versus-size scatter: the
@@ -200,11 +359,26 @@ run("Fig1", {
   hyp <- merge(hyp, inv[, c("disease", "module", "n_genes", "designated")],
                by = c("disease", "module"))
   hyp$lab <- ifelse(hyp$designated, as.character(hyp$module), NA)
+  # Both labels are placed by hand because the repulsion solve cannot help here.
+  # At n ~ 150 there is a cluster of some thirty points between fold 0 and 3, and
+  # ggrepel, which has no point.padding by default, was parking "magenta" in the
+  # middle of it -- on top of the very points it is meant to be read against. The
+  # one direction with room is straight up: the magenta point at fold 4 is the
+  # highest point in its column, and the next thing above it is purple's label at
+  # fold 9. So magenta's anchor is lifted clear of the cluster and purple keeps
+  # the below-the-point position it already had (its point is the topmost in the
+  # panel, so lifting it too would push the label through the panel border).
+  # nudge_y rather than a y aesthetic on purpose: a nudge is applied after the
+  # scale is computed, so lifting a label cannot stretch the axis underneath it.
+  lab_dy <- ifelse(!hyp$designated, 0,
+            ifelse(hyp$disease == "HCC",  1.5,     # magenta: above its point
+                                          -1.7))   # purple:  below its point
   pc <- ggplot(hyp, aes(n_genes, fold, colour = disease)) +
     geom_hline(yintercept = 1, linetype = 2, colour = "grey35") +
     geom_point(size = 1.9, alpha = 0.9) +
     ggrepel::geom_text_repel(aes(label = lab), size = 3.1, fontface = "bold",
-                             colour = "#7A5C00", na.rm = TRUE, min.segment.length = 0) +
+                             colour = "#7A5C00", na.rm = TRUE, min.segment.length = 0,
+                             nudge_y = lab_dy, seed = 42) +
     scale_x_log10() +
     scale_colour_manual(values = c(HF = C_HF, HCC = C_HCC)) +
     labs(x = "Genes in module (log scale)", y = "Tier A fold enrichment",
@@ -277,8 +451,27 @@ run("Fig1", {
   # journal does not downscale it and shrink every label with it. The previous
   # 13 x 11.5 in canvas was scaled to roughly half, which is why the reviewer
   # saw 5.5 pt axis text rendered at an effective ~2.75 pt.
-  save_fig((pa / (pb | (pc / pd)) / pe) + plot_layout(heights = c(1.9, 5.8, 1.05)),
-           "Fig1_harmonised_networks", PLOS_MAX_W, PLOS_MAX_H)
+  # Panel a is NOT stacked with `/` the way the others are. patchwork aligns the
+  # panel columns of every row to a common range, and rows b-e set that range
+  # very wide on the left (the 43 named modules on Fig 1b's y axis, 1.65 in) and
+  # on the right (the legend, 1.70 in). Panel a has no axes at all, so being
+  # aligned to that range buys it nothing and costs it a third of the page: it
+  # has been rendering its 4.15 in worth of boxes centred in a 7.34 in cell with
+  # 1.7 in of blank page on either side, which is why the eigengene box's second
+  # line ("kME-weighted; both directions", 1.49 in at 8 pt) sat 3 px off its
+  # border -- it was sized for the 4.15 in it actually gets, not the 7.34 in the
+  # row below has to spare.
+  #
+  # wrap_elements() does not fix this: it wraps pa into the aligned grid, so the
+  # wrapper inherits the narrowed width (measured: cell 4.14 in, no better).
+  # cowplot::plot_grid() with align = "none" composes the two halves as opaque
+  # blocks, so panel a keeps the full row and rows b-e keep their own internal
+  # patchwork alignment. Verified by painting pa's panel: 4.15 in before, 7.30 in
+  # after.
+  fig1_body <- (pb | (pc / pd)) / pe + plot_layout(heights = c(5.8, 1.05))
+  save_fig(cowplot::plot_grid(pa, fig1_body, ncol = 1,
+                              rel_heights = c(1.9, 6.85), align = "none"),
+           "Fig1_harmonised_networks", PLOS_MAX_W, PLOS_MAX_H, editable = TRUE)
 })
 
 # =============================================================================
@@ -337,6 +530,34 @@ run("Fig2", {
               sum(prim$mirror), nrow(prim)))
   prim$lab <- ifelse(prim$tier == "A" & !prim$mirror, short_set(prim$set), NA)
 
+  # One label is placed by hand. AA-TRNA BIOSYNTH. is the only labelled set whose
+  # point lands inside the red cluster instead of beside it: its HCC effect size
+  # (1.02) falls inside the mirroring sets' own range (0.64 to 1.17) and its HF
+  # effect (-0.21) sits just above their highest (-0.36). ggrepel could therefore
+  # only draw its connector straight down through the cluster -- the very points
+  # the label is meant to be read against -- and it parked the label itself on the
+  # lower dots as well.
+  #
+  # Moving the label sideways does not fix it, and that is measured rather than
+  # assumed. ggrepel draws the connector to the nearest edge of the label's box,
+  # so as long as the point's x falls inside the label's horizontal span the
+  # connector comes out vertical whatever the label's position. Clearing the point
+  # to the right therefore needs a label at most 2.045 - 1.024 = 1.02 data units
+  # wide; at 8 pt this one is 1.77 (strwidth: 1.145 in over a panel of 0.648 in
+  # per unit), so it cannot go there, and the only set name short enough to try
+  # would be "AA-TRNA", which collides in meaning with the two TRNA aminoacyl
+  # labels already on the panel. Lifting the label above its point instead makes
+  # the connector the short vertical run the eye expects -- it rises from the
+  # triangle to the label and crosses no points at all.
+  # The lift is deliberately small. A sweep over every placement inside the panel
+  # found exactly one dot-free band, y = +0.05, and it is where "RRNA PROC.
+  # (MITO.)" already sits, so the label is parked underneath that one rather than
+  # through it.
+  # nudge_y rather than a second y aesthetic: a nudge is applied after the scales
+  # are computed, so moving a label cannot stretch the axes underneath it.
+  lab_dy2 <- ifelse(prim$tier == "A" & !prim$mirror &
+                    prim$set == "KEGG_AMINOACYL_TRNA_BIOSYNTHESIS", 0.20, 0)
+
   # --- a: effect-size scatter -------------------------------------------------
   pa <- ggplot(prim, aes(hedges_g.hcc, hedges_g.hf)) +
     geom_hline(yintercept = 0, linetype = 2, colour = "grey40") +
@@ -345,10 +566,10 @@ run("Fig2", {
     geom_point(data = subset(prim, tier != "A"), colour = C_GREY, size = 1.9, alpha = 0.75) +
     geom_point(data = subset(prim, tier == "A" & mirror), colour = C_HCC, size = 2.9) +
     geom_point(data = subset(prim, tier == "A" & !mirror), colour = "#1B7837", size = 2.9, shape = 17) +
-    ggrepel::geom_text_repel(aes(label = lab), size = 2.8, colour = "#1B7837",
+    ggrepel::geom_text_repel(aes(label = lab), size = PT8, colour = "#1B7837",
                              na.rm = TRUE, min.segment.length = 0, max.overlaps = Inf,
                              box.padding = 0.7, point.padding = 0.3, force = 6,
-                             max.iter = 20000, seed = 42) +
+                             nudge_y = lab_dy2, max.iter = 20000, seed = 42) +
     scale_x_continuous(expand = expansion(mult = 0.16)) +
     scale_y_continuous(expand = expansion(mult = 0.14)) +
     labs(x = expression("Hedges "*italic(g)*", HCC (TCGA-LIHC)"),
@@ -371,7 +592,7 @@ run("Fig2", {
     labs(x = expression("Hedges "*italic(g)), y = NULL, colour = NULL, tag = "b",
          title = "The 15 Tier A sets, both diseases",
          subtitle = "ordered by HCC effect size; crossing zero is\nnecessary but not sufficient for the mirror gate") +
-    th + theme(axis.text.y = element_text(size = 7.5),
+    th + theme(axis.text.y = element_text(size = 8),
                legend.position = "top", legend.justification = "right")
 
   # --- c: observed vs permutation null ----------------------------------------
@@ -457,7 +678,7 @@ run("Fig2", {
                axis.text = element_text(size = 8))
 
   save_fig((pa | pb) / (pc | pd) + plot_layout(heights = c(1, 1)),
-           "Fig2_pathway_mirror")
+           "Fig2_pathway_mirror", editable = TRUE)
 })
 
 # =============================================================================
@@ -542,7 +763,7 @@ run("Fig3", {
          subtitle = sprintf("Tier A rho = %+.3f (n = %d)\nvs %+.3f for GSE57338",
                             r4v, sum(m4$tier.x == "A"), cor(w$TCGA_LIHC[w$tier == "A"], w$GSE57338[w$tier == "A"], method = "spearman"))) + th
 
-  save_fig((pa | pb) / (pc | pd), "Fig3_same_organ_controls")
+  save_fig((pa | pb) / (pc | pd), "Fig3_same_organ_controls", editable = TRUE)
 })
 
 # =============================================================================
@@ -676,10 +897,29 @@ run("S5", {
     coord_flip() +
     labs(x = NULL, y = expression(italic(I)^2*" (%)"), fill = NULL,
          title = "Between-cohort heterogeneity, Tier A sets (S21 Table)",
-         subtitle = sprintf("Median %s: HF %.1f%%, HCC %.1f%%; the discordance is\nnot a few outlier sets",
-                            "I\u00b2", median(h$I2_pct[h$disease == "HF"], na.rm = TRUE),
-                            median(h$I2_pct[h$disease == "HCC"], na.rm = TRUE))) +
-    th + theme(axis.text.y = element_text(size = 7), legend.position = "top")
+         # The subtitle's superscript is plotmath, matching the y axis, and the
+         # wording has not changed -- only where the line breaks.
+         #
+         # It used to be sprintf() with a literal "I\u00b2" and an embedded \n.
+         # That was wrong on the superscript: a plain string's \u00b2 is whatever
+         # glyph the font draws for U+00B2, measured here at 4.7 pt against the
+         # 10 pt text around it, where plotmath draws the same superscript at 7.0.
+         # The other two superscripts and subscripts in the figure set (this
+         # panel's own y axis, and Z[summary] in Fig 1d) are plotmath, so the
+         # subtitle was the odd one out.
+         #
+         # Handing it to plotmath costs the line break, and that is worth knowing
+         # rather than rediscovering: plotmath drops an embedded \n, it does not
+         # render it. Tested -- bquote("a " * I^2 * ".(paste0(x, \"\n\", y))")
+         # collapses to one line and overprints the title. atop() honours the
+         # break but centres the second line, which reads wrong under a
+         # left-aligned title. So the break is gone instead, and the sentence
+         # runs to one line: at 7.5 in it ends around 4.2 in, well inside the
+         # figure.
+         subtitle = bquote("Median "*italic(I)^2*.(sprintf(": HF %.1f%%, HCC %.1f%%; the discordance is not a few outlier sets",
+                            median(h$I2_pct[h$disease == "HF"], na.rm = TRUE),
+                            median(h$I2_pct[h$disease == "HCC"], na.rm = TRUE))))) +
+    th + theme(axis.text.y = element_text(size = 8), legend.position = "top")
   save_fig(p, "FigS5_heterogeneity", PLOS_MAX_W, 4.09)
 })
 
