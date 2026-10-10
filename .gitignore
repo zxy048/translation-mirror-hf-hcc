@@ -43,6 +43,23 @@ CLAUDE.md
 # reviewers' points by number -- stayed stageable while the rule that was meant
 # to exclude it sat right there looking correct. `*_Submission*` matches both
 # PLOS_ONE_Submission and PLOS_ONE_Submission_v2, and any future suffix.
+#
+# That fix was still one level short. The rules below originally named the three
+# extensions that mattered at the time (`*_Submission*/*.docx`, `*.pdf`, `*.md`),
+# which covers a file sitting directly in a submission directory and nothing
+# else. Everything nested one level deeper stayed stageable: BBA_Submission's
+# figure PNGs and supplementary CSVs, Frontiers_Submission's figure TIFFs,
+# HC_Submission/Figures/Main_Figures.pdf. `*_Submission*/**` is the rule those
+# three were trying to be -- the whole directory, at any depth. The extension
+# list was the bug: a rule written against the file types of one package silently
+# fails for the next package, which is the same failure the trailing-`*` note
+# above records one level up.
+#
+# HC_Submission is a deliberate exception in substance but not in mechanism: its
+# manuscript, cover letter and figures were committed before this rule existed
+# and remain tracked, because gitignore never untracks. Adding to it later needs
+# an explicit `git add -f`, which is the right amount of friction for a
+# directory that holds another journal's submission package.
 *Decision_Letter*
 *Reviewer_Comments*
 *Response_to_Reviewers*
@@ -59,7 +76,13 @@ rebuttal*
 # exactly that position and is ignored anyway, so the precedent is already set
 # that confidentiality outranks tracking a source.
 Cover_Letter_*
-*_Submission*/*.docx
-*_Submission*/*.pdf
-*_Submission*/*.md
+*_Submission*/**
 v2_output/logs/transcript_msg_*.txt
+
+# Editable figure sources. R17 renders these SVG/PDF intermediates on its way to
+# the Fig*.pdf the package ships, and nothing reads them back -- they are derived
+# and regenerable by re-running R17. They were untracked and unignored, which is
+# the one state that matters here: `git add -A` would have committed 20-odd
+# intermediate files that no one chose to track, and the published PNG/PDF
+# alongside them would have disagreed the first time a font moved.
+v2_output/figures/editable/
