@@ -239,7 +239,7 @@ check("composition survivorship", f"{surv} of {len(ta25)} Tier A set–cohort pa
 check("median attenuation", f"median attenuation of {100*med:.1f}%")
 check("max VIF", f"maximum VIF {max(vifs):.2f}")
 
-print("\n--- age and sex adjustment (R2 Major 3) ---")
+print("\n--- age and sex adjustment (S37 / S38 Tables) ---")
 s37 = rows("Table_S37_clinical_covariate_adjustment.csv")
 s38 = rows("Table_S38_age_sex_mirror_recheck.csv")
 ta37 = [r for r in s37 if r["tier"] == "A"]
@@ -302,6 +302,121 @@ forbid("stringency claim (false: FDR admits the most genes)",
        "the more stringent of the three on this data")
 forbid("stringency claim, table caption form",
        "showing that the FDR criterion is the more stringent")
+
+# ---------------------------------------------------------------------------
+# translation score and overall survival (S39, S39b)
+# ---------------------------------------------------------------------------
+# This block exists because the survival numbers are the one place in the v2
+# manuscript that no script in the repository produced until this revision: v1's
+# figures belonged to the withdrawn TATS score, and the v2 text asserted a null
+# that nothing computed. R23_survival.R now produces it; these checks pin the
+# prose to that table, so the same gap cannot reopen silently.
+#
+# The stratum column carries the literal string "NA" for whole-cohort rows, not
+# an empty cell -- R writes `NA` for a missing character value. A helper testing
+# for "" would match no row at all and every check below would fail for a reason
+# that has nothing to do with the manuscript.
+print("\n--- translation score and overall survival (S39) ---")
+surv = rows("Table_S39_translation_score_survival.csv")
+cover = rows("Table_S39b_survival_annotation_coverage.csv")
+
+def srow(cohort, model, covars="none", score="TCS", stratum="NA"):
+    for r in surv:
+        if (r["cohort"] == cohort and r["score"] == score and r["model"] == model
+                and r["covariates"] == covars and r["stratum"] == stratum):
+            return r
+    raise KeyError(f"no S39 row for {cohort}/{score}/{model}/{covars}/{stratum}")
+
+def hci(r, dec=2):
+    """'1.55 [1.17-2.04]', with the en-dash the manuscript uses."""
+    return (f"{num(r['hr']):.{dec}f} "
+            f"[{num(r['ci_lo']):.{dec}f}–{num(r['ci_hi']):.{dec}f}]")
+
+# The four whole-cohort per-IQR estimates, in the order the manuscript lists
+# them. The hazard ratio and the interval are checked as two separate strings
+# rather than one: the manuscript says "CCGA-LIHC HR 1.13 per IQR [0.90-1.42]"
+# and omits "per IQR" from the three that follow it, so the joined form is not a
+# contiguous substring anywhere -- a single check would fail on correct prose.
+for c, ci_prose, prose in (
+        ("TCGA_LIHC",        "[0.90–1.42]", "TCGA-LIHC HR 1.13 per IQR [0.90–1.42]"),
+        ("GSE141198",        "[0.78–1.39]", "GSE141198 1.04 [0.78–1.39]"),
+        ("GSE76427",         "[0.76–2.40]", "GSE76427 1.35 [0.76–2.40]"),
+        ("GSE14520_GPL3921", "[1.17–2.04]", "GSE14520 1.55 [1.17–2.04]")):
+    r = srow(c, "continuous_per_IQR")
+    check(f"TCS per-IQR HR, {c}", f"{num(r['hr']):.2f}", prose)
+    check(f"TCS per-IQR CI, {c}",
+          f"[{num(r['ci_lo']):.2f}–{num(r['ci_hi']):.2f}]", ci_prose)
+
+# The sentence the paragraph rests on, computed rather than asserted: it is the
+# one a reader is most likely to take as the finding, and it is checkable.
+whole = [r for r in surv if r["score"] == "TCS" and r["stratum"] == "NA"]
+check(f"every whole-cohort TCS estimate is above 1 (n = {len(whole)} rows)",
+      "above 1" if all(num(r["hr"]) > 1 for r in whole) else "NOT ALL ABOVE 1",
+      "Every whole-cohort point estimate was above 1")
+
+# ... and that they are not mutually contradictory, which is the difference
+# between "cohort-dependent" and "consistent direction, one cohort significant".
+base = [srow(c, "continuous_per_IQR") for c in
+        ("TCGA_LIHC", "GSE141198", "GSE76427", "GSE14520_GPL3921")]
+overlap = all(num(a["ci_lo"]) <= num(b["ci_hi"]) and num(b["ci_lo"]) <= num(a["ci_hi"])
+              for i, a in enumerate(base) for b in base[i + 1:])
+check("the four per-IQR confidence intervals all overlap",
+      "mutually consistent rather than contradictory" if overlap else "CIs DISJOINT",
+      "All four confidence intervals overlap")
+
+g = srow("GSE14520_GPL3921", "continuous_per_IQR")
+check("GSE14520 n and event count",
+      f"*n* = {g['n']}, {g['n_events']} deaths",
+      "in GSE14520 (*n* = 221, 85 deaths")
+check("GSE14520 unadjusted Cox P", f"*P* = {num(g['p_cox']):.4f}",
+      "in GSE14520 (*n* = 221, 85 deaths; *P* = 0.0020")
+check("GSE14520 median-split log-rank P",
+      f"*P* = {num(srow('GSE14520_GPL3921', 'median_split')['p_logrank']):.4f}",
+      "log-rank *P* = 0.0090 as a median split")
+
+# The adjustment, which is the part a reviewer will test first.
+for covars, prose in (("purity",        "tumour purity (HR 1.52)"),
+                      ("proliferation", "proliferation (HR 1.47)")):
+    check(f"GSE14520 adjusted for {covars}",
+          f"(HR {num(srow('GSE14520_GPL3921', 'continuous_per_IQR', covars)['hr']):.2f})",
+          prose)
+full = srow("GSE14520_GPL3921", "continuous_per_IQR", "purity+proliferation+immune")
+check("GSE14520 fully adjusted HR and CI", hci(full), "(HR 1.43 [1.06–1.93]")
+check("GSE14520 fully adjusted P", f"*P* = {num(full['p_cox']):.3f}",
+      "(HR 1.43 [1.06–1.93], *P* = 0.018")
+
+# A number that is in the table and must NOT be in the manuscript. The TCGA
+# median split reaches P = 0.017 under full adjustment -- the most quotable
+# number in S39 -- but its proportional-hazards test fails at P = 0.020, so the
+# P-value does not mean what it appears to mean. Quoting it would put a
+# misleading significant result in the abstract-adjacent text of the one section
+# a reviewer is already primed to distrust. Guarded by the exact HR/CI rather
+# than the P-value, because the CI pair is unique to this row.
+tcga_med = srow("TCGA_LIHC", "median_split", "purity+proliferation+immune")
+if num(tcga_med["p_ph_global"]) < 0.05:
+    forbid("TCGA adjusted median-split (PH violated, must stay out of the text)",
+           hci(tcga_med))
+
+print("\n--- survival annotation coverage (S39b) ---")
+words = {0: "no", 1: "one", 2: "two", 3: "three", 4: "four"}
+hf = [r for r in cover if r["disease"] == "HF"]
+hf_un = [r for r in hf if r["analysed"] == "FALSE"]
+check("every HF cohort lacks a deposited survival field",
+      f"{words.get(len(hf_un), len(hf_un))} heart-failure cohorts"
+      if len(hf_un) == len(hf) else "an HF cohort IS analysed",
+      "The three heart-failure cohorts deposit no survival field")
+hcc_ok = [r for r in cover if r["disease"] == "HCC" and r["analysed"] == "TRUE"]
+check("number of HCC cohorts with usable survival annotation",
+      "one of four HCC cohorts" if len(hcc_ok) == 4 else f"{len(hcc_ok)} HCC cohorts",
+      "prognostic in one of four HCC cohorts")
+gp = [r for r in cover if r["cohort"] == "GSE14520_GPL571"][0]
+check("GSE14520_GPL571 reported as not analysed",
+      "not analysed" if gp["analysed"] == "FALSE" else "analysed",
+      "so it is reported as not analysed rather than as covered")
+check("GSE14520_GPL571 annotation present but unmatched in this cohort",
+      "carries annotation" if (gp["n_joined"] == "0"
+                               and gp["source"] != "none deposited") else "carries no annotation",
+      "GSE14520_GPL571 carries annotation whose sample identifiers do not intersect")
 
 # ---------------------------------------------------------------------------
 # orphan sweep
