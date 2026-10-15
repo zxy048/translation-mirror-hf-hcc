@@ -67,7 +67,7 @@ ok(order == sorted(order) and len(set(order)) == N_REFS,
    f"citations numbered by first appearance; {len(order)} of {N_REFS} refs cited")
 ok(all(g == sorted(g) for g in cites), "no descending citation groups (e.g. [8,5,7])")
 
-ref_block = md[md.index("## References"):md.index("## Supporting Information Captions")]
+ref_block = md[md.index("## References"):md.index("## Supporting Information")]
 refs = re.findall(r"^(\d+)\.\s", ref_block, flags=re.M)
 ok(len(refs) == N_REFS, f"reference list has {N_REFS} entries (got {len(refs)})")
 ok(set(int(r) for r in refs) == set(first_seen.keys()),
@@ -84,7 +84,7 @@ for n in range(1, N_FIGS + 1):
 # ---- required sections (v2 adds five declarations sections) ----
 for sec in ["## Abstract", "## Introduction", "## Materials and Methods",
             "## Results", "## Discussion", "## References",
-            "## Supporting Information Captions",
+            "## Supporting Information",
             "## Data Availability", "## Author Contributions", "## Funding",
             "## Competing Interests", "## Acknowledgments"]:
     ok(sec in md, f"section present: {sec}")

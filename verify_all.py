@@ -30,10 +30,8 @@ Run this before assembling any submission package. It exits non-zero if any
 check fails, so it can gate a release rather than merely inform one.
 """
 import os
-import re
 import subprocess
 import sys
-import zlib
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PY = sys.executable
@@ -46,6 +44,10 @@ CHECKS = [
     ("supporting information",
      "Code/Revision_v2/R20_verify_SI.py",
      "opens the built SI PDF and checks every table and figure it holds against its source CSV"),
+    ("response letter numbers",
+     "Code/Revision_v2/R24_audit_response_letter.py",
+     "opens the response letter and checks its numbers against the manuscript, the "
+     "regenerated tables and the built figure files"),
     ("manuscript structure and PLOS formatting",
      "qa_plos_v2.py",
      "checks abstract length, citation order, section presence, page setup, line numbers"),
@@ -58,72 +60,59 @@ CHECKS = [
 # 7.5 x 8.75 in, which shrank every label with them. The ceiling is asserted
 # here rather than trusted, because "we rendered it at the right size" is
 # exactly the kind of claim that silently goes stale after a re-render.
+#
+# The figures are TIFF, not PDF: PLOS takes TIFF or EPS, and rasterising the
+# vector page is also what removes Fig 2's 6 dpi colour-bar bitmap. The checked
+# file is therefore the uploaded one. Reading the TIFF's own tag instead of
+# recomputing the render is deliberate -- a check that re-derives the number it
+# is checking cannot notice that the render and the check disagree.
 PLOS_MAX_W_IN = 7.5
 PLOS_MAX_H_IN = 8.75
-FIGURES = ["PLOS_ONE_Submission_v2/Fig1.pdf",
-           "PLOS_ONE_Submission_v2/Fig2.pdf",
-           "PLOS_ONE_Submission_v2/Fig3.pdf"]
+PLOS_MIN_DPI = 300
+PLOS_MAX_MB = 10.0
+FIGURES = ["PLOS_ONE_Submission_v2/Fig1.tiff",
+           "PLOS_ONE_Submission_v2/Fig2.tiff",
+           "PLOS_ONE_Submission_v2/Fig3.tiff"]
 
 
-def media_box_inches(path):
-    """Width and height in inches from a PDF's first /MediaBox.
-
-    Read raw bytes rather than with a PDF library, so this needs no dependency
-    the checking environment might lack. The first version of this only scanned
-    the raw file, which works for R's own pdf() output but silently reports
-    "no /MediaBox found" for the PDF 1.7 files written here, where the page
-    dictionary lives inside a FlateDecode object stream. A check that cannot
-    find its input must not read as a pass, so the streams are decompressed
-    before giving up.
-    """
-    with open(path, "rb") as fh:
-        blob = fh.read()
-
-    pattern = re.compile(rb"/MediaBox\s*\[\s*([\d.+-]+)\s+([\d.+-]+)\s+([\d.+-]+)\s+([\d.+-]+)")
-
-    def first_box(data):
-        m = pattern.search(data)
-        return m.groups() if m else None
-
-    groups = first_box(blob)
-    if groups is None:
-        for m in re.finditer(rb"stream\r?\n", blob):
-            start = m.end()
-            end = blob.find(b"endstream", start)
-            if end < 0:
-                continue
-            try:
-                data = zlib.decompress(blob[start:end])
-            except zlib.error:
-                continue
-            groups = first_box(data)
-            if groups:
-                break
-    if groups is None:
-        return None
-    x0, y0, x1, y1 = (float(v) for v in groups)
-    return abs(x1 - x0) / 72.0, abs(y1 - y0) / 72.0
+def tiff_specs(path):
+    """(width_px, height_px, dpi_x, dpi_y) as the TIFF file itself records them."""
+    from PIL import Image
+    with Image.open(path) as im:
+        w, h = im.size
+        dpi = im.info.get("dpi") or (0, 0)
+    return w, h, dpi[0], dpi[1]
 
 
 def check_figure_specs():
-    """Every main figure must sit at or under the PLOS ceiling."""
+    """Every main figure must be a TIFF at or above PLOS's resolution floor and
+    at or under its print-size ceiling."""
     fails = []
     for rel in FIGURES:
         path = os.path.join(ROOT, rel)
         if not os.path.exists(path):
             fails.append("%s is missing" % rel)
             continue
-        box = media_box_inches(path)
-        if box is None:
-            fails.append("%s: no /MediaBox found" % rel)
+        try:
+            w, h, dx, dy = tiff_specs(path)
+        except Exception as exc:                      # unreadable or not a TIFF
+            fails.append("%s: not a readable TIFF (%s)" % (rel, exc))
             continue
-        w, h = box
-        ok = w <= PLOS_MAX_W_IN + 0.01 and h <= PLOS_MAX_H_IN + 0.01
-        print("  %s %s  %.2f x %.2f in (%.0f x %.0f px @300dpi)"
-              % ("PASS" if ok else "FAIL", rel, w, h, w * 300, h * 300))
+        if dx < PLOS_MIN_DPI or dy < PLOS_MIN_DPI:
+            fails.append("%s is %g dpi, under the %d dpi floor"
+                         % (rel, min(dx, dy), PLOS_MIN_DPI))
+            continue
+        w_in, h_in = w / dx, h / dy
+        mb = os.path.getsize(path) / 1e6
+        ok = (w_in <= PLOS_MAX_W_IN + 0.01 and h_in <= PLOS_MAX_H_IN + 0.01
+              and mb <= PLOS_MAX_MB)
+        print("  %s %s  %.2f x %.2f in (%d x %d px @ %g dpi, %.2f MB)"
+              % ("PASS" if ok else "FAIL", rel, w_in, h_in, w, h, dx, mb))
         if not ok:
-            fails.append("%s is %.2f x %.2f in, over the %.2f x %.2f ceiling"
-                         % (rel, w, h, PLOS_MAX_W_IN, PLOS_MAX_H_IN))
+            fails.append("%s is %.2f x %.2f in / %.2f MB, over the "
+                         "%.2f x %.2f in / %.0f MB ceiling"
+                         % (rel, w_in, h_in, mb, PLOS_MAX_W_IN, PLOS_MAX_H_IN,
+                            PLOS_MAX_MB))
     return fails
 
 

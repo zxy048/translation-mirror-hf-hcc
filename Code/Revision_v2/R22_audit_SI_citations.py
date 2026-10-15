@@ -17,7 +17,13 @@ expanded before a "never cited" verdict means anything:
     S22b-d Tables          a letter range that repeats no number
 
 The caption definitions themselves are excluded from the body, so a table that
-only mentions another table in its own caption does not count as cited.
+only mentions another table in its own caption does not count as cited. That
+exclusion covers the S1 File caption, which names every table and figure in the
+supplement and would otherwise vouch for all of them (see CAPTION below).
+
+S1 File is the supplement as a whole rather than an item inside it, so it is
+defined but never tallied: a body sentence citing the container says nothing
+about whether a reader can find any particular table in the text.
 
 Read-only. Writes nothing; prints a report and exits non-zero if any item is
 never cited, so it can be wired into verify_all.py later if wanted.
@@ -31,7 +37,14 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MS = os.path.join(ROOT, "Manuscript_PLOSONE_v2.md")
 
-CAPTION = re.compile(r"^\*\*(S\d+[a-z]?) (Table|Fig)\.\*\*")
+# "File" is matched as well as "Table" and "Fig", and it has to be. The S1 File
+# caption reads "A single PDF containing Tables S1-S39 and Figures S1-S5", so
+# while it went unrecognised it was left in the body -- where the numeric-range
+# expander below read "S1-S39" and marked *every table* as cited. The audit then
+# reported 39/39 on any manuscript at all, which is the one failure mode an
+# audit must not have. Treating the line as the caption definition it is takes
+# it out of the body and restores the count.
+CAPTION = re.compile(r"^\*\*(S\d+[a-z]?) (Table|Fig|File)\.\*\*")
 LETTERS = "abcdefgh"
 
 
@@ -77,10 +90,15 @@ def main():
     cited = expand("\n".join(body))
 
     print("manuscript: %s" % MS)
-    print("SI items defined: %d (%d tables, %d figures)" % (
-        len(defined),
-        sum(1 for _, k in defined if k == "Table"),
-        sum(1 for _, k in defined if k == "Fig")))
+    # Counted per kind and summed, rather than printing len(defined) beside the
+    # table and figure counts: once "File" was recognised the three no longer
+    # added up (45 items printed as "39 tables, 5 figures") and a breakdown that
+    # does not total is worse than no breakdown.
+    print("SI items defined: %s" % ", ".join(
+        "%d %s" % (sum(1 for _, k in defined if k == kind),
+                   kind if sum(1 for _, k in defined if k == kind) == 1 else kind + "s")
+        for kind in ("Table", "Fig", "File")
+        if any(k == kind for _, k in defined)))
     print()
 
     # The other direction, and the one that actually breaks a submission: a body

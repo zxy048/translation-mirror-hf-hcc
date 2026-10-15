@@ -44,9 +44,129 @@ FIG = f"{ROOT}/v2_output/figures"
 MS = f"{ROOT}/Manuscript_PLOSONE_v2.md"
 OUT = f"{ROOT}/v2_output/Supporting_Information_v2.pdf"
 
-MAX_COLS = 12        # columns per page block before splitting
-MAX_FULL_ROWS = 200  # tables longer than this are previewed, with a notice
-PREVIEW_ROWS = 60
+# ------------------------------------------------------------------ page budget
+#
+# The supplement grows with its inputs unless something stops it, and the
+# something used to be a row count: print in full up to 200 rows, preview at 60
+# past that. Two tables showed why a row count is the wrong unit.
+#
+#   * S37 holds 163 rows, so it sat *under* the 200-row threshold, printed every
+#     row, and cost 24 pages.
+#   * S19 holds 45 rows -- one page of content -- and cost 12, because its 37
+#     columns split into four blocks and each block reprinted the same 45 rows.
+#
+# The driver is rows x column blocks, so the budget is stated in pages and the
+# row count is derived from it: each column block is given MAX_PAGES_PER_BLOCK
+# pages and carries however many rows actually fit on them. A table small enough
+# to fit is still printed whole and carries no notice, so the rule degrades to
+# the previous behaviour for the tables that were never the problem.
+# The budget is per TABLE, not per column block. Counting per block made a
+# two-block table four pages before anything was looked at, because each block
+# reprints the same rows through different columns and each was given the full
+# budget of its own.
+MAX_PAGES_PER_TABLE = 2
+
+def max_cols_for(n_rows):
+    """Columns per block, by row count.
+
+    Splitting on a flat count wastes pages on short tables: S20 panel a is two
+    rows across 37 numeric columns and cost four pages, because 12 columns per
+    block split it four ways. A block is limited by width, and a table with two
+    rows has vertical space to spend on narrow columns.
+    """
+    if n_rows > 20:
+        return 12
+    if n_rows > 6:
+        return 20
+    return 40
+
+# Tables the manuscript cites by value are printed as a structural preview when
+# they do not fit, and the preview narrows the column set as well as the row set.
+# S37 carries 25 columns and S19 37, and printing the other eighteen is most of
+# what the pages were spent on; the columns kept are the ones the cited claim is
+# made of. Narrowing columns is only done for tables listed here, so the
+# reduction is a decision recorded per table rather than a rule applied blind.
+PREVIEW_COLS = {
+    "S37": ["cohort", "set", "tier", "n", "g_unadjusted", "g_adjusted",
+            "attenuation", "survives"],
+    "S19": ["reference", "test", "module", "moduleSize", "Zsummary.pres",
+            "medianRank.pres", "preservation_class"],
+    "S17": ["set", "g_HCC", "g_HF", "mirror", "tier", "cluster",
+            "hcc_cohort", "hf_cohort"],
+}
+
+# Rows the manuscript cites, ordered to the front of a preview so that a reader
+# checking a number in the text finds the row it came from on the printed page.
+# Each predicate is applied to the table itself rather than to a hard-coded row
+# list, so it cannot go stale when the table is regenerated:
+#   S37, S17, S21 -- the manuscript reports counts over the Tier A sets
+#                    ("GSE57338 gives 10 of 15 Tier A sets", "10 of 15 Tier A
+#                    sets are mirror-perturbed", median I2 across the Tier A
+#                    sets), which is a statement about every Tier A row.
+#   S19           -- the two designated modules, which are the only rows whose
+#                    Zsummary the manuscript and the response letter quote.
+#   S30           -- the seven transcription factors the text names by value in
+#                    TCGA-LIHC (ATF4, MYC, DDIT3, EIF4EBP1, EIF2AK3, ERN1,
+#                    MTOR), on the TCS score. Narrowed to that score because the
+#                    quoted coefficients are all partial correlations against
+#                    TCS; widening it to every score triples the pinned set and
+#                    pushes the table back over its budget for no extra citation.
+#   S39           -- the continuous per-IQR Cox rows, which is the model every
+#                    hazard ratio in the text and in the response letter is
+#                    quoted from.
+#
+# Tables cited only through a *derived* statistic get no pin and are not meant
+# to: S14's "mean |g| is 1.44" and S25's "55 of 103 Tier A set-cohort pairs" are
+# computed over every row, so no bounded preview can make them checkable by eye.
+# They are checkable against the CSV, which the cover names as the authoritative
+# copy, and that is the distinction the preview notice exists to draw.
+# Written as column -> allowed values rather than as a predicate, so that a pin
+# can be checked against the frame it is applied to. A merged item publishes
+# several CSVs under one number, and a pin written for the parent table does not
+# describe all of them: S39's pin names a `score` column that S39 panel b -- the
+# annotation-coverage table -- does not have. As a predicate that was a KeyError
+# that stopped the build; as data it is a pin that simply does not apply.
+PIN_ROWS = {
+    "S37": {"tier": ["A"]},
+    "S17": {"tier": ["A"]},
+    "S21": {"tier": ["A"]},
+    "S19": {"module": ["magenta", "purple"]},
+    "S30": {"tf": ["ATF4", "MYC", "DDIT3", "EIF4EBP1", "EIF2AK3", "ERN1", "MTOR"],
+            "cohort": ["TCGA_LIHC"], "score": ["TCS"]},
+    "S39": {"score": ["TCS"], "model": ["continuous_per_IQR"]},
+}
+
+
+def pin_mask(df, label):
+    """Rows the pin for `label` selects, or None where no pin applies.
+
+    None rather than an all-False mask, so a caller cannot mistake "this table
+    has no cited rows to protect" for "this table's cited rows are empty".
+    """
+    spec = PIN_ROWS.get(label)
+    if not spec:
+        return None
+    if any(col not in df.columns for col in spec):
+        return None
+    mask = pd.Series(True, index=df.index)
+    for col, allowed in spec.items():
+        mask &= df[col].isin(allowed)
+    return mask
+
+# PLOS requires supporting-information item numbers to be whole numbers
+# ("Combine separate parts ... into one file, or rename with whole numbers"), so
+# the five tables that carried a letter suffix in the v2 draft are published as
+# panels of their parent table rather than as separate items. The CSVs keep the
+# filenames they were built under -- they are repository artefacts, not
+# submitted item names -- so the label-to-source mapping has to be recorded
+# here. A label absent from this map is its own single source and renders
+# exactly as before.
+PANELS = {
+    "S20": ["S20", "S20b"],
+    "S22": ["S22", "S22b", "S22c", "S22d"],
+    "S39": ["S39", "S39b"],
+}
+PANEL_LETTER = "abcdefgh"
 
 A4_PORTRAIT = (8.27, 11.69)
 A4_LANDSCAPE = (11.69, 8.27)
@@ -203,6 +323,12 @@ def _fits(fig, ax, tbl):
     ab = ax.get_window_extent()
     return tb.y0 >= ab.y0 - 0.5
 
+MAX_ROWS_PER_PAGE = 60   # ceiling for the per-page fit search, both here and in
+                         # rows_that_fit: if the two disagreed, the budget would
+                         # be computed against one row height and paginated at
+                         # another, and the pages would exceed the budget.
+
+
 def _layout_pages(sub, hdr, fs, numcol, caption, label, suf, note):
     """Greedily fit as many rows per page as actually render. Returns a list of
     (start, stop) row index pairs.
@@ -212,7 +338,7 @@ def _layout_pages(sub, hdr, fs, numcol, caption, label, suf, note):
     """
     spans, i, n = [], 0, len(sub)
     while i < n:
-        lo, hi, best = 1, min(n - i, 60), 1
+        lo, hi, best = 1, min(n - i, MAX_ROWS_PER_PAGE), 1
         while lo <= hi:
             mid = (lo + hi) // 2
             fig, ax = _page_frame(label, caption, suf, note)
@@ -228,51 +354,194 @@ def _layout_pages(sub, hdr, fs, numcol, caption, label, suf, note):
         i += best
     return spans
 
-def render_table_pages(pdf, label, caption, df, src_note):
-    """Landscape A4; split by columns, then paginate rows by measured fit."""
-    cols = list(df.columns)
-    blocks = []
-    if len(cols) <= MAX_COLS:
-        blocks.append(cols)
-    else:
-        key = cols[:1]
-        rest = cols[1:]
-        step = MAX_COLS - 1
-        for i in range(0, len(rest), step):
-            blocks.append(key + rest[i:i + step])
+def table_panels(label):
+    """Every CSV published under `label`, as (panel_letter, csv_path) pairs.
 
-    truncated = len(df) > MAX_FULL_ROWS
-    body = df.head(PREVIEW_ROWS) if truncated else df
-    note = ""
-    if truncated:
-        note = (f"Showing the first {PREVIEW_ROWS} of {len(df):,} rows. "
-                f"The complete table is provided as the machine-readable file "
-                f"{os.path.basename(src_note)}.")
+    Returns [(None, path)] for an ordinary single-source table, and
+    [('a', path), ('b', path), ...] for a merged one. A panel whose CSV is
+    missing comes back as (letter, None) so the caller can render a placeholder
+    in its place rather than dropping the panel silently -- the failure this
+    whole file exists to avoid.
+    """
+    srcs = PANELS.get(label, [label])
+    merged = len(srcs) > 1
+    out = []
+    for i, s in enumerate(srcs):
+        letter = PANEL_LETTER[i] if merged else None
+        hits = glob.glob(f"{TAB}/Table_{s}_*.csv")
+        out.append((letter, hits[0] if hits else None))
+    return out
+
+
+def _block_meta(body, block):
+    """Header lines, font size and numeric-column flags for one column block."""
+    hdr = [wrap_header(c) for c in block]
+    fs = 7.0 if len(block) <= 9 else 6.2 if len(block) <= 16 else 5.6
+    numcol = [pd.api.types.is_numeric_dtype(body[c]) for c in block]
+    return hdr, fs, numcol
+
+
+def rows_that_fit(sub, hdr, fs, numcol, caption, label, suf, note):
+    """The largest number of leading rows of `sub` that renders on ONE page.
+
+    Binary search on the drawn extent rather than a predicted count: row height
+    depends on font metrics, wrapped headers and SCALE_Y, and predicting it is
+    what clipped rows when this file was first written.
+    """
+    if len(sub) == 0:
+        return 0
+    lo, hi, best = 1, min(len(sub), MAX_ROWS_PER_PAGE), 0
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        fig, ax = _page_frame(label, caption, suf, note)
+        tbl = _place_table(ax, sub.iloc[:mid], hdr, fs, numcol)
+        ok = _fits(fig, ax, tbl)
+        plt.close(fig)
+        if ok:
+            best, lo = mid, mid + 1
+        else:
+            hi = mid - 1
+    return best
+
+
+def order_rows(df, label):
+    """Rows the manuscript cites first, everything else in file order.
+
+    A preview is a selection, so which rows it takes is a real choice and not a
+    detail. The first N would cut whichever rows happen to sort first, and the
+    cited rows are not those: S37's are the Tier A rows of three cohorts, which
+    sit behind five rows of another tier within every cohort block. Putting them
+    first is what makes the truncation safe to make at all.
+    """
+    mask = pin_mask(df, label)
+    if mask is None or not mask.any():
+        return df
+    return pd.concat([df[mask], df[~mask]])
+
+
+def table_notice(csv_name, n_rows, n_cols, shown_rows, shown_cols, ordered):
+    """One sentence naming what was reduced and where the whole table is."""
+    if shown_rows == n_rows and shown_cols == n_cols:
+        return f"Complete table: {csv_name} ({n_rows} rows x {n_cols} columns)."
+    parts = []
+    if shown_cols < n_cols:
+        parts.append(f"{shown_cols} of {n_cols} columns")
+    if shown_rows < n_rows:
+        parts.append(f"{shown_rows} of {n_rows} rows")
+    tail = " Rows cited in the manuscript are printed first." if ordered else ""
+    return (f"Printed from {csv_name} ({n_rows} rows x {n_cols} columns): "
+            + " and ".join(parts)
+            + f".{tail} The CSV is the complete and authoritative version.")
+
+
+def table_plan(label, caption, df, csv_name, panel=None):
+    """Decide what is printed for one table, and say so.
+
+    Returns (blocks, ordered_rows_shown, note, panel_suffix). Kept in one place
+    and called from both the builder and R20: a verifier that recomputed the row
+    count for itself would be checking its own arithmetic rather than the drawn
+    page, and the two would agree exactly until the day one of them was edited.
+    """
+    n_rows, n_cols = len(df), len(df.columns)
+
+    cols = PREVIEW_COLS.get(label, list(df.columns))
+    absent = [c for c in cols if c not in df.columns]
+    if absent:
+        # A preview column set naming a column the table no longer has would
+        # drop it without a word, which is the failure class this budget exists
+        # to prevent -- so it aborts the build instead.
+        raise SystemExit(f"{label}: PREVIEW_COLS names columns absent from "
+                         f"{csv_name}: {absent}")
+
+    ordered = order_rows(df, label)
+    pinned = pin_mask(ordered, label)
+    was_ordered = pinned is not None and bool(pinned.any())
+    body = ordered[cols]
+
+    per_block = max_cols_for(n_rows)
+    if len(cols) <= per_block:
+        blocks = [cols]
+    else:
+        key, rest, step = cols[:1], cols[1:], per_block - 1
+        blocks = [key + rest[i:i + step] for i in range(0, len(rest), step)]
+
+    panel_suf = f"  (panel {panel})" if panel else ""
+    n_pin = int(pinned.sum()) if pinned is not None else 0
+
+    def plan(note):
+        """How many rows this table prints, given the caption it will carry."""
+        cap = [rows_that_fit(body[b], *_block_meta(body, b),
+                             caption, label, panel_suf, note) for b in blocks]
+        if not cap or min(cap) == 0:
+            return 0
+        # Pages are summed over blocks: the blocks reprint the same rows through
+        # different columns, so a two-block table printed one page each is two
+        # pages of the document, and that is what the budget has to count.
+        n = min(cap) * MAX_PAGES_PER_TABLE
+        while n > 0 and sum(-(-n // c) for c in cap) > MAX_PAGES_PER_TABLE:
+            n -= 1
+        # The cited rows are a floor and not an option. A preview that hides the
+        # row a manuscript number came from is worse than a long supplement, so
+        # where the floor needs more pages than the budget, the floor wins and
+        # the notice reports the larger count.
+        return min(n_rows, max(n, n_pin))
+
+    shown = plan("")
+    note = table_notice(csv_name, n_rows, n_cols, shown, len(cols), was_ordered)
+    if shown < n_rows or len(cols) < n_cols:
+        # The notice is part of the caption and takes vertical space, so re-fit
+        # with it present. It can only reduce the row count, so one pass is
+        # enough; the second notice then reports the reduced count.
+        shown = plan(note)
+        note = table_notice(csv_name, n_rows, n_cols, shown, len(cols), was_ordered)
+
+    return blocks, body.iloc[:shown], note, panel_suf
+
+
+def render_table_pages(pdf, label, caption, df, src_note, panel=None):
+    """Landscape A4; narrow the columns where the label has a preview set, split
+    into column blocks, and give each block at most MAX_PAGES_PER_BLOCK pages."""
+    blocks, shown_body, note, panel_suf = table_plan(
+        label, caption, df, os.path.basename(src_note), panel)
 
     for bi, block in enumerate(blocks):
-        sub = body[block]
-        hdr = [wrap_header(c) for c in block]
-        fs = 7.0 if len(block) <= 9 else 6.2 if len(block) <= 16 else 5.6
-        numcol = [pd.api.types.is_numeric_dtype(sub[c]) for c in block]
-
+        sub = shown_body[block]
+        hdr, fs, numcol = _block_meta(shown_body, block)
         col_suf = f"  (columns {bi+1} of {len(blocks)})" if len(blocks) > 1 else ""
-        spans = _layout_pages(sub, hdr, fs, numcol, caption, label, col_suf, note)
+        base_suf = panel_suf + col_suf
+        spans = _layout_pages(sub, hdr, fs, numcol, caption, label, base_suf, note)
         total = len(spans)
         for p, (a, b) in enumerate(spans, 1):
-            suf = col_suf + (f"  (page {p} of {total})" if total > 1 else "")
-            # the truncation notice belongs on the final page of the final block
-            pg_note = note if (p == total and bi == len(blocks) - 1) else ""
+            suf = base_suf + (f"  (page {p} of {total})" if total > 1 else "")
+            # the notice closes each block, so a block read on its own still
+            # says which CSV it came from and what it left out
+            pg_note = note if p == total else ""
             fig, ax = _page_frame(label, caption, suf, pg_note)
             _place_table(ax, sub.iloc[a:b], hdr, fs, numcol)
             pdf.savefig(fig)
             plt.close(fig)
 
 def render_figure_page(pdf, label, caption, png):
+    """Portrait A4, with the axes box cut to the figure's own aspect ratio.
+
+    The box used to be a fixed 0.90 x 0.76 of the page and `imshow` letterboxed
+    inside it, so a wide, short figure -- S2, S4 and S5 -- sat in the top third
+    of an otherwise blank page. Sizing the box to the image removes the gap
+    without touching the image itself.
+    """
+    img = plt.imread(png)
+    h_px, w_px = img.shape[0], img.shape[1]
+    pw, ph = A4_PORTRAIT
+    avail_w, avail_h = 0.90 * pw, 0.76 * ph      # the box the caption leaves free
+    scale = min(avail_w / w_px, avail_h / h_px)
+    w_in, h_in = w_px * scale, h_px * scale
+    x0 = (0.05 * pw + (avail_w - w_in) / 2) / pw
+    y0 = (0.04 * ph + (avail_h - h_in) / 2) / ph
     fig = plt.figure(figsize=A4_PORTRAIT)
     draw_caption(fig, caption, title=f"{label} Fig.")
-    ax = fig.add_axes([0.05, 0.04, 0.90, 0.76])
+    ax = fig.add_axes([x0, y0, w_in / pw, h_in / ph])
     ax.axis("off")
-    ax.imshow(plt.imread(png))
+    ax.imshow(img)
     pdf.savefig(fig)
     plt.close(fig)
 
@@ -322,18 +591,24 @@ def render_cover(pdf, n_fig, n_tab):
              "hash recorded in S1 Table identifies the exact settings used.",
              ha="center", fontsize=9.5, color="#40506a", linespacing=1.6)
     # The CSV is the authoritative full text and the PDF is a rendering of it.
-    # Saying so on the title page is what makes the two truncations below
-    # legitimate rather than lossy: a set name shortened to "REACTOME_SRP_..."
-    # or a table shown as its first 60 rows is a display choice, and the reader
-    # has to be told where the untruncated version is before the choice is
-    # theirs to make.
+    # Saying so on the title page is what makes the reductions below legitimate
+    # rather than lossy: a set name shortened to "REACTOME_SRP_...", a table
+    # narrowed to the columns its claim is made of, or a table shown as the rows
+    # that fit are each a display choice, and the reader has to be told where the
+    # untruncated version is before the choice is theirs to make.
+    #
+    # This paragraph states the policy in terms of a page budget rather than a
+    # row count. The row count it used to name was also written into the
+    # manuscript body, so the two could disagree the moment either was edited;
+    # a policy that names no number cannot go stale that way.
     fig.text(0.5, 0.30,
              "Every table is also supplied complete as a machine-readable CSV\n"
              "alongside this document, and the CSV, not this PDF, is the\n"
-             "authoritative full text. Tables longer than 200 rows are printed\n"
-             "as a bounded preview of the first 60 and state their true row\n"
-             "count and the CSV's filename. Long cell values are shortened with\n"
-             "\"...\" in the printed preview only; the CSV holds them in full.",
+             "authoritative full text. A table too large to print within its\n"
+             "page budget is shown as a bounded preview that states its full row\n"
+             "and column counts and names the CSV carrying the rest, and the rows\n"
+             "the text cites are printed first. Long cell values are shortened\n"
+             "with \"...\" in the printed preview only; the CSV holds them whole.",
              ha="center", fontsize=9, color="#7a3020", linespacing=1.6,
              bbox=dict(boxstyle="round,pad=0.6", fc="#fdf6f2", ec="#e0c0b0"))
     fig.text(0.5, 0.10, "Generated by Code/Revision_v2/R19_build_SI_pdf.py",
@@ -368,18 +643,20 @@ def main():
                 print(f"  fig {lab}: MISSING -> placeholder")
 
         for lab in tab_labels:
-            hits = glob.glob(f"{TAB}/Table_{lab}_*.csv")
-            if hits:
-                src = hits[0]
-                df = pd.read_csv(src)
-                render_table_pages(pdf, lab, caps_tab[lab], df, src)
-                print(f"  tab {lab}: {os.path.basename(src)} ({len(df)}r x {len(df.columns)}c)")
-            else:
-                missing.append(f"{lab} Table")
-                render_placeholder(pdf, lab, "Table",
-                                   f"Table file not yet generated.\nExpected Table_S{lab}_*.csv",
-                                   caps_tab[lab])
-                print(f"  tab {lab}: MISSING -> placeholder")
+            for panel, src in table_panels(lab):
+                tag = f"{lab}{' panel ' + panel if panel else ''}"
+                if src:
+                    df = pd.read_csv(src)
+                    render_table_pages(pdf, lab, caps_tab[lab], df, src, panel)
+                    print(f"  tab {tag}: {os.path.basename(src)} ({len(df)}r x {len(df.columns)}c)")
+                else:
+                    missing.append(f"{lab} Table"
+                                   + (f" panel {panel}" if panel else ""))
+                    render_placeholder(pdf, lab, "Table",
+                                       f"Table file not yet generated.\nExpected "
+                                       f"Table_S{lab}{panel or ''}_*.csv",
+                                       caps_tab[lab])
+                    print(f"  tab {tag}: MISSING -> placeholder")
 
     size_mb = os.path.getsize(OUT) / 1e6
     print(f"\nwrote {OUT}  ({size_mb:.1f} MB)")

@@ -51,16 +51,33 @@ DOCS = [
 # Copied rather than rebuilt. The source hash is asserted so that a stale or
 # hand-edited package file cannot pass as current: the point of listing the
 # expected source is to notice when the two have drifted apart.
+#
+# The Supporting Information is uploaded under the name of the caption that
+# describes it. PLOS requires file names to match captions ("a PDF file for
+# 'S2 Fig.' must be named 'S2_fig.pdf'"), and since the supplement is one
+# consolidated file it is captioned S1 File -- so the name is S1_File.pdf, not
+# a description of its contents. The earlier 05_Supporting_Information.pdf was
+# a generic name that matched no caption the manuscript defines.
 COPIES = [
-    (os.path.join(ROOT, "v2_output", "figures", "Fig1_harmonised_networks.pdf"),
-     "Fig1.pdf"),
-    (os.path.join(ROOT, "v2_output", "figures", "Fig2_pathway_mirror.pdf"),
-     "Fig2.pdf"),
-    (os.path.join(ROOT, "v2_output", "figures", "Fig3_same_organ_controls.pdf"),
-     "Fig3.pdf"),
     (os.path.join(ROOT, "v2_output", "Supporting_Information_v2.pdf"),
-     "05_Supporting_Information.pdf"),
+     "S1_File.pdf"),
 ]
+
+# Rendered rather than copied. PLOS takes TIFF (or EPS) for figures, not PDF,
+# so the three main figures are rasterised at 600 dpi by their own script. That
+# script writes straight into the package, which is why these are listed
+# separately from COPIES: there is no source file to hash, because the source
+# is the vector PDF plus this render step. (source_pdf, package_name)
+FIGURES = [
+    ("Fig1_harmonised_networks.pdf", "Fig1.tiff"),
+    ("Fig2_pathway_mirror.pdf", "Fig2.tiff"),
+    ("Fig3_same_organ_controls.pdf", "Fig3.tiff"),
+]
+
+# Superseded upload names. Left in place they would ship alongside their
+# replacements and the package would carry two versions of every figure -- one
+# of them in a format PLOS does not accept, under a name no caption defines.
+STALE = ["Fig1.pdf", "Fig2.pdf", "Fig3.pdf", "05_Supporting_Information.pdf"]
 
 # Files in the package that are NOT upload items. Listed explicitly so that the
 # assembly reports them rather than silently carrying them forward. There used
@@ -166,7 +183,23 @@ def main():
             print("  %s -> %s" % (builder, dst))
 
     print("\n" + "=" * 74)
-    print("Copying figures and Supporting Information")
+    print("Dropping superseded upload files")
+    print("=" * 74)
+    for name in STALE:
+        full = os.path.join(PKG, name)
+        if os.path.exists(full):
+            os.remove(full)
+            print("  removed %s" % name)
+        else:
+            print("  %s absent (ok)" % name)
+
+    print("\n" + "=" * 74)
+    print("Rendering the three main figures as 600 dpi TIFF")
+    print("=" * 74)
+    run([sys.executable, "build_figure_tiffs.py"])
+
+    print("\n" + "=" * 74)
+    print("Copying the Supporting Information")
     print("=" * 74)
     for src, dst in COPIES:
         if not os.path.exists(src):
@@ -192,10 +225,9 @@ def main():
     except ImportError:
         print("  (Pillow not installed -- preview_png/ left as it was)")
     else:
-        for src, dst in COPIES:
-            if not dst.lower().startswith("fig"):
-                continue
-            png = os.path.splitext(src)[0] + ".png"
+        for src_pdf, dst in FIGURES:
+            png = os.path.join(ROOT, "v2_output", "figures",
+                               os.path.splitext(src_pdf)[0] + ".png")
             if not os.path.exists(png):
                 continue
             im = Image.open(png)
@@ -215,12 +247,12 @@ def main():
         note = "  <- do not upload" if name in NOT_UPLOADED else ""
         print("  %-46s %8d B%s" % (name, os.path.getsize(full), note))
 
-    print("\nUpload these six, and nothing else:")
+    print("\nUpload these eight, and nothing else:")
     for name in ("01_Cover_Letter.docx", "02_Response_to_Reviewers.docx",
                  "03_Manuscript.docx",
                  "04_Revised_Manuscript_with_Track_Changes.docx",
-                 "05_Supporting_Information.pdf",
-                 "Fig1.pdf  Fig2.pdf  Fig3.pdf"):
+                 "S1_File.pdf",
+                 "Fig1.tiff  Fig2.tiff  Fig3.tiff"):
         print("  " + name)
     print("\nThen run: python verify_all.py")
     return 0
