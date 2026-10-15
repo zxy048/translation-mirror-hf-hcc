@@ -43,6 +43,14 @@ BLOCK_NAME = [
     (r"\breviewer\b.*\.(txt|md|pdf|docx)$", "reviewer correspondence"),
     (r"response[_ -]?to[_ -]?reviewers", "response letter (quotes reviewer comments)"),
     (r"rebuttal", "rebuttal (quotes reviewer comments)"),
+    # A script that *edits* the response letter holds the letter's sentences as
+    # its old strings, so it is the letter for publication purposes even though
+    # its name says "response_letter" and not "Response_to_Reviewers". The
+    # `.gitignore` rule is the first line of defence; this catches `git add -f`.
+    # An *audit* of the letter is a different thing and is not matched: R24 reads
+    # the letter from disk and carries none of its prose, only provenance
+    # pointers ("Reviewer 2, Major 7") naming which point a number answers.
+    (r"edit[_ -]?.*response[_ -]?letter", "response letter (quotes reviewer comments)"),
 ]
 
 # Content markers, searched in text files that would be staged. A file whose

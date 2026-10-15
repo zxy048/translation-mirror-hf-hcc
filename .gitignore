@@ -64,6 +64,14 @@ CLAUDE.md
 *Reviewer_Comments*
 *Response_to_Reviewers*
 rebuttal*
+# The line-editing script for the response letter is the letter in another
+# form: it carries both sides of every replacement it applies, so the "old"
+# strings are the letter's own sentences. Neither rule above catches it -- the
+# name says "response_letter", not "Response_to_Reviewers", and the prose it
+# embeds contains none of the gate's content markers. It sat untracked and
+# unignored, which is the one state where `git add -A` publishes it, and only a
+# manual read kept it out. That is not a defence that survives the next session.
+*line_edit_response_letter*
 # Cover letters belong to the same rule for a reason of substance rather than
 # of file type. A revision cover letter is not a neutral submission note:
 # Cover_Letter_PLOSONE_v2.md thanks the reviewers by count and concedes that
