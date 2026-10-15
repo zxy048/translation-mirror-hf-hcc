@@ -243,7 +243,13 @@ print("\n--- age and sex adjustment (S37 / S38 Tables) ---")
 s37 = rows("Table_S37_clinical_covariate_adjustment.csv")
 s38 = rows("Table_S38_age_sex_mirror_recheck.csv")
 ta37 = [r for r in s37 if r["tier"] == "A"]
-att37 = sorted(num(r["attenuation"]) for r in ta37)
+# The median attenuation is taken over ALL S37 fits, not the Tier A subset: the
+# manuscript sentence that reports it puts it in the same breath as the maximum
+# VIF, which is an all-fits quantity ("...is 2.8% and no fit is collinear
+# (maximum VIF 1.03 across the 163 set–cohort fits)"). Computed on Tier A alone
+# it reads 2.9%, so the two bases are not interchangeable and the check has to
+# use the one the prose actually cites.
+att37 = sorted(num(r["attenuation"]) for r in s37)
 med37 = att37[len(att37)//2] if len(att37) % 2 else \
         (att37[len(att37)//2-1] + att37[len(att37)//2]) / 2
 # NB: `check` matches the manuscript as raw markdown, so these strings carry the
@@ -253,7 +259,7 @@ med37 = att37[len(att37)//2] if len(att37) % 2 else \
 check("age/sex median attenuation",
       f"Median attenuation of |*g*| is {100*med37:.1f}%")
 check("age/sex max VIF", f"maximum VIF {max(num(r['max_vif']) for r in s37):.2f} "
-                         f"across {len(s37)} set–cohort fits")
+                         f"across the {len(s37)} set–cohort fits")
 check("age/sex sex confound count",
       f"{sum(1 for r in ta37 if num(r['p_sex']) < 0.05)} of {len(ta37)} "
       f"Tier A set–cohort fits at *P* < 0.05")
@@ -272,8 +278,25 @@ for r in s38:
               f"from ρ = {num(r['rho_unadjusted']):.3f} to "
               f"{num(r['rho_adjusted']):.3f}".replace("-", "−"))
     else:
-        check(f"mirror count, {r['hf_cohort']}, before/after",
-              f"{r['hf_cohort']} {u} of {int(num(r['n_sets']))} both times")
+        # The non-discovery HF cohorts give the same count, so the prose names
+        # them in one clause ("GSE116250 and GSE141910 1 of 15 both times")
+        # rather than repeating "… both times" once per cohort. The expected
+        # string is built from S38 in row order instead of being copied out of
+        # the manuscript, so a cohort added to the table joins the clause here
+        # automatically rather than silently escaping the assertion. If the
+        # cohorts ever stop agreeing the clause is no longer well formed, and
+        # the check falls back to the per-cohort literal.
+        sib = [r2 for r2 in s38
+               if r2["tier"] == "A" and r2["hf_cohort"] != "GSE57338"]
+        same_u = len({int(num(r2["mirror_unadjusted"])) for r2 in sib}) == 1
+        same_n = len({int(num(r2["n_sets"])) for r2 in sib}) == 1
+        if sib and same_u and same_n:
+            check(f"mirror count, {r['hf_cohort']}, before/after",
+                  " and ".join(r2["hf_cohort"] for r2 in sib)
+                  + f" {u} of {int(num(r['n_sets']))} both times")
+        else:
+            check(f"mirror count, {r['hf_cohort']}, before/after",
+                  f"{r['hf_cohort']} {u} of {int(num(r['n_sets']))} both times")
 
 print("\n--- hub-gene threshold (S31) ---")
 s31 = rows("Table_S31_gene_significance_threshold.csv")
