@@ -93,6 +93,16 @@ PREVIEW_COLS = {
             "medianRank.pres", "preservation_class"],
     "S17": ["set", "g_HCC", "g_HF", "mirror", "tier", "cluster",
             "hcc_cohort", "hf_cohort"],
+    # S40a is a 1,965-row sample manifest; the PDF prints a bounded preview and
+    # PREVIEW_SORT puts the paired samples first within it. S40c is the per-set
+    # result table the text cites, so its cited columns are printed for every
+    # row (58 rows fit within the table budget at this column count) while the
+    # CSV keeps all 26.
+    "S40a": ["cohort", "group", "patient_key", "paired_design",
+             "included_in_paired", "pair_id", "exclusion_reason", "sample_id"],
+    "S40c": ["cohort", "n_pairs_analysed", "g_paired_z", "paired_ci_lo",
+             "paired_ci_hi", "p_perm_paired", "p_fdr_within_cohort",
+             "hedges_g_full_cohort", "direction_matches_full_cohort", "set"],
 }
 
 # Rows the manuscript cites, ordered to the front of a preview so that a reader
@@ -136,6 +146,16 @@ PIN_ROWS = {
     "S39": {"score": ["TCS"], "model": ["continuous_per_IQR"]},
 }
 
+# Display ordering without a row floor. A pin protects rows the text cites and
+# forces all of them onto the page, which is right for a table whose rows are
+# quoted and wrong for the 1,965-row sample manifest. S40a is not cited row by
+# row, but its first cohort in file order is an unpaired series; without this
+# the bounded preview would show only the part of the manifest that the paired
+# analysis excludes. The sort is stable, so file order is kept within each group.
+PREVIEW_SORT = {
+    "S40a": "included_in_paired",
+}
+
 
 def pin_mask(df, label):
     """Rows the pin for `label` selects, or None where no pin applies.
@@ -165,6 +185,7 @@ PANELS = {
     "S20": ["S20", "S20b"],
     "S22": ["S22", "S22b", "S22c", "S22d"],
     "S39": ["S39", "S39b"],
+    "S40": ["S40a", "S40b", "S40c", "S40d", "S40e"],
 }
 PANEL_LETTER = "abcdefgh"
 
@@ -404,7 +425,22 @@ def rows_that_fit(sub, hdr, fs, numcol, caption, label, suf, note):
     return best
 
 
-def order_rows(df, label):
+def _spec_key(mapping, label, panel):
+    """Look up a per-panel override before the parent table's entry.
+
+    A merged item publishes several CSVs under one number, so a preview set or
+    ordering written for one panel must not be applied to its siblings. S39's
+    pin is written for the parent because it describes panel a; S40's preview
+    sets are written per panel because panels a and c are different tables.
+    """
+    if panel:
+        key = f"{label}{panel}"
+        if key in mapping:
+            return key
+    return label
+
+
+def order_rows(df, label, panel=None):
     """Rows the manuscript cites first, everything else in file order.
 
     A preview is a selection, so which rows it takes is a real choice and not a
@@ -413,10 +449,17 @@ def order_rows(df, label):
     sit behind five rows of another tier within every cohort block. Putting them
     first is what makes the truncation safe to make at all.
     """
-    mask = pin_mask(df, label)
-    if mask is None or not mask.any():
-        return df
-    return pd.concat([df[mask], df[~mask]])
+    mask = pin_mask(df, _spec_key(PIN_ROWS, label, panel))
+    if mask is not None and mask.any():
+        df = pd.concat([df[mask], df[~mask]])
+    # Ordering only: unlike a pin this does not add a row floor, so the preview
+    # stays bounded. Values are compared as strings because the CSVs are read
+    # with mixed boolean spellings depending on the writer.
+    sort_col = PREVIEW_SORT.get(_spec_key(PREVIEW_SORT, label, panel))
+    if sort_col in df.columns:
+        first = df[sort_col].astype(str).str.strip().str.lower().isin(("true", "1"))
+        df = pd.concat([df[first], df[~first]])
+    return df
 
 
 def table_notice(csv_name, n_rows, n_cols, shown_rows, shown_cols, ordered):
@@ -444,7 +487,8 @@ def table_plan(label, caption, df, csv_name, panel=None):
     """
     n_rows, n_cols = len(df), len(df.columns)
 
-    cols = PREVIEW_COLS.get(label, list(df.columns))
+    cols = PREVIEW_COLS.get(_spec_key(PREVIEW_COLS, label, panel),
+                            list(df.columns))
     absent = [c for c in cols if c not in df.columns]
     if absent:
         # A preview column set naming a column the table no longer has would
@@ -453,8 +497,8 @@ def table_plan(label, caption, df, csv_name, panel=None):
         raise SystemExit(f"{label}: PREVIEW_COLS names columns absent from "
                          f"{csv_name}: {absent}")
 
-    ordered = order_rows(df, label)
-    pinned = pin_mask(ordered, label)
+    ordered = order_rows(df, label, panel)
+    pinned = pin_mask(ordered, _spec_key(PIN_ROWS, label, panel))
     was_ordered = pinned is not None and bool(pinned.any())
     body = ordered[cols]
 
@@ -571,9 +615,32 @@ def manuscript_title():
     raise SystemExit(f"no H1 title line found in {MS}")
 
 
-def render_cover(pdf, n_fig, n_tab):
+def label_span(labels):
+    """'S1–S5' from the caption labels themselves, not from a typed count.
+
+    A count is a second place for the number to live: add a caption and the
+    cover keeps claiming the old total unless someone remembers to edit it.
+    Reading the labels makes the cover a function of the caption table, which
+    is what R20 already checks.
+    """
+    nums = sorted(int(re.sub(r"\D", "", s)) for s in labels)
+    runs = []
+    for n in nums:
+        if runs and n == runs[-1][1] + 1:
+            runs[-1][1] = n
+        else:
+            runs.append([n, n])
+    return ", ".join("S%d–S%d" % (a, b) if a != b else "S%d" % a
+                     for a, b in runs)
+
+
+def render_cover(pdf, fig_labels, tab_labels):
     fig = plt.figure(figsize=A4_PORTRAIT)
-    fig.text(0.5, 0.72, "Supporting Information", ha="center", fontsize=24, weight="bold")
+    # PLOS names a consolidated supplement by the caption that describes it.
+    # The heading is that caption, so the cover and the manuscript's
+    # "**S1 File.**" line agree by construction.
+    fig.text(0.5, 0.72, "S1 File. Supporting information.",
+             ha="center", fontsize=20, weight="bold")
     title_lines = textwrap.wrap(manuscript_title(), width=62)
     # Block-anchor so the title sits the same distance below the heading whatever
     # number of lines it wraps to; the old fixed y-positions only worked for the
@@ -583,7 +650,8 @@ def render_cover(pdf, n_fig, n_tab):
         fig.text(0.5, y, ln, ha="center", fontsize=11)
         y -= 0.025
     fig.text(0.5, y - 0.020,
-             f"{n_fig} supplementary figures  ·  {n_tab} supplementary tables",
+             "Figures %s  ·  Tables %s"
+             % (label_span(fig_labels), label_span(tab_labels)),
              ha="center", fontsize=11, color="#40506a")
     fig.text(0.5, 0.44,
              "Every figure and table in this supplement is generated by the frozen\n"
@@ -627,7 +695,7 @@ def main():
 
     missing = []
     with PdfPages(OUT) as pdf:
-        render_cover(pdf, len(fig_labels), len(tab_labels))
+        render_cover(pdf, fig_labels, tab_labels)
 
         for lab in fig_labels:
             png = f"{FIG}/Fig{lab}_*.png"

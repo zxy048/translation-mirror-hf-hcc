@@ -186,14 +186,23 @@ run("Fig1", {
 
   # Every count quoted in the schematic is read from R02/R04, never typed in.
   hf_n   <- sum(inv$disease == "HF");  hcc_n  <- sum(inv$disease == "HCC")
-  hf_sz  <- inv$n_genes[inv$disease == "HF"  & inv$designated][1]
-  hcc_sz <- inv$n_genes[inv$disease == "HCC" & inv$designated][1]
   hf_mod <- des_of("HF"); hcc_mod <- des_of("HCC")
 
   # --- a: schematic ----------------------------------------------------------
   # R2 (Major 1) asked for a schematic relating the WGCNA modules, the a priori
-  # canonical pathway tiers, and the derived scores. Boxes and arrows only; no
-  # data are plotted in this panel, and nothing here is a result.
+  # canonical pathway tiers, and the derived scores. The previous version drew a
+  # single flow from the networks through "ssGSEA per network" to a combined
+  # "Preservation test and Hedges g comparison", which was wrong in three ways:
+  # the translation-module designation is a hypergeometric test of the Tier A
+  # sets against each network's modules, not ssGSEA; module preservation and the
+  # pathway Hedges g are separate analyses on separate objects; and the mirror
+  # classification had no step at all. The panel is now three tracks, one per
+  # analysis -- module preservation; the translation module and the derived
+  # scores with their trait associations; and the pathway effect sizes that feed
+  # the mirror classification. Each track names its own inputs, so no arrow has
+  # to cross from one analysis into another, and the three analysis boxes share
+  # a fill to group them. Boxes and arrows only; no data are plotted here, and
+  # nothing in this panel is a result.
   #
   # Sizing this panel at the 8 pt floor is constrained by measurement, not taste.
   # Both constraints were found the hard way: the first attempt at 8 pt changed
@@ -215,30 +224,27 @@ run("Fig1", {
   #    7.40 in and leaves rows b-e their own patchwork alignment.
   #
   #    At 8 pt (geom_text size = PT8, the floor the rest of this file holds to)
-  #    the longest line in each column is 0.95, 1.33 and 1.49 in -- "23 named
-  #    modules", "HCC magenta (146 genes)", "kME-weighted; both directions".
-  #    COL_X below gives each column its longest line plus roughly 0.45 in of
-  #    clear space, and leaves 0.15 in of page margin at each end and about 1.05
-  #    in between columns for the arrows to cross. Measured off the render, the
-  #    tightest box of the seven now clears its text by 70 px (0.23 in) rather
-  #    than the 3 px it had at 4.15 in.
-  #    00_probe_fig1a_widths.R measures every label against its column rather
-  #    than estimating, prints the box width and gap that follow, and is where to
-  #    check a new label before adding it.
+  #    the longest line in each column is 1.40, 1.38 and 1.31 in -- the arrow
+  #    line "→ HF purple; HCC magenta", "ssGSEA per two-arm cohort", and "both
+  #    directions; Zsummary". COL_X below gives each column its longest line plus
+  #    0.40 in of clear space, 0.15 in of page margin at each end and the rest to
+  #    the two arrow channels. 00_probe_fig1a_widths.R measures every label
+  #    against its column rather than estimating, prints the extents that follow,
+  #    and is where to check a new label before adding it.
   #
   # 2. Height. One y-unit is 3.50 px at 300 dpi and one line of 8 pt text pitches
   #    43.5 px = 12.4 units. That pitch is what the device lays down, not what
   #    8 pt x lineheight 1.06 = 8.5 pt would suggest, which is why it is measured
-  #    rather than computed. The band is 100 units tall, so a column of two
-  #    four-line boxes needs 99 units before any padding at all: four-line labels
-  #    do not fit here at 8 pt. Columns 1 and 2 therefore carry three lines each
-  #    and column 3 -- which holds three boxes rather than two -- carries two.
-  #    Nothing that a reader needs is only here. What the boxes gave up to fit is
-  #    in the Fig 1 caption: the provenance of the Tier A sets ("KEGG + Reactome",
-  #    dropped from the tiers box) and the word "network" from the two column-1
-  #    headings, which now read "HF (GSE57338)" and "HCC (GSE141198)" under a
-  #    column header that already says "1 · Network modules". The caption's
-  #    "designate one translation module per disease" carries the rest.
+  #    rather than computed. The band is 100 units tall. Three two-line boxes
+  #    need 86.4 units and leave 6.8 units between rows; the three tracks are
+  #    separated by those gaps without vertical arrows, because the tracks are
+  #    deliberately independent and a vertical connector would imply a dependency
+  #    that does not exist. Nothing a reader needs is only here: the provenance
+  #    of the Tier A sets (KEGG + Reactome) and the gene counts of the designated
+  #    modules (153 and 146) are in the Fig 1 caption and the tables it cites.
+  #    The third analysis box carries the mirror criterion itself, including the
+  #    requirement that the bootstrap CI exclude zero; the caption states it in
+  #    full prose.
   #
   # Heights follow from the line count and the y positions from the heights, so a
   # rectangle and the text inside it cannot disagree. PAD_U is the only number
@@ -249,56 +255,66 @@ run("Fig1", {
   Y_TOP <- 100; Y_BOT <- 0
   box_h <- function(n_lines) n_lines * LINE_PITCH_U + 2 * PAD_U
 
-  # Named heights, bottom-up per column, in -> named vertical centres out. The
-  # gap is whatever is left over, so each column spans the band exactly and no
-  # box can drift past the top or bottom edge.
+  # Named heights, bottom-up per column, in -> named vertical centres out. Every
+  # column carries the same three two-line boxes, so the row centres are shared
+  # across columns and every arrow is horizontal.
   col_centres <- function(h) {
     gap  <- (Y_TOP - Y_BOT - sum(h)) / (length(h) - 1)
     ymin <- Y_BOT + c(0, cumsum(utils::head(h, -1) + gap))
     stats::setNames(as.list(ymin + unname(h) / 2), names(h))
   }
-  c1 <- col_centres(c(hcc = box_h(3), hf    = box_h(3)))
-  c2 <- col_centres(c(sg  = box_h(3), tiers = box_h(3)))
-  c3 <- col_centres(c(pre = box_h(2), eig   = box_h(2), tcs = box_h(2)))
+  row_y <- col_centres(c(r3 = box_h(2), r2 = box_h(2), r1 = box_h(2)))
 
-  # Column x extents, in data units. Not equal thirds: each column is sized to
-  # the longest line it has to carry, which 00_probe_fig1a_widths.R measures.
-  # Equal thirds would give column 3 1.29 in, and the eigengene box's second line
-  # needs 1.48 in. Column 1 needs the least (its longest line is "23 named
-  # modules") and column 3 the most. Everything below reads its x from here, so
-  # moving a column or resizing one moves the boxes, the headers and the arrows
-  # together.
-  # Printed verbatim by 00_probe_fig1a_widths.R, so the two cannot drift.
-  COL_X  <- list(c(2, 20), c(35, 58), c(72, 98))
+  # Column x extents, in data units. Each column is sized to the longest line it
+  # has to carry, which 00_probe_fig1a_widths.R measures; the printed extents
+  # are copied here verbatim so the probe and the figure cannot drift.
+  COL_X  <- list(c(2.0, 26.3), c(38.5, 62.6), c(74.9, 98.0))
   cx     <- function(i) COL_X[[i]]
   cmid   <- function(i) mean(COL_X[[i]])
 
+  # Row order is top (module preservation), middle (translation module and
+  # derived scores), bottom (pathway effect sizes). Each row reads left to right;
+  # the analysis box is the gold box in column 3.
   bx <- data.frame(
-    xmin = c(cx(1)[1], cx(1)[1], cx(2)[1], cx(2)[1], cx(3)[1], cx(3)[1], cx(3)[1]),
-    xmax = c(cx(1)[2], cx(1)[2], cx(2)[2], cx(2)[2], cx(3)[2], cx(3)[2], cx(3)[2]),
-    ycen = c(c1$hf, c1$hcc, c2$tiers, c2$sg, c3$tcs, c3$eig, c3$pre),
-    nlin = c(3L, 3L, 3L, 3L, 2L, 2L, 2L),
-    fill = c("#DCE7F2", "#F6DEDC", "#EDEDED", "#E4EDE4", "#FBEFD0", "#EAF3EA", "#EAF3EA"),
-    edge = c(C_HF, C_HCC, "grey40", "#3B6E3B", "#8A6D00", "#3B6E3B", "#3B6E3B"),
+    xmin = rep(c(cx(1)[1], cx(2)[1], cx(3)[1]), 3),
+    xmax = rep(c(cx(1)[2], cx(2)[2], cx(3)[2]), 3),
+    ycen = rep(c(row_y$r1, row_y$r2, row_y$r3), each = 3),
+    nlin = 2L,
+    fill = c(
+      "#DCE7F2", "#EDEDED", "#FBEFD0",   # preservation track
+      "#EDE3F2", "#EAF3EA", "#FBEFD0",   # module / score track
+      "#E4EDE4", "#EAF3EA", "#FBEFD0"),  # pathway track
+    edge = c(
+      "grey40", "grey40", "#8A6D00",
+      "#6A3D9A", "#3B6E3B", "#8A6D00",
+      "#3B6E3B", "#3B6E3B", "#8A6D00"),
     lab = c(
-      sprintf("HF (GSE57338)\n177 failing LV\n%s named modules", hf_n),
-      sprintf("HCC (GSE141198)\n148 tumours\n%s named modules", hcc_n),
-      "A priori pathway tiers\n15 Tier A sets\nexplicit membership",
-      sprintf("ssGSEA per network\nHF %s (%s genes)\nHCC %s (%s genes)",
-              hf_mod, hf_sz, hcc_mod, hcc_sz),
-      "TCS \u2014 disease-agnostic\nmean z, 15 Tier A sets",
-      "Module eigengene score\nkME-weighted; both directions",
-      "Preservation test and\nHedges g comparison"),
+      "HF and HCC networks\n177 failing LV \u00b7 148 tumours",
+      sprintf("All named modules\n%s HF; %s HCC", hf_n, hcc_n),
+      "Module preservation\nboth directions; Zsummary",
+      sprintf("Networks + 15 Tier A sets\n\u2192 HF %s; HCC %s", hf_mod, hcc_mod),
+      "TCS and module score\nmean z; kME-weighted",
+      "Score\u2013trait association\nTF correlation; survival",
+      "15 Tier A sets\nexplicit membership",
+      "ssGSEA per two-arm cohort\npathway scores per sample",
+      "Hedges g \u2192 mirror\nopp. sign; |g| \u2265 0.20; CI\u2260 0"),
     stringsAsFactors = FALSE)
   bx$ymin <- bx$ycen - box_h(bx$nlin) / 2
   bx$ymax <- bx$ycen + box_h(bx$nlin) / 2
-  # Box edges and arrow endpoints that depend on the derived geometry.
-  tiers_y_bot <- c2$tiers - box_h(3) / 2
-  sg_y_top    <- c2$sg    + box_h(3) / 2
+
   hd <- data.frame(x = c(cmid(1), cmid(2), cmid(3)),
-                   lab = c("1 \u00b7 Network modules",
-                           "2 \u00b7 Pathway tiers",
-                           "3 \u00b7 Derived scores"))
+                   lab = c("1 \u00b7 Inputs and modules",
+                           "2 \u00b7 Derived objects",
+                           "3 \u00b7 Separate analyses"))
+  # Two arrows per track, both read off the same column extents and row centres
+  # the rectangles are built from. There are no vertical arrows: the three
+  # analyses are separate, and the inputs a track needs are repeated inside that
+  # track rather than lifted into a shared column.
+  seg <- data.frame(
+    x    = rep(c(cx(1)[2], cx(2)[2]), 3),
+    xend = rep(c(cx(2)[1], cx(3)[1]), 3),
+    y    = rep(c(row_y$r1, row_y$r2, row_y$r3), each = 2),
+    yend = rep(c(row_y$r1, row_y$r2, row_y$r3), each = 2))
   arw <- arrow(length = unit(0.05, "in"), type = "closed")
   pa <- ggplot() +
     geom_rect(data = bx, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
@@ -307,20 +323,11 @@ run("Fig1", {
               size = PT8, lineheight = 1.06, colour = "grey10") +
     geom_text(data = hd, aes(x, 107, label = lab), size = PT8, fontface = "bold",
               colour = "grey25") +
-    # Endpoints are read off the same column extents and the same box centres the
-    # rectangles are built from, so moving a column or re-stacking a column moves
-    # the arrows with it and an arrow cannot end up pointing where a box used to be.
-    geom_segment(aes(x = cx(1)[2], xend = cx(2)[1], y = c1$hf, yend = c2$sg + 8),
-                 arrow = arw, linewidth = 0.4, colour = "grey35") +
-    geom_segment(aes(x = cx(1)[2], xend = cx(2)[1], y = c1$hcc, yend = c2$sg - 8),
-                 arrow = arw, linewidth = 0.4, colour = "grey35") +
-    geom_segment(aes(x = cmid(2), xend = cmid(2), y = tiers_y_bot, yend = sg_y_top),
-                 arrow = arw, linewidth = 0.4, colour = "grey35") +
-    geom_segment(aes(x = cx(2)[2], xend = cx(3)[1], y = c2$sg, yend = c3$eig),
+    geom_segment(data = seg, aes(x = x, y = y, xend = xend, yend = yend),
                  arrow = arw, linewidth = 0.4, colour = "grey35") +
     scale_x_continuous(limits = c(0, 100), expand = c(0, 0)) +
     scale_y_continuous(limits = c(0, 114), expand = c(0, 0)) +
-    labs(tag = "a", title = "How the three objects relate (schematic)") +
+    labs(tag = "a", title = "Three separate analyses and their objects (schematic)") +
     theme_void() +
     theme(plot.tag = element_text(face = "bold", size = 12),
           # Panel a is the one panel that does not inherit `th` (it is theme_void),
@@ -386,9 +393,14 @@ run("Fig1", {
   pc <- ggplot(hyp, aes(n_genes, fold, colour = disease)) +
     geom_hline(yintercept = 1, linetype = 2, colour = "grey35") +
     geom_point(size = 1.9, alpha = 0.9) +
-    ggrepel::geom_text_repel(aes(label = lab), size = 3.1, fontface = "bold",
-                             colour = "#7A5C00", na.rm = TRUE, min.segment.length = 0,
-                             nudge_y = lab_dy, seed = 42) +
+    # ggrepel 0.9.8 has no bg.color/bg.r, so the white halo is a label
+    # background rather than a text outline. The hairline border is left in the
+    # text colour: without it the white patch reads as a hole cut in the point
+    # cloud rather than as a label. Only two labels are drawn here.
+    ggrepel::geom_label_repel(aes(label = lab), size = 3.1, fontface = "bold",
+                              colour = "#7A5C00", fill = "white", label.size = 0,
+                              na.rm = TRUE, min.segment.length = 0,
+                              nudge_y = lab_dy, seed = 42) +
     scale_x_log10() +
     scale_colour_manual(values = c(HF = C_HF, HCC = C_HCC)) +
     labs(x = "Genes in module (log scale)", y = "Tier A fold enrichment",
@@ -420,8 +432,9 @@ run("Fig1", {
   pd <- ggplot(tb, aes(Zsummary.pres, medianRank.pres, colour = direction)) +
     geom_vline(xintercept = c(2, 10), linetype = 3, colour = "grey55") +
     geom_point(aes(shape = designated, size = moduleSize), alpha = 0.85) +
-    ggrepel::geom_text_repel(aes(label = lab), size = 3.1, fontface = "bold",
-                             colour = "grey15", na.rm = TRUE, min.segment.length = 0) +
+    ggrepel::geom_label_repel(aes(label = lab), size = 3.1, fontface = "bold",
+                              colour = "grey15", fill = "white", label.size = 0,
+                              na.rm = TRUE, min.segment.length = 0) +
     scale_shape_manual(values = c(`FALSE` = 16, `TRUE` = 18), guide = "none") +
     scale_size_continuous(range = c(1.6, 5), guide = "none") +
     # The worst-preserved module sits at median rank ~21 of 23; without padding
@@ -452,7 +465,7 @@ run("Fig1", {
     scale_y_continuous(labels = percent_format()) +
     coord_flip() +
     labs(x = NULL, y = "Fraction of named modules", fill = "Preservation class", tag = "e",
-         title = "Most modules are not shared; the translation modules are",
+         title = "Preservation classes of named modules, by direction",
          subtitle = "counts are of named modules; the unassigned grey bin is excluded") +
     th + theme(legend.position = "right",
                axis.text.y = element_text(size = 8.5))

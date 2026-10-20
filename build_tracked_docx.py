@@ -247,8 +247,28 @@ def whole_paragraph(p_src, kind, ids, text=None):
     src_map = char_style_map(p_src)
     src_text = "".join(c for c, _ in src_map) if text is None else text
     if src_text:
-        rPr0 = src_map[0][1] if src_map else None
-        new_p.append(wrap(make_run(src_text, rPr0, deleted=(kind == "del")), kind, ids))
+        deleted = (kind == "del")
+        if text is not None or not src_map:
+            # Caller-supplied text is not positionally tied to p_src's runs;
+            # one run with the paragraph's first rPr is the honest rendering.
+            rPr0 = src_map[0][1] if src_map else None
+            new_p.append(wrap(make_run(src_text, rPr0, deleted=deleted), kind, ids))
+        else:
+            # Slice at every rPr change, exactly as slices() does inside
+            # rebuild_paragraph(). Taking the first run's rPr for the whole
+            # paragraph flattened every italic, bold and sup/sub span in a
+            # wholly inserted or deleted paragraph -- the reason the tracked
+            # file carried 6 w:i where the clean file carried 155.
+            start, cur = 0, src_map[0][1]
+            for k in range(1, len(src_map)):
+                if src_map[k][1] is not cur:
+                    new_p.append(wrap(make_run(
+                        "".join(c for c, _ in src_map[start:k]), cur,
+                        deleted=deleted), kind, ids))
+                    start, cur = k, src_map[k][1]
+            new_p.append(wrap(make_run(
+                "".join(c for c, _ in src_map[start:]), cur,
+                deleted=deleted), kind, ids))
     return new_p
 
 

@@ -338,6 +338,20 @@ r = [x for x in s38 if x["hf_cohort"] == "GSE57338" and x["tier"] == "A"][0]
 expect("GSE57338 age/sex rho before", f"\u03c1 = {fmt(num(r['rho_unadjusted']), 3)}")
 expect("GSE57338 age/sex rho after", f"\u03c1 = {fmt(num(r['rho_adjusted']), 3)}")
 
+# Paired-sample sensitivity (S40 Table), added during the revision.
+s40c = load_rows("Table_S40c_paired_effect_sizes.csv")
+s40d = load_rows("Table_S40d_paired_summary.csv")
+total_pairs = sum(int(num(r["n_pairs_analysed"])) for r in s40d)
+n_ci = sum(1 for r in s40c
+           if str(r["paired_ci_excludes_0"]).lower() == "true")
+expect("paired total", f"{total_pairs} matched pairs")
+expect("paired estimate count", f"All {len(s40c)} cohort–set estimates")
+expect("paired CI support", f"{n_ci} had confidence intervals excluding zero")
+for r in s40d:
+    expect(f"paired count {r['cohort']}",
+           f"{int(num(r['n_pairs_analysed']))} pairs")
+expect("paired TCGA subset", "50 of 371 tumours")
+
 # Heterogeneity, which the letter reports instead of a list of possible causes.
 s21 = load_rows("Table_S21_cohort_heterogeneity.csv")
 for disease in ("HF", "HCC"):

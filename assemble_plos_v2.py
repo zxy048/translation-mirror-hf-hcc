@@ -25,6 +25,7 @@ regenerated.
 Usage:  python assemble_plos_v2.py
 """
 import hashlib
+import json
 import os
 import re
 import shutil
@@ -34,6 +35,36 @@ import zlib
 
 ROOT = r"D:\R_projects\revision_analysis"
 PKG = os.path.join(ROOT, "PLOS_ONE_Submission_v2")
+
+# The manuscript number and the letter's date both come from the decision email
+# and from nowhere else. Typing either into the letter means two places to get
+# it wrong, and the number is the one field the submission system is guaranteed
+# to check. The template carries tokens; this file carries the values; an
+# internal build substitutes whatever is there, while a submission build
+# (PLOS_SUBMISSION=1) refuses to run while a token survives.
+CONFIG = os.path.join(ROOT, "submission_config.json")
+COVER_MD = os.path.join(ROOT, "Cover_Letter_PLOSONE_v2.md")
+TOKENS = {
+    "manuscript_id": "{{MANUSCRIPT_ID}}",
+    "submission_date": "{{SUBMISSION_DATE}}",
+}
+
+
+def load_config():
+    with open(CONFIG, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def unfilled(cfg):
+    """Keys whose configured value is still the token itself (or empty)."""
+    return [k for k, tok in TOKENS.items()
+            if str(cfg.get(k, "")).strip() in ("", tok)]
+
+
+def substitute(text, cfg):
+    for key, tok in TOKENS.items():
+        text = text.replace(tok, str(cfg.get(key, tok)))
+    return text
 
 # Document sources -> the numbered name they are uploaded under.
 # (source, destination, builder) where builder is "pandoc" or a script path.
@@ -167,7 +198,31 @@ def main():
             if not os.path.exists(src):
                 sys.exit("  source missing: %s" % src)
             tmp = os.path.join(ROOT, "_pkg_tmp.docx")
-            pandoc_docx(src, tmp)
+            source = src
+            if os.path.abspath(src) == os.path.abspath(COVER_MD):
+                cfg = load_config()
+                missing = unfilled(cfg)
+                if missing and os.environ.get("PLOS_SUBMISSION") == "1":
+                    sys.exit(
+                        "submission build refused: %s still holds %s. Fill "
+                        "%s from the decision email first."
+                        % (os.path.basename(CONFIG),
+                           ", ".join(TOKENS[k] for k in missing),
+                           "them" if len(missing) > 1 else "it"))
+                # Substitute into a temp source rather than editing the template:
+                # the .md on disk must keep its tokens, or the next submission
+                # inherits this one's manuscript number.
+                source = os.path.join(ROOT, "_pkg_tmp.md")
+                with open(src, encoding="utf-8") as fh:
+                    body = fh.read()
+                with open(source, "w", encoding="utf-8", newline="") as fh:
+                    fh.write(substitute(body, cfg))
+                if missing:
+                    print("  note: internal build; %s left as placeholders"
+                          % ", ".join(TOKENS[k] for k in missing))
+            pandoc_docx(source, tmp)
+            if source != src:
+                os.remove(source)
             shutil.copy2(tmp, os.path.join(PKG, dst))
             os.remove(tmp)
             print("  pandoc %s -> %s" % (os.path.basename(src), dst))

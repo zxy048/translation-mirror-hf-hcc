@@ -1,0 +1,5 @@
+"cohort","disease","n_pairs_manifest","n_pairs_analysed","n_tierA_sets_tested","n_direction_matches_full_cohort","n_direction_differs_from_full_cohort","n_direction_matches_pair_subset","n_paired_ci_excludes_0","n_p_perm_nominal_lt_0.05","n_p_fdr_lt_0.05","median_g_paired_z","median_hedges_g_full_cohort"
+"GSE14520_GPL3921","HCC",213,213,14,14,0,14,14,14,14,1.05774174835244,1.38163469692743
+"GSE14520_GPL571","HCC",19,19,15,15,0,15,11,11,11,0.519177541025888,0.837138562375455
+"GSE76427","HCC",52,52,14,14,0,14,13,13,13,1.03356054407739,1.19761866935562
+"TCGA_LIHC","HCC",50,50,15,15,0,15,11,11,11,0.587757838965157,0.834218101585005

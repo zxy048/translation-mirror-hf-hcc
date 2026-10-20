@@ -239,6 +239,47 @@ check("composition survivorship", f"{surv} of {len(ta25)} Tier A set–cohort pa
 check("median attenuation", f"median attenuation of {100*med:.1f}%")
 check("max VIF", f"maximum VIF {max(vifs):.2f}")
 
+print("\n--- paired-sample sensitivity (S40 Table) ---")
+s40c = rows("Table_S40c_paired_effect_sizes.csv")
+s40d = rows("Table_S40d_paired_summary.csv")
+tot_pairs = sum(int(num(r["n_pairs_analysed"])) for r in s40d)
+n_est = len(s40c)
+n_dir = sum(1 for r in s40c if str(r["direction_matches_full_cohort"]).lower() == "true")
+n_ci = sum(1 for r in s40c if str(r["paired_ci_excludes_0"]).lower() == "true")
+check("paired total", f"{tot_pairs} pairs in total",
+      f"yielding {tot_pairs} patient pairs")
+check("paired estimate count", f"Across the {n_est} cohort–gene-set estimates")
+check("paired direction agreement",
+      f"all {n_dir} paired estimates agreed in sign",
+      "every paired effect had the same sign")
+check("paired CI support", f"{n_ci} of {n_est} estimates")
+# The prose spells this count out ("the remaining nine estimates"), so the
+# check has to as well; an integer here fails on text that is present.
+_NUM_WORD = {0: "zero", 1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
+             6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten"}
+_n_unsupported = n_est - n_ci
+check("paired estimates without CI support",
+      f"remaining {_NUM_WORD.get(_n_unsupported, _n_unsupported)} estimates")
+# Table labels use an underscore where the manuscript prose uses a hyphen
+# (TCGA_LIHC vs TCGA-LIHC); the check quotes the prose, so the label is mapped.
+_MS_LABEL = {"TCGA_LIHC": "TCGA-LIHC"}
+for r in s40d:
+    k = int(num(r["n_p_fdr_lt_0.05"]))
+    n = int(num(r["n_tierA_sets_tested"]))
+    coh = _MS_LABEL.get(r["cohort"], r["cohort"])
+    check(f"paired FDR support {r['cohort']}",
+          f"{k} of {n} estimates in {coh}")
+seen = set()
+for r in s40c:
+    coh = r["cohort"]
+    if coh in seen:
+        continue
+    seen.add(coh)
+    p = int(num(r["n_pairs_analysed"]))
+    d = int(num(r["n_disease_full_cohort"]))
+    disp = _MS_LABEL.get(coh, coh)
+    check(f"paired tumour denominator {coh}", f"{p} of {d} tumours in {disp}")
+
 print("\n--- age and sex adjustment (S37 / S38 Tables) ---")
 s37 = rows("Table_S37_clinical_covariate_adjustment.csv")
 s38 = rows("Table_S38_age_sex_mirror_recheck.csv")
@@ -431,7 +472,7 @@ check("every HF cohort lacks a deposited survival field",
 hcc_ok = [r for r in cover if r["disease"] == "HCC" and r["analysed"] == "TRUE"]
 check("number of HCC cohorts with usable survival annotation",
       "one of four HCC cohorts" if len(hcc_ok) == 4 else f"{len(hcc_ok)} HCC cohorts",
-      "prognostic in one of four HCC cohorts")
+      "associated with survival in one of four HCC cohorts")
 gp = [r for r in cover if r["cohort"] == "GSE14520_GPL571"][0]
 check("GSE14520_GPL571 reported as not analysed",
       "not analysed" if gp["analysed"] == "FALSE" else "analysed",

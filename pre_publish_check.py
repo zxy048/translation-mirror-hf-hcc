@@ -27,6 +27,7 @@ file that .gitignore does not know about yet.
 Run before every push. Exits non-zero if anything confidential would be
 published.
 """
+import json
 import os
 import re
 import subprocess
@@ -131,7 +132,40 @@ def scan_content(path):
     return hits
 
 
+# The cover letter's manuscript number and date come from the decision email,
+# through submission_config.json. A submission build must not ship the template
+# tokens; an internal build is expected to carry them, because the email has
+# not arrived yet. Keying on the target (PLOS_SUBMISSION=1) rather than on the
+# file keeps the distinction out of the source: the same cover letter is
+# correct as a draft and wrong as a submission, and only the caller knows
+# which it is building.
+def target_gate():
+    """Problems that must block a submission build; empty for internal ones."""
+    if os.environ.get("PLOS_SUBMISSION") != "1":
+        return []
+    path = os.path.join(ROOT, "submission_config.json")
+    if not os.path.exists(path):
+        return ["submission build: %s is missing" % path]
+    try:
+        with open(path, encoding="utf-8") as fh:
+            cfg = json.load(fh)
+    except (OSError, ValueError) as exc:
+        return ["submission build: cannot read %s (%s)" % (path, exc)]
+    out = []
+    for key, tok in (("manuscript_id", "{{MANUSCRIPT_ID}}"),
+                     ("submission_date", "{{SUBMISSION_DATE}}")):
+        if str(cfg.get(key, "")).strip() in ("", tok):
+            out.append("submission build: %s still holds %s -- fill it from "
+                       "the decision email" % (os.path.basename(path), tok))
+    return out
+
+
 def main():
+    gate = target_gate()
+    if gate:
+        for problem in gate:
+            print("BLOCK %s" % problem)
+        return 1
     entries = would_publish()
     if not entries:
         print("Nothing staged or untracked. Nothing to publish.")
