@@ -94,3 +94,12 @@ v2_output/logs/transcript_msg_*.txt
 # intermediate files that no one chose to track, and the published PNG/PDF
 # alongside them would have disagreed the first time a font moved.
 v2_output/figures/editable/
+
+# Audit evidence and submission configuration. The V03 audit and patch drafts
+# quote sentences from the response letter, and submission_config.json carries
+# the manuscript number and submission date. Neither is public repository
+# content, and both were untracked-and-unignored -- the one state in which
+# `git add -A` publishes them. The audit directory is also not a build input:
+# it is evidence for decisions, not a source any script reads.
+/v2_output/audit/
+/submission_config.json
