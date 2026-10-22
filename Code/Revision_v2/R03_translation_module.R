@@ -6,12 +6,14 @@
 # to).
 #
 #   1. ssGSEA score per sample for every canonical translation set
-#   2. correlate each set score with each module eigengene
-#   3. translation module = argmax over modules of mean |r| across Tier A sets,
-#      with a sample-level permutation p-value (max-statistic null, so the
-#      p-value is corrected across the whole sets x modules matrix)
-#   4. independent secondary check: hypergeometric over-representation of
-#      Tier A genes inside each module
+#   2. hypergeometric over-representation of Tier A genes inside each module
+#      (one-sided; fold enrichment)
+#   3. translation module = the module with the largest fold enrichment among
+#      modules significant at FDR < alpha; the identical rule is applied to
+#      both diseases
+#   4. secondary check: eigengene tracking, i.e. mean |r| between each module
+#      eigengene and the Tier A scores, with a sample-level permutation
+#      p-value (max-statistic null, corrected across the sets x modules matrix)
 #
 # ORIENTATION: R02 stores samples x genes (WGCNA); GSVA needs genes x samples,
 # so the analysis uses r2$gxHF / r2$gxHCC.
