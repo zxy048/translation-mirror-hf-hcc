@@ -71,4 +71,6 @@ artifacts. Most are excluded by `.gitignore` and are not published; only
 files — a manuscript `.md` and its `.docx` — and asserts twelve properties of
 them, every one a property of the manuscript text alone. It is kept here as the
 worked example of the failure: **a check confined to the document cannot see a
-defect that lives in the data.** `verify_all.py` replaces it.
+defect that lives in the data.** `verify_all.py` replaces it. The root-level
+copy is labelled historical in its header; it targets the v1 files by absolute
+path and is not the current QA entry point.
