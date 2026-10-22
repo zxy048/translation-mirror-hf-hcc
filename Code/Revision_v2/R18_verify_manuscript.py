@@ -425,7 +425,7 @@ base = [srow(c, "continuous_per_IQR") for c in
 overlap = all(num(a["ci_lo"]) <= num(b["ci_hi"]) and num(b["ci_lo"]) <= num(a["ci_hi"])
               for i, a in enumerate(base) for b in base[i + 1:])
 check("the four per-IQR confidence intervals all overlap",
-      "mutually consistent rather than contradictory" if overlap else "CIs DISJOINT",
+      "compatible rather than contradictory" if overlap else "CIs DISJOINT",
       "All four confidence intervals overlap")
 
 g = srow("GSE14520_GPL3921", "continuous_per_IQR")
