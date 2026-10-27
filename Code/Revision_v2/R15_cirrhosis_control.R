@@ -167,6 +167,32 @@ log_msg("  final: ", nrow(gx), " genes x ", ncol(gx), " samples; ",
         paste(names(table(grp_stage)), table(grp_stage), sep = "=", collapse = " "))
 
 # ---------------------------------------------------------------------------
+# 3b. coverage row for the S11 inventory
+# ---------------------------------------------------------------------------
+# S11 is written by R05 from its cohort list, which holds the eight
+# disease-versus-control cohorts; GSE89377 is loaded only here, so its coverage
+# is reported here and rendered as a second panel of the same table. It is kept
+# as a panel rather than appended to R05's file because its "disease" arm is the
+# whole hepatocarcinogenesis spectrum, not one diseased group -- appending it to
+# R05's frame would also make S11 depend on this script having been run.
+A_genes <- unique(unlist(resolve_sets(SETS_TIER_A)))
+cov15 <- data.frame(
+  cohort        = "GSE89377",
+  disease       = "HCC",
+  tech          = "array",
+  n_genes       = nrow(gx),
+  n_samples     = ncol(gx),
+  n_disease     = sum(grp_stage != "Normal"),
+  n_control     = sum(grp_stage == "Normal"),
+  n_unlabeled   = 0L,
+  tierA_covered = length(intersect(rownames(gx), A_genes)),
+  tierA_total   = length(A_genes),
+  stringsAsFactors = FALSE)
+cov15$tierA_pct <- round(100 * cov15$tierA_covered / cov15$tierA_total, 1)
+print(cov15, row.names = FALSE)
+write_table(cov15, "Table_S11b_GSE89377_cohort_coverage.csv")
+
+# ---------------------------------------------------------------------------
 # 4. ssGSEA -- same parameter object as R06, so scores are comparable
 # ---------------------------------------------------------------------------
 sets_all <- resolve_sets(unique(c(SETS_TIER_A, SETS_TIER_B_EXTRA, SETS_TIER_C_V1)))
@@ -304,14 +330,42 @@ wide7 <- reshape(hcc7, idvar = "set", timevar = "cohort", direction = "wide")
 names(wide7) <- sub("^hedges_g\\.", "", names(wide7))
 me <- merge(wide[wide$tier == "A", c("set", "HCC")], wide7, by = "set")
 log_msg("--- GSE89377 HCC arm vs the HCC cohorts v1 already used (Tier A, n=", nrow(me), ") ---")
+# Written out rather than only logged: the manuscript quotes these numbers, so
+# a reviewer has to be able to see them without re-running the join. They are
+# the one part of the GSE89377 account that no other table carries -- S34 holds
+# this cohort's per-set effects and S14 the other cohorts', but neither holds
+# the cross-cohort summary.
+xchk <- list()
 for (cc in setdiff(names(me), c("set", "HCC"))) {
   v <- me[[cc]]
   ok <- is.finite(v) & is.finite(me$HCC)
   if (sum(ok) < 5) next
+  ag <- 100 * mean(sign(v[ok]) == sign(me$HCC[ok]))
+  rh <- suppressWarnings(stats::cor(me$HCC[ok], v[ok], method = "spearman"))
   log_msg(sprintf("  vs %-14s n=%2d | sign agreement %.0f%% | Spearman rho=%.3f",
-                  cc, sum(ok), 100 * mean(sign(v[ok]) == sign(me$HCC[ok])),
-                  suppressWarnings(stats::cor(me$HCC[ok], v[ok], method = "spearman"))))
+                  cc, sum(ok), ag, rh))
+  xchk[[cc]] <- data.frame(comparison = "same-disease (HCC arm vs HCC cohort)",
+                           cohort = cc, n_sets = sum(ok), tier = "A",
+                           sign_agreement_pct = ag, spearman_rho = rh,
+                           stringsAsFactors = FALSE)
 }
+# The cross-disease reference: the same HCC arm against the HF cohort the
+# manuscript pairs it with. Same-sign agreement is reported on the same scale as
+# the rows above; that it is low is the mirror result, not a disagreement.
+hf7 <- r7[r7$cohort == "GSE57338", c("set", "hedges_g")]
+m2  <- merge(wide[wide$tier == "A", c("set", "HCC")], hf7, by = "set")
+ok2 <- is.finite(m2$HCC) & is.finite(m2$hedges_g)
+if (sum(ok2) >= 5) {
+  ag2 <- 100 * mean(sign(m2$HCC[ok2]) == sign(m2$hedges_g[ok2]))
+  rh2 <- suppressWarnings(stats::cor(m2$HCC[ok2], m2$hedges_g[ok2], method = "spearman"))
+  log_msg(sprintf("  vs %-14s n=%2d | sign agreement %.0f%% | Spearman rho=%.3f (cross-disease)",
+                  "GSE57338", sum(ok2), ag2, rh2))
+  xchk[["GSE57338"]] <- data.frame(comparison = "cross-disease (HCC arm vs HF cohort)",
+                                   cohort = "GSE57338", n_sets = sum(ok2), tier = "A",
+                                   sign_agreement_pct = ag2, spearman_rho = rh2,
+                                   stringsAsFactors = FALSE)
+}
+write_table(do.call(rbind, xchk), "Table_S35b_GSE89377_HCC_arm_crosscheck.csv")
 
 saveRDS(list(es = es, wide = wide, scores = sc, stage = grp_stage,
              crosscheck = me, stages = STAGES),

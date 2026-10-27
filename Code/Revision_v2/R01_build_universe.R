@@ -107,6 +107,11 @@ loss <- rbind(
     "present in common universe U"),
     n = c(nrow(cnt), sum(det_hcc), nrow(E_hcc), nrow(E_hcc), length(U)))
 )
+# The S1 Table caption and the S1 File header both point a reader here to
+# identify the exact settings used, so the hash is written into the table
+# rather than only logged: a promise in the caption has to be checkable from
+# the deposited file alone.
+loss$config_hash <- CONFIG_HASH
 print(loss)
 write_table(loss, "Table_S1_gene_universe_loss_chain.csv")
 

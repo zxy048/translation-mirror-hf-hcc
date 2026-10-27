@@ -447,7 +447,20 @@ run("Fig1", {
          colour = NULL, tag = "d",
          title = "Module preservation, both directions",
          subtitle = "dotted lines: Z = 2 and Z = 10") +
-    th + theme(legend.position = "top")
+    # One key per line, so the two long direction labels stack instead of running
+    # side by side. Side by side they were about 1.95 in wide against a panel of
+    # about 1.3 in: ggplot drew the legend across the cell and it spilled out of
+    # panel d's column into the gutter beside panel b's HCC bar chart, where it
+    # read as part of that panel. legend.box = "vertical" alone does not stack
+    # them -- with a single colour guide there is only one legend box, so the
+    # key arrangement has to be set on the guide itself.
+    guides(colour = guide_legend(ncol = 1)) +
+    th + theme(legend.position = "bottom",
+               legend.box = "vertical",
+               legend.title = element_blank(),
+               legend.key.height = unit(9, "pt"),
+               legend.margin = margin(2, 0, 0, 0),
+               legend.spacing.y = unit(1, "pt"))
 
   # --- e: preservation classes ------------------------------------------------
   tb$class <- ifelse(tb$Zsummary.pres > 10, "strong (>10)",

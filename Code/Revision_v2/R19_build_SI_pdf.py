@@ -182,7 +182,9 @@ def pin_mask(df, label):
 # here. A label absent from this map is its own single source and renders
 # exactly as before.
 PANELS = {
+    "S11": ["S11", "S11b"],
     "S20": ["S20", "S20b"],
+    "S35": ["S35", "S35b"],
     "S22": ["S22", "S22b", "S22c", "S22d"],
     "S39": ["S39", "S39b"],
     "S40": ["S40a", "S40b", "S40c", "S40d", "S40e"],

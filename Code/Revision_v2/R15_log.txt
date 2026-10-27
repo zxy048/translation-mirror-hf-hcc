@@ -1,9 +1,9 @@
-[22:25:45] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:26:32] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
 Warning messages:
 1: package 'WGCNA' was built under R version 4.6.1 
 2: package 'msigdbr' was built under R version 4.6.1 
-[22:25:55] === R15 start === 
-[22:26:03]   series matrix: 107 samples; phenotype levels: 
+[19:26:49] === R15 start === 
+[19:26:57]   series matrix: 107 samples; phenotype levels: 
 ph
 Choronic Hepatitis with high grade  Choronic Hepatitis with low grade 
                                 12                                  8 
@@ -15,33 +15,38 @@ Choronic Hepatitis with high grade  Choronic Hepatitis with low grade
                                  9                                 12 
     hepatocellular carcinoma (TG3)                             Normal 
                                 14                                 13 
-[22:26:03]   stage counts: CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
-[22:26:20]   raw: 48803 probes x 215 columns 
-[22:26:21]   title-vs-phenotype agreement: 107 / 107 
-[22:26:23]   detection filter: 17793 / 48803 probes kept 
-[22:26:25]   after log2 + quantile: range 5.37-15.37 
-[22:26:25]   GPL6947 annot: 49577 probes; cols: ID, Gene title, Gene symbol, Gene ID 
-[22:26:25]   11756 genes x 107 samples after collapse 
-[22:26:25]   final: 11756 genes x 107 samples; CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
-[22:26:26] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
-[22:26:27]   ssGSEA: 40 sets x 107 samples; dropped 1 sets (<5 genes measured) 
-[22:26:27]   tiers scored: A=15 B_extra=5 C_v1=20 
-[22:26:27]   reference arm: Normal, n = 13 
-[22:26:32]   CH_low (8 vs 13) done 
-[22:26:36]   CH_high (12 vs 13) done 
-[22:26:40]   Cirrhosis (12 vs 13) done 
-[22:26:44]   DN_low (11 vs 13) done 
-[22:26:48]   DN_high (11 vs 13) done 
-[22:26:53]   eHCC (5 vs 13) done 
-[22:26:57]   HCC (35 vs 13) done 
+[19:26:57]   stage counts: CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
+[19:27:13]   raw: 48803 probes x 215 columns 
+[19:27:15]   title-vs-phenotype agreement: 107 / 107 
+[19:27:16]   detection filter: 17793 / 48803 probes kept 
+[19:27:19]   after log2 + quantile: range 5.37-15.37 
+[19:27:20]   GPL6947 annot: 49577 probes; cols: ID, Gene title, Gene symbol, Gene ID 
+[19:27:20]   11756 genes x 107 samples after collapse 
+[19:27:20]   final: 11756 genes x 107 samples; CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
+[19:27:21] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+   cohort disease  tech n_genes n_samples n_disease n_control n_unlabeled
+ GSE89377     HCC array   11756       107        94        13           0
+ tierA_covered tierA_total tierA_pct
+           420         497      84.5
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S11b_GSE89377_cohort_coverage.csv 
+[19:27:22]   ssGSEA: 40 sets x 107 samples; dropped 1 sets (<5 genes measured) 
+[19:27:22]   tiers scored: A=15 B_extra=5 C_v1=20 
+[19:27:22]   reference arm: Normal, n = 13 
+[19:27:27]   CH_low (8 vs 13) done 
+[19:27:31]   CH_high (12 vs 13) done 
+[19:27:36]   Cirrhosis (12 vs 13) done 
+[19:27:41]   DN_low (11 vs 13) done 
+[19:27:46]   DN_high (11 vs 13) done 
+[19:27:50]   eHCC (5 vs 13) done 
+[19:27:55]   HCC (35 vs 13) done 
 [written] D:/R_projects/revision_analysis/v2_output/tables/Table_S34_GSE89377_stage_spectrum_effect_sizes.csv 
-[22:26:57] --- cirrhosis vs HCC direction agreement --- 
-[22:26:57]   Tier A     n=15 | both-up 11 | both-down  1 | discordant  3 | rho=+0.668 
-[22:26:57]   ALL tiers  n=40 | both-up 21 | both-down  3 | discordant 16 | rho=+0.532 
+[19:27:55] --- cirrhosis vs HCC direction agreement --- 
+[19:27:55]   Tier A     n=15 | both-up 11 | both-down  1 | discordant  3 | rho=+0.668 
+[19:27:55]   ALL tiers  n=40 | both-up 21 | both-down  3 | discordant 16 | rho=+0.532 
 [written] D:/R_projects/revision_analysis/v2_output/tables/Table_S35_GSE89377_HCC_vs_cirrhosis_specificity.csv 
-[22:26:57] --- eHCC vs HCC direction agreement (is the change at the transition?) --- 
-[22:26:57]   Tier A     n=15 | both-up 13 | both-down  0 | discordant  2 | rho=+0.343 
-[22:26:57]   ALL tiers  n=40 | both-up 29 | both-down  3 | discordant  8 | rho=+0.665 
+[19:27:55] --- eHCC vs HCC direction agreement (is the change at the transition?) --- 
+[19:27:55]   Tier A     n=15 | both-up 13 | both-down  0 | discordant  2 | rho=+0.343 
+[19:27:55]   ALL tiers  n=40 | both-up 29 | both-down  3 | discordant  8 | rho=+0.665 
 
 === Tier A: does cirrhosis move the same way as HCC? ===
                                                                                  set
@@ -92,9 +97,11 @@ Choronic Hepatitis with high grade  Choronic Hepatitis with low grade
                            FALSE
                             TRUE
                             TRUE
-[22:26:57] --- GSE89377 HCC arm vs the HCC cohorts v1 already used (Tier A, n=15) --- 
-[22:26:57]   vs TCGA_LIHC      n=15 | sign agreement 100% | Spearman rho=0.607 
-[22:26:57]   vs GSE14520_GPL3921 n=14 | sign agreement 100% | Spearman rho=0.790 
-[22:26:57]   vs GSE14520_GPL571 n=15 | sign agreement 93% | Spearman rho=0.596 
-[22:26:57]   vs GSE76427       n=14 | sign agreement 100% | Spearman rho=0.833 
-[22:26:57] === R15 done === 
+[19:27:55] --- GSE89377 HCC arm vs the HCC cohorts v1 already used (Tier A, n=15) --- 
+[19:27:55]   vs TCGA_LIHC      n=15 | sign agreement 100% | Spearman rho=0.607 
+[19:27:55]   vs GSE14520_GPL3921 n=14 | sign agreement 100% | Spearman rho=0.790 
+[19:27:55]   vs GSE14520_GPL571 n=15 | sign agreement 93% | Spearman rho=0.596 
+[19:27:55]   vs GSE76427       n=14 | sign agreement 100% | Spearman rho=0.833 
+[19:27:55]   vs GSE57338       n=15 | sign agreement 13% | Spearman rho=-0.679 (cross-disease) 
+[written] D:/R_projects/revision_analysis/v2_output/tables/Table_S35b_GSE89377_HCC_arm_crosscheck.csv 
+[19:27:55] === R15 done === 

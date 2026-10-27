@@ -1,14 +1,8 @@
-﻿Rscript.exe : Warning messages:
-At line:1 char:367
-+ ... vision_v2"; & "C:\Program Files\R\R-4.6.0\bin\Rscript.exe" "R17_figur ...
-+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : NotSpecified: (Warning messages::String) [], RemoteException
-    + FullyQualifiedErrorId : NativeCommandError
- 
+Warning messages:
 1: package 'ggplot2' was built under R version 4.6.1 
 2: package 'patchwork' was built under R version 4.6.1 
 3: package 'scales' was built under R version 4.6.1 
-[23:30:14] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:12:21] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
 Warning messages:
 1: package 'WGCNA' was built under R version 4.6.1 
 2: package 'msigdbr' was built under R version 4.6.1 
@@ -25,7 +19,7 @@ designated modules from R04$verdict:
   HF network tested in HCC   11      3             9
   HCC: designated magenta is rank 6 of 20 named modules (Z = 7.09)
   HF: designated purple is rank 2 of 23 named modules (Z = 11.03)
-  wrote Fig1_harmonised_networks 
+  wrote Fig1_harmonised_networks (+ editable svg/pdf) 
   recomputed mirror, TCGA vs GSE57338: Tier A 10/15, all 26/41
   R09 primary row 'primary (v1 cohorts)' tier A: 10/15 sets, 3/5 clusters
   Fig2d cohort matrix (Tier A):
@@ -43,30 +37,27 @@ designated modules from R04$verdict:
          GSE76427 GSE116250   2/14  0.169
          GSE76427 GSE141910   0/14 -0.059
   GSE116250 rho range: -0.393 to +0.211 | GSE141910 range: -0.457 to -0.059 
-  wrote Fig2_pathway_mirror 
-  wrote Fig3_same_organ_controls 
-  wrote FigS1_hub_gene_threshold 
-  wrote FigS2_score_concordance 
-  wrote FigS3_soft_threshold 
-  !! FAILED: S4 -> Error in try(expr, silent = TRUE) : 
-  R14_tom_robustness.rds not present yet (R14 still running)
- 
-  wrote FigS5_heterogeneity 
+  wrote Fig2_pathway_mirror (+ editable svg/pdf) 
+  wrote Fig3_same_organ_controls (+ editable svg/pdf) 
+  wrote FigS1_hub_gene_threshold  
+  wrote FigS2_score_concordance  
+  wrote FigS3_soft_threshold  
+    R14 object names: HF, HCC, table, coherence, params 
+  wrote FigS4_module_robustness  
+  wrote FigS5_heterogeneity  
 
 === R17 summary ===
-succeeded: Fig1, Fig2, Fig3, S1, S2, S3, S5 
-FAILED:
-   S4 : Error in try(expr, silent = TRUE) : 
-  R14_tom_robustness.rds not present yet (R14 still running)
- 
+succeeded: Fig1, Fig2, Fig3, S1, S2, S3, S4, S5 
 
 files in figures/:
- [1] "Fig1_harmonised_networks.pdf" "Fig1_harmonised_networks.png"
- [3] "Fig2_pathway_mirror.pdf"      "Fig2_pathway_mirror.png"     
- [5] "Fig3_same_organ_controls.pdf" "Fig3_same_organ_controls.png"
- [7] "FigS1_hub_gene_threshold.pdf" "FigS1_hub_gene_threshold.png"
- [9] "FigS2_score_concordance.pdf"  "FigS2_score_concordance.png" 
-[11] "FigS3_soft_threshold.pdf"     "FigS3_soft_threshold.png"    
-[13] "FigS5_heterogeneity.pdf"      "FigS5_heterogeneity.png"     
+ [1] "editable"                     "Fig1_harmonised_networks.pdf"
+ [3] "Fig1_harmonised_networks.png" "Fig2_pathway_mirror.pdf"     
+ [5] "Fig2_pathway_mirror.png"      "Fig3_same_organ_controls.pdf"
+ [7] "Fig3_same_organ_controls.png" "FigS1_hub_gene_threshold.pdf"
+ [9] "FigS1_hub_gene_threshold.png" "FigS2_score_concordance.pdf" 
+[11] "FigS2_score_concordance.png"  "FigS3_soft_threshold.pdf"    
+[13] "FigS3_soft_threshold.png"     "FigS4_module_robustness.pdf" 
+[15] "FigS4_module_robustness.png"  "FigS5_heterogeneity.pdf"     
+[17] "FigS5_heterogeneity.png"     
 
 R17 DONE

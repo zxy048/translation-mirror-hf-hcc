@@ -97,9 +97,10 @@ file that is **not** the manuscript:
 |---|---|
 | `Code/Revision_v2/R18_verify_manuscript.py` | the regenerated S-table CSVs; re-derives every number quoted in the text |
 | `Code/Revision_v2/R20_verify_SI.py` | the built SI PDF; all 40 tables and 5 figures |
+| `Code/Revision_v2/R24_audit_response_letter.py` | the response letter's numbers against the manuscript and the regenerated tables. Skipped, with a printed notice, where the letter is absent — it is peer-review correspondence and is never published |
 | `qa_plos_v2.py` | manuscript structure, citation order, page setup, and that withdrawn v1 wording has not crept back |
 | `build_tracked_docx.py` | rebuilds the tracked docx and confirms accept-all reproduces v2, reject-all reproduces v1 |
-| *(inline)* | main-figure PDF page size against the PLOS ceiling |
+| *(inline)* | main-figure TIFF size against the PLOS ceiling; every SI item cited and every citation captioned; the manuscript, cover letter and response letter agree on both median attenuation figures (age/sex, S37; composition, S25) and on the pipeline range; the scoped cohort, module and Fig 1 counts against S14, S40 and S4 |
 
 Before pushing, also run:
 
@@ -122,7 +123,16 @@ reviewers' comments.
 ## Pipeline: `Code/Revision_v2/`
 
 Runs in order. `R00_config.R` freezes every parameter and is `source()`d by
-every script; the configuration hash is recorded alongside each output table.
+every script. It also derives `CONFIG_HASH`, an MD5 of the frozen settings (not
+of file paths, which differ between machines), and `R01_build_universe.R`
+writes that hash into the `config_hash` column of S1 Table. That column is what
+lets a reader confirm which settings produced the deposited tables: change a
+parameter or a gene set and the hash changes; move the project directory and it
+does not. Recompute it with:
+
+```bash
+Rscript -e 'source("Code/Revision_v2/R00_config.R"); cat(CONFIG_HASH, "\n")'
+```
 
 | Script | Purpose |
 |---|---|
@@ -137,17 +147,29 @@ every script; the configuration hash is recorded alongside each output table.
 | `R08_redundancy.R` | Jaccard clustering, effective number of tests |
 | `R09_mirror_test.R` | sample-level permutation mirror test |
 | `R10_heterogeneity.R`, `R10b_hf_aetiology.R` | Cochran's *Q*, *I*², aetiology stratification |
+| `R10c_clinical_covariates.R` | age and sex adjustment (S37, S38 Tables) |
 | `R11_composition.R` | marker-based composition scores and adjusted correlations |
 | `R12_tats_and_tf.R` | translation scores, survival, transcription-factor association |
 | `R13_headline_numbers.R` | the numbers quoted in the manuscript |
 | `R14_tom_robustness.R`, `R14b_cohesion.R` | connectivity-matched null, jackknife stability |
-| `R15_cirrhosis_control.R` | same-organ non-malignant liver disease control |
+| `R15_cirrhosis_control.R` | same-organ non-malignant liver disease control; also writes the GSE89377 coverage row that renders as S11 Table panel b |
 | `R17_figures.R` | all main and supplementary figures, at PLOS page size |
 | `R18_verify_manuscript.py` | manuscript numbers against regenerated tables |
 | `R19_build_SI_pdf.py`, `R20_verify_SI.py` | build and verify the supporting information |
+| `R21_sessioninfo.R` | the package versions recorded with the deposited outputs |
+| `R22_audit_SI_citations.py` | every SI item is cited in the body, and every citation has a caption |
+| `R23_survival.R` | translation-score associations with survival (S39 Table) |
+| `R30_paired_sensitivity.R` | paired-design sensitivity analysis (S40 Tables), stage 1 manifest and stage 2 statistics |
 
-The `00_probe*.R` and `00_diag_*.R` scripts are exploratory and are not part of
-the pipeline; they are kept because they record how the parameters were settled.
+`R24`–`R29` and `R31`–`R34` are revision tooling rather than analysis: they audit
+the response letter, apply line edits to the manuscript and the letter, and
+verify the cover letter. They are not part of the result-producing pipeline, and
+the letter-editing ones are deliberately not published — they embed both sides
+of every replacement they apply, which is the letter itself.
+
+The `00_probe*.R`, `00_diag_*.R` and `R16_probe_*.R` scripts are exploratory and
+are not part of the pipeline; they are kept because they record how the
+parameters were settled.
 
 ## Superseded pipeline
 

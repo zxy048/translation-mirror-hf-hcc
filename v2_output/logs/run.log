@@ -754,3 +754,139 @@
 [00:04:03] --- any TCS test below P = 0.05? --- 
 [00:04:03] === R23 done === 
 [13:31:54] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:12:21] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[20:40:57] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[20:41:07] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[20:41:13] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[20:41:24] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[20:41:37] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[20:41:50] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[20:43:57] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:01:37] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:01:37] === R30 start: pairing manifest only (no statistics) === 
+[23:01:39] GSE14520 cross-platform patient-key overlap: 0 
+[23:01:39] Pairing summary: 
+[23:01:39]   GSE57338             paired=FALSE samples=313 (177 disease / 136 control) pairs=NA unmatched=NA/NA 
+[23:01:39]   GSE141198            paired=FALSE samples=148 (148 disease / 0 control) pairs=NA unmatched=NA/NA 
+[23:01:39]   TCGA_LIHC            paired=TRUE  samples=421 (371 disease / 50 control) pairs=50 unmatched=321/0 
+[23:01:39]   GSE116250            paired=FALSE samples=64 (50 disease / 14 control) pairs=NA unmatched=NA/NA 
+[23:01:39]   GSE14520_GPL3921     paired=TRUE  samples=445 (225 disease / 220 control) pairs=213 unmatched=12/7 
+[23:01:39]   GSE14520_GPL571      paired=TRUE  samples=41 (22 disease / 19 control) pairs=19 unmatched=3/0 
+[23:01:39]   GSE76427             paired=TRUE  samples=167 (115 disease / 52 control) pairs=52 unmatched=63/0 
+[23:01:39]   GSE141910            paired=FALSE samples=366 (200 disease / 166 control) pairs=NA unmatched=NA/NA 
+[23:01:39] === R30 stage 1 complete: manifest written; no paired statistics run === 
+[23:09:38] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:10:12] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:10:12] === R30 start: pairing manifest only (no statistics) === 
+[23:10:14] GSE14520 cross-platform patient-key overlap: 0 
+[23:10:14] Pairing summary: 
+[23:10:14]   GSE57338             paired=FALSE samples=313 (177 disease / 136 control) pairs=NA unmatched=NA/NA 
+[23:10:14]   GSE141198            paired=FALSE samples=148 (148 disease / 0 control) pairs=NA unmatched=NA/NA 
+[23:10:14]   TCGA_LIHC            paired=TRUE  samples=421 (371 disease / 50 control) pairs=50 unmatched=321/0 
+[23:10:14]   GSE116250            paired=FALSE samples=64 (50 disease / 14 control) pairs=NA unmatched=NA/NA 
+[23:10:14]   GSE14520_GPL3921     paired=TRUE  samples=445 (225 disease / 220 control) pairs=213 unmatched=12/7 
+[23:10:14]   GSE14520_GPL571      paired=TRUE  samples=41 (22 disease / 19 control) pairs=19 unmatched=3/0 
+[23:10:14]   GSE76427             paired=TRUE  samples=167 (115 disease / 52 control) pairs=52 unmatched=63/0 
+[23:10:14]   GSE141910            paired=FALSE samples=366 (200 disease / 166 control) pairs=NA unmatched=NA/NA 
+[23:10:14] === R30 stage 1 complete: manifest written === 
+[23:10:14] --- GSE14520_GPL3921: 213 complete pairs, 14 Tier A sets scored --- 
+[23:10:15] --- GSE14520_GPL571: 19 complete pairs, 15 Tier A sets scored --- 
+[23:10:16] --- GSE76427: 52 complete pairs, 14 Tier A sets scored --- 
+[23:10:16] --- TCGA_LIHC: 50 complete pairs, 15 Tier A sets scored --- 
+[23:10:17] Paired sensitivity summary: 
+[23:10:17]   GSE14520_GPL3921   pairs=213/213 sets=14 dir_full=14 flip=0 dir_subset=14 CI!=0=14 nominal=14 FDR=14 
+[23:10:17]   GSE14520_GPL571    pairs=19/19 sets=15 dir_full=15 flip=0 dir_subset=15 CI!=0=11 nominal=11 FDR=11 
+[23:10:17]   GSE76427           pairs=52/52 sets=14 dir_full=14 flip=0 dir_subset=14 CI!=0=13 nominal=13 FDR=13 
+[23:10:17]   TCGA_LIHC          pairs=50/50 sets=15 dir_full=15 flip=0 dir_subset=15 CI!=0=11 nominal=11 FDR=11 
+[23:10:17] No Tier A set changes sign relative to the full-cohort analysis. 
+[23:10:17] === R30 stage 2 complete: paired sensitivity outputs written === 
+[23:10:40] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:10:46] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:10:46] === R30 start: pairing manifest only (no statistics) === 
+[23:10:48] GSE14520 cross-platform patient-key overlap: 0 
+[23:10:48] Pairing summary: 
+[23:10:48]   GSE57338             paired=FALSE samples=313 (177 disease / 136 control) pairs=NA unmatched=NA/NA 
+[23:10:48]   GSE141198            paired=FALSE samples=148 (148 disease / 0 control) pairs=NA unmatched=NA/NA 
+[23:10:48]   TCGA_LIHC            paired=TRUE  samples=421 (371 disease / 50 control) pairs=50 unmatched=321/0 
+[23:10:48]   GSE116250            paired=FALSE samples=64 (50 disease / 14 control) pairs=NA unmatched=NA/NA 
+[23:10:48]   GSE14520_GPL3921     paired=TRUE  samples=445 (225 disease / 220 control) pairs=213 unmatched=12/7 
+[23:10:48]   GSE14520_GPL571      paired=TRUE  samples=41 (22 disease / 19 control) pairs=19 unmatched=3/0 
+[23:10:48]   GSE76427             paired=TRUE  samples=167 (115 disease / 52 control) pairs=52 unmatched=63/0 
+[23:10:48]   GSE141910            paired=FALSE samples=366 (200 disease / 166 control) pairs=NA unmatched=NA/NA 
+[23:10:48] === R30 stage 1 complete: manifest written === 
+[23:10:48] --- GSE14520_GPL3921: 213 complete pairs, 14 Tier A sets scored --- 
+[23:10:49] --- GSE14520_GPL571: 19 complete pairs, 15 Tier A sets scored --- 
+[23:10:49] --- GSE76427: 52 complete pairs, 14 Tier A sets scored --- 
+[23:10:50] --- TCGA_LIHC: 50 complete pairs, 15 Tier A sets scored --- 
+[23:10:50] Paired sensitivity summary: 
+[23:10:50]   GSE14520_GPL3921   pairs=213/213 sets=14 dir_full=14 flip=0 dir_subset=14 CI!=0=14 nominal=14 FDR=14 
+[23:10:50]   GSE14520_GPL571    pairs=19/19 sets=15 dir_full=15 flip=0 dir_subset=15 CI!=0=11 nominal=11 FDR=11 
+[23:10:50]   GSE76427           pairs=52/52 sets=14 dir_full=14 flip=0 dir_subset=14 CI!=0=13 nominal=13 FDR=13 
+[23:10:50]   TCGA_LIHC          pairs=50/50 sets=15 dir_full=15 flip=0 dir_subset=15 CI!=0=11 nominal=11 FDR=11 
+[23:10:50] No Tier A set changes sign relative to the full-cohort analysis. 
+[23:10:50] === R30 stage 2 complete: paired sensitivity outputs written === 
+[23:10:59] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[23:11:01] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[00:12:09] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:03:16] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[13:03:30] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:20:28] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:22:29] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:23:12] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:23:50] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:24:24] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:25:04] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:03:30] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:26:32] R00 config loaded: v2.0-2026-10-01 | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:26:49] === R15 start === 
+[19:26:57]   series matrix: 107 samples; phenotype levels: 
+[19:26:57]   stage counts: CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
+[19:27:13]   raw: 48803 probes x 215 columns 
+[19:27:15]   title-vs-phenotype agreement: 107 / 107 
+[19:27:16]   detection filter: 17793 / 48803 probes kept 
+[19:27:19]   after log2 + quantile: range 5.37-15.37 
+[19:27:20]   GPL6947 annot: 49577 probes; cols: ID, Gene title, Gene symbol, Gene ID 
+[19:27:20]   11756 genes x 107 samples after collapse 
+[19:27:20]   final: 11756 genes x 107 samples; CH_high=12 CH_low=8 Cirrhosis=12 DN_high=11 DN_low=11 eHCC=5 HCC=35 Normal=13 
+[19:27:21] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[19:27:22]   ssGSEA: 40 sets x 107 samples; dropped 1 sets (<5 genes measured) 
+[19:27:22]   tiers scored: A=15 B_extra=5 C_v1=20 
+[19:27:22]   reference arm: Normal, n = 13 
+[19:27:27]   CH_low (8 vs 13) done 
+[19:27:31]   CH_high (12 vs 13) done 
+[19:27:36]   Cirrhosis (12 vs 13) done 
+[19:27:41]   DN_low (11 vs 13) done 
+[19:27:46]   DN_high (11 vs 13) done 
+[19:27:50]   eHCC (5 vs 13) done 
+[19:27:55]   HCC (35 vs 13) done 
+[19:27:55] --- cirrhosis vs HCC direction agreement --- 
+[19:27:55]   Tier A     n=15 | both-up 11 | both-down  1 | discordant  3 | rho=+0.668 
+[19:27:55]   ALL tiers  n=40 | both-up 21 | both-down  3 | discordant 16 | rho=+0.532 
+[19:27:55] --- eHCC vs HCC direction agreement (is the change at the transition?) --- 
+[19:27:55]   Tier A     n=15 | both-up 13 | both-down  0 | discordant  2 | rho=+0.343 
+[19:27:55]   ALL tiers  n=40 | both-up 29 | both-down  3 | discordant  8 | rho=+0.665 
+[19:27:55] --- GSE89377 HCC arm vs the HCC cohorts v1 already used (Tier A, n=15) --- 
+[19:27:55]   vs TCGA_LIHC      n=15 | sign agreement 100% | Spearman rho=0.607 
+[19:27:55]   vs GSE14520_GPL3921 n=14 | sign agreement 100% | Spearman rho=0.790 
+[19:27:55]   vs GSE14520_GPL571 n=15 | sign agreement 93% | Spearman rho=0.596 
+[19:27:55]   vs GSE76427       n=14 | sign agreement 100% | Spearman rho=0.833 
+[19:27:55]   vs GSE57338       n=15 | sign agreement 13% | Spearman rho=-0.679 (cross-disease) 
+[19:27:55] === R15 done === 
+[19:51:29] R00 config loaded: v2.0-2026-10-01 (hash d717569e3b415e78099189afc5aaf129) | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:51:29] === R01 start === 
+[19:51:29] --- HF: GSE57338 --- 
+[19:51:58] series matrix: 33297 features x 313 samples 
+[19:51:58] HF disease samples: 177  (config says 177) 
+[19:52:06] array filter: global median=5.007 -> 16632/33297 probes detected (50.0%) 
+[19:52:06] HF after collapse: 12090 genes 
+[19:52:06] --- HCC: GSE141198 --- 
+[19:52:06] counts: 15036 genes x 148 samples (vst agrees) 
+[19:52:06] RNA-seq filter: count>=10 in >=50% -> 13178/15036 genes (87.6%) 
+[19:52:07] HCC after collapse: 13178 genes 
+[19:52:07] === universe U: 10213 genes === 
+[19:52:07] msigdb table loaded from cache: msigdb_26.1.0_Homo_sapiens.rds 
+[19:52:08] Tier A genes absent from U: 41 / 497 
+[19:52:11] === R01 done: |U| = 10213 genes; HF 313 samples; HCC 148 samples === 
+[19:53:17] R00 config loaded: v2.0-2026-10-01 (hash d717569e3b415e78099189afc5aaf129) | Tier A=15 Tier B=21 Tier C(v1)=33 
+[19:53:17] R00 config loaded: v2.0-2026-10-01 (hash d717569e3b415e78099189afc5aaf129) | Tier A=15 Tier B=21 Tier C(v1)=33 
+[22:39:48] R00 config loaded: v2.0-2026-10-01 (hash d717569e3b415e78099189afc5aaf129) | Tier A=15 Tier B=21 Tier C(v1)=33 

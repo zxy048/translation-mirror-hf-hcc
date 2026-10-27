@@ -43,7 +43,12 @@ PKG = os.path.join(ROOT, "PLOS_ONE_Submission_v2")
 # internal build substitutes whatever is there, while a submission build
 # (PLOS_SUBMISSION=1) refuses to run while a token survives.
 CONFIG = os.path.join(ROOT, "submission_config.json")
-COVER_MD = os.path.join(ROOT, "Cover_Letter_PLOSONE_v2.md")
+COVER_MD = os.path.join(ROOT, "Cover_Letter_PLOSONE_R34.md")
+# The response letter carries the manuscript number as well: it is the file the
+# editor opens first when matching a revision to its record. Both letter
+# templates therefore hold tokens rather than the number.
+RESPONSE_MD = os.path.join(ROOT, "v2_output",
+                           "Response_to_Reviewers_condensed_draft.md")
 TOKENS = {
     "manuscript_id": "{{MANUSCRIPT_ID}}",
     "submission_date": "{{SUBMISSION_DATE}}",
@@ -73,10 +78,16 @@ DOCS = [
      "03_Manuscript.docx", "build_plos_docx_v2.py"),
     (None,  # produced by build_tracked_docx.py, has no markdown of its own
      "04_Revised_Manuscript_with_Track_Changes.docx", "build_tracked_docx.py"),
-    (os.path.join(ROOT, "Cover_Letter_PLOSONE_v2.md"),
+    (os.path.join(ROOT, "Cover_Letter_PLOSONE_R34.md"),
      "01_Cover_Letter.docx", "pandoc"),
-    (os.path.join(ROOT, "v2_output", "Response_to_Reviewers.md"),
-     "02_Response_to_Reviewers.docx", "pandoc"),
+    # The condensed draft supersedes Response_to_Reviewers.md as the maintained
+    # response letter: it is the version that carries the manuscript line
+    # numbers, the corrected composition covariates and the softened tone. The
+    # long version is kept only for its prose history, not as a build source.
+    # Typography for this one document only, and on purpose: see pandoc_docx().
+    (os.path.join(ROOT, "v2_output", "Response_to_Reviewers_condensed_draft.md"),
+     "02_Response_to_Reviewers.docx", "pandoc",
+     os.path.join(ROOT, "assets", "response_letter_reference.docx")),
 ]
 
 # Copied rather than rebuilt. The source hash is asserted so that a stale or
@@ -172,16 +183,29 @@ def run(cmd, **kw):
         sys.exit("FAILED: %s" % " ".join(cmd))
 
 
-def pandoc_docx(src_md, dst_docx):
+def pandoc_docx(src_md, dst_docx, reference=None):
     """Markdown -> docx, matching the format the letters were shipped in.
 
     Deliberately plain: the letters in this package carry no explicit font,
     size or margin overrides, and adding `format_plos` here would silently
     re-typeset documents that have already been read by the authors. Change the
     formatting on purpose or not at all.
+
+    The one deliberate exception is `assets/response_letter_reference.docx`,
+    used for the response letter only, at the authors' request to shorten it
+    (2026-10-27). It is pandoc's own default reference document with two
+    changes: body text 12 pt -> 11 pt (docDefaults / body-text `w:sz` 24 -> 22)
+    and the default paragraph spacing reduced from 9 pt before + 9 pt after
+    (`w:before=180 w:after=180`) to 3 pt + 3 pt. Nothing about the letter's
+    wording, structure or content changes; it removes about six pages of air.
+    Regenerate it by exporting pandoc's default reference and applying those
+    two edits; no other style is touched.
     """
-    run(["pandoc", src_md, "-o", dst_docx,
-         "--from", "markdown+superscript+subscript"])
+    cmd = ["pandoc", src_md, "-o", dst_docx,
+           "--from", "markdown+superscript+subscript"]
+    if reference:
+        cmd += ["--reference-doc", reference]
+    run(cmd)
 
 
 def main():
@@ -192,14 +216,17 @@ def main():
     print("Rebuilding the four submission documents")
     print("=" * 74)
 
-    for src, dst, builder in DOCS:
+    for entry in DOCS:
+        src, dst, builder = entry[:3]
+        reference = entry[3] if len(entry) > 3 else None
         print("\n[%s]" % dst)
         if builder == "pandoc":
             if not os.path.exists(src):
                 sys.exit("  source missing: %s" % src)
             tmp = os.path.join(ROOT, "_pkg_tmp.docx")
             source = src
-            if os.path.abspath(src) == os.path.abspath(COVER_MD):
+            if os.path.abspath(src) in (os.path.abspath(COVER_MD),
+                                        os.path.abspath(RESPONSE_MD)):
                 cfg = load_config()
                 missing = unfilled(cfg)
                 if missing and os.environ.get("PLOS_SUBMISSION") == "1":
@@ -220,7 +247,7 @@ def main():
                 if missing:
                     print("  note: internal build; %s left as placeholders"
                           % ", ".join(TOKENS[k] for k in missing))
-            pandoc_docx(source, tmp)
+            pandoc_docx(source, tmp, reference)
             if source != src:
                 os.remove(source)
             shutil.copy2(tmp, os.path.join(PKG, dst))

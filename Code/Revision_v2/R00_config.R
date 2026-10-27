@@ -439,7 +439,28 @@ options(stringsAsFactors = FALSE)
 # separate file so R01 and R05 cannot diverge.
 source(file.path(V2, "R00_io.R"))
 
-log_msg("R00 config loaded: ", CONFIG_VERSION,
+# ------------------------------------------------------- configuration hash --
+# A digest of the frozen *settings*, not of the file paths, which differ between
+# machines. S1 Table carries it, so a reader can confirm which settings produced
+# the deposited tables: change a parameter or a gene set and the hash changes;
+# move the project directory and it does not.
+CONFIG_HASH <- local({
+  settings <- list(
+    version = CONFIG_VERSION,
+    wgcna   = WGCNA,
+    stats   = STATS,
+    tierA   = SETS_TIER_A,
+    tierB   = SETS_TIER_B_EXTRA,
+    tierC   = SETS_TIER_C_V1,
+    tfs     = TFS_PANEL,
+    markers = MARKERS)
+  f <- tempfile(fileext = ".txt")
+  on.exit(unlink(f), add = TRUE)
+  dput(settings, f)
+  unname(tools::md5sum(f))
+})
+
+log_msg("R00 config loaded: ", CONFIG_VERSION, " (hash ", CONFIG_HASH, ")",
         " | Tier A=", length(SETS_TIER_A),
         " Tier B=", length(c(SETS_TIER_A, SETS_TIER_B_EXTRA)),
         " Tier C(v1)=", length(SETS_TIER_C_V1))

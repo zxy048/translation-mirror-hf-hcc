@@ -38,7 +38,13 @@ if bad:
     print(f"WARNING: {len(bad)} sup/sub tag(s) contain whitespace and will not "
           f"convert cleanly, e.g. {bad[0]!r}")
 
-md = re.sub(r"<sup>(.*?)</sup>", r"^\1^", md)
+# Brackets inside a superscript run must be escaped. pandoc reads `^[...]` as
+# an *inline note*, not as superscript, so a citation marker written as
+# <sup>[1,2]</sup> would be swallowed into a footnote and disappear from the
+# body text -- silently, with no warning. Escaping yields superscript [1,2].
+md = re.sub(r"<sup>(.*?)</sup>",
+            lambda m: "^" + m.group(1).replace("[", r"\[").replace("]", r"\]") + "^",
+            md)
 md = re.sub(r"<sub>(.*?)</sub>", r"~\1~", md)
 
 if "<sup>" in md or "<sub>" in md:

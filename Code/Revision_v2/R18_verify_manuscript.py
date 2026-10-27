@@ -235,8 +235,14 @@ surv = sum(1 for r in ta25 if r["survives"] in ("TRUE", "True", "1"))
 att = sorted(num(r["attenuation"]) for r in ta25)
 med = att[len(att)//2] if len(att) % 2 else (att[len(att)//2-1] + att[len(att)//2]) / 2
 vifs = [num(r["max_vif"]) for r in ta25]
-check("composition survivorship", f"{surv} of {len(ta25)} Tier A set–cohort pairs")
-check("median attenuation", f"median attenuation of {100*med:.1f}%")
+# The prose reports the survivor count and the denominator in different clauses
+# ("across the 103 Tier A set–cohort pairs, 82 retained their direction after
+# adjustment, 55 met the composite criterion"), so the count and the denominator
+# are asserted as two strings instead of one contiguous phrase. The numbers are
+# still computed from S25 alone.
+check("composition survivorship", f"{surv} met the composite criterion",
+      f"across the {len(ta25)} Tier A set–cohort pairs")
+check("median attenuation", f"median signed attenuation of {100*med:.1f}%")
 check("max VIF", f"maximum VIF {max(vifs):.2f}")
 
 print("\n--- paired-sample sensitivity (S40 Table) ---")
@@ -286,10 +292,10 @@ s38 = rows("Table_S38_age_sex_mirror_recheck.csv")
 ta37 = [r for r in s37 if r["tier"] == "A"]
 # The median attenuation is taken over ALL S37 fits, not the Tier A subset: the
 # manuscript sentence that reports it puts it in the same breath as the maximum
-# VIF, which is an all-fits quantity ("...is 2.8% and no fit is collinear
-# (maximum VIF 1.03 across the 163 set–cohort fits)"). Computed on Tier A alone
-# it reads 2.9%, so the two bases are not interchangeable and the check has to
-# use the one the prose actually cites.
+# VIF, which is an all-fits quantity ("Median signed attenuation is 2.8% across
+# the 163 set–cohort fits ... and no fit is collinear (maximum VIF 1.03)").
+# Computed on Tier A alone it reads 2.9%, so the two bases are not interchangeable
+# and the check has to use the one the prose actually cites.
 att37 = sorted(num(r["attenuation"]) for r in s37)
 med37 = att37[len(att37)//2] if len(att37) % 2 else \
         (att37[len(att37)//2-1] + att37[len(att37)//2]) / 2
@@ -298,9 +304,12 @@ med37 = att37[len(att37)//2] if len(att37) % 2 else \
 # check fails on text that is present, which is a false alarm rather than a
 # finding -- the opposite of the failure mode this file exists to catch.
 check("age/sex median attenuation",
-      f"Median attenuation of |*g*| is {100*med37:.1f}%")
-check("age/sex max VIF", f"maximum VIF {max(num(r['max_vif']) for r in s37):.2f} "
-                         f"across the {len(s37)} set–cohort fits")
+      f"Median signed attenuation is {100*med37:.1f}%")
+# "...across the 163 set–cohort fits" and "maximum VIF 1.03" sit in one sentence
+# but not contiguously -- the attenuation clause comes first and the VIF is
+# parenthesised at the end, with the full definition of attenuation between them.
+check("age/sex max VIF", f"maximum VIF {max(num(r['max_vif']) for r in s37):.2f}",
+      f"across the {len(s37)} set–cohort fits")
 check("age/sex sex confound count",
       f"{sum(1 for r in ta37 if num(r['p_sex']) < 0.05)} of {len(ta37)} "
       f"Tier A set–cohort fits at *P* < 0.05")

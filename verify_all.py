@@ -33,28 +33,42 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PY = sys.executable
 
-# (label, script path relative to ROOT, what it reads that the manuscript does not)
+# (label, script path relative to ROOT, what it reads that the manuscript does
+# not, file the check cannot run without)
+#
+# The fourth field exists for exactly one check. The response letter is
+# peer-review correspondence and is gitignored, so it is in the working tree
+# and in no public repository. A check that needs it must be *skipped* there,
+# not failed: a red "response letter numbers" line reads as "the manuscript's
+# numbers do not reconcile", which is the opposite of what has happened. The
+# skip prints why, so the missing check cannot pass for a passing one.
 CHECKS = [
     ("manuscript numbers vs regenerated tables",
      "Code/Revision_v2/R18_verify_manuscript.py",
-     "opens the regenerated S-table CSVs and re-derives every number quoted in the text"),
+     "opens the regenerated S-table CSVs and re-derives every number quoted in the text",
+     None),
     ("supporting information",
      "Code/Revision_v2/R20_verify_SI.py",
-     "opens the built SI PDF and checks every table and figure it holds against its source CSV"),
+     "opens the built SI PDF and checks every table and figure it holds against its source CSV",
+     None),
     ("response letter numbers",
      "Code/Revision_v2/R24_audit_response_letter.py",
      "opens the response letter and checks its numbers against the manuscript, the "
-     "regenerated tables and the built figure files"),
+     "regenerated tables and the built figure files",
+     os.path.join("v2_output", "Response_to_Reviewers_condensed_draft.md")),
     ("manuscript structure and PLOS formatting",
      "qa_plos_v2.py",
-     "checks abstract length, citation order, section presence, page setup, line numbers"),
+     "checks abstract length, citation order, section presence, page setup, line numbers",
+     None),
     ("tracked-changes docx round-trip",
      "build_tracked_docx.py",
-     "rebuilds the tracked docx and confirms accept-all reproduces v2 and reject-all reproduces v1"),
+     "rebuilds the tracked docx and confirms accept-all reproduces v2 and reject-all reproduces v1",
+     None),
 ]
 
 # v1 figures were rendered at 13 x 11.5 in and downscaled by the journal to
@@ -200,15 +214,72 @@ def check_si_citations():
 # response letter each carried their own R00-Rnn range. Those are the seams
 # between documents, and no per-document validator can see across them.
 #
-# Two shared quantities are checked here: the median attenuation of |g| after
-# age/sex adjustment (S37), and the pipeline range cited to the public
-# repository. Both are values a reader will compare across documents.
+# Three shared quantities are checked here: the median signed attenuation after
+# age/sex adjustment (S37), the median signed attenuation after tissue-
+# composition adjustment (S25), and the pipeline range cited to the public
+# repository. All three are values a reader will compare across documents.
 # ---------------------------------------------------------------------------
-ATTEN = re.compile(r"Median attenuation of \|\*g\*\| is ([\d.]+)%")
+# Two *different* adjustments are both called "attenuation", and both are
+# reported in the manuscript and the response letter:
+#
+#   age and sex (S37)      -- 163 set-cohort fits, median signed attenuation 2.8%
+#   tissue composition (S25) -- 103 Tier A pairs,  median signed attenuation 34.1%
+#
+# They are separate quantities, so each is compared only with itself: a check
+# that pooled them would fail on a correct document (the value would be "not
+# unique") and a check that silently took the first would pass one of them
+# unexamined. The scope is read from the sentence the value sits in, because the
+# phrase alone does not distinguish them and the two documents order the two
+# clues differently -- the manuscript writes "2.8% across the 163 fits" and
+# "over the 103 pairs ... 34.1%".
+#
+# The wording variants are accepted rather than normalised: the manuscript has
+# "Median signed attenuation is", the condensed response letter has "median
+# attenuation is" and "median signed attenuation is", and the long version had
+# "Median attenuation of |g| is".
+#
+# The two letters are the files assemble_plos_v2.py actually builds 01 and 02
+# from. They were Cover_Letter_PLOSONE_v2.md and Response_to_Reviewers.md until
+# 2026-10-27; both were superseded that day, and a cross-document check still
+# reading the superseded pair would report agreement between the manuscript and
+# documents nobody is submitting.
+ATTEN = re.compile(
+    r"[Mm]edian (?:signed )?attenuation (?:of \|\*g\*\| )?(?:is|of) ([\d.]+)%")
+ATTEN_SCOPE = (
+    ("age/sex (S37, 163 fits)", re.compile(r"\b163\b")),
+    ("composition (S25, 103 pairs)", re.compile(r"\b103\b")),
+)
+# Documents that must carry the figures if they are present at all.
+ATTEN_REQUIRED = ("manuscript", "response letter")
 PIPE = re.compile(r"R00\s*[–-]\s*R(\d+)")
 DOCS = [("manuscript", "Manuscript_PLOSONE_v2.md"),
-        ("cover letter", "Cover_Letter_PLOSONE_v2.md"),
-        ("response letter", os.path.join("v2_output", "Response_to_Reviewers.md"))]
+        ("cover letter", "Cover_Letter_PLOSONE_R34.md"),
+        ("response letter", os.path.join("v2_output",
+                                         "Response_to_Reviewers_condensed_draft.md"))]
+
+
+def attenuation_values(text):
+    """(scope, value) for every attenuation figure in `text`.
+
+    The scope is whichever of the two fit counts sits nearest the figure in its
+    own sentence, measured from the end of the matched phrase (just past the
+    percentage). An earlier version took the first scope marker found in the
+    sentence, which assigned both figures to age/sex whenever a document
+    reported them in one sentence; measuring from the start of the phrase was
+    no better, because the phrase begins with "median", which pulls the match
+    back towards whatever precedes it.
+    """
+    out = []
+    for sent in re.split(r"(?<=[.)])\s+", text):
+        for m in ATTEN.finditer(sent):
+            best, best_d = None, None
+            for name, rx in ATTEN_SCOPE:
+                for a in rx.finditer(sent):
+                    d = abs(a.start() - m.end())
+                    if best_d is None or d < best_d:
+                        best, best_d = name, d
+            out.append((best or "unspecified", m.group(1)))
+    return out
 
 
 def check_cross_document():
@@ -216,36 +287,64 @@ def check_cross_document():
     for name, rel in DOCS:
         path = os.path.join(ROOT, rel)
         if not os.path.exists(path):
-            fails.append("%s is missing" % name)
+            # The letters are gitignored, so a clone of the public repository
+            # has none of them. That is the expected state there, not a defect:
+            # the checks still run on whatever is present, and the skip says so
+            # rather than passing silently.
+            print("  SKIP  %s (%s) is not present." % (name, rel))
+            print("        Peer-review correspondence is never published, so a")
+            print("        clone of the repository legitimately lacks it.")
             continue
         with open(path, encoding="utf-8") as fh:
             texts[name] = fh.read()
 
-    # 1. one attenuation figure, not one per document.
+    # 1. each attenuation quantity, one value per document and the same value
+    #    in every document that reports it.
     atten = {}
-    for name in ("manuscript", "response letter"):
-        if name not in texts:
-            continue
-        vals = ATTEN.findall(texts[name])
-        if len(set(vals)) != 1:
-            fails.append("%s: attenuation value is not unique (%s)"
-                         % (name, vals or "not found"))
-            continue
-        atten[name] = vals[0]
-    if atten:
-        print("  attenuation: " + ", ".join(
-            "%s=%s%%" % (n, atten[n]) for n in sorted(atten)))
-    if len(set(atten.values())) > 1:
-        fails.append("median attenuation disagrees across documents: %s"
-                     % ", ".join("%s=%s%%" % (n, v) for n, v in sorted(atten.items())))
+    for name, text in texts.items():
+        by_scope = {}
+        for scope, v in attenuation_values(text):
+            by_scope.setdefault(scope, set()).add(v)
+        for scope in sorted(by_scope):
+            vals = by_scope[scope]
+            if len(vals) != 1:
+                fails.append("%s: %s attenuation is not unique (%s)"
+                             % (name, scope, ", ".join(sorted(vals))))
+                continue
+            atten.setdefault(scope, {})[name] = next(iter(vals))
+        if name in ATTEN_REQUIRED:
+            for scope, _ in ATTEN_SCOPE:
+                if scope not in by_scope:
+                    fails.append("%s: no %s attenuation figure found"
+                                 % (name, scope))
+    for scope in sorted(atten):
+        got = atten[scope]
+        print("  attenuation, %s: %s" % (scope, ", ".join(
+            "%s=%s%%" % (n, got[n]) for n in sorted(got))))
+        if len(set(got.values())) > 1:
+            fails.append("%s attenuation disagrees across documents: %s"
+                         % (scope, ", ".join("%s=%s%%" % (n, v)
+                                             for n, v in sorted(got.items()))))
+    if not texts:
+        print("  nothing to compare: no cross-document text is present")
 
     # 2. one pipeline range, not one per document.
+    #
+    # The manuscript states it (under Data Availability). The cover letter does
+    # not, and no longer needs to: it cites the repository rather than a script
+    # range. So a document that states no range is silent, not wrong, and only
+    # the manuscript is required to state one. A document that states two
+    # different ranges is wrong.
     pipe = {}
     for name, text in texts.items():
         vals = PIPE.findall(text)
+        if not vals:
+            if name == "manuscript":
+                fails.append("%s: pipeline range not found" % name)
+            continue
         if len(set(vals)) != 1:
             fails.append("%s: pipeline range is not unique (%s)"
-                         % (name, vals or "not found"))
+                         % (name, ", ".join(sorted(set(vals)))))
             continue
         pipe[name] = "R00–R" + vals[0]
     if pipe:
@@ -416,10 +515,20 @@ def run(label, script, reads):
     # Console is GBK on this machine; the scripts print non-ASCII and die on
     # encode errors unless the child is told the stream is UTF-8.
     env = dict(os.environ, PYTHONIOENCODING="utf-8")
-    p = subprocess.run([PY, path], cwd=ROOT, env=env,
-                       capture_output=True, text=True,
-                       encoding="utf-8", errors="replace")
-    out = (p.stdout or "") + (p.stderr or "")
+    # Output goes to a temporary file, not to a pipe. `capture_output=True`
+    # deadlocks on the tracked-docx check: that script drives Word through COM,
+    # WINWORD.EXE inherits the pipe handles, outlives the direct child, and the
+    # parent then waits for an EOF that arrives only when Word exits -- which it
+    # does not. The symptom was a run that printed nothing and never finished.
+    # A file handle has the same inheritance problem but not the same
+    # consequence: subprocess.run waits for the child it started, and the file
+    # is read after that, so a lingering Word process costs nothing.
+    with tempfile.TemporaryFile(mode="w+", encoding="utf-8",
+                                errors="replace") as fh:
+        p = subprocess.run([PY, path], cwd=ROOT, env=env,
+                           stdout=fh, stderr=subprocess.STDOUT)
+        fh.seek(0)
+        out = fh.read()
     for line in out.rstrip().splitlines()[-14:]:
         print("  | " + line)
     if p.returncode != 0:
@@ -433,7 +542,18 @@ def main():
     print("A check that only reads the manuscript cannot see the failures that")
     print("matter, which is how the v1 submission shipped six of them.")
     failures = []
-    for label, script, reads in CHECKS:
+    for check in CHECKS:
+        label, script, reads = check[:3]
+        requires = check[3] if len(check) > 3 else None
+        if requires and not os.path.exists(os.path.join(ROOT, requires)):
+            print("\n" + "=" * 74)
+            print("[%s]" % label)
+            print("=" * 74)
+            print("  SKIP  %s is not present." % requires)
+            print("        It is peer-review correspondence and is never published,")
+            print("        so this check runs only in the working tree that holds it.")
+            print("        Nothing was verified here; nothing failed.")
+            continue
         failures += run(label, script, reads)
 
     print("\n" + "=" * 74)
