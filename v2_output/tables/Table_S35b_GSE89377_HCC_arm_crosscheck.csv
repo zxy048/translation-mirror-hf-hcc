@@ -1,0 +1,6 @@
+"comparison","cohort","n_sets","tier","sign_agreement_pct","spearman_rho"
+"same-disease (HCC arm vs HCC cohort)","TCGA_LIHC",15,"A",100,0.607142857142857
+"same-disease (HCC arm vs HCC cohort)","GSE14520_GPL3921",14,"A",100,0.789879465871601
+"same-disease (HCC arm vs HCC cohort)","GSE14520_GPL571",15,"A",93.3333333333333,0.596428571428571
+"same-disease (HCC arm vs HCC cohort)","GSE76427",14,"A",100,0.832967032967033
+"cross-disease (HCC arm vs HF cohort)","GSE57338",15,"A",13.3333333333333,-0.678571428571428

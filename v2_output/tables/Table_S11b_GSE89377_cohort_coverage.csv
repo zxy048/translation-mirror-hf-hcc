@@ -1,0 +1,2 @@
+"cohort","disease","tech","n_genes","n_samples","n_disease","n_control","n_unlabeled","tierA_covered","tierA_total","tierA_pct"
+"GSE89377","HCC","array",11756,107,94,13,0,420,497,84.5
