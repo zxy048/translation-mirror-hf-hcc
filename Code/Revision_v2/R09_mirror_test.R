@@ -78,6 +78,12 @@ mirror_pair <- function(hcc, hf, sets, tier, nperm = STATS$N_PERM_NULL) {
   obs$hcc_cohort <- hcc; obs$hf_cohort <- hf; obs$tier <- tier
   n_obs <- sum(obs$mirror)
 
+  # Cross-disease effect-size correlation. A descriptive companion to the count
+  # tests, computed on every set in the tier rather than only on those passing
+  # the gate, so it is the correlation the manuscript already reports -- not a
+  # second, re-gated statistic.
+  rho_obs <- stats::cor(obs$g_HCC, obs$g_HF, method = "spearman")
+
   cl <- setNames(r8$clusters$cluster, r8$clusters$set)
   obs$cluster <- cl[obs$set]
   total_cl <- length(unique(na.omit(cl[sets])))
@@ -97,10 +103,23 @@ mirror_pair <- function(hcc, hf, sets, tier, nperm = STATS$N_PERM_NULL) {
     a <- hedges_all(S1, p1[seq_len(n1d)], p1[-seq_len(n1d)])
     b <- hedges_all(S2, p2[seq_len(n2d)], p2[-seq_len(n2d)])
     mir <- abs(a) >= STATS$MIN_EFFECT & abs(b) >= STATS$MIN_EFFECT & sign(a) == -sign(b)
-    c(sets = sum(mir), clusters = length(unique(obs$cluster[mir])))
-  }, numeric(2))
+    c(sets = sum(mir), clusters = length(unique(obs$cluster[mir])),
+      rho = stats::cor(a, b, method = "spearman"))
+  }, numeric(3))
   p_perm  <- (1 + sum(null["sets", ]     >= n_obs)) / (1 + nperm)
   p_perm_cl <- (1 + sum(null["clusters", ] >= k))   / (1 + nperm)
+
+  # --- permutation null for the correlation ----------------------------------
+  # Same relabellings as the count tests, so all three statistics share one
+  # null: the permuted effect sizes a and b are the ones already computed, and
+  # no extra random draw is made. cor() consumes no RNG, so the sets/clusters
+  # null series above is bit-identical to the run without this block.
+  # The statistic is recomputed from the permuted g values each iteration; the
+  # observed rho is never held fixed.
+  rho_null <- null["rho", ]
+  p_rho_two <- (1 + sum(abs(rho_null) >= abs(rho_obs))) / (1 + nperm)
+  p_rho_neg <- (1 + sum(rho_null <= rho_obs))            / (1 + nperm)
+  rho_q     <- stats::quantile(rho_null, c(0.025, 0.5, 0.975), names = FALSE)
 
   # --- 3. what v1 did, for continuity only -----------------------------------
   # binom.test(k, total_cl, 0.5). Reported because the response letter has to
@@ -117,6 +136,10 @@ mirror_pair <- function(hcc, hf, sets, tier, nperm = STATS$N_PERM_NULL) {
        perm_null_sets = null["sets", ], perm_null_clusters = null["clusters", ],
        perm_mean = mean(null["sets", ]), perm_mean_clusters = mean(null["clusters", ]),
        p_binom_v1 = p_binom_v1,
+       rho_obs = rho_obs, rho_null = rho_null,
+       rho_null_mean = mean(rho_null), rho_null_sd = stats::sd(rho_null),
+       rho_q025 = rho_q[1], rho_q500 = rho_q[2], rho_q975 = rho_q[3],
+       p_rho_two = p_rho_two, p_rho_neg = p_rho_neg,
        n_eff_nyholt = neff_ny, n_eff_li_ji = neff_lj)
 }
 
@@ -145,6 +168,9 @@ for (p in PAIRS) {
                 res$p_perm_cluster, res$perm_mean_clusters))
     cat(sprintf("  n_eff of this tier: %.1f (Nyholt) / %.1f (Li & Ji)\n",
                 res$n_eff_nyholt, res$n_eff_li_ji))
+    cat(sprintf("  cross-disease rho : %+.3f ; null mean %+.3f (2.5-97.5%%: %+.3f to %+.3f) ; two-sided P = %.4f\n",
+                res$rho_obs, res$rho_null_mean, res$rho_q025, res$rho_q975,
+                res$p_rho_two))
   }
 }
 
@@ -163,6 +189,25 @@ summ <- do.call(rbind, lapply(results, function(r) data.frame(
   stringsAsFactors = FALSE)))
 cat("\n=== SUMMARY ===\n"); print(summ, row.names = FALSE)
 write_table(summ, "Table_S18_mirror_summary.csv")
+
+# The correlation test is published under its own number rather than as extra
+# columns on S18, so the frozen S18 output is not overwritten by a later
+# addition and the two statistics stay separable on inspection.
+rho_tab <- do.call(rbind, lapply(results, function(r) data.frame(
+  pair = r$tag, tier = r$tier, n_sets = r$n_sets,
+  rho_obs = round(r$rho_obs, 4),
+  rho_null_mean = round(r$rho_null_mean, 4),
+  rho_null_sd = round(r$rho_null_sd, 4),
+  rho_q025 = round(r$rho_q025, 4),
+  rho_q500 = round(r$rho_q500, 4),
+  rho_q975 = round(r$rho_q975, 4),
+  p_rho_two_sided = r$p_rho_two,
+  p_rho_neg_tail = r$p_rho_neg,
+  n_perm = STATS$N_PERM_NULL,
+  seed = STATS$SEED,
+  stringsAsFactors = FALSE)))
+cat("\n=== CORRELATION PERMUTATION (S18b) ===\n"); print(rho_tab, row.names = FALSE)
+write_table(rho_tab, "Table_S18b_rho_permutation.csv")
 
 saveRDS(list(results = results, summary = summ, obs = obs_all),
         file.path(OUT, "intermediate", "R09_mirror.rds"))
