@@ -69,8 +69,14 @@ MS = os.path.join(ROOT, "Manuscript_PLOSONE_v2.md")
 # part of this file has been mutation-tested this way: a check that has never
 # been seen to fail is not known to be a check, and R22 in this repository spent
 # a full build reporting a false pass because exactly that was never done.
+# The condensed draft is the letter actually uploaded as 02_Response_to_Reviewers,
+# so it is what this file has to audit. The long Response_to_Reviewers.md is the
+# superseded prose history and is no longer shipped; pointing the default at it
+# would have left the shipped letter unaudited, which is the state this file
+# exists to prevent. R24_LETTER still overrides, so either can be checked.
 LETTER = os.environ.get(
-    "R24_LETTER", os.path.join(ROOT, "v2_output", "Response_to_Reviewers.md"))
+    "R24_LETTER",
+    os.path.join(ROOT, "v2_output", "Response_to_Reviewers_condensed_draft.md"))
 
 
 def norm(t):
@@ -183,7 +189,16 @@ OPERATIONAL = {
     "600": "figure export resolution, checked against the built TIFFs in part E",
 }
 
-toks = tokens(letter)
+# Every "*Changes:*" line names the section and the printed line numbers of the
+# clean manuscript ("L141–169", "L418–449, L528–542 and L652–663"). Those are
+# cross-references, not measurements, and they are absent from the manuscript and
+# the tables by design -- so tokenizing them made 19 line numbers read as
+# uncorroborated data in the first run against the condensed letter. They are
+# removed before the sweep rather than allow-listed, because a list of 19
+# numbers would silently vouch for whichever of them a later edit reused as a
+# real value.
+CROSSREF = re.compile(r"(?<![A-Za-z0-9])L\d+(?:\s*[–-]\s*L?\d+)*")
+toks = tokens(CROSSREF.sub("", letter_n))
 distinct = sorted(set(toks), key=lambda s: (len(s), s))
 uncorroborated = [t for t in distinct
                   if t not in pool and t not in DERIVED
@@ -296,7 +311,7 @@ for pair, tier, label, form in [
     ("HCC array vs HF RNA-seq 2", "C", "GSE141910 Tier C", "slash"),
 ]:
     r = s18row(pair, tier)
-    text = (f"| {r['n_sets']} | **{r['n_mirror_sets']}** |" if form == "cells"
+    text = (f"| {r['n_sets']} | {r['n_mirror_sets']} |" if form == "cells"
             else f"{r['n_mirror_sets']}/{r['n_sets']}")
     expect(f"mirror count {label} ({form} form)", text)
 
@@ -318,11 +333,19 @@ for pair, label in [("HCC array vs HF RNA-seq", "GSE116250"),
 # across every occurrence, because the letter quotes them in two places each (a
 # response and the corrections table) and a drifted duplicate would otherwise
 # leave the correct value standing in the other.
+# The condensed letter prints the HF value both in prose and as a table row, and
+# the HCC value only as a row ("| HCC | magenta | 146 | HF | 7.09 | 5 | ...").
+# Asserting "Zsummary = 7.09" would report a mismatch on a value that is present,
+# so each row is checked in the row form and the prose form where it exists.
 zs = {f"{num(x['Zsummary.pres']):.2f}" for x in s20}
 for ref, label in [("HF", "HF purple to HCC"), ("HCC", "HCC magenta to HF")]:
     r = [x for x in s20 if x["reference"] == ref][0]
-    expect(f"preservation Zsummary {label}",
-           f"Zsummary = {num(r['Zsummary.pres']):.2f}")
+    expect(f"preservation row {label}",
+           f"| {r['module']} | {r['moduleSize']} | {r['test']} | "
+           f"{num(r['Zsummary.pres']):.2f} |")
+r = [x for x in s20 if x["reference"] == "HF"][0]
+expect("preservation Zsummary HF purple to HCC (prose form)",
+       f"Zsummary = {num(r['Zsummary.pres']):.2f}")
 expect_all("every Zsummary the letter prints is a designated-module value",
            r"Zsummary = (\d+\.\d+)", zs)
 
@@ -335,8 +358,12 @@ for cohort, label in [("GSE57338", "HF module"), ("TCGA_LIHC", "HCC module")]:
 # Age/sex adjustment: the article's claim is that it changes nothing, which is
 # only meaningful if the before and after values are the ones in the table.
 r = [x for x in s38 if x["hf_cohort"] == "GSE57338" and x["tier"] == "A"][0]
-expect("GSE57338 age/sex rho before", f"\u03c1 = {fmt(num(r['rho_unadjusted']), 3)}")
-expect("GSE57338 age/sex rho after", f"\u03c1 = {fmt(num(r['rho_adjusted']), 3)}")
+# One check, not two: the letter states both figures in a single clause ("rho
+# moves from -0.550 to -0.461"), and pinning the pair together also catches a
+# swap of the two, which two independent membership tests would not.
+expect("GSE57338 age/sex rho before and after",
+       f"\u03c1 moves from {fmt(num(r['rho_unadjusted']), 3)} "
+       f"to {fmt(num(r['rho_adjusted']), 3)}")
 
 # Paired-sample sensitivity (S40 Table), added during the revision.
 s40c = load_rows("Table_S40c_paired_effect_sizes.csv")
@@ -344,13 +371,19 @@ s40d = load_rows("Table_S40d_paired_summary.csv")
 total_pairs = sum(int(num(r["n_pairs_analysed"])) for r in s40d)
 n_ci = sum(1 for r in s40c
            if str(r["paired_ci_excludes_0"]).lower() == "true")
-expect("paired total", f"{total_pairs} matched pairs")
-expect("paired estimate count", f"All {len(s40c)} cohort–set estimates")
-expect("paired CI support", f"{n_ci} had confidence intervals excluding zero")
+# The letter states the four per-cohort counts inside one parenthetical
+# ("(GPL3921 213; GPL571 19; GSE76427 52; TCGA-LIHC 50)") rather than as
+# "<n> pairs" per cohort, so the label that precedes each number is the cohort's
+# short name. norm() folds the en dash, so "tumour-normal" matches the letter.
+PAIR_LABEL = {"GSE14520_GPL3921": "GPL3921", "GSE14520_GPL571": "GPL571",
+              "GSE76427": "GSE76427", "TCGA_LIHC": "TCGA-LIHC"}
+expect("paired total", f"{total_pairs} matched tumour-normal pairs")
+expect("paired estimate count", f"all {len(s40c)} cohort-set estimates")
+expect("paired CI support", f"{n_ci} with CIs excluding zero")
 for r in s40d:
     expect(f"paired count {r['cohort']}",
-           f"{int(num(r['n_pairs_analysed']))} pairs")
-expect("paired TCGA subset", "50 of 371 tumours")
+           f"{PAIR_LABEL[r['cohort']]} {int(num(r['n_pairs_analysed']))}")
+expect("paired TCGA subset", "50 of 371 TCGA tumours")
 
 # Heterogeneity, which the letter reports instead of a list of possible causes.
 s21 = load_rows("Table_S21_cohort_heterogeneity.csv")
@@ -399,7 +432,10 @@ def s39row(cohort, cov, stratum="NA"):
             and x["covariates"] == cov][0]
 
 
-for cohort, form in [("TCGA_LIHC", "{hr:.2f} per IQR [{lo:.2f}-{hi:.2f}]"),
+# All four are quoted in the same "HR x.xx [lo-hi]" shape in the condensed
+# letter: it drops the "per IQR" qualifier from the TCGA figure and states the
+# scale (continuous, per interquartile range) once, for the block.
+for cohort, form in [("TCGA_LIHC", "{hr:.2f} [{lo:.2f}-{hi:.2f}]"),
                      ("GSE141198", "{hr:.2f} [{lo:.2f}-{hi:.2f}]"),
                      ("GSE76427", "{hr:.2f} [{lo:.2f}-{hi:.2f}]"),
                      ("GSE14520_GPL3921", "{hr:.2f} [{lo:.2f}-{hi:.2f}]")]:
@@ -408,12 +444,13 @@ for cohort, form in [("TCGA_LIHC", "{hr:.2f} per IQR [{lo:.2f}-{hi:.2f}]"),
            form.format(hr=num(x["hr"]), lo=num(x["ci_lo"]), hi=num(x["ci_hi"])))
 
 x = s39row("GSE14520_GPL3921", "none")
-# Emphasis markers included: the letter writes these in italics, and a check
-# written against the plain text fails on a string that is present.
-expect("survival sample and events", f"*n* = {x['n']}, {x['n_events']} deaths")
+# No emphasis markers: the condensed letter writes this as plain "n = 221, 85
+# deaths", where the long version italicised the n. The check follows the text
+# actually shipped rather than the typography of a superseded draft.
+expect("survival sample and events", f"n = {x['n']}, {x['n_events']} deaths")
 x = s39row("GSE14520_GPL3921", "purity+proliferation+immune")
 expect("survival HR fully adjusted",
-       f"HR {num(x['hr']):.2f} [{num(x['ci_lo']):.2f}-{num(x['ci_hi']):.2f}]")
+       f"{num(x['hr']):.2f} [{num(x['ci_lo']):.2f}-{num(x['ci_hi']):.2f}]")
 
 # ------------------------------------------------------------------ part D ---
 print("\n--- D. superseded values appear only where they are being corrected ---")
@@ -438,15 +475,41 @@ SUPERSEDED = {
     "v1 top-6,000 variance filter": "top-6,000",
     "v1 top-3,000 variance filter": "top-3,000",
 }
+
+# Reviewer comments are reproduced verbatim from the editor's letter and must
+# not be edited, so a superseded value inside one is the reviewer's text rather
+# than a claim of ours. Reviewer 2, Major 5 quotes "a top-3,000-gene filter"
+# exactly because that is the defect being reported, and judging it by our own
+# correction markers is a category error. The quote paragraphs -- the ones that
+# open with "**Major N.**", "**(N)**", "**N.**" or "**Overall comment.**" -- are
+# blanked to spaces first, so offsets are unchanged and only our prose is
+# judged. The corrections table and every *Changes:* line are still scanned.
+QUOTE_START = re.compile(
+    r"^\*\*(?:Major |Minor )?\d+\.?\*\*|^\*\*\(\d+\)\*\*"
+    r"|^\*\*Overall comment\.\*\*")
+
+
+def mask_reviewer_quotes(text):
+    out = []
+    for para in text.split("\n\n"):
+        if QUOTE_START.match(para.strip()):
+            out.append(re.sub(r"[^\n]", " ", para))
+        else:
+            out.append(para)
+    return "\n\n".join(out)
+
+
+letter_prose = mask_reviewer_quotes(letter_n)
+
 for why, needle in SUPERSEDED.items():
     hay = norm(needle)
-    starts = [m.start() for m in re.finditer(re.escape(hay), letter_n)]
+    starts = [m.start() for m in re.finditer(re.escape(hay), letter_prose)]
     if not starts:
         # Also fine: a superseded value absent entirely needs no context.
-        print(f"  OK   {why}: absent from the letter")
+        print(f"  OK   {why}: absent from our own prose")
         continue
     bad = [s for s in starts
-           if not any(k in letter_n[max(0, s - WINDOW): s + WINDOW].lower()
+           if not any(k in letter_prose[max(0, s - WINDOW): s + WINDOW].lower()
                       for k in MARKERS)]
     if bad:
         FAILS.append(f"superseded value stands uncorrected: {why}")

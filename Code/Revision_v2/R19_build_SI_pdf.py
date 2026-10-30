@@ -625,15 +625,31 @@ def label_span(labels):
     Reading the labels makes the cover a function of the caption table, which
     is what R20 already checks.
     """
-    nums = sorted(int(re.sub(r"\D", "", s)) for s in labels)
+    # A letter suffix is kept out of the range arithmetic: "S18b" strips to 18
+    # under a digits-only rule, so the cover printed "S1–S18, S18–S40" -- one
+    # number listed twice and the sub-table it belongs to never named. The
+    # numbers still form the ranges; every lettered label is then named
+    # explicitly, since it is a separate caption that a range does not cover.
+    nums, lettered = set(), []
+    for s in labels:
+        m = re.match(r"S(\d+)([a-z]?)$", s)
+        if not m:
+            raise SystemExit("unparseable caption label: %s" % s)
+        n = int(m.group(1))
+        nums.add(n)
+        if m.group(2):
+            lettered.append("S%d%s" % (n, m.group(2)))
     runs = []
-    for n in nums:
+    for n in sorted(nums):
         if runs and n == runs[-1][1] + 1:
             runs[-1][1] = n
         else:
             runs.append([n, n])
-    return ", ".join("S%d–S%d" % (a, b) if a != b else "S%d" % a
+    span = ", ".join("S%d–S%d" % (a, b) if a != b else "S%d" % a
                      for a, b in runs)
+    if lettered:
+        span += ", including " + " and ".join(sorted(lettered))
+    return span
 
 
 def render_cover(pdf, fig_labels, tab_labels):

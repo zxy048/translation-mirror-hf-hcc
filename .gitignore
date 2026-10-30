@@ -87,6 +87,15 @@ Cover_Letter_*
 *_Submission*/**
 v2_output/logs/transcript_msg_*.txt
 
+# R34 is the cover-letter gate, and it carries the letter inside it: the three
+# locked passages (F1, F2, the AI statement) are compared verbatim, so the file
+# is a second copy of the paragraphs that the rule above exists to keep out of
+# the repository. The name says "verify", which none of the rules above match,
+# and it would otherwise have been committed as a well-behaved verification
+# script. It still runs locally against the package; only the publication is
+# blocked.
+Code/Revision_v2/R34_verify_cover_letter.py
+
 # Editable figure sources. R17 renders these SVG/PDF intermediates on its way to
 # the Fig*.pdf the package ships, and nothing reads them back -- they are derived
 # and regenerable by re-running R17. They were untracked and unignored, which is

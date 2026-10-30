@@ -170,28 +170,39 @@ def check_si_citations():
     # reaches the table. Only the item's *own* caption is excluded.
     index = {i for i, ln in enumerate(lines) if SI_INDEX.match(ln)}
 
-    refs = []                                   # (line index, kind, number)
+    refs = []                        # (line index, kind, number, letter suffix)
     for i, ln in enumerate(lines):
         if i in index:
             continue
         for m in re.finditer(
                 r"((?:S\d+[a-z]?)(?:\s*[,–-]\s*S\d+[a-z]?)*)\s+Tables?", ln):
             for part in re.split(r"\s*,\s*", m.group(1)):
-                r = re.match(r"S(\d+)[a-z]?(?:[–-]S(\d+)[a-z]?)?", part)
+                r = re.match(r"S(\d+)([a-z]?)(?:[–-]S(\d+)([a-z]?))?", part)
                 if r:
                     a = int(r.group(1))
-                    b = int(r.group(2)) if r.group(2) else a
-                    refs.extend((i, "Table", n) for n in range(a, b + 1))
-        for m in re.finditer(r"S(\d+)[a-z]?\s*Fig", ln):
-            refs.append((i, "Fig", int(m.group(1))))
-        for m in re.finditer(r"Fig(?:ure)?s?\.?\s*[–-]?\s*S(\d+)", ln):
-            refs.append((i, "Fig", int(m.group(1))))
+                    b = int(r.group(3)) if r.group(3) else a
+                    if a == b:
+                        # S18b is its own item, not a synonym for S18: carry
+                        # the letter through so a plain "S18 Table" cannot
+                        # stand in for a caption that is never cited.
+                        refs.append((i, "Table", a, r.group(2) or r.group(4) or ""))
+                    else:
+                        refs.extend((i, "Table", n, "") for n in range(a, b + 1))
+        for m in re.finditer(r"S(\d+)([a-z]?)\s*Fig", ln):
+            refs.append((i, "Fig", int(m.group(1)), m.group(2)))
+        for m in re.finditer(r"Fig(?:ure)?s?\.?\s*[–-]?\s*S(\d+)([a-z]?)", ln):
+            refs.append((i, "Fig", int(m.group(1)), m.group(2)))
+
+    def label_key(lab):
+        m = re.match(r"S(\d+)([a-z]?)", lab)
+        return int(m.group(1)), m.group(2)
 
     fails = []
     for (label, kind), own in sorted(caps.items(),
-                                     key=lambda kv: (kv[0][1], int(kv[0][0][1:]))):
-        n = int(label[1:])
-        if any(k == kind and num == n and i != own for i, k, num in refs):
+                                     key=lambda kv: (kv[0][1],) + label_key(kv[0][0])):
+        n, suf = label_key(label)
+        if any(k == kind and num == n and s == suf and i != own
+               for i, k, num, s in refs):
             continue
         fails.append("%s %s (caption L%d) is defined but never cited"
                      % (label, kind, own + 1))
