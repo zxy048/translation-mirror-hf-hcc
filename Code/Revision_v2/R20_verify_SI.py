@@ -71,7 +71,15 @@ for label, kind in declared:
     by_kind.setdefault(kind, []).append(label)
 
 RENDERED = {"Table": caps_tab, "Fig": caps_fig}
-KNOWN_SKIPPED = {"File"}
+# Kinds the supplement deliberately does not render, each with its reason, and
+# each checked positively further down -- "not rendered" must not become "not
+# verified", which is the failure this section was written for. "File" is the
+# consolidated supplement itself, i.e. the document being built. "Data" is the
+# CSV archive uploaded beside it as S1_Data.zip: the manuscript captions it so
+# that the machine-readable copy has a name the submission system can match
+# against a caption, and nothing of it belongs on a printed page.
+KNOWN_SKIPPED = {"File": "the supplement itself",
+                 "Data": "uploaded as S1_Data.zip, not printed"}
 for kind, labels in sorted(by_kind.items()):
     if kind in RENDERED:
         want = sorted(RENDERED[kind])
@@ -85,11 +93,92 @@ for kind, labels in sorted(by_kind.items()):
     elif kind in KNOWN_SKIPPED:
         oks.append(f"caption kind {kind} defined and deliberately not rendered")
         print(f"  OK   {kind}: {len(labels)} defined, not rendered by design "
-              f"(the supplement itself)")
+              f"({KNOWN_SKIPPED[kind]})")
     else:
         fails.append(f"unrecognised caption kind {kind!r}")
         print(f"  FAIL unrecognised caption kind {kind!r} -- R19 ignores it, so "
               f"{len(labels)} item(s) would be absent from the supplement: {labels}")
+
+# ------------------------------------ 1c. the skipped kinds owe a real check ---
+# S1 Data is the only caption that points at a file other than the supplement,
+# so it is the only one whose promise the rest of this script cannot see. The
+# archive is verified here against the same CSV directory the supplement is
+# rendered from, and the manifest against the files it describes: a manifest is
+# a transcript of the archive, and a transcribed one drifts.
+if "Data" in by_kind:
+    import csv as _csv
+    import zipfile
+    ZIP = "D:/R_projects/revision_analysis/PLOS_ONE_Submission_v2/S1_Data.zip"
+    print("\n--- S1 Data archive matches the tables the supplement prints ---")
+    if not os.path.exists(ZIP):
+        fails.append("S1_Data.zip missing")
+        print(f"  FAIL {ZIP} does not exist")
+    else:
+        with zipfile.ZipFile(ZIP) as zf:
+            all_names = zf.namelist()
+            names = [n for n in all_names if n != "00_MANIFEST.txt"]
+            has_manifest = "00_MANIFEST.txt" in all_names
+            man = zf.read("00_MANIFEST.txt").decode("utf-8") if has_manifest else ""
+            blobs = {n: zf.read(n) for n in names}
+
+        # Every CSV belongs to a table the manuscript defines, and every table it
+        # defines has one: the archive and the caption list can only be
+        # reconciled if neither has drifted.
+        csv_labels = {}
+        for n in names:
+            if n.startswith("Table_S") and n.endswith(".csv"):
+                lab = "S" + n[len("Table_S"):].split("_")[0]
+                csv_labels.setdefault(lab, []).append(n)
+        # Panel suffixes go either way: S40a-e hang off the single S40 caption,
+        # while S18b is a caption in its own right. So a CSV matches a caption
+        # when its label extends that caption's label, and every caption owes at
+        # least one CSV.
+        unknown = sorted(c for c in csv_labels
+                         if not any(c.startswith(lab) for lab in caps_tab))
+        uncovered = sorted(lab for lab in caps_tab
+                           if not any(c.startswith(lab) for c in csv_labels))
+        only_csv = all(n.endswith(".csv") for n in names)
+        ok = has_manifest and only_csv and not unknown and not uncovered
+        (oks if ok else fails).append("S1 Data: every CSV maps to a table caption")
+        print(f"  {'OK  ' if ok else 'FAIL'} manifest "
+              f"{'present' if has_manifest else 'MISSING'}; "
+              f"{len(names)} CSV(s) for {len(caps_tab)} table caption(s); "
+              f"unmatched labels {unknown or 'none'}; "
+              f"captions with no CSV {uncovered or 'none'}; "
+              f"only CSVs alongside: {only_csv}")
+
+        # Rows, columns and bytes are re-derived from the files rather than
+        # trusted, so a stale manifest is caught by the numbers it prints. The
+        # manifest is read from its column header rather than from a fixed line
+        # number: the descriptive paragraph above it is prose and may be reworded.
+        body = man.splitlines()
+        hdr = next((i for i, ln in enumerate(body) if ln.startswith("label ")), len(body))
+        rows = [ln for ln in body[hdr + 1:]
+                if ln.strip() and not ln.strip().endswith(" tables.")]
+        bad = []
+        for ln in rows:
+            parts = ln.split()
+            if len(parts) != 5:
+                bad.append(ln)
+                continue
+            label, fname, nrow, ncol, nbytes = parts
+            blob = blobs.get(fname)
+            if blob is None:
+                bad.append(f"{fname}: absent from archive")
+                continue
+            text = blob.decode("utf-8-sig")
+            parsed = list(_csv.reader(text.splitlines()))
+            got = (max(len(parsed) - 1, 0), len(parsed[0]) if parsed else 0, len(blob))
+            if (int(nrow), int(ncol), int(nbytes)) != got:
+                bad.append(f"{fname}: manifest {nrow}x{ncol}x{nbytes} actual "
+                           f"{got[0]}x{got[1]}x{got[2]}")
+        count_ok = man.strip().endswith(f"{len(names)} tables.")
+        ok = not bad and count_ok and len(rows) == len(names)
+        (oks if ok else fails).append("S1 Data: manifest re-derived from the archive")
+        print(f"  {'OK  ' if ok else 'FAIL'} manifest re-derived from the archive: "
+              f"{len(rows)} row(s) checked, {len(bad)} mismatch(es)"
+              + ("" if count_ok else "; trailer count is wrong")
+              + "".join("\n        " + b for b in bad[:6]))
 
 # ------------------------------------------------------- 2. no v1 residue ------
 print("\n--- no superseded v1 content in the supplement ---")

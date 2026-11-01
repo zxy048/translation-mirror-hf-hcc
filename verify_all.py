@@ -145,12 +145,14 @@ def check_figure_specs():
 # A literal search reported 17 uncited items; the real number was 12.
 #
 # A reference counts anywhere in the manuscript except the item's own caption
-# and the consolidated S1 File index, which names every item and would otherwise
-# mark the whole supplement as cited. Caption-to-caption references do count:
-# a reader following either one reaches the same table.
+# and the two index captions -- S1 File, which names every item, and S1 Data,
+# which lists every table in the archive it accompanies. Both enumerate the
+# whole supplement, so counting either would mark every item as cited and make
+# the check vacuous. Caption-to-caption references do count: a reader following
+# either one reaches the same table.
 # ---------------------------------------------------------------------------
 SI_CAPTION = re.compile(r"^\*\*(S\d+[a-z]?) (Table|Fig)\.\*\*")
-SI_INDEX = re.compile(r"^\*\*S1 File\.\*\*")
+SI_INDEX = re.compile(r"^\*\*S1 (File|Data)\.\*\*")
 
 
 def check_si_citations():

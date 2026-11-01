@@ -24,6 +24,8 @@ regenerated.
 
 Usage:  python assemble_plos_v2.py
 """
+import csv
+import glob
 import hashlib
 import json
 import os
@@ -31,6 +33,7 @@ import re
 import shutil
 import subprocess
 import sys
+import zipfile
 import zlib
 
 ROOT = r"D:\R_projects\revision_analysis"
@@ -208,6 +211,71 @@ def pandoc_docx(src_md, dst_docx, reference=None):
     run(cmd)
 
 
+# The tables are supplied twice on purpose: printed in S1 File, and complete as
+# CSV, which the manuscript captions as S1 Data. An archive assembled by hand
+# would be the one upload item with no command behind it -- exactly the defect
+# this script exists to remove -- so it is rebuilt here from the same CSVs the
+# SI PDF is rendered from, and the manifest is written from those files rather
+# than transcribed beside them.
+DATA_ZIP = "S1_Data.zip"
+DATA_TABLES = os.path.join(ROOT, "v2_output", "tables")
+
+
+def build_data_zip():
+    tables = sorted(glob.glob(os.path.join(DATA_TABLES, "Table_S*.csv")))
+    if not tables:
+        sys.exit("  no Table_S*.csv under %s" % DATA_TABLES)
+
+    lines = [
+        "S1 Data. Machine-readable versions of the supplementary tables.",
+        "",
+        "Every table printed in S1 File is supplied here complete, one CSV per",
+        "table or panel label. Where the printed page is a bounded preview, the",
+        "CSV here carries the full table; the row and column counts below are",
+        "the full counts, not the counts of the printed preview.",
+        "",
+        "%-8s %-46s %7s %6s %10s" % ("label", "file", "rows", "cols", "bytes"),
+    ]
+    entries = []
+    for path in tables:
+        name = os.path.basename(path)
+        with open(path, encoding="utf-8-sig", newline="") as fh:
+            rows = list(csv.reader(fh))
+        # A ragged file would make the manifest's single column count a lie for
+        # every row after the first, and the CSV is the authoritative copy here.
+        widths = {len(r) for r in rows}
+        if len(widths) > 1:
+            sys.exit("  ragged CSV: %s has row widths %s" % (name, sorted(widths)))
+        entries.append((name, path, len(rows) - 1, len(rows[0]) if rows else 0))
+        lines.append("%-8s %-46s %7d %6d %10d"
+                     % (name[len("Table_"):].split("_")[0], name,
+                        entries[-1][2], entries[-1][3], os.path.getsize(path)))
+    lines += ["", "%d tables." % len(entries)]
+    manifest = "\r\n".join(lines) + "\r\n"
+
+    out = os.path.join(PKG, DATA_ZIP)
+    before = sha256(out) if os.path.exists(out) else None
+    # Fixed timestamps. Two runs over unchanged CSVs must produce identical
+    # bytes: otherwise every rebuild reads as a change in git and in the upload
+    # diff, and "did the data change?" becomes a question no hash can answer.
+    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
+        payload = [("00_MANIFEST.txt", manifest.encode("utf-8"))]
+        for name, path, _, _ in entries:
+            with open(path, "rb") as fh:
+                payload.append((name, fh.read()))
+        for name, blob in payload:
+            info = zipfile.ZipInfo(name, date_time=(1980, 1, 1, 0, 0, 0))
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.external_attr = 0o644 << 16
+            zf.writestr(info, blob)
+
+    after = sha256(out)
+    print("  %d CSVs -> %-26s %s"
+          % (len(entries), DATA_ZIP,
+             "unchanged" if before == after else "UPDATED"))
+    return len(entries)
+
+
 def main():
     if not os.path.isdir(PKG):
         sys.exit("package directory not found: %s" % PKG)
@@ -294,6 +362,11 @@ def main():
               % (os.path.relpath(src, ROOT), dst,
                  "unchanged" if same else "UPDATED"))
 
+    print("\n" + "=" * 74)
+    print("Building the S1 Data archive")
+    print("=" * 74)
+    build_data_zip()
+
     # preview_png/ is for eyeballing the layout; it is never uploaded. It used to
     # be a hand-copied leftover and had drifted five days behind the figures it is
     # supposed to preview, which is the failure mode this whole script exists to
@@ -329,11 +402,11 @@ def main():
         note = "  <- do not upload" if name in NOT_UPLOADED else ""
         print("  %-46s %8d B%s" % (name, os.path.getsize(full), note))
 
-    print("\nUpload these eight, and nothing else:")
+    print("\nUpload these nine, and nothing else:")
     for name in ("01_Cover_Letter.docx", "02_Response_to_Reviewers.docx",
                  "03_Manuscript.docx",
                  "04_Revised_Manuscript_with_Track_Changes.docx",
-                 "S1_File.pdf",
+                 "S1_File.pdf", "S1_Data.zip",
                  "Fig1.tiff  Fig2.tiff  Fig3.tiff"):
         print("  " + name)
     print("\nThen run: python verify_all.py")
