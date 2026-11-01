@@ -132,7 +132,7 @@ print("\n--- mirror perturbation ---")
 s18 = rows("Table_S18_mirror_summary.csv")
 prim = max([r for r in s18 if r["tier"] == "A"], key=lambda r: int(r["n_mirror_sets"]))
 check("primary mirror (Tier A)", f"{prim['n_mirror_sets']}/{prim['n_sets']}",
-      f"**{prim['n_mirror_sets']} of {prim['n_sets']} Tier A sets**")
+      f"{prim['n_mirror_sets']} of {prim['n_sets']} Tier A sets are mirror-perturbed")
 check("primary mirror P", "permutation *P* = 1 × 10⁻⁴")
 check("cluster mirror", f"{prim['n_mirror_clusters']} of {prim['n_clusters']} clusters")
 check("cluster mirror P", f"*P* = {num(prim['p_perm_clusters']):.4f}")
