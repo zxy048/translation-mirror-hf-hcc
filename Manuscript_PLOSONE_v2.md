@@ -225,7 +225,7 @@ YH: conceptualization, data curation, formal analysis, investigation, methodolog
 
 ## Funding
 
-This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
+This research was supported by the Medical Research Project of Jiangsu Commission of Health (grant no. K2024009) and the Frontier Technologies R&D Program of Jiangsu (grant no. BF2025640). The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
 
 ## Competing Interests
 
